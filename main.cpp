@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     auto *w = new MainWindow();
 
-    w->show();
+    w->showMaximized();
     int res = QApplication::exec();
     delete w;
     return res;

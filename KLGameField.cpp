@@ -4,9 +4,9 @@
 
 #include <QPainter>
 #include "KLGameField.h"
-#define FIELD_OFFSET 2
+#define FIELD_OFFSET 1
 #define SPACE 1
-#define CELL_SIZE 26
+#define CELL_SIZE 12
 
 KLGameField::KLGameField(QWidget *parent) : QWidget(parent) {
 
@@ -27,8 +27,7 @@ void KLGameField::rePaint() {
     int fw = w - FIELD_OFFSET * 2;
     int fh = h - FIELD_OFFSET * 2;
 
-    painter.translate(FIELD_OFFSET,FIELD_OFFSET);
-    painter.fillRect(QRect(0,0, fw,fh), QBrush("#232323"));
+    painter.fillRect(QRect(FIELD_OFFSET,FIELD_OFFSET, fw,fh), QBrush("#232323"));
 
     fw -= SPACE * 2;
     fh -= SPACE * 2;
@@ -37,8 +36,6 @@ void KLGameField::rePaint() {
     int remX = (fw % (CELL_SIZE + 1)) / 2;
     int qy = fh / (CELL_SIZE + 1);
     int remY = (fh % (CELL_SIZE + 1)) / 2;
-
-    painter.resetTransform();
 
     painter.translate(FIELD_OFFSET + SPACE + remX,FIELD_OFFSET + SPACE + remY);
     for (int i = 0; i < qx; ++i) {
