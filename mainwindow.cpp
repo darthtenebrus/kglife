@@ -16,9 +16,18 @@ MainWindow::MainWindow(QWidget *parent) :
     gameField = new KLGameField(ui->centralwidget);
     vbox->addWidget(gameField);
     ui->centralwidget->setLayout(vbox);
+
+    connect(ui->actionNextStep, &QAction::triggered, this, &MainWindow::nextAction);
+
 }
 
 MainWindow::~MainWindow() {
     delete gameField;
     delete ui;
+}
+
+
+void MainWindow::nextAction(bool) {
+    gameField->recalculate();
+    gameField->repaint();
 }
