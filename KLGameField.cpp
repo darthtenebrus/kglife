@@ -32,15 +32,15 @@ void KLGameField::rePaint() {
     fw -= SPACE * 2;
     fh -= SPACE * 2;
 
-    int qx = fw / (CELL_SIZE + 1);
-    int remX = (fw % (CELL_SIZE + 1)) / 2;
-    int qy = fh / (CELL_SIZE + 1);
-    int remY = (fh % (CELL_SIZE + 1)) / 2;
+    int qx = fw / (CELL_SIZE + SPACE);
+    int remX = (fw % (CELL_SIZE + SPACE)) / 2;
+    int qy = fh / (CELL_SIZE + SPACE);
+    int remY = (fh % (CELL_SIZE + SPACE)) / 2;
 
     painter.translate(FIELD_OFFSET + SPACE + remX,FIELD_OFFSET + SPACE + remY);
     for (int i = 0; i < qx; ++i) {
         for (int j = 0; j < qy; ++j) {
-            painter.fillRect(QRect(i * (CELL_SIZE + 1), j * (CELL_SIZE + 1),
+            painter.fillRect(QRect(i * (CELL_SIZE + SPACE), j * (CELL_SIZE + SPACE),
                                    CELL_SIZE, CELL_SIZE), QBrush("#000000"));
 
         }
