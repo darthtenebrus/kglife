@@ -15,7 +15,6 @@ public:
 
     ~KLGameField() override;
 
-    void recalculate(void);
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -24,6 +23,8 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
+    void cancelTimerInstantly(void);
+    void recalculate(void);
     void actualDoRePaint();
     uchar *initLayer(uchar *);
     void swapLayers(void);
@@ -40,6 +41,16 @@ private:
     int m_remY;
     uchar *m_MainLayer = nullptr;
     uchar *m_NextStepLayer = nullptr;
+    QTimer *evoTimer = nullptr;
+
+
+public slots:
+    void nextAction(bool);
+    void checkTimerAndUpdate(bool);
+    void nextGeneration(void);
+
+signals:
+    void changeControls(bool);
 
 };
 

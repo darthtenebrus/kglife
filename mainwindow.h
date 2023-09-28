@@ -21,12 +21,14 @@ public:
 
     ~MainWindow() override;
 
+
 private:
     Ui::MainWindow *ui;
     KLGameField *gameField;
 
 public slots:
-    void nextAction(bool);
+    void controlsChanged(bool);
+
 };
 
 

@@ -8,16 +8,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    auto *vbox = new QVBoxLayout(ui->centralwidget);
-    gameField = new KLGameField(ui->centralwidget);
-    vbox->addWidget(gameField);
-    ui->centralwidget->setLayout(vbox);
+    gameField = new KLGameField(this);
 
-    connect(ui->actionNextStep, &QAction::triggered, this, &MainWindow::nextAction);
+    ui->centralwidget->layout()->addWidget(gameField);
+
+    connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
+    connect(ui->nextStepButton, &QToolButton::clicked, gameField, &KLGameField::nextAction);
+    connect(ui->playButton, &QToolButton::clicked, gameField, &KLGameField::checkTimerAndUpdate);
+    connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
 
 }
 
@@ -26,8 +27,11 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+void MainWindow::controlsChanged(bool enabled) {
 
-void MainWindow::nextAction(bool) {
-    gameField->recalculate();
-    gameField->repaint();
+    ui->actionNextStep->setEnabled(enabled);
+    ui->nextStepButton->setEnabled(enabled);
+    ui->playButton->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-stop"));
+    ui->playButton->setToolTip(enabled ? tr("Stop evolution") : tr("Start evolution"));
 }
+

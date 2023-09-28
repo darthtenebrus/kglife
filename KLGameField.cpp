@@ -4,14 +4,25 @@
 
 #include <QPainter>
 #include "KLGameField.h"
+#include "mainwindow.h"
 #include <QMouseEvent>
+#include <QTimer>
+
 
 #define FIELD_OFFSET 1
 #define SPACE 1
 #define CELL_SIZE 16
 
 KLGameField::KLGameField(QWidget *parent) : QWidget(parent) {
+    evoTimer = new QTimer();
+    connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
+}
 
+KLGameField::~KLGameField() {
+
+    delete m_MainLayer;
+    delete m_NextStepLayer;
+    delete evoTimer;
 }
 
 void KLGameField::paintEvent(QPaintEvent *e) {
@@ -40,6 +51,7 @@ void KLGameField::actualDoRePaint() {
 }
 
 void KLGameField::resizeEvent(QResizeEvent *event) {
+    cancelTimerInstantly();
 
     int h = height();
     int w = width();
@@ -68,12 +80,6 @@ uchar *KLGameField::initLayer(uchar *layer) {
     memset(layer, 0, m_cellsX * m_cellsY);
     return layer;
 
-}
-
-KLGameField::~KLGameField() {
-
-    delete m_MainLayer;
-    delete m_NextStepLayer;
 }
 
 void KLGameField::swapLayers(void) {
@@ -156,6 +162,7 @@ QPoint KLGameField::getMainOffset() {
 }
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
+    cancelTimerInstantly();
     const QPoint &newPos = event->pos() - getMainOffset();
     if(newPos.x() < 0 || newPos.y() < 0) {
         return;
@@ -167,3 +174,31 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
     repaint();
 }
+
+void KLGameField::nextAction(bool) {
+    recalculate();
+    repaint();
+}
+
+void KLGameField::nextGeneration(void) {
+    nextAction(true);
+}
+
+void KLGameField::checkTimerAndUpdate(bool) {
+    if(!evoTimer->isActive()) {
+        evoTimer->start(1000);
+        emit changeControls(false);
+    } else {
+        evoTimer->stop();
+        emit changeControls(true);
+    }
+}
+
+void KLGameField::cancelTimerInstantly() {
+    if (evoTimer->isActive()) {
+        evoTimer->stop();
+        emit changeControls(true);
+    }
+
+}
+
