@@ -123,13 +123,25 @@
      <string>Game</string>
     </property>
     <addaction name="actionNextStep"/>
+    <addaction name="actionStartStop"/>
    </widget>
    <addaction name="menuControl"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNextStep">
+   <property name="icon">
+    <iconset theme="media-skip-forward"/>
+   </property>
    <property name="text">
     <string>Next Step</string>
+   </property>
+  </action>
+  <action name="actionStartStop">
+   <property name="icon">
+    <iconset theme="media-playback-start-symbolic"/>
+   </property>
+   <property name="text">
+    <string>Start/Stop evolution</string>
    </property>
   </action>
  </widget>

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
     connect(ui->nextStepButton, &QToolButton::clicked, gameField, &KLGameField::nextAction);
     connect(ui->playButton, &QToolButton::clicked, gameField, &KLGameField::checkTimerAndUpdate);
+    connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
 
 }
