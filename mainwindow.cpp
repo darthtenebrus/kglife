@@ -11,7 +11,7 @@
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    gameField = new KLGameField(this);
+    gameField = new KLGameField(ui->timerSlider->value(), this);
 
     ui->centralwidget->layout()->addWidget(gameField);
 
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->nextStepButton, &QToolButton::clicked, gameField, &KLGameField::nextAction);
     connect(ui->playButton, &QToolButton::clicked, gameField, &KLGameField::checkTimerAndUpdate);
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
+
+    connect(ui->timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
     connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);

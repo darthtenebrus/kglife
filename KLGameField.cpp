@@ -12,9 +12,11 @@
 #define FIELD_OFFSET 1
 #define SPACE 1
 #define CELL_SIZE 16
+#define DIVISOR 2000
 
-KLGameField::KLGameField(QWidget *parent) : QWidget(parent) {
+KLGameField::KLGameField(int timerInterval,  QWidget *parent) : QWidget(parent) {
     setMouseTracking(true);
+    m_TimerInterval = DIVISOR / timerInterval;
     evoTimer = new QTimer();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
 }
@@ -200,7 +202,7 @@ void KLGameField::nextGeneration(void) {
 
 void KLGameField::checkTimerAndUpdate(bool) {
     if(!evoTimer->isActive()) {
-        evoTimer->start(1000);
+        evoTimer->start(m_TimerInterval);
         emit changeControls(false);
     } else {
         evoTimer->stop();
@@ -215,5 +217,15 @@ void KLGameField::cancelTimerInstantly() {
     }
 
 }
+
+void KLGameField::timerChanged(int timerInterval) {
+    m_TimerInterval = DIVISOR / timerInterval;
+    if (evoTimer->isActive()) {
+        evoTimer->stop();
+        evoTimer->start(m_TimerInterval);
+    }
+}
+
+
 
 

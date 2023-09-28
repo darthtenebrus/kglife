@@ -11,10 +11,8 @@
 class KLGameField : public QWidget {
 Q_OBJECT
 public:
-    KLGameField(QWidget *parent = 0);
-
+    KLGameField(int timerInterval, QWidget *parent = 0);
     ~KLGameField() override;
-
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -35,6 +33,7 @@ private:
     void copyToLayer(uchar *, int, int, uchar);
 
     QPoint getMainOffset();
+    int m_TimerInterval;
     int m_Generation = 0;
     int m_fieldWidth;
     int m_fieldHeight;
@@ -51,6 +50,7 @@ public slots:
     void nextAction(bool);
     void checkTimerAndUpdate(bool);
     void nextGeneration(void);
+    void timerChanged(int);
 
 signals:
     void changeControls(bool);
