@@ -21,14 +21,17 @@ protected:
     void paintEvent(QPaintEvent *e) override;
     void resizeEvent(QResizeEvent *event) override;
 
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
 private:
     void actualDoRePaint();
     uchar *initLayer(uchar *);
-    void setInitialCells(void);
     void swapLayers(void);
-    int calculateNeighbors(int x, int y);
-    uchar fromMainLayer(int x, int y);
-    void copyToNextStep(int x, int y, uchar val);
+    int calculateNeighbors(int, int);
+    uchar fromMainLayer(int, int);
+    void copyToLayer(uchar *, int, int, uchar);
+
+    QPoint getMainOffset();
     int m_fieldWidth;
     int m_fieldHeight;
     int m_cellsX;

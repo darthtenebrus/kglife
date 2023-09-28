@@ -4,6 +4,7 @@
 
 #include <QPainter>
 #include "KLGameField.h"
+#include <QMouseEvent>
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -23,7 +24,8 @@ void KLGameField::actualDoRePaint() {
 
     painter.fillRect(QRect(FIELD_OFFSET, FIELD_OFFSET, m_fieldWidth, m_fieldHeight),
                      QBrush("#232323"));
-    painter.translate(FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY);
+    const QPoint &mainOffset = getMainOffset();
+    painter.translate(mainOffset.x(), mainOffset.y());
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
             QBrush color;
@@ -54,8 +56,6 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
 
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
-    setInitialCells();
-
     QWidget::resizeEvent(event);
 }
 
@@ -74,16 +74,6 @@ KLGameField::~KLGameField() {
 
     delete m_MainLayer;
     delete m_NextStepLayer;
-}
-
-void KLGameField::setInitialCells(void) {
-
-
-    m_MainLayer[m_cellsX * (m_cellsY / 2) + m_cellsX / 4 + 1] = 1;
-    m_MainLayer[m_cellsX * (m_cellsY / 2) + m_cellsX / 4 + 2] = 1;
-    m_MainLayer[m_cellsX * (m_cellsY / 2) + m_cellsX / 4 + 3] = 1;
-
-
 }
 
 void KLGameField::swapLayers(void) {
@@ -111,7 +101,7 @@ void KLGameField::recalculate(void) {
                 default:
                     targetVal = 0;
             }
-            copyToNextStep(x, y, targetVal);
+            copyToLayer(m_NextStepLayer, x, y, targetVal);
 
         }
     }
@@ -157,6 +147,23 @@ uchar KLGameField::fromMainLayer(int x, int y) {
     return m_MainLayer[y * m_cellsX + x];
 }
 
-void KLGameField::copyToNextStep(int x, int y, uchar val) {
-    m_NextStepLayer[y * m_cellsX + x] = val;
+void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
+    layer[y * m_cellsX + x] = val;
+}
+
+QPoint KLGameField::getMainOffset() {
+    return QPoint(FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY);
+}
+
+void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
+    const QPoint &newPos = event->pos() - getMainOffset();
+    if(newPos.x() < 0 || newPos.y() < 0) {
+        return;
+    }
+
+    int cellX = newPos.x() / (CELL_SIZE + SPACE);
+    int cellY = newPos.y() / (CELL_SIZE + SPACE);
+
+    copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
+    repaint();
 }
