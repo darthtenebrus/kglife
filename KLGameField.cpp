@@ -27,7 +27,7 @@ void KLGameField::actualDoRePaint() {
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
             QBrush color;
-            color = m_MainLayer[y * m_cellsX + x] ? QBrush("#00FF00") : QBrush("#000000");
+            color = (fromMainLayer(x, y)) ? QBrush("#00FF00") : QBrush("#000000");
             painter.fillRect(QRect(x * (CELL_SIZE + SPACE), y * (CELL_SIZE + SPACE),
                                    CELL_SIZE, CELL_SIZE), color);
 
@@ -59,12 +59,12 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 }
 
-unsigned char *KLGameField::initLayer(unsigned char *layer) {
+uchar *KLGameField::initLayer(uchar *layer) {
     if (nullptr != layer) {
         delete layer;
     }
 
-    layer = new unsigned char[m_cellsX * m_cellsY];
+    layer = new uchar[m_cellsX * m_cellsY];
     memset(layer, 0, m_cellsX * m_cellsY);
     return layer;
 
@@ -88,7 +88,7 @@ void KLGameField::setInitialCells(void) {
 
 void KLGameField::swapLayers(void) {
 
-    unsigned char *tmp;
+    uchar *tmp;
     tmp = m_MainLayer;
     m_MainLayer = m_NextStepLayer;
     m_NextStepLayer = tmp;
@@ -100,16 +100,18 @@ void KLGameField::recalculate(void) {
         for (int x = 0; x < m_cellsX; ++x) {
 
             int countNeighbors = calculateNeighbors(x, y);
+            uchar targetVal;
             switch(countNeighbors) {
                 case 3:
-                    m_NextStepLayer[y * m_cellsX + x] = 1;
+                    targetVal = 1;
                     break;
                 case 2:
-                    m_NextStepLayer[y * m_cellsX + x] = m_MainLayer[y * m_cellsX + x];
+                    targetVal = fromMainLayer(x, y);
                     break;
                 default:
-                    m_NextStepLayer[y * m_cellsX + x] = 0;
+                    targetVal = 0;
             }
+            copyToNextStep(x, y, targetVal);
 
         }
     }
@@ -145,8 +147,16 @@ int KLGameField::calculateNeighbors(int x, int y) {
                 newX = 0;
             }
 
-            locNeighbors += m_MainLayer[newY * m_cellsX + newX];
+            locNeighbors += fromMainLayer(newX, newY);
         }
     }
     return locNeighbors;
+}
+
+uchar KLGameField::fromMainLayer(int x, int y) {
+    return m_MainLayer[y * m_cellsX + x];
+}
+
+void KLGameField::copyToNextStep(int x, int y, uchar val) {
+    m_NextStepLayer[y * m_cellsX + x] = val;
 }
