@@ -19,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->nextStepButton, &QToolButton::clicked, gameField, &KLGameField::nextAction);
     connect(ui->playButton, &QToolButton::clicked, gameField, &KLGameField::checkTimerAndUpdate);
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
+
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
+    connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);
 
 }
 
@@ -34,5 +36,10 @@ void MainWindow::controlsChanged(bool enabled) {
     ui->nextStepButton->setEnabled(enabled);
     ui->playButton->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-stop"));
     ui->playButton->setToolTip(enabled ? tr("Stop evolution") : tr("Start evolution"));
+}
+
+void MainWindow::generationChanged(int cgen) {
+    ui->statusbar->showMessage(tr("Generation: %1").arg(cgen));
+
 }
 

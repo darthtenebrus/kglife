@@ -34,7 +34,7 @@
         <location filename="mainwindow.ui" line="102"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="149"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="149"/>
-        <location filename="mainwindow.cpp" line="36"/>
+        <location filename="mainwindow.cpp" line="38"/>
         <source>Start evolution</source>
         <translation>Начать эволюцию</translation>
     </message>
@@ -53,9 +53,14 @@
         <translation>Начать/Остановить эволюцию</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="36"/>
+        <location filename="mainwindow.cpp" line="38"/>
         <source>Stop evolution</source>
         <translation>Остановить эволюцию</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="42"/>
+        <source>Generation: %1</source>
+        <translation>Поколение: %1</translation>
     </message>
 </context>
 </TS>

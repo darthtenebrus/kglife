@@ -28,6 +28,7 @@ private:
 
 public slots:
     void controlsChanged(bool);
+    void generationChanged(int);
 
 };
 

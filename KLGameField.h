@@ -35,6 +35,7 @@ private:
     void copyToLayer(uchar *, int, int, uchar);
 
     QPoint getMainOffset();
+    int m_Generation = 0;
     int m_fieldWidth;
     int m_fieldHeight;
     int m_cellsX;
@@ -53,6 +54,7 @@ public slots:
 
 signals:
     void changeControls(bool);
+    void changeGeneration(int);
 
 };
 

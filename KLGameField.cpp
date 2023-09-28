@@ -69,6 +69,8 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
 
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
+    m_Generation = 0;
+    emit changeGeneration(m_Generation);
     QWidget::resizeEvent(event);
 }
 
@@ -113,6 +115,7 @@ void KLGameField::recalculate(void) {
         }
     }
     swapLayers();
+    m_Generation++;
 
 }
 
@@ -187,6 +190,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
 
 void KLGameField::nextAction(bool) {
     recalculate();
+    emit changeGeneration(m_Generation);
     repaint();
 }
 
