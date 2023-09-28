@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Game Of Life</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/images/desktop/64x64/kglife.png</normaloff>:/images/desktop/64x64/kglife.png</iconset>
+  </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonTextUnderIcon</enum>
   </property>
@@ -81,7 +85,8 @@
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset theme="media-skip-forward"/>
+          <iconset theme="media-skip-forward">
+           <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="popupMode">
           <enum>QToolButton::DelayedPopup</enum>
@@ -100,7 +105,8 @@
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset theme="media-playback-start-symbolic"/>
+          <iconset theme="media-playback-start-symbolic">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
@@ -130,7 +136,8 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNextStep">
    <property name="icon">
-    <iconset theme="media-skip-forward"/>
+    <iconset theme="media-skip-forward">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Next Step</string>
@@ -138,13 +145,16 @@
   </action>
   <action name="actionStartStop">
    <property name="icon">
-    <iconset theme="media-playback-start-symbolic"/>
+    <iconset theme="media-playback-start-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Start/Stop evolution</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
