@@ -14,6 +14,7 @@
 #define CELL_SIZE 16
 
 KLGameField::KLGameField(QWidget *parent) : QWidget(parent) {
+    setMouseTracking(true);
     evoTimer = new QTimer();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
 }
@@ -175,6 +176,15 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     repaint();
 }
 
+void KLGameField::mouseMoveEvent(QMouseEvent *event) {
+    const QPoint &newPos = event->pos() - getMainOffset();
+    if(newPos.x() > 0 && newPos.y() > 0) {
+        setCursor(Qt::CrossCursor);
+    } else {
+        setCursor(Qt::ArrowCursor);
+    }
+}
+
 void KLGameField::nextAction(bool) {
     recalculate();
     repaint();
@@ -201,4 +211,5 @@ void KLGameField::cancelTimerInstantly() {
     }
 
 }
+
 

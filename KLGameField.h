@@ -22,6 +22,8 @@ protected:
 
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
+    void mouseMoveEvent(QMouseEvent *event) override;
+
 private:
     void cancelTimerInstantly(void);
     void recalculate(void);

@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Simple KDE Game Of Life
+Name[de]=Linion Addon Manager
+Name[en]=Linion Addon Manager
+Name[es]=Linion Addon Manager
+Name[ru]=Просто игра "Жизнь" для KDE
+Comment=Simple Game Of Life realization for KDE
+Comment[de]=Linion Addon Manager fuer TESO Spieler
+Comment[en]=Linion Addon Manager for TESO players
+Comment[es]=Linion Addon Manager para TESO jugadores
+Comment[ru]=Простая реализация игры "Жизнь" для KDE
+Keywords=Games;MMORPG;TESO;addons;
+Keywords[de]=Spielung;MMORPG;TESO;addons;
+Keywords[es]=Juegos;MMORPG;TESO;addons;
+Keywords[ru]=Игры;Жизнь;
+Exec=kglife
+Icon=kglife
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Game;GNOME;KDE;
