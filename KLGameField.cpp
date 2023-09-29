@@ -9,6 +9,8 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTextStream>
+
 #ifdef _DEBUG
 #include <QDebug>
 #endif
