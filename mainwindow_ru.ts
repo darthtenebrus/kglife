@@ -6,51 +6,49 @@
     <message>
         <location filename="mainwindow.ui" line="26"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="151"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="134"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="151"/>
         <source>Game Of Life</source>
         <translation>Игра &quot;Жизнь&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="82"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="161"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="161"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="142"/>
-        <source>toolBar</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="141"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="153"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="136"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="153"/>
         <source>Next Step</source>
         <translation>Следующий шаг</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="150"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="154"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="137"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="154"/>
         <source>Start/Stop Evolution</source>
         <translation>Начать/Остановить эволюцию</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="156"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="139"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="156"/>
         <source>Start Evolution</source>
         <translation>Начать эволюцию</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="158"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="158"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="158"/>
         <source>About Qt</source>
         <translation>О Qt</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="163"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="159"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="159"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
@@ -62,21 +60,21 @@
     <message>
         <location filename="mainwindow.ui" line="74"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="160"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="141"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="160"/>
         <source>Game</source>
         <translation>Игра</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="132"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="152"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="135"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="152"/>
         <source>New Game</source>
         <translation>Новая игра</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="24"/>
         <source>Generation Change Speed</source>
-        <translation type="unfinished">Скорость смены поколений</translation>
+        <translation>Скорость смены поколений</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="30"/>
