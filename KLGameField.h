@@ -19,8 +19,11 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
     void mouseDoubleClickEvent(QMouseEvent *event) override;
-
     void mouseMoveEvent(QMouseEvent *event) override;
+
+    void mousePressEvent(QMouseEvent *event) override;
+
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void cancelTimerInstantly(void);
@@ -31,6 +34,8 @@ private:
     int calculateNeighbors(int, int);
     uchar fromMainLayer(int, int);
     void copyToLayer(uchar *, int, int, uchar);
+
+    bool checkMousePosition(QPoint &);
 
     QPoint getMainOffset();
     int m_TimerInterval;
@@ -44,9 +49,11 @@ private:
     uchar *m_MainLayer = nullptr;
     uchar *m_NextStepLayer = nullptr;
     QTimer *evoTimer = nullptr;
-
+    QCursor m_Cursor;
+    bool m_bPressed = false;
 
 public slots:
+    void newAction(bool);
     void nextAction(bool);
     void checkTimerAndUpdate(bool);
     void nextGeneration(void);
@@ -55,6 +62,9 @@ public slots:
 signals:
     void changeControls(bool);
     void changeGeneration(int);
+    void emptyColony(void);
+
+
 
 };
 

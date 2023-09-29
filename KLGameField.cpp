@@ -16,6 +16,7 @@
 
 KLGameField::KLGameField(int timerInterval,  QWidget *parent) : QWidget(parent) {
     setMouseTracking(true);
+    m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
     evoTimer = new QTimer();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
@@ -97,8 +98,11 @@ void KLGameField::swapLayers(void) {
 
 void KLGameField::recalculate(void) {
 
+    int nEmpties = 0;
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
+
+            nEmpties += (!fromMainLayer(x, y));
 
             int countNeighbors = calculateNeighbors(x, y);
             uchar targetVal;
@@ -118,6 +122,14 @@ void KLGameField::recalculate(void) {
     }
     swapLayers();
     m_Generation++;
+
+    if (nEmpties == m_cellsX * m_cellsY) {
+
+        cancelTimerInstantly();
+        emit emptyColony();
+    } else {
+        emit changeGeneration(m_Generation);
+    }
 
 }
 
@@ -164,35 +176,58 @@ void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
 }
 
 QPoint KLGameField::getMainOffset() {
-    return QPoint(FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY);
+    return {FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY };
 }
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
-    cancelTimerInstantly();
-    const QPoint &newPos = event->pos() - getMainOffset();
-    if(newPos.x() < 0 || newPos.y() < 0) {
+
+    QPoint newPos = event->pos();
+    if(!checkMousePosition(newPos)) {
         return;
     }
+
+    cancelTimerInstantly();
+    m_bPressed = false;
 
     int cellX = newPos.x() / (CELL_SIZE + SPACE);
     int cellY = newPos.y() / (CELL_SIZE + SPACE);
 
+    m_Generation = 0;
     copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
     repaint();
 }
 
 void KLGameField::mouseMoveEvent(QMouseEvent *event) {
-    const QPoint &newPos = event->pos() - getMainOffset();
-    if(newPos.x() > 0 && newPos.y() > 0) {
-        setCursor(Qt::CrossCursor);
+
+    static int oldCellX = -1;
+    static int oldCellY = -1;
+
+    QPoint newPos = event->pos();
+    if(!checkMousePosition(newPos)) {
+        setCursor(m_Cursor);
+        m_bPressed = false;
+        return;
     } else {
-        setCursor(Qt::ArrowCursor);
+        setCursor(Qt::CrossCursor);
+
+        if (m_bPressed) {
+            m_Generation = 0;
+            cancelTimerInstantly();
+            int cellX = newPos.x() / (CELL_SIZE + SPACE);
+            int cellY = newPos.y() / (CELL_SIZE + SPACE);
+
+            if (cellX != oldCellX || cellY != oldCellY) {
+                oldCellX = cellX;
+                oldCellY = cellY;
+                copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
+                repaint();
+            }
+        }
     }
 }
 
 void KLGameField::nextAction(bool) {
     recalculate();
-    emit changeGeneration(m_Generation);
     repaint();
 }
 
@@ -225,6 +260,46 @@ void KLGameField::timerChanged(int timerInterval) {
         evoTimer->start(m_TimerInterval);
     }
 }
+
+void KLGameField::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        QPoint newPos = event->pos();
+        if(!checkMousePosition(newPos)) {
+            return;
+        }
+        cancelTimerInstantly();
+        m_bPressed = true;
+    }
+    QWidget::mousePressEvent(event);
+}
+
+void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        QPoint newPos = event->pos();
+        if(!checkMousePosition(newPos)) {
+            return;
+        }
+        cancelTimerInstantly();
+        m_bPressed = false;
+    }
+
+    QWidget::mouseReleaseEvent(event);
+}
+
+bool KLGameField::checkMousePosition(QPoint &mpos) {
+    mpos -= getMainOffset();
+    return (mpos.x() >= 0 && mpos.y() >= 0);
+}
+
+void KLGameField::newAction(bool) {
+    cancelTimerInstantly();
+    m_MainLayer = initLayer(m_MainLayer);
+    m_NextStepLayer = initLayer(m_NextStepLayer);
+    m_Generation = 0;
+    repaint();
+    emit changeGeneration(m_Generation);
+}
+
 
 
 

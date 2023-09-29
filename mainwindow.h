@@ -6,6 +6,7 @@
 #define KGLIVE_MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSlider>
 #include "KLGameField.h"
 
 
@@ -25,10 +26,13 @@ public:
 private:
     Ui::MainWindow *ui;
     KLGameField *gameField;
+    QSlider *timerSlider;
 
 public slots:
     void controlsChanged(bool);
     void generationChanged(int);
+    void colonyIsEmpty(void);
+
 
 };
 
