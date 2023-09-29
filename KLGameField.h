@@ -35,9 +35,9 @@ private:
     uchar fromMainLayer(int, int);
     void copyToLayer(uchar *, int, int, uchar);
 
-    bool checkMousePosition(QPoint &);
+    bool checkMousePosition(QPoint &) const;
 
-    QPoint getMainOffset();
+    QPoint getMainOffset() const;
     int m_TimerInterval;
     int m_Generation = 0;
     int m_fieldWidth;

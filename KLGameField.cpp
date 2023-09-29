@@ -175,7 +175,7 @@ void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
     layer[y * m_cellsX + x] = val;
 }
 
-QPoint KLGameField::getMainOffset() {
+QPoint KLGameField::getMainOffset() const {
     return {FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY };
 }
 
@@ -286,7 +286,7 @@ void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
     QWidget::mouseReleaseEvent(event);
 }
 
-bool KLGameField::checkMousePosition(QPoint &mpos) {
+bool KLGameField::checkMousePosition(QPoint &mpos) const {
     mpos -= getMainOffset();
     return (mpos.x() >= 0 && mpos.y() >= 0);
 }

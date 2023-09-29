@@ -6,6 +6,7 @@
 
 #include <QVBoxLayout>
 #include <QSlider>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -33,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
     connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
+    connect(ui->actionAboutQt, &QAction::triggered, this, [=]{
+        QMessageBox::aboutQt(this);
+    });
 
     connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
