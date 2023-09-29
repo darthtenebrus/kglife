@@ -82,6 +82,8 @@
      <string>Help</string>
     </property>
     <addaction name="actionAboutQt"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuControl"/>
    <addaction name="menuHelp"/>
@@ -154,6 +156,11 @@
   <action name="actionAboutQt">
    <property name="text">
     <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

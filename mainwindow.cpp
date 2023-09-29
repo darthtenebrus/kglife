@@ -36,6 +36,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
     connect(ui->actionAboutQt, &QAction::triggered, this, [=]{
         QMessageBox::aboutQt(this);
+
+    });
+
+    connect(ui->actionAbout, &QAction::triggered, this, [=]{
+        QMessageBox::about(this, "KGLife", tr("A simple Game Of Life Qt realization"));
+
     });
 
     connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
