@@ -11,9 +11,9 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent), ui(new Ui::MainWindow) {
+        QMainWindow(parent), ui(new Ui::MainWindow),
+        timerSlider(new QSlider(Qt::Horizontal, this)) {
     ui->setupUi(this);
-    timerSlider = new QSlider(Qt::Horizontal, this);
     timerSlider->setValue(5);
     timerSlider->setSliderPosition(5);
     timerSlider->setSingleStep(1);
@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->centralwidget->layout()->addWidget(gameField);
 
     connect(ui->actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
+    connect(ui->actionOpen, &QAction::triggered, gameField, &KLGameField::openAction);
+    connect(ui->actionSave, &QAction::triggered, gameField, &KLGameField::saveAction);
+
     connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
     connect(ui->actionAboutQt, &QAction::triggered, this, [=]{

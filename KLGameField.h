@@ -55,6 +55,8 @@ private:
 public slots:
     void newAction(bool);
     void nextAction(bool);
+    void openAction(bool);
+    void saveAction(bool);
     void checkTimerAndUpdate(bool);
     void nextGeneration(void);
     void timerChanged(int);

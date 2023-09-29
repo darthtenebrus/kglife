@@ -7,18 +7,21 @@
 #include "mainwindow.h"
 #include <QMouseEvent>
 #include <QTimer>
-
+#include <QFileDialog>
+#include <QMessageBox>
+#ifdef _DEBUG
+#include <QDebug>
+#endif
 
 #define FIELD_OFFSET 1
 #define SPACE 1
 #define CELL_SIZE 16
 #define DIVISOR 2000
 
-KLGameField::KLGameField(int timerInterval,  QWidget *parent) : QWidget(parent) {
+KLGameField::KLGameField(int timerInterval,  QWidget *parent) : QWidget(parent), evoTimer(new QTimer()) {
     setMouseTracking(true);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
-    evoTimer = new QTimer();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
 }
 
@@ -298,6 +301,105 @@ void KLGameField::newAction(bool) {
     m_Generation = 0;
     repaint();
     emit changeGeneration(m_Generation);
+}
+
+void KLGameField::openAction(bool) {
+    cancelTimerInstantly();
+    const QString &path = QFileDialog::getOpenFileName(this, tr("Load colony from file"),
+                                                       QDir::homePath(), tr("This application (*.kgol)"));
+
+#ifdef _DEBUG
+    qDebug() << "File = " << path;
+#endif
+
+    if ("" == path) {
+        return;
+    }
+
+    QFile file(path);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QMessageBox::warning(this,tr("error"),tr("open file failed"));
+        return;
+    }
+
+    const QByteArray &header = file.read(8);
+    const QString &strhead = QString::fromLatin1(header);
+    if (strhead != "KGOL_SIG") {
+        QMessageBox::warning(this,tr("error"),tr("Invalid file format"));
+        return;
+    }
+
+#ifdef _DEBUG
+    qDebug() << "Header Ok = " << strhead;
+#endif
+
+    QByteArray content;
+    while(!file.atEnd()) {
+        content = file.readAll();
+    }
+    const QList<QByteArray> &coords = content.split('C');
+    if (coords.empty()) {
+        QMessageBox::warning(this,tr("error"),tr("Invalid file format"));
+        return;
+    }
+
+    m_MainLayer = initLayer(m_MainLayer);
+    m_NextStepLayer = initLayer(m_NextStepLayer);
+    
+    for (const QByteArray &item: coords) {
+        if (!item.startsWith('X')) {
+            continue;
+        }
+
+        const QList<QByteArray> &pairXY = item.split('Y');
+        int resY = QString::fromLatin1(pairXY[1]).toInt();
+        int resX = QString::fromLatin1(pairXY[0]).midRef(1).toInt();
+
+        if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
+            continue;
+        }
+
+        copyToLayer(m_MainLayer, resX, resY, 1);
+    }
+}
+
+void KLGameField::saveAction(bool) {
+    cancelTimerInstantly();
+    const QString &path = QFileDialog::getSaveFileName(this, tr("Save colony current state"),
+                                              QDir::homePath(), tr("This application (*.kgol)"));
+#ifdef _DEBUG
+    qDebug() << "File = " << path;
+#endif
+
+
+    if ("" == path) {
+        return;
+    }
+
+    QFile file(path);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+    {
+        QMessageBox::warning(this,tr("error"),tr("open file failed"));
+        return;
+    }
+
+    QTextStream out(&file);
+#ifdef _DEBUG
+    qDebug() << "Out created";
+#endif
+    out << "KGOL_SIG";
+    for (int y = 0; y < m_cellsY; ++y) {
+        for (int x = 0; x < m_cellsX; ++x) {
+            if (fromMainLayer(x,y)) {
+                out << "CX" << x << "Y" << y;
+            }
+        }
+    }
+#ifdef _DEBUG
+    qDebug() << "Out written";
+#endif
+    file.close();
 }
 
 

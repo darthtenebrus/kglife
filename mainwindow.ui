@@ -74,6 +74,9 @@
      <string>Game</string>
     </property>
     <addaction name="actionNewGame"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
     <addaction name="actionNextStep"/>
     <addaction name="actionStartStop"/>
    </widget>
@@ -118,6 +121,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionNewGame"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
    <addaction name="separator"/>
    <addaction name="actionNextStep"/>
    <addaction name="actionStartStop"/>
@@ -161,6 +166,30 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset theme="document-save">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save colony current state</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Load colony from file</string>
    </property>
   </action>
  </widget>
