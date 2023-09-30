@@ -357,8 +357,17 @@ void KLGameField::openAction(bool) {
         }
 
         const QStringList &pairXY = item.split('Y');
-        int resY = pairXY[1].toInt();
-        int resX = pairXY[0].toInt();
+        bool ready = false;
+        int resX;
+        int resY = pairXY[1].toInt(&ready);
+        if (ready) {
+            resX = pairXY[0].toInt(&ready);
+        }
+
+        if (!ready) {
+            QMessageBox::critical(this,tr("Error"),tr("Invalid file format"));
+            return;
+        }
 
         if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
             continue;
