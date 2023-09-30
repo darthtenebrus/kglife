@@ -352,8 +352,11 @@ void KLGameField::openAction(bool) {
     m_NextStepLayer = initLayer(m_NextStepLayer);
     
     for (const QString &item: coords) {
-        if (!item.contains('Y')) {
+        if (item.isEmpty()) {
             continue;
+        } else if (!item.contains('Y')) {
+            QMessageBox::critical(this,tr("Error"),tr("Invalid file format"));
+            return;
         }
 
         const QStringList &pairXY = item.split('Y');

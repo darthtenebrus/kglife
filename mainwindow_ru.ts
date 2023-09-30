@@ -5,7 +5,7 @@
     <name>KLGameField</name>
     <message>
         <location filename="KLGameField.cpp" line="312"/>
-        <location filename="KLGameField.cpp" line="383"/>
+        <location filename="KLGameField.cpp" line="386"/>
         <source>This application (*.kgol)</source>
         <oldsource>This application (*.kgol) (*.kgol)</oldsource>
         <translation>Это приложение (*.kgol)</translation>
@@ -14,27 +14,29 @@
         <location filename="KLGameField.cpp" line="325"/>
         <location filename="KLGameField.cpp" line="332"/>
         <location filename="KLGameField.cpp" line="347"/>
-        <location filename="KLGameField.cpp" line="368"/>
-        <location filename="KLGameField.cpp" line="396"/>
+        <location filename="KLGameField.cpp" line="358"/>
+        <location filename="KLGameField.cpp" line="371"/>
+        <location filename="KLGameField.cpp" line="399"/>
         <source>Error</source>
         <oldsource>error</oldsource>
         <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="KLGameField.cpp" line="325"/>
-        <location filename="KLGameField.cpp" line="396"/>
+        <location filename="KLGameField.cpp" line="399"/>
         <source>Open file failed</source>
         <translation>Не удалось открыть файл</translation>
     </message>
     <message>
         <location filename="KLGameField.cpp" line="332"/>
         <location filename="KLGameField.cpp" line="347"/>
-        <location filename="KLGameField.cpp" line="368"/>
+        <location filename="KLGameField.cpp" line="358"/>
+        <location filename="KLGameField.cpp" line="371"/>
         <source>Invalid file format</source>
         <translation>Неверный формат файла</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="382"/>
+        <location filename="KLGameField.cpp" line="385"/>
         <source>Save colony current state</source>
         <translation>Сохранить текущее состояние колонии</translation>
     </message>
