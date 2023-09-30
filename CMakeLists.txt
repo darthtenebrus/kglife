@@ -31,8 +31,9 @@ add_executable(${PROJECT_NAME}
         mainwindow.ui
         KLGameField.cpp
         KLGameField.h
+        LoadGameException.h
         ${RES_FILES}
-        ${QM_FILES})
+        ${QM_FILES} )
 
 target_link_libraries(${PROJECT_NAME}
         Qt5::Core
