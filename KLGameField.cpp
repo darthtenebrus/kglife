@@ -341,7 +341,8 @@ void KLGameField::openAction(bool) {
     while(!file.atEnd()) {
         content = file.readAll();
     }
-    const QList<QByteArray> &coords = content.split('C');
+    const QString &strContent = QString::fromLatin1(content);
+    const QStringList &coords = strContent.split("CX");
     if (coords.empty()) {
         QMessageBox::critical(this,tr("Error"),tr("Invalid file format"));
         return;
@@ -350,14 +351,14 @@ void KLGameField::openAction(bool) {
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
     
-    for (const QByteArray &item: coords) {
-        if (!item.startsWith('X')) {
+    for (const QString &item: coords) {
+        if (!item.contains('Y')) {
             continue;
         }
 
-        const QList<QByteArray> &pairXY = item.split('Y');
-        int resY = QString::fromLatin1(pairXY[1]).toInt();
-        int resX = QString::fromLatin1(pairXY[0]).midRef(1).toInt();
+        const QStringList &pairXY = item.split('Y');
+        int resY = pairXY[1].toInt();
+        int resX = pairXY[0].toInt();
 
         if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
             continue;
