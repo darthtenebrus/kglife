@@ -13,20 +13,18 @@ Q_OBJECT
 public:
     KLGameField(int timerInterval, QWidget *parent = 0);
     ~KLGameField() override;
+    void cancelTimerInstantly(void);
 
 protected:
     void paintEvent(QPaintEvent *e) override;
     void resizeEvent(QResizeEvent *event) override;
-
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
-
     void mousePressEvent(QMouseEvent *event) override;
-
     void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
-    void cancelTimerInstantly(void);
+
     void recalculate(void);
     void actualDoRePaint();
     uchar *initLayer(uchar *);

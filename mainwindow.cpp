@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#define VERSION "1.0"
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow),
@@ -43,7 +44,10 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     connect(ui->actionAbout, &QAction::triggered, this, [=]{
-        QMessageBox::about(this, "KGLife", tr("A simple Game Of Life Qt realization"));
+        QMessageBox::about(this, "KGLife",
+                           QString("KGLife v. %1\n").arg(VERSION) +
+        tr("A simple Game Of Life Qt realization") +
+        "\n© 2023 E.Sorochinskiy");
 
     });
 
@@ -63,7 +67,7 @@ MainWindow::~MainWindow() {
 void MainWindow::controlsChanged(bool enabled) {
 
     ui->actionNextStep->setEnabled(enabled);
-    ui->actionStartStop->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-stop"));
+    ui->actionStartStop->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-pause"));
     ui->actionStartStop->setToolTip(enabled ? tr("Start evolution") : tr("Stop evolution"));
 }
 
@@ -74,5 +78,10 @@ void MainWindow::generationChanged(int cgen) {
 
 void MainWindow::colonyIsEmpty(void) {
     ui->statusbar->showMessage(tr("Colony is empty"));
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    gameField->cancelTimerInstantly();
+    QWidget::closeEvent(event);
 }
 

@@ -49,7 +49,7 @@ void KLGameField::actualDoRePaint() {
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
             QBrush color;
-            color = (fromMainLayer(x, y)) ? QBrush("#00FF00") : QBrush("#000000");
+            color = (fromMainLayer(x, y)) ? QBrush("#00FF55") : QBrush("#000000");
             painter.fillRect(QRect(x * (CELL_SIZE + SPACE), y * (CELL_SIZE + SPACE),
                                    CELL_SIZE, CELL_SIZE), color);
 
@@ -148,6 +148,8 @@ int KLGameField::calculateNeighbors(int x, int y) {
             }
 
             int newY = y + dy;
+            int newX = x + dx;
+
             if (newY < 0) {
                 newY = m_cellsY - 1;
             }
@@ -156,7 +158,6 @@ int KLGameField::calculateNeighbors(int x, int y) {
                 newY = 0;
             }
 
-            int newX = x + dx;
 
             if (newX < 0) {
                 newX = m_cellsX - 1;
@@ -321,14 +322,14 @@ void KLGameField::openAction(bool) {
     QFile file(path);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::warning(this,tr("error"),tr("open file failed"));
+        QMessageBox::critical(this,tr("Error"),tr("Open file failed"));
         return;
     }
 
     const QByteArray &header = file.read(8);
     const QString &strhead = QString::fromLatin1(header);
     if (strhead != "KGOL_SIG") {
-        QMessageBox::warning(this,tr("error"),tr("Invalid file format"));
+        QMessageBox::critical(this,tr("Error"),tr("Invalid file format"));
         return;
     }
 
@@ -342,7 +343,7 @@ void KLGameField::openAction(bool) {
     }
     const QList<QByteArray> &coords = content.split('C');
     if (coords.empty()) {
-        QMessageBox::warning(this,tr("error"),tr("Invalid file format"));
+        QMessageBox::critical(this,tr("Error"),tr("Invalid file format"));
         return;
     }
 
@@ -382,7 +383,7 @@ void KLGameField::saveAction(bool) {
     QFile file(path);
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
     {
-        QMessageBox::warning(this,tr("error"),tr("open file failed"));
+        QMessageBox::critical(this,tr("Error"),tr("Open file failed"));
         return;
     }
 

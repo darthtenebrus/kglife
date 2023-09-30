@@ -174,7 +174,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>Save...</string>
    </property>
    <property name="toolTip">
     <string>Save colony current state</string>
@@ -186,7 +186,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>Open...</string>
    </property>
    <property name="toolTip">
     <string>Load colony from file</string>

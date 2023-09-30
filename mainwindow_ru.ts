@@ -4,38 +4,40 @@
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="311"/>
-        <location filename="KLGameField.cpp" line="372"/>
+        <location filename="KLGameField.cpp" line="312"/>
+        <location filename="KLGameField.cpp" line="373"/>
         <source>This application (*.kgol)</source>
-        <translation type="unfinished"></translation>
+        <oldsource>This application (*.kgol) (*.kgol)</oldsource>
+        <translation>Это приложение (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="324"/>
-        <location filename="KLGameField.cpp" line="331"/>
-        <location filename="KLGameField.cpp" line="345"/>
-        <location filename="KLGameField.cpp" line="385"/>
-        <source>error</source>
-        <translation type="unfinished"></translation>
+        <location filename="KLGameField.cpp" line="325"/>
+        <location filename="KLGameField.cpp" line="332"/>
+        <location filename="KLGameField.cpp" line="346"/>
+        <location filename="KLGameField.cpp" line="386"/>
+        <source>Error</source>
+        <oldsource>error</oldsource>
+        <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="324"/>
-        <location filename="KLGameField.cpp" line="385"/>
-        <source>open file failed</source>
-        <translation type="unfinished"></translation>
+        <location filename="KLGameField.cpp" line="325"/>
+        <location filename="KLGameField.cpp" line="386"/>
+        <source>Open file failed</source>
+        <translation>Не удалось открыть файл</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="331"/>
-        <location filename="KLGameField.cpp" line="345"/>
+        <location filename="KLGameField.cpp" line="332"/>
+        <location filename="KLGameField.cpp" line="346"/>
         <source>Invalid file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный формат файла</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="371"/>
+        <location filename="KLGameField.cpp" line="372"/>
         <source>Save colony current state</source>
         <translation>Сохранить текущее состояние колонии</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="310"/>
+        <location filename="KLGameField.cpp" line="311"/>
         <source>Load colony from file</source>
         <translation>Загрузить колонию из файла</translation>
     </message>
@@ -95,8 +97,15 @@
         <location filename="mainwindow.ui" line="177"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="187"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="187"/>
-        <source>Save</source>
-        <translation>Сохранить</translation>
+        <source>Save...</source>
+        <translation>Сохранить...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="189"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="191"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="191"/>
+        <source>Open...</source>
+        <translation>Загрузить...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="180"/>
@@ -106,13 +115,6 @@
         <translation>Сохранить текущее состояние колонии</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="189"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="191"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="191"/>
-        <source>Open</source>
-        <translation>Загрузить</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="192"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="193"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="193"/>
@@ -120,7 +122,7 @@
         <translation>Загрузить колонию из файла</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="67"/>
+        <location filename="mainwindow.cpp" line="71"/>
         <source>Start evolution</source>
         <translation>Начать эволюцию</translation>
     </message>
@@ -139,32 +141,32 @@
         <translation>Новая игра</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="24"/>
+        <location filename="mainwindow.cpp" line="25"/>
         <source>Generation Change Speed</source>
         <translation>Скорость смены поколений</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="30"/>
+        <location filename="mainwindow.cpp" line="31"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Установите или снимите клетку двойным нажатием или проведите линию, зажав левую кнопку</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="46"/>
+        <location filename="mainwindow.cpp" line="49"/>
         <source>A simple Game Of Life Qt realization</source>
         <translation>Простая реализация игры &quot;Жизнь&quot; на Qt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="67"/>
+        <location filename="mainwindow.cpp" line="71"/>
         <source>Stop evolution</source>
         <translation>Остановить эволюцию</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="71"/>
+        <location filename="mainwindow.cpp" line="75"/>
         <source>Generation: %1</source>
         <translation>Поколение: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="76"/>
+        <location filename="mainwindow.cpp" line="80"/>
         <source>Colony is empty</source>
         <oldsource>Colony is empty or remains static</oldsource>
         <translation>Колония пуста</translation>
