@@ -9,7 +9,7 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#define VERSION "1.0"
+#include "version.h"
 
 QString MainWindow::orgName = "kglife";
 
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionAbout, &QAction::triggered, this, [=]{
         QMessageBox::about(this, "KGLife",
-                           QString("KGLife v. %1\n").arg(VERSION) +
+                           QString("KGLife v. %1\n").arg(APP_VERSION) +
         tr("A simple Game Of Life Qt realization") +
         "\n© 2023 E.Sorochinskiy");
 
