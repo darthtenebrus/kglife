@@ -216,47 +216,47 @@
     <message>
         <location filename="main.cpp" line="28"/>
         <source>Simple Game Of Life realization for KDE</source>
-        <translation type="unfinished"></translation>
+        <translation>Простая реализация игры &quot;Жизнь&quot;</translation>
     </message>
     <message>
         <location filename="main.cpp" line="29"/>
         <source>Created by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Создано:</translation>
     </message>
     <message>
         <location filename="main.cpp" line="33"/>
         <source>Usage %1 [options]</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование %1 [параметры]</translation>
     </message>
     <message>
         <location filename="main.cpp" line="35"/>
         <source>Valid options:</source>
-        <translation type="unfinished"></translation>
+        <translation>Допустимые переметры:</translation>
     </message>
     <message>
         <location filename="main.cpp" line="36"/>
         <source>show this help</source>
-        <translation type="unfinished"></translation>
+        <translation>показать эту инструкцию</translation>
     </message>
     <message>
         <location filename="main.cpp" line="37"/>
         <source>display version</source>
-        <translation type="unfinished"></translation>
+        <translation>показать версию</translation>
     </message>
     <message>
         <location filename="main.cpp" line="42"/>
         <source>Unknown option %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный параметр %1</translation>
     </message>
     <message>
         <location filename="main.cpp" line="43"/>
         <source>Launch %1 -h or %1 --help for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустите %1 -h or %1 --help для получения инструкции</translation>
     </message>
     <message>
         <location filename="main.cpp" line="47"/>
         <source>Launch this application without any parameters to see its main functional</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустите без параметров, чтобы увидеть полный функционал</translation>
     </message>
 </context>
 </TS>
