@@ -7,7 +7,9 @@
 
 #include <QMainWindow>
 #include <QSlider>
+#include <QSettings>
 #include "KLGameField.h"
+#include "preferences.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -22,7 +24,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    static QString orgname;
+    static QString orgName;
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -32,12 +34,20 @@ private:
     KLGameField *gameField;
     QSlider *timerSlider;
 
-
+    QSettings settings;
+    PreferencesType defs = {
+            {"cellsColor",
+                                  QVariant(QColor(0x00FF55))},
+            {"backColor",
+                                  QVariant(QColor("#000000"))}
+    };
+    PreferencesType fillDataFromSettings() const;
 
 public slots:
     void controlsChanged(bool);
     void generationChanged(int);
     void colonyIsEmpty(void);
+
 
 
 };

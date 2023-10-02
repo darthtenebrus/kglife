@@ -11,10 +11,12 @@
 #include "ui_mainwindow.h"
 #define VERSION "1.0"
 
-QString MainWindow::orgname = "kglife";
+QString MainWindow::orgName = "kglife";
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow),
+        settings(QSettings::NativeFormat, QSettings::UserScope,
+                 MainWindow::orgName, "config"),
         timerSlider(new QSlider(Qt::Horizontal, this)) {
     ui->setupUi(this);
     timerSlider->setValue(5);
@@ -28,7 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timerSlider->setFixedWidth(200);
     ui->toolBar->addWidget(timerSlider);
 
-    gameField = new KLGameField(QColor(0x00FF55), QColor("#000000"), timerSlider->value(), this);
+    PreferencesType data = fillDataFromSettings();
+
+    gameField = new KLGameField(data["cellsColor"].value<QColor>(),
+                                data["backColor"].value<QColor>(), timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     gameField->setStatusTip(tr("Set or erase a single cell by double click or drag a line with left button pressed"));
 
@@ -85,6 +90,16 @@ void MainWindow::generationChanged(int cgen) {
 void MainWindow::colonyIsEmpty(void) {
     ui->statusbar->showMessage(tr("Colony is empty"));
 }
+
+PreferencesType MainWindow::fillDataFromSettings() const {
+
+    PreferencesType data;
+    for (const QString &key: defs.keys()) {
+        data.insert(key, settings.value(key, defs[key]));
+    }
+    return data;
+}
+
 
 void MainWindow::closeEvent(QCloseEvent *event) {
     gameField->cancelTimerInstantly();
