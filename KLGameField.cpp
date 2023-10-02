@@ -10,12 +10,11 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QColorDialog>
 #include "LoadGameException.h"
 
 #ifdef _DEBUG
 #include <QDebug>
-#include <QColorDialog>
-
 #endif
 
 #define FIELD_OFFSET 1
