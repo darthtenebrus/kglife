@@ -42,7 +42,7 @@
         <translation>Выберите цвет клеток</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="446"/>
+        <location filename="KLGameField.cpp" line="447"/>
         <source>Choose background color</source>
         <translation>Выберите цвет фона</translation>
     </message>
@@ -161,7 +161,7 @@
         <translation>Загрузить колонию из файла</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
+        <location filename="mainwindow.cpp" line="85"/>
         <source>Start evolution</source>
         <translation>Начать эволюцию</translation>
     </message>
@@ -195,17 +195,17 @@
         <translation>Простая реализация игры &quot;Жизнь&quot; на Qt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
+        <location filename="mainwindow.cpp" line="85"/>
         <source>Stop evolution</source>
         <translation>Остановить эволюцию</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="87"/>
+        <location filename="mainwindow.cpp" line="89"/>
         <source>Generation: %1</source>
         <translation>Поколение: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="92"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>Colony is empty</source>
         <oldsource>Colony is empty or remains static</oldsource>
         <translation>Колония пуста</translation>

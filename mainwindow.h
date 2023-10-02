@@ -36,17 +36,19 @@ private:
 
     QSettings settings;
     PreferencesType defs = {
-            {"cellsColor",
-                                  QVariant(QColor(0x00FF55))},
-            {"backColor",
-                                  QVariant(QColor("#000000"))}
+            {"cellsColor",QVariant(QColor(0x00FF55))},
+            {"backColor",QVariant(QColor("#000000"))}
     };
-    PreferencesType fillDataFromSettings() const;
+    PreferencesType m_data;
+
+    void fillDataFromSettings(void);
+    void writeSettingsDirect(void);
 
 public slots:
     void controlsChanged(bool);
     void generationChanged(int);
     void colonyIsEmpty(void);
+    void settingChanged(const QString &, const QColor &);
 
 
 

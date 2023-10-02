@@ -436,6 +436,7 @@ void KLGameField::changeCellsColor(bool) {
     if (ccolor.isValid()) {
         m_ColorCells = ccolor;
         repaint();
+        emit changeSetting("cellsColor", m_ColorCells);
     }
 
 }
@@ -448,6 +449,7 @@ void KLGameField::changeBackgroundColor(bool) {
     if (ccolor.isValid()) {
         m_ColorBackground = ccolor;
         repaint();
+        emit changeSetting("backColor", m_ColorBackground);
     }
 
 }

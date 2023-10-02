@@ -30,10 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timerSlider->setFixedWidth(200);
     ui->toolBar->addWidget(timerSlider);
 
-    PreferencesType data = fillDataFromSettings();
+    fillDataFromSettings();
 
-    gameField = new KLGameField(data["cellsColor"].value<QColor>(),
-                                data["backColor"].value<QColor>(),
+    gameField = new KLGameField(m_data["cellsColor"].value<QColor>(),
+                                m_data["backColor"].value<QColor>(),
                                 timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     gameField->setStatusTip(tr("Set or erase a single cell by double click or drag a line with left button pressed"));
@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);
     connect(gameField, &KLGameField::emptyColony, this, &MainWindow::colonyIsEmpty);
 
+    connect(gameField, &KLGameField::changeSetting, this, &MainWindow::settingChanged);
+
 }
 
 MainWindow::~MainWindow() {
@@ -92,18 +94,30 @@ void MainWindow::colonyIsEmpty(void) {
     ui->statusbar->showMessage(tr("Colony is empty"));
 }
 
-PreferencesType MainWindow::fillDataFromSettings() const {
+void MainWindow::fillDataFromSettings(void)  {
 
-    PreferencesType data;
     for (const QString &key: defs.keys()) {
-        data.insert(key, settings.value(key, defs[key]));
+        m_data.insert(key, settings.value(key, defs[key]));
     }
-    return data;
+
 }
 
 
 void MainWindow::closeEvent(QCloseEvent *event) {
     gameField->cancelTimerInstantly();
+    writeSettingsDirect();
     QWidget::closeEvent(event);
+}
+
+void MainWindow::writeSettingsDirect(void) {
+    for (const QString &key: m_data.keys()) {
+        settings.setValue(key, m_data.value(key));
+    }
+    settings.sync();
+
+}
+
+void MainWindow::settingChanged(const QString &setting, const QColor &color) {
+    m_data[setting] = QVariant(color);
 }
 

@@ -71,6 +71,7 @@ signals:
     void changeControls(bool);
     void changeGeneration(int);
     void emptyColony(void);
+    void changeSetting(const QString &, const QColor &);
 
 
 
