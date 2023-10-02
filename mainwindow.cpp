@@ -33,7 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
     PreferencesType data = fillDataFromSettings();
 
     gameField = new KLGameField(data["cellsColor"].value<QColor>(),
-                                data["backColor"].value<QColor>(), timerSlider->value(), this);
+                                data["backColor"].value<QColor>(),
+                                timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     gameField->setStatusTip(tr("Set or erase a single cell by double click or drag a line with left button pressed"));
 
