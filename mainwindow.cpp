@@ -11,6 +11,8 @@
 #include "ui_mainwindow.h"
 #define VERSION "1.0"
 
+QString MainWindow::orgname = "kglife";
+
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow),
         timerSlider(new QSlider(Qt::Horizontal, this)) {
@@ -26,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timerSlider->setFixedWidth(200);
     ui->toolBar->addWidget(timerSlider);
 
-    gameField = new KLGameField(timerSlider->value(), this);
+    gameField = new KLGameField(QColor(0x00FF55), QColor("#000000"), timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     gameField->setStatusTip(tr("Set or erase a single cell by double click or drag a line with left button pressed"));
 
@@ -51,6 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     });
 
+    connect(ui->actionCellsColor, &QAction::triggered, gameField,
+            &KLGameField::changeCellsColor);
+    connect(ui->actionBackgroundColor, &QAction::triggered, gameField,
+            &KLGameField::changeBackgroundColor);
     connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);

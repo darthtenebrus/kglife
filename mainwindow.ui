@@ -80,6 +80,19 @@
     <addaction name="actionNextStep"/>
     <addaction name="actionStartStop"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <widget class="QMenu" name="menuColors">
+     <property name="title">
+      <string>Colors...</string>
+     </property>
+     <addaction name="actionCellsColor"/>
+     <addaction name="actionBackgroundColor"/>
+    </widget>
+    <addaction name="menuColors"/>
+   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -89,6 +102,7 @@
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuControl"/>
+   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -190,6 +204,16 @@
    </property>
    <property name="toolTip">
     <string>Load colony from file</string>
+   </property>
+  </action>
+  <action name="actionCellsColor">
+   <property name="text">
+    <string>Cells</string>
+   </property>
+  </action>
+  <action name="actionBackgroundColor">
+   <property name="text">
+    <string>Background</string>
    </property>
   </action>
  </widget>

@@ -14,6 +14,8 @@
 
 #ifdef _DEBUG
 #include <QDebug>
+#include <QColorDialog>
+
 #endif
 
 #define FIELD_OFFSET 1
@@ -21,7 +23,11 @@
 #define CELL_SIZE 16
 #define DIVISOR 2000
 
-KLGameField::KLGameField(int timerInterval,  QWidget *parent) : QWidget(parent), evoTimer(new QTimer()) {
+KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor,
+                         int timerInterval,  QWidget *parent) : QWidget(parent),
+                         m_ColorCells(cellsColor),
+                         m_ColorBackground(backgroundColor),
+                         evoTimer(new QTimer()) {
     setMouseTracking(true);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
@@ -50,7 +56,8 @@ void KLGameField::actualDoRePaint() {
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
             QBrush color;
-            color = (fromMainLayer(x, y)) ? QBrush("#00FF55") : QBrush("#000000");
+
+            color = (fromMainLayer(x, y)) ? QBrush(m_ColorCells) : QBrush(m_ColorBackground);
             painter.fillRect(QRect(x * (CELL_SIZE + SPACE), y * (CELL_SIZE + SPACE),
                                    CELL_SIZE, CELL_SIZE), color);
 
@@ -420,6 +427,30 @@ void KLGameField::saveAction(bool) {
     } catch (const LoadGameException &ex) {
         QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
     }
+}
+
+void KLGameField::changeCellsColor(bool) {
+
+    const QColor &ccolor = QColorDialog::getColor(m_ColorCells, this,
+                                                  tr("Choose cells color"));
+
+    if (ccolor.isValid()) {
+        m_ColorCells = ccolor;
+        repaint();
+    }
+
+}
+
+void KLGameField::changeBackgroundColor(bool) {
+
+    const QColor &ccolor = QColorDialog::getColor(m_ColorBackground, this,
+                                                  tr("Choose background color"));
+
+    if (ccolor.isValid()) {
+        m_ColorBackground = ccolor;
+        repaint();
+    }
+
 }
 
 

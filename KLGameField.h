@@ -11,7 +11,7 @@
 class KLGameField : public QWidget {
 Q_OBJECT
 public:
-    KLGameField(int timerInterval, QWidget *parent = 0);
+    KLGameField(const QColor &cellsColor, const QColor &BackgroundColor, int timerInterval, QWidget *parent = nullptr);
     ~KLGameField() override;
     void cancelTimerInstantly(void);
 
@@ -50,14 +50,22 @@ private:
     QCursor m_Cursor;
     bool m_bPressed = false;
 
+    QColor m_ColorCells;
+    QColor m_ColorBackground;
+
 public slots:
     void newAction(bool);
     void nextAction(bool);
     void openAction(bool);
     void saveAction(bool);
     void checkTimerAndUpdate(bool);
-    void nextGeneration(void);
     void timerChanged(int);
+
+    void changeCellsColor(bool);
+    void changeBackgroundColor(bool);
+
+private slots:
+    void nextGeneration(void);
 
 signals:
     void changeControls(bool);

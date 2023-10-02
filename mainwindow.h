@@ -17,9 +17,12 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
 Q_OBJECT
 
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+
+    static QString orgname;
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -28,6 +31,8 @@ private:
     Ui::MainWindow *ui;
     KLGameField *gameField;
     QSlider *timerSlider;
+
+
 
 public slots:
     void controlsChanged(bool);
