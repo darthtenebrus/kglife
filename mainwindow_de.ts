@@ -78,7 +78,7 @@
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="215"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="215"/>
         <source>Colors...</source>
-        <translation>Farben</translation>
+        <translation>Farben...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="98"/>
@@ -120,14 +120,14 @@
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="201"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="201"/>
         <source>About Qt</source>
-        <translation>Von Qt</translation>
+        <translation>Über Qt</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="182"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="202"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="202"/>
         <source>About</source>
-        <translation>Von der App</translation>
+        <translation>Über diese App</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="191"/>
