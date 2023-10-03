@@ -222,7 +222,7 @@
     <message>
         <location filename="main.cpp" line="32"/>
         <source>Created by: </source>
-        <translation>Создано:</translation>
+        <translation>Создано: </translation>
     </message>
     <message>
         <location filename="main.cpp" line="36"/>
