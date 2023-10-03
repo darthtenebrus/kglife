@@ -3,6 +3,9 @@
 #include <QPushButton>
 #include <QDir>
 #include <iostream>
+#include <QSystemSemaphore>
+#include <QSharedMemory>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "version.h"
 
@@ -25,7 +28,7 @@ int main(int argc, char *argv[]) {
             const QString &firstArg = cmd_args.value(0);
             const QString &progName = firstArg.contains(QDir::separator()) ?
                                       firstArg.section(QDir::separator(), -1, -1) : firstArg;
-            std::cout << progName.toStdString() << " " << QObject::tr("Simple Game Of Life realization for KDE").toStdString() << "\n";
+            std::cout << progName.toStdString() << " " << QObject::tr("Simple Game Of Life realization").toStdString() << "\n";
             std::cout << QObject::tr("Created by: ")
                     .toStdString() << "Eugene E. Sorochinskiy <manager@darkguard.net>\n\n";
             const QString &optVal = cmd_args.value(1);
@@ -49,6 +52,38 @@ int main(int argc, char *argv[]) {
             return 0;
         }
     } catch (const std::exception &ex) {
+        return 1;
+    }
+
+    const QString &semaph_id = "kglife_semaphore";
+    const QString &shared_id = "kglife_shared_mem";
+    QSystemSemaphore semaphore(semaph_id, 1);
+    semaphore.acquire();
+
+#ifndef Q_OS_WIN32
+    QSharedMemory nix_fix_shared_memory(shared_id);
+    if (nix_fix_shared_memory.attach())
+    {
+        nix_fix_shared_memory.detach();
+    }
+#endif
+
+    QSharedMemory sharedMemory(shared_id);
+    bool is_running = false;
+    if (sharedMemory.attach())
+    {
+        is_running = true;
+    } else {
+        sharedMemory.create(1);
+    }
+    semaphore.release();
+
+    if (is_running) {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.setWindowTitle(QObject::tr("Already Running"));
+        msgBox.setText(QObject::tr("Application Already Running"));
+        msgBox.exec();
         return 1;
     }
 
