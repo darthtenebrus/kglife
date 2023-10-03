@@ -42,3 +42,4 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Widgets
         )
 
+install(TARGETS ${PROJECT_NAME})
