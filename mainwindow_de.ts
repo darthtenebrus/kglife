@@ -4,48 +4,48 @@
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="318"/>
+        <location filename="KLGameField.cpp" line="319"/>
         <source>Load colony from file</source>
         <translation>Kolonie von der Datei einladen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="319"/>
-        <location filename="KLGameField.cpp" line="394"/>
+        <location filename="KLGameField.cpp" line="320"/>
+        <location filename="KLGameField.cpp" line="395"/>
         <source>This application (*.kgol)</source>
         <translation>Diese App (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="332"/>
-        <location filename="KLGameField.cpp" line="408"/>
+        <location filename="KLGameField.cpp" line="333"/>
+        <location filename="KLGameField.cpp" line="409"/>
         <source>Open file failed</source>
         <translation>Dateiladen Versager</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="338"/>
-        <location filename="KLGameField.cpp" line="353"/>
-        <location filename="KLGameField.cpp" line="363"/>
-        <location filename="KLGameField.cpp" line="375"/>
+        <location filename="KLGameField.cpp" line="339"/>
+        <location filename="KLGameField.cpp" line="354"/>
+        <location filename="KLGameField.cpp" line="364"/>
+        <location filename="KLGameField.cpp" line="376"/>
         <source>Invalid file format</source>
         <translation>Ungültiges Dateiformat</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="387"/>
-        <location filename="KLGameField.cpp" line="427"/>
+        <location filename="KLGameField.cpp" line="388"/>
+        <location filename="KLGameField.cpp" line="428"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="393"/>
+        <location filename="KLGameField.cpp" line="394"/>
         <source>Save colony current state</source>
         <translation>Den Kolonie zustand sparen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="434"/>
+        <location filename="KLGameField.cpp" line="435"/>
         <source>Choose cells color</source>
         <translation>Zellefarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="447"/>
+        <location filename="KLGameField.cpp" line="448"/>
         <source>Choose background color</source>
         <translation>Hintergrundfarbe wahlen</translation>
     </message>

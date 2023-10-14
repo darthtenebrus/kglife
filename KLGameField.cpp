@@ -301,7 +301,8 @@ void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
 
 bool KLGameField::checkMousePosition(QPoint &mpos) const {
     mpos -= getMainOffset();
-    return (mpos.x() >= 0 && mpos.y() >= 0);
+    return (mpos.x() >= 0 && mpos.y() >= 0 &&
+            mpos.x() <= m_cellsX * (CELL_SIZE + SPACE) && mpos.y() <= m_cellsY * (CELL_SIZE + SPACE));
 }
 
 void KLGameField::newAction(bool) {
