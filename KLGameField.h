@@ -22,9 +22,12 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
+    void recalcScreenCells(void);
 
 private:
 
+    void changeDelta(int);
     void recalculate(void);
     void actualDoRePaint();
     uchar *initLayer(uchar *);
@@ -40,15 +43,26 @@ private:
     int m_Generation = 0;
     int m_fieldWidth;
     int m_fieldHeight;
-    int m_cellsX;
-    int m_remX;
-    int m_cellsY;
-    int m_remY;
+    int m_cellsX = 0;
+    int m_remScrX;
+    int m_cellsY = 0;
+    int m_remScrY;
+    int m_MaxMemOffsetX = 0;
+    int m_MaxMemOffsetY = 0;
+
+    int m_CurrMemOffsetX = 0;
+    int m_CurrMemOffsetY = 0;
+
+
+    int m_cellSize;
+    int m_ScrCellsX;
+    int m_ScrCellsY;
+
     uchar *m_MainLayer = nullptr;
     uchar *m_NextStepLayer = nullptr;
     QTimer *evoTimer = nullptr;
     QCursor m_Cursor;
-    bool m_bPressed = false;
+    bool m_LeftbPressed = false;
 
     QColor m_ColorCells;
     QColor m_ColorBackground;
@@ -72,8 +86,6 @@ signals:
     void changeGeneration(int);
     void emptyColony(void);
     void changeSetting(const QString &, const QColor &);
-
-
 
 };
 

@@ -4,50 +4,50 @@
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="320"/>
-        <location filename="KLGameField.cpp" line="395"/>
+        <location filename="KLGameField.cpp" line="375"/>
+        <location filename="KLGameField.cpp" line="450"/>
         <source>This application (*.kgol)</source>
         <oldsource>This application (*.kgol) (*.kgol)</oldsource>
         <translation>Это приложение (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="388"/>
-        <location filename="KLGameField.cpp" line="428"/>
+        <location filename="KLGameField.cpp" line="443"/>
+        <location filename="KLGameField.cpp" line="483"/>
         <source>Error</source>
         <oldsource>error</oldsource>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="333"/>
-        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="388"/>
+        <location filename="KLGameField.cpp" line="464"/>
         <source>Open file failed</source>
         <translation>Не удалось открыть файл</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="339"/>
-        <location filename="KLGameField.cpp" line="354"/>
-        <location filename="KLGameField.cpp" line="364"/>
-        <location filename="KLGameField.cpp" line="376"/>
+        <location filename="KLGameField.cpp" line="394"/>
+        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="419"/>
+        <location filename="KLGameField.cpp" line="431"/>
         <source>Invalid file format</source>
         <translation>Неверный формат файла</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="394"/>
+        <location filename="KLGameField.cpp" line="449"/>
         <source>Save colony current state</source>
         <translation>Сохранить текущее состояние колонии</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="435"/>
+        <location filename="KLGameField.cpp" line="490"/>
         <source>Choose cells color</source>
         <translation>Выберите цвет клеток</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="448"/>
+        <location filename="KLGameField.cpp" line="503"/>
         <source>Choose background color</source>
         <translation>Выберите цвет фона</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="319"/>
+        <location filename="KLGameField.cpp" line="374"/>
         <source>Load colony from file</source>
         <translation>Загрузить колонию из файла</translation>
     </message>

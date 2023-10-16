@@ -19,7 +19,8 @@
 
 #define FIELD_OFFSET 1
 #define SPACE 1
-#define CELL_SIZE 16
+#define MIN_CELL_SIZE 16
+#define MAX_CELL_SIZE 128
 #define DIVISOR 2000
 
 KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor,
@@ -27,6 +28,7 @@ KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor
                          m_ColorCells(cellsColor),
                          m_ColorBackground(backgroundColor),
                          evoTimer(new QTimer()) {
+    m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
@@ -38,6 +40,25 @@ KLGameField::~KLGameField() {
     delete m_MainLayer;
     delete m_NextStepLayer;
     delete evoTimer;
+}
+
+void KLGameField::changeDelta(int delta) {
+    int tmpSize = 0;
+    tmpSize = m_cellSize + delta;
+    if (tmpSize > MAX_CELL_SIZE || tmpSize < MIN_CELL_SIZE) {
+        return;
+    }
+
+    m_cellSize = tmpSize;
+    recalcScreenCells();
+    repaint();
+}
+
+void KLGameField::wheelEvent(QWheelEvent *event) {
+    cancelTimerInstantly();
+    QPoint numDegrees = event->angleDelta() / 8;
+    changeDelta(numDegrees.y());
+
 }
 
 void KLGameField::paintEvent(QPaintEvent *e) {
@@ -52,17 +73,51 @@ void KLGameField::actualDoRePaint() {
                      QBrush("#232323"));
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
-    for (int y = 0; y < m_cellsY; ++y) {
-        for (int x = 0; x < m_cellsX; ++x) {
+    for (int y = 0; y < m_ScrCellsY; ++y) {
+        for (int x = 0; x < m_ScrCellsX; ++x) {
             QBrush color;
 
-            color = (fromMainLayer(x, y)) ? QBrush(m_ColorCells) : QBrush(m_ColorBackground);
-            painter.fillRect(QRect(x * (CELL_SIZE + SPACE), y * (CELL_SIZE + SPACE),
-                                   CELL_SIZE, CELL_SIZE), color);
+            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(m_ColorCells) : QBrush(m_ColorBackground);
+            painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
+                                   m_cellSize, m_cellSize), color);
 
         }
 
     }
+
+}
+
+
+void KLGameField::recalcScreenCells() {
+    int fw = m_fieldWidth - SPACE * 2;
+    int fh = m_fieldHeight - SPACE * 2;
+
+    m_ScrCellsX = fw / (m_cellSize + SPACE);
+    m_ScrCellsY = fh / (m_cellSize + SPACE);
+
+    if (m_cellsX) {
+        if(m_ScrCellsX > m_cellsX) {
+            m_ScrCellsX = m_cellsX;
+        }
+        m_MaxMemOffsetX = m_cellsX - m_ScrCellsX;
+        if (m_CurrMemOffsetX > m_MaxMemOffsetX) {
+            m_CurrMemOffsetX = m_MaxMemOffsetX;
+        }
+    }
+
+    if (m_cellsY) {
+        if (m_ScrCellsY > m_cellsY) {
+            m_ScrCellsY = m_cellsY;
+        }
+        m_MaxMemOffsetY = m_cellsY - m_ScrCellsY;
+        if (m_CurrMemOffsetY > m_MaxMemOffsetY) {
+            m_CurrMemOffsetY = m_MaxMemOffsetY;
+        }
+
+    }
+
+    m_remScrX = (fw - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
+    m_remScrY = (fh - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
 
 }
 
@@ -74,18 +129,16 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
     m_fieldWidth = w - FIELD_OFFSET * 2;
     m_fieldHeight = h - FIELD_OFFSET * 2;
 
-    int fw = m_fieldWidth - SPACE * 2;
-    int fh = m_fieldHeight - SPACE * 2;
+    recalcScreenCells();
 
-    m_cellsX = fw / (CELL_SIZE + SPACE);
-    m_remX = (fw % (CELL_SIZE + SPACE)) / 2;
-    m_cellsY = fh / (CELL_SIZE + SPACE);
-    m_remY = (fh % (CELL_SIZE + SPACE)) / 2;
-
-    m_MainLayer = initLayer(m_MainLayer);
-    m_NextStepLayer = initLayer(m_NextStepLayer);
-    m_Generation = 0;
-    emit changeGeneration(m_Generation);
+    if (!m_cellsX && !m_cellsY) {
+        m_cellsX = m_ScrCellsX;
+        m_cellsY = m_ScrCellsY;
+        m_MainLayer = initLayer(m_MainLayer);
+        m_NextStepLayer = initLayer(m_NextStepLayer);
+        m_Generation = 0;
+        emit changeGeneration(m_Generation);
+    }
     QWidget::resizeEvent(event);
 }
 
@@ -189,7 +242,7 @@ void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
 }
 
 QPoint KLGameField::getMainOffset() const {
-    return {FIELD_OFFSET + SPACE + m_remX, FIELD_OFFSET + SPACE + m_remY };
+    return {FIELD_OFFSET + SPACE + m_remScrX, FIELD_OFFSET + SPACE + m_remScrY };
 }
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
@@ -200,13 +253,14 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     }
 
     cancelTimerInstantly();
-    m_bPressed = false;
+    m_LeftbPressed = false;
 
-    int cellX = newPos.x() / (CELL_SIZE + SPACE);
-    int cellY = newPos.y() / (CELL_SIZE + SPACE);
+    int cellX = newPos.x() / (m_cellSize + SPACE);
+    int cellY = newPos.y() / (m_cellSize + SPACE);
 
     m_Generation = 0;
-    copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
+    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
     repaint();
 }
 
@@ -218,21 +272,22 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
     QPoint newPos = event->pos();
     if(!checkMousePosition(newPos)) {
         setCursor(m_Cursor);
-        m_bPressed = false;
+        m_LeftbPressed = false;
         return;
     } else {
-        setCursor(Qt::CrossCursor);
+        setCursor(Qt::PointingHandCursor);
 
-        if (m_bPressed) {
+        if (m_LeftbPressed) {
             m_Generation = 0;
             cancelTimerInstantly();
-            int cellX = newPos.x() / (CELL_SIZE + SPACE);
-            int cellY = newPos.y() / (CELL_SIZE + SPACE);
+            int cellX = newPos.x() / (m_cellSize + SPACE);
+            int cellY = newPos.y() / (m_cellSize + SPACE);
 
             if (cellX != oldCellX || cellY != oldCellY) {
                 oldCellX = cellX;
                 oldCellY = cellY;
-                copyToLayer(m_MainLayer, cellX, cellY, !fromMainLayer(cellX, cellY));
+                copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                            !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
                 repaint();
             }
         }
@@ -281,7 +336,7 @@ void KLGameField::mousePressEvent(QMouseEvent *event) {
             return;
         }
         cancelTimerInstantly();
-        m_bPressed = true;
+        m_LeftbPressed = true;
     }
     QWidget::mousePressEvent(event);
 }
@@ -293,7 +348,7 @@ void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
             return;
         }
         cancelTimerInstantly();
-        m_bPressed = false;
+        m_LeftbPressed = false;
     }
 
     QWidget::mouseReleaseEvent(event);
@@ -302,7 +357,7 @@ void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
 bool KLGameField::checkMousePosition(QPoint &mpos) const {
     mpos -= getMainOffset();
     return (mpos.x() >= 0 && mpos.y() >= 0 &&
-            mpos.x() <= m_cellsX * (CELL_SIZE + SPACE) && mpos.y() <= m_cellsY * (CELL_SIZE + SPACE));
+            mpos.x() <= m_ScrCellsX * (m_cellSize + SPACE) && mpos.y() <= m_ScrCellsY * (m_cellSize + SPACE));
 }
 
 void KLGameField::newAction(bool) {
@@ -454,6 +509,8 @@ void KLGameField::changeBackgroundColor(bool) {
     }
 
 }
+
+
 
 
 
