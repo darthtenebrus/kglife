@@ -40,12 +40,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->centralwidget->layout()->addWidget(gameField);
 
+
     connect(ui->actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
     connect(ui->actionOpen, &QAction::triggered, gameField, &KLGameField::openAction);
     connect(ui->actionSave, &QAction::triggered, gameField, &KLGameField::saveAction);
 
     connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
     connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
+    connect(ui->actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
     connect(ui->actionAboutQt, &QAction::triggered, this, [=]{
         QMessageBox::aboutQt(this);
 

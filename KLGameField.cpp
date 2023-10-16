@@ -3,6 +3,8 @@
 //
 
 #include <QPainter>
+#include <QApplication>
+#include<QDesktopWidget>
 #include "KLGameField.h"
 #include "mainwindow.h"
 #include <QMouseEvent>
@@ -32,6 +34,7 @@ KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor
     setMouseTracking(true);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
+    initTotalCells();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
 }
 
@@ -95,26 +98,25 @@ void KLGameField::recalcScreenCells() {
     m_ScrCellsX = fw / (m_cellSize + SPACE);
     m_ScrCellsY = fh / (m_cellSize + SPACE);
 
-    if (m_cellsX) {
-        if(m_ScrCellsX > m_cellsX) {
-            m_ScrCellsX = m_cellsX;
-        }
-        m_MaxMemOffsetX = m_cellsX - m_ScrCellsX;
-        if (m_CurrMemOffsetX > m_MaxMemOffsetX) {
-            m_CurrMemOffsetX = m_MaxMemOffsetX;
-        }
+    if(m_ScrCellsX > m_cellsX) {
+        m_ScrCellsX = m_cellsX;
+    }
+    m_MaxMemOffsetX = m_cellsX - m_ScrCellsX;
+
+    if (m_CurrMemOffsetX > m_MaxMemOffsetX) {
+        m_CurrMemOffsetX = m_MaxMemOffsetX;
     }
 
-    if (m_cellsY) {
-        if (m_ScrCellsY > m_cellsY) {
-            m_ScrCellsY = m_cellsY;
-        }
-        m_MaxMemOffsetY = m_cellsY - m_ScrCellsY;
-        if (m_CurrMemOffsetY > m_MaxMemOffsetY) {
-            m_CurrMemOffsetY = m_MaxMemOffsetY;
-        }
 
+    if (m_ScrCellsY > m_cellsY) {
+        m_ScrCellsY = m_cellsY;
     }
+    m_MaxMemOffsetY = m_cellsY - m_ScrCellsY;
+
+    if (m_CurrMemOffsetY > m_MaxMemOffsetY) {
+        m_CurrMemOffsetY = m_MaxMemOffsetY;
+    }
+
 
     m_remScrX = (fw - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
     m_remScrY = (fh - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
@@ -131,14 +133,6 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
 
     recalcScreenCells();
 
-    if (!m_cellsX && !m_cellsY) {
-        m_cellsX = m_ScrCellsX;
-        m_cellsY = m_ScrCellsY;
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
-        m_Generation = 0;
-        emit changeGeneration(m_Generation);
-    }
     QWidget::resizeEvent(event);
 }
 
@@ -247,6 +241,10 @@ QPoint KLGameField::getMainOffset() const {
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
 
+    if (m_MoveMode) {
+        return;
+    }
+
     QPoint newPos = event->pos();
     if(!checkMousePosition(newPos)) {
         return;
@@ -275,20 +273,38 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
         m_LeftbPressed = false;
         return;
     } else {
-        setCursor(Qt::PointingHandCursor);
+        setCursor(m_MoveMode ? Qt::OpenHandCursor : Qt::PointingHandCursor);
 
         if (m_LeftbPressed) {
             m_Generation = 0;
             cancelTimerInstantly();
             int cellX = newPos.x() / (m_cellSize + SPACE);
             int cellY = newPos.y() / (m_cellSize + SPACE);
+            
+            if (!m_MoveMode) {
+                
+                if (cellX != oldCellX || cellY != oldCellY) {
+                    oldCellX = cellX;
+                    oldCellY = cellY;
+                    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                                !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+                    repaint();
+                }
+            } else if (cellX != oldCellX || cellY != oldCellY) {
 
-            if (cellX != oldCellX || cellY != oldCellY) {
+                if (oldCellX == -1 && oldCellY == -1) {
+                    oldCellX = cellX;
+                    oldCellY = cellY;
+                    return;
+                }
+
+                int dirX = sgn(cellX - oldCellX);
+                int dirY = sgn(cellY - oldCellY);
+
                 oldCellX = cellX;
                 oldCellY = cellY;
-                copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
-                            !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
-                repaint();
+                intentToMoveField(dirX, dirY);
+
             }
         }
     }
@@ -507,6 +523,45 @@ void KLGameField::changeBackgroundColor(bool) {
         repaint();
         emit changeSetting("backColor", m_ColorBackground);
     }
+
+}
+
+void KLGameField::changeMoveMode(bool mMode) {
+    m_MoveMode = mMode;
+}
+
+int KLGameField::sgn(int val) {
+    return  (0 < val) - (val < 0);
+}
+
+void KLGameField::intentToMoveField(int dx, int dy) {
+    int tmpMemOffsetX = m_CurrMemOffsetX;
+    int tmpMemOffsetY = m_CurrMemOffsetY;
+    tmpMemOffsetX -= dx;
+    tmpMemOffsetY -= dy;
+    if (tmpMemOffsetX >= 0 && tmpMemOffsetX <= m_MaxMemOffsetX) {
+        m_CurrMemOffsetX = tmpMemOffsetX;
+        repaint();
+    }
+
+    if (tmpMemOffsetY >= 0 && tmpMemOffsetY <= m_MaxMemOffsetY) {
+        m_CurrMemOffsetY = tmpMemOffsetY;
+        repaint();
+    }
+}
+
+void KLGameField::initTotalCells() {
+
+    QDesktopWidget *desktopwidget = QApplication :: desktop (); // Get display resolution
+    int dw = desktopwidget->width();
+    int dh = desktopwidget->height();
+
+    m_cellsX = dw / (m_cellSize + SPACE);
+    m_cellsY = dh / (m_cellSize + SPACE);
+    m_MainLayer = initLayer(m_MainLayer);
+    m_NextStepLayer = initLayer(m_NextStepLayer);
+    m_Generation = 0;
+    emit changeGeneration(m_Generation);
 
 }
 

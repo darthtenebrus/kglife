@@ -141,6 +141,8 @@
    <addaction name="actionNextStep"/>
    <addaction name="actionStartStop"/>
    <addaction name="separator"/>
+   <addaction name="actionMove"/>
+   <addaction name="separator"/>
   </widget>
   <action name="actionNewGame">
    <property name="icon">
@@ -214,6 +216,18 @@
   <action name="actionBackgroundColor">
    <property name="text">
     <string>Background</string>
+   </property>
+  </action>
+  <action name="actionMove">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-share">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Move</string>
    </property>
   </action>
  </widget>

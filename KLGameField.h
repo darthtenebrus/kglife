@@ -25,8 +25,11 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void recalcScreenCells(void);
 
-private:
+    int sgn(int val);
+    void intentToMoveField(int x, int y);
 
+private:
+    void initTotalCells();
     void changeDelta(int);
     void recalculate(void);
     void actualDoRePaint();
@@ -63,6 +66,7 @@ private:
     QTimer *evoTimer = nullptr;
     QCursor m_Cursor;
     bool m_LeftbPressed = false;
+    bool m_MoveMode = false;
 
     QColor m_ColorCells;
     QColor m_ColorBackground;
@@ -77,6 +81,7 @@ public slots:
 
     void changeCellsColor(bool);
     void changeBackgroundColor(bool);
+    void changeMoveMode(bool);
 
 private slots:
     void nextGeneration(void);
