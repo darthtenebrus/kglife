@@ -4,6 +4,6 @@
 
 #ifndef KGLIFE_VERSION_H
 #define KGLIFE_VERSION_H
-#define APP_VERSION "1.0-2"
+#define APP_VERSION "1.0-3"
 
 #endif //KGLIFE_VERSION_H
