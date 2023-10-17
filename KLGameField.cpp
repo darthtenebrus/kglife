@@ -15,11 +15,6 @@
 #include <QColorDialog>
 #include "LoadGameException.h"
 
-#ifdef _DEBUG
-
-#include <QDebug>
-
-#endif
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -408,10 +403,6 @@ void KLGameField::openAction(bool) {
     const QString &path = QFileDialog::getOpenFileName(this, tr("Load colony from file"),
                                                        QDir::homePath(), tr("This application (*.kgol)"));
 
-#ifdef _DEBUG
-    qDebug() << "File = " << path;
-#endif
-
     if ("" == path) {
         return;
     }
@@ -428,9 +419,6 @@ void KLGameField::openAction(bool) {
             throw LoadGameException(tr("Invalid file format").toStdString());
         }
 
-#ifdef _DEBUG
-        qDebug() << "Header Ok = " << strhead;
-#endif
 
         QByteArray content;
         while (!file.atEnd()) {
@@ -482,10 +470,6 @@ void KLGameField::saveAction(bool) {
     cancelTimerInstantly();
     const QString &path = QFileDialog::getSaveFileName(this, tr("Save colony current state"),
                                                        QDir::homePath(), tr("This application (*.kgol)"));
-#ifdef _DEBUG
-    qDebug() << "File = " << path;
-#endif
-
 
     if ("" == path) {
         return;
@@ -498,9 +482,7 @@ void KLGameField::saveAction(bool) {
             throw LoadGameException(tr("Open file failed").toStdString());
         }
         QTextStream out(&file);
-#ifdef _DEBUG
-        qDebug() << "Out created";
-#endif
+
         out << "KGOL_SIG";
         for (int y = 0; y < m_cellsY; ++y) {
             for (int x = 0; x < m_cellsX; ++x) {
@@ -509,9 +491,7 @@ void KLGameField::saveAction(bool) {
                 }
             }
         }
-#ifdef _DEBUG
-        qDebug() << "Out written";
-#endif
+
         file.close();
     } catch (const LoadGameException &ex) {
         QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
