@@ -87,6 +87,9 @@ public slots:
     void changeBackgroundColor(bool);
     void changeMoveMode(bool);
 
+    void cZoomIn(bool);
+    void cZoomOut(bool);
+
 private slots:
     void nextGeneration(void);
 

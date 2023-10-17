@@ -36,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                 m_data["backColor"].value<QColor>(),
                                 timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-    gameField->setStatusTip(tr("Set or erase a single cell by double click or drag a line with left button pressed"));
 
     ui->centralwidget->layout()->addWidget(gameField);
 
@@ -65,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
             &KLGameField::changeCellsColor);
     connect(ui->actionBackgroundColor, &QAction::triggered, gameField,
             &KLGameField::changeBackgroundColor);
+
+    connect(ui->actionZoomIn, &QAction::triggered, gameField, &KLGameField::cZoomIn);
+    connect(ui->actionZoomOut, &QAction::triggered, gameField, &KLGameField::cZoomOut);
+
     connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);

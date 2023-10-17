@@ -79,6 +79,10 @@
     <addaction name="separator"/>
     <addaction name="actionNextStep"/>
     <addaction name="actionStartStop"/>
+    <addaction name="separator"/>
+    <addaction name="actionMove"/>
+    <addaction name="actionZoomIn"/>
+    <addaction name="actionZoomOut"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -142,6 +146,8 @@
    <addaction name="actionStartStop"/>
    <addaction name="separator"/>
    <addaction name="actionMove"/>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
    <addaction name="separator"/>
   </widget>
   <action name="actionNewGame">
@@ -223,11 +229,27 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-share">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset resource="images.qrc">
+     <normaloff>:/images/move.png</normaloff>:/images/move.png</iconset>
    </property>
    <property name="text">
     <string>Move</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="icon">
+    <iconset theme="zoom-in"/>
+   </property>
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="icon">
+    <iconset theme="zoom-out"/>
+   </property>
+   <property name="text">
+    <string>Zoom Out</string>
    </property>
   </action>
  </widget>

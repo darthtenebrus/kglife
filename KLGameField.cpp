@@ -32,6 +32,7 @@ KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor
                          evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
+    changeMoveMode(false);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
     initTotalCells();
@@ -527,6 +528,9 @@ void KLGameField::changeBackgroundColor(bool) {
 
 void KLGameField::changeMoveMode(bool mMode) {
     m_MoveMode = mMode;
+    setStatusTip(!m_MoveMode ?
+    tr("Set or erase a single cell by double click or drag a line with left button pressed") :
+                 tr("Drag the mouse to move field"));
 }
 
 int KLGameField::sgn(int val) {
@@ -566,7 +570,15 @@ void KLGameField::initTotalCells() {
 }
 
 QPoint KLGameField::getStandardFieldDefs(int &x, int &y) const {
-    return QPoint(x- (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2);
+    return {x- (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2};
+}
+
+void KLGameField::cZoomIn(bool) {
+    changeDelta(12);
+}
+
+void KLGameField::cZoomOut(bool) {
+    changeDelta(-12);
 }
 
 
