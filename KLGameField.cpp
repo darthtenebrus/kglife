@@ -72,8 +72,8 @@ void KLGameField::actualDoRePaint() {
 
     QPainter painter(this);
 
-    painter.fillRect(QRect(FIELD_OFFSET, FIELD_OFFSET, m_fieldWidth, m_fieldHeight),
-                     QBrush("#232323"));
+    painter.setBackground(QBrush("#232323"));
+
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
     for (int y = 0; y < m_ScrCellsY; ++y) {
@@ -90,13 +90,14 @@ void KLGameField::actualDoRePaint() {
 
 }
 
-
 void KLGameField::recalcScreenCells() {
-    int fw = m_fieldWidth - SPACE * 2;
-    int fh = m_fieldHeight - SPACE * 2;
 
-    m_ScrCellsX = fw / (m_cellSize + SPACE);
-    m_ScrCellsY = fh / (m_cellSize + SPACE);
+    int h = height();
+    int w = width();
+    QPoint fd = getStandardFieldDefs(w, h);
+
+    m_ScrCellsX = fd.x() / (m_cellSize + SPACE);
+    m_ScrCellsY = fd.y() / (m_cellSize + SPACE);
 
     if(m_ScrCellsX > m_cellsX) {
         m_ScrCellsX = m_cellsX;
@@ -118,21 +119,15 @@ void KLGameField::recalcScreenCells() {
     }
 
 
-    m_remScrX = (fw - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
-    m_remScrY = (fh - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
+    m_remScrX = (fd.x() - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
+    m_remScrY = (fd.y() - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
 
 }
 
 void KLGameField::resizeEvent(QResizeEvent *event) {
     cancelTimerInstantly();
 
-    int h = height();
-    int w = width();
-    m_fieldWidth = w - FIELD_OFFSET * 2;
-    m_fieldHeight = h - FIELD_OFFSET * 2;
-
     recalcScreenCells();
-
     QWidget::resizeEvent(event);
 }
 
@@ -273,7 +268,6 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
         m_LeftbPressed = false;
         return;
     } else {
-        setCursor(m_MoveMode ? Qt::OpenHandCursor : Qt::PointingHandCursor);
 
         if (m_LeftbPressed) {
             m_Generation = 0;
@@ -290,22 +284,27 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
                                 !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
                     repaint();
                 }
-            } else if (cellX != oldCellX || cellY != oldCellY) {
+            } else {
+                setCursor(Qt::ClosedHandCursor);
+                if (cellX != oldCellX || cellY != oldCellY) {
 
-                if (oldCellX == -1 && oldCellY == -1) {
+                    if (oldCellX == -1 && oldCellY == -1) {
+                        oldCellX = cellX;
+                        oldCellY = cellY;
+                        return;
+                    }
+
+                    int dirX = sgn(cellX - oldCellX);
+                    int dirY = sgn(cellY - oldCellY);
+
                     oldCellX = cellX;
                     oldCellY = cellY;
-                    return;
+                    intentToMoveField(dirX, dirY);
                 }
 
-                int dirX = sgn(cellX - oldCellX);
-                int dirY = sgn(cellY - oldCellY);
-
-                oldCellX = cellX;
-                oldCellY = cellY;
-                intentToMoveField(dirX, dirY);
-
             }
+        } else {
+            setCursor(m_MoveMode ? Qt::OpenHandCursor : Qt::CrossCursor);
         }
     }
 }
@@ -552,17 +551,22 @@ void KLGameField::intentToMoveField(int dx, int dy) {
 
 void KLGameField::initTotalCells() {
 
-    QDesktopWidget *desktopwidget = QApplication :: desktop (); // Get display resolution
+    QDesktopWidget *desktopwidget = QApplication::desktop (); // Get display resolution
     int dw = desktopwidget->width();
     int dh = desktopwidget->height();
+    QPoint fd = getStandardFieldDefs(dw, dh);
 
-    m_cellsX = dw / (m_cellSize + SPACE);
-    m_cellsY = dh / (m_cellSize + SPACE);
+    m_cellsX = fd.x() / (m_cellSize + SPACE);
+    m_cellsY = fd.y() / (m_cellSize + SPACE);
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
     m_Generation = 0;
     emit changeGeneration(m_Generation);
 
+}
+
+QPoint KLGameField::getStandardFieldDefs(int &x, int &y) const {
+    return QPoint(x- (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2);
 }
 
 

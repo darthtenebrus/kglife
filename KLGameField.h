@@ -41,11 +41,15 @@ private:
 
     bool checkMousePosition(QPoint &) const;
 
+    [[nodiscard]]
     QPoint getMainOffset() const;
+
+    [[nodiscard]]
+    QPoint getStandardFieldDefs(int &, int &) const;
+
     int m_TimerInterval;
     int m_Generation = 0;
-    int m_fieldWidth;
-    int m_fieldHeight;
+
     int m_cellsX = 0;
     int m_remScrX;
     int m_cellsY = 0;

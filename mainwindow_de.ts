@@ -4,48 +4,48 @@
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="390"/>
+        <location filename="KLGameField.cpp" line="389"/>
         <source>Load colony from file</source>
         <translation>Kolonie von der Datei einladen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="391"/>
-        <location filename="KLGameField.cpp" line="466"/>
+        <location filename="KLGameField.cpp" line="390"/>
+        <location filename="KLGameField.cpp" line="465"/>
         <source>This application (*.kgol)</source>
         <translation>Diese App (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="404"/>
-        <location filename="KLGameField.cpp" line="480"/>
+        <location filename="KLGameField.cpp" line="403"/>
+        <location filename="KLGameField.cpp" line="479"/>
         <source>Open file failed</source>
         <translation>Dateiladen Versager</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="410"/>
-        <location filename="KLGameField.cpp" line="425"/>
-        <location filename="KLGameField.cpp" line="435"/>
-        <location filename="KLGameField.cpp" line="447"/>
+        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="424"/>
+        <location filename="KLGameField.cpp" line="434"/>
+        <location filename="KLGameField.cpp" line="446"/>
         <source>Invalid file format</source>
         <translation>Ungültiges Dateiformat</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="459"/>
-        <location filename="KLGameField.cpp" line="499"/>
+        <location filename="KLGameField.cpp" line="458"/>
+        <location filename="KLGameField.cpp" line="498"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="465"/>
+        <location filename="KLGameField.cpp" line="464"/>
         <source>Save colony current state</source>
         <translation>Den Kolonie zustand sparen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="506"/>
+        <location filename="KLGameField.cpp" line="505"/>
         <source>Choose cells color</source>
         <translation>Zellefarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="519"/>
+        <location filename="KLGameField.cpp" line="518"/>
         <source>Choose background color</source>
         <translation>Hintergrundfarbe wahlen</translation>
     </message>
@@ -55,125 +55,126 @@
     <message>
         <location filename="mainwindow.ui" line="26"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="208"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="194"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="208"/>
         <source>Game Of Life</source>
         <translation>Lebenspiel</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="74"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="228"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="213"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="228"/>
         <source>Game</source>
         <translation>Spiel</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="85"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="229"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="214"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="229"/>
         <source>Settings</source>
         <translation>Setzen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="89"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="230"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="215"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="230"/>
         <source>Colors...</source>
         <translation>Farben...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="98"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="231"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="216"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="231"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="209"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="195"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="209"/>
         <source>New Game</source>
         <translation>Neues Spiel</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="162"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="210"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="196"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="210"/>
         <source>Next Step</source>
         <translation>Nächster Schritt</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="171"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="211"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="197"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="211"/>
         <source>Start/Stop Evolution</source>
         <translation>Start/Stop die Evolution</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="174"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="213"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="199"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="213"/>
         <source>Start Evolution</source>
         <translation>Start die Evolution</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="179"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="215"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="201"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="215"/>
         <source>About Qt</source>
         <translation>Über Qt</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="184"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="216"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="202"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="216"/>
         <source>About</source>
         <translation>Über diese App</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="193"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="217"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="203"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="217"/>
         <source>Save...</source>
         <translation>Sparen...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="196"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="219"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="205"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="219"/>
         <source>Save colony current state</source>
         <translation>Den Koloniezustand sparen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="205"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="221"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="207"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="221"/>
         <source>Open...</source>
         <translation>Laden...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="208"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="223"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="209"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="223"/>
         <source>Load colony from file</source>
         <translation>Den Koloniezustand einladen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="213"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="225"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="211"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="225"/>
         <source>Cells</source>
         <translation>Zellen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="218"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="226"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="212"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="226"/>
         <source>Background</source>
         <translation>Hintergrund</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="230"/>
         <location filename="cmake-build-debug/kglife_autogen/include/ui_mainwindow.h" line="227"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_mainwindow.h" line="227"/>
         <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
