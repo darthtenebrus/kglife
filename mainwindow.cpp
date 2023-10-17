@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionZoomIn, &QAction::triggered, gameField, &KLGameField::cZoomIn);
     connect(ui->actionZoomOut, &QAction::triggered, gameField, &KLGameField::cZoomOut);
+    connect(ui->actionRestore, &QAction::triggered, gameField, &KLGameField::cRestore);
 
     connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
@@ -134,4 +135,5 @@ void MainWindow::zoomInChanged(bool enable) {
 
 void MainWindow::zoomOutChanged(bool enable) {
     ui->actionZoomOut->setEnabled(enable);
+    ui->actionRestore->setEnabled(enable);
 }

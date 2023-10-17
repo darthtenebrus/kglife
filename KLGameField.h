@@ -89,6 +89,7 @@ public slots:
 
     void cZoomIn(bool);
     void cZoomOut(bool);
+    void cRestore(bool);
 
 private slots:
     void nextGeneration(void);

@@ -591,6 +591,10 @@ void KLGameField::cZoomOut(bool) {
     changeDelta(-12);
 }
 
+void KLGameField::cRestore(bool) {
+    changeDelta(-1000);
+}
+
 
 
 

@@ -83,6 +83,7 @@
     <addaction name="actionMove"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
+    <addaction name="actionRestore"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -148,6 +149,7 @@
    <addaction name="actionMove"/>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
+   <addaction name="actionRestore"/>
    <addaction name="separator"/>
   </widget>
   <action name="actionNewGame">
@@ -258,6 +260,17 @@
    </property>
    <property name="text">
     <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionRestore">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-fit-best"/>
+   </property>
+   <property name="text">
+    <string>Restore</string>
    </property>
   </action>
  </widget>
