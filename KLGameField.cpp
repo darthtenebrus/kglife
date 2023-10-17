@@ -16,7 +16,9 @@
 #include "LoadGameException.h"
 
 #ifdef _DEBUG
+
 #include <QDebug>
+
 #endif
 
 #define FIELD_OFFSET 1
@@ -26,10 +28,10 @@
 #define DIVISOR 2000
 
 KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor,
-                         int timerInterval,  QWidget *parent) : QWidget(parent),
-                         m_ColorCells(cellsColor),
-                         m_ColorBackground(backgroundColor),
-                         evoTimer(new QTimer()) {
+                         int timerInterval, QWidget *parent) : QWidget(parent),
+                                                               m_ColorCells(cellsColor),
+                                                               m_ColorBackground(backgroundColor),
+                                                               evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
     changeMoveMode(false);
@@ -49,11 +51,18 @@ KLGameField::~KLGameField() {
 void KLGameField::changeDelta(int delta) {
     int tmpSize = 0;
     tmpSize = m_cellSize + delta;
-    if (tmpSize > MAX_CELL_SIZE || tmpSize < MIN_CELL_SIZE) {
-        return;
-    }
 
-    m_cellSize = tmpSize;
+    if (tmpSize > MAX_CELL_SIZE) {
+        m_cellSize = MAX_CELL_SIZE;
+        emit changeZoomIn(false);
+    } else if (tmpSize < MIN_CELL_SIZE) {
+        m_cellSize = MIN_CELL_SIZE;
+        emit changeZoomOut(false);
+    } else {
+        m_cellSize = tmpSize;
+        emit changeZoomIn(true);
+        emit changeZoomOut(true);
+    }
     recalcScreenCells();
     repaint();
 }
@@ -81,7 +90,8 @@ void KLGameField::actualDoRePaint() {
         for (int x = 0; x < m_ScrCellsX; ++x) {
             QBrush color;
 
-            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(m_ColorCells) : QBrush(m_ColorBackground);
+            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(m_ColorCells) : QBrush(
+                    m_ColorBackground);
             painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
                                    m_cellSize, m_cellSize), color);
 
@@ -100,7 +110,7 @@ void KLGameField::recalcScreenCells() {
     m_ScrCellsX = fd.x() / (m_cellSize + SPACE);
     m_ScrCellsY = fd.y() / (m_cellSize + SPACE);
 
-    if(m_ScrCellsX > m_cellsX) {
+    if (m_ScrCellsX > m_cellsX) {
         m_ScrCellsX = m_cellsX;
     }
     m_MaxMemOffsetX = m_cellsX - m_ScrCellsX;
@@ -161,7 +171,7 @@ void KLGameField::recalculate(void) {
 
             int countNeighbors = calculateNeighbors(x, y);
             uchar targetVal;
-            switch(countNeighbors) {
+            switch (countNeighbors) {
                 case 3:
                     targetVal = 1;
                     break;
@@ -232,7 +242,7 @@ void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
 }
 
 QPoint KLGameField::getMainOffset() const {
-    return {FIELD_OFFSET + SPACE + m_remScrX, FIELD_OFFSET + SPACE + m_remScrY };
+    return {FIELD_OFFSET + SPACE + m_remScrX, FIELD_OFFSET + SPACE + m_remScrY};
 }
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
@@ -242,7 +252,7 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     }
 
     QPoint newPos = event->pos();
-    if(!checkMousePosition(newPos)) {
+    if (!checkMousePosition(newPos)) {
         return;
     }
 
@@ -264,7 +274,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
     static int oldCellY = -1;
 
     QPoint newPos = event->pos();
-    if(!checkMousePosition(newPos)) {
+    if (!checkMousePosition(newPos)) {
         setCursor(m_Cursor);
         m_LeftbPressed = false;
         return;
@@ -275,9 +285,9 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
             cancelTimerInstantly();
             int cellX = newPos.x() / (m_cellSize + SPACE);
             int cellY = newPos.y() / (m_cellSize + SPACE);
-            
+
             if (!m_MoveMode) {
-                
+
                 if (cellX != oldCellX || cellY != oldCellY) {
                     oldCellX = cellX;
                     oldCellY = cellY;
@@ -320,7 +330,7 @@ void KLGameField::nextGeneration(void) {
 }
 
 void KLGameField::checkTimerAndUpdate(bool) {
-    if(!evoTimer->isActive()) {
+    if (!evoTimer->isActive()) {
         evoTimer->start(m_TimerInterval);
         emit changeControls(false);
     } else {
@@ -348,7 +358,7 @@ void KLGameField::timerChanged(int timerInterval) {
 void KLGameField::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         QPoint newPos = event->pos();
-        if(!checkMousePosition(newPos)) {
+        if (!checkMousePosition(newPos)) {
             return;
         }
         cancelTimerInstantly();
@@ -360,7 +370,7 @@ void KLGameField::mousePressEvent(QMouseEvent *event) {
 void KLGameField::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         QPoint newPos = event->pos();
-        if(!checkMousePosition(newPos)) {
+        if (!checkMousePosition(newPos)) {
             return;
         }
         cancelTimerInstantly();
@@ -463,7 +473,7 @@ void KLGameField::openAction(bool) {
 void KLGameField::saveAction(bool) {
     cancelTimerInstantly();
     const QString &path = QFileDialog::getSaveFileName(this, tr("Save colony current state"),
-                                              QDir::homePath(), tr("This application (*.kgol)"));
+                                                       QDir::homePath(), tr("This application (*.kgol)"));
 #ifdef _DEBUG
     qDebug() << "File = " << path;
 #endif
@@ -529,12 +539,12 @@ void KLGameField::changeBackgroundColor(bool) {
 void KLGameField::changeMoveMode(bool mMode) {
     m_MoveMode = mMode;
     setStatusTip(!m_MoveMode ?
-    tr("Set or erase a single cell by double click or drag a line with left button pressed") :
+                 tr("Set or erase a single cell by double click or drag a line with left button pressed") :
                  tr("Drag the mouse to move field"));
 }
 
 int KLGameField::sgn(int val) {
-    return  (0 < val) - (val < 0);
+    return (0 < val) - (val < 0);
 }
 
 void KLGameField::intentToMoveField(int dx, int dy) {
@@ -555,7 +565,7 @@ void KLGameField::intentToMoveField(int dx, int dy) {
 
 void KLGameField::initTotalCells() {
 
-    QDesktopWidget *desktopwidget = QApplication::desktop (); // Get display resolution
+    QDesktopWidget *desktopwidget = QApplication::desktop(); // Get display resolution
     int dw = desktopwidget->width();
     int dh = desktopwidget->height();
     QPoint fd = getStandardFieldDefs(dw, dh);
@@ -570,7 +580,7 @@ void KLGameField::initTotalCells() {
 }
 
 QPoint KLGameField::getStandardFieldDefs(int &x, int &y) const {
-    return {x- (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2};
+    return {x - (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2};
 }
 
 void KLGameField::cZoomIn(bool) {

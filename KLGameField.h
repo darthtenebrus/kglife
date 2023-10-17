@@ -99,6 +99,9 @@ signals:
     void emptyColony(void);
     void changeSetting(const QString &, const QColor &);
 
+    void changeZoomIn(bool);
+    void changeZoomOut(bool);
+
 };
 
 

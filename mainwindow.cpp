@@ -73,8 +73,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
     connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);
     connect(gameField, &KLGameField::emptyColony, this, &MainWindow::colonyIsEmpty);
-
     connect(gameField, &KLGameField::changeSetting, this, &MainWindow::settingChanged);
+
+    connect(gameField, &KLGameField::changeZoomIn, this, &MainWindow::zoomInChanged);
+    connect(gameField, &KLGameField::changeZoomOut, this, &MainWindow::zoomOutChanged);
 
 }
 
@@ -126,3 +128,10 @@ void MainWindow::settingChanged(const QString &setting, const QColor &color) {
     m_data[setting] = QVariant(color);
 }
 
+void MainWindow::zoomInChanged(bool enable) {
+    ui->actionZoomIn->setEnabled(enable);
+}
+
+void MainWindow::zoomOutChanged(bool enable) {
+    ui->actionZoomOut->setEnabled(enable);
+}

@@ -50,6 +50,9 @@ public slots:
     void colonyIsEmpty(void);
     void settingChanged(const QString &, const QColor &);
 
+    void zoomInChanged(bool);
+    void zoomOutChanged(bool);
+
 
 
 };
