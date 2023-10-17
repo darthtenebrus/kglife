@@ -4,58 +4,58 @@
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="400"/>
+        <location filename="KLGameField.cpp" line="408"/>
         <source>Load colony from file</source>
         <translation>Kolonie von der Datei einladen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="401"/>
-        <location filename="KLGameField.cpp" line="476"/>
+        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="484"/>
         <source>This application (*.kgol)</source>
         <translation>Diese App (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="414"/>
-        <location filename="KLGameField.cpp" line="490"/>
+        <location filename="KLGameField.cpp" line="422"/>
+        <location filename="KLGameField.cpp" line="498"/>
         <source>Open file failed</source>
         <translation>Dateiladen Versager</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="420"/>
-        <location filename="KLGameField.cpp" line="435"/>
-        <location filename="KLGameField.cpp" line="445"/>
-        <location filename="KLGameField.cpp" line="457"/>
+        <location filename="KLGameField.cpp" line="428"/>
+        <location filename="KLGameField.cpp" line="443"/>
+        <location filename="KLGameField.cpp" line="453"/>
+        <location filename="KLGameField.cpp" line="465"/>
         <source>Invalid file format</source>
         <translation>Ungültiges Dateiformat</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="469"/>
-        <location filename="KLGameField.cpp" line="509"/>
+        <location filename="KLGameField.cpp" line="477"/>
+        <location filename="KLGameField.cpp" line="517"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="475"/>
+        <location filename="KLGameField.cpp" line="483"/>
         <source>Save colony current state</source>
         <translation>Den Kolonie zustand sparen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="516"/>
+        <location filename="KLGameField.cpp" line="524"/>
         <source>Choose cells color</source>
         <translation>Zellefarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="529"/>
+        <location filename="KLGameField.cpp" line="537"/>
         <source>Choose background color</source>
         <translation>Hintergrundfarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="542"/>
+        <location filename="KLGameField.cpp" line="550"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Mausdoppelklick um die Einzelle setzen oder löschen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="543"/>
+        <location filename="KLGameField.cpp" line="551"/>
         <source>Drag the mouse to move field</source>
         <translation>Linke Maustaste halten um das Feld zu bewegen</translation>
     </message>
@@ -217,22 +217,22 @@
         <translation>Die einfrache Lebenspielrealisation</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="93"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>Start evolution</source>
         <translation>Start die Evolution</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="93"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>Stop evolution</source>
         <translation>Stop die Evolution</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="98"/>
         <source>Generation: %1</source>
         <translation>Generation %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="102"/>
+        <location filename="mainwindow.cpp" line="103"/>
         <source>Colony is empty</source>
         <translation>Leerkolonie</translation>
     </message>

@@ -53,6 +53,8 @@ public slots:
     void zoomInChanged(bool);
     void zoomOutChanged(bool);
 
+    void restoreChanged(bool);
+
 
 
 };

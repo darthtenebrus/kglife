@@ -31,6 +31,8 @@ protected:
 private:
     void initTotalCells();
     void changeDelta(int);
+    void restoreScreen();
+
     void recalculate(void);
     void actualDoRePaint();
     uchar *initLayer(uchar *);
@@ -102,6 +104,7 @@ signals:
 
     void changeZoomIn(bool);
     void changeZoomOut(bool);
+    void changeRestore(bool);
 
 };
 

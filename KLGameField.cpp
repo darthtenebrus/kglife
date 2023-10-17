@@ -48,20 +48,24 @@ KLGameField::~KLGameField() {
     delete evoTimer;
 }
 
+void KLGameField::restoreScreen() {
+    m_cellSize = MIN_CELL_SIZE;
+    m_CurrMemOffsetX = m_CurrMemOffsetY = 0;
+    recalcScreenCells();
+    repaint();
+}
+
+
 void KLGameField::changeDelta(int delta) {
     int tmpSize = 0;
     tmpSize = m_cellSize + delta;
 
     if (tmpSize > MAX_CELL_SIZE) {
         m_cellSize = MAX_CELL_SIZE;
-        emit changeZoomIn(false);
     } else if (tmpSize < MIN_CELL_SIZE) {
         m_cellSize = MIN_CELL_SIZE;
-        emit changeZoomOut(false);
     } else {
         m_cellSize = tmpSize;
-        emit changeZoomIn(true);
-        emit changeZoomOut(true);
     }
     recalcScreenCells();
     repaint();
@@ -98,6 +102,10 @@ void KLGameField::actualDoRePaint() {
         }
 
     }
+
+    emit changeZoomIn(m_cellSize < MAX_CELL_SIZE);
+    emit changeZoomOut(m_cellSize > MIN_CELL_SIZE);
+    emit changeRestore(m_CurrMemOffsetX || m_CurrMemOffsetY || (m_cellSize != MIN_CELL_SIZE));
 
 }
 
@@ -548,17 +556,22 @@ int KLGameField::sgn(int val) {
 }
 
 void KLGameField::intentToMoveField(int dx, int dy) {
+    bool changed = false;
     int tmpMemOffsetX = m_CurrMemOffsetX;
     int tmpMemOffsetY = m_CurrMemOffsetY;
     tmpMemOffsetX -= dx;
     tmpMemOffsetY -= dy;
     if (tmpMemOffsetX >= 0 && tmpMemOffsetX <= m_MaxMemOffsetX) {
         m_CurrMemOffsetX = tmpMemOffsetX;
-        repaint();
+        changed = true;
     }
 
     if (tmpMemOffsetY >= 0 && tmpMemOffsetY <= m_MaxMemOffsetY) {
         m_CurrMemOffsetY = tmpMemOffsetY;
+        changed = true;
+    }
+
+    if (changed) {
         repaint();
     }
 }
@@ -584,15 +597,18 @@ QPoint KLGameField::getStandardFieldDefs(int &x, int &y) const {
 }
 
 void KLGameField::cZoomIn(bool) {
+    cancelTimerInstantly();
     changeDelta(12);
 }
 
 void KLGameField::cZoomOut(bool) {
+    cancelTimerInstantly();
     changeDelta(-12);
 }
 
 void KLGameField::cRestore(bool) {
-    changeDelta(-1000);
+    cancelTimerInstantly();
+    restoreScreen();
 }
 
 

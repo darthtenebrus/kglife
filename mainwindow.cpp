@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(gameField, &KLGameField::changeZoomIn, this, &MainWindow::zoomInChanged);
     connect(gameField, &KLGameField::changeZoomOut, this, &MainWindow::zoomOutChanged);
+    connect(gameField, &KLGameField::changeRestore, this, &MainWindow::restoreChanged);
 
 }
 
@@ -135,5 +136,8 @@ void MainWindow::zoomInChanged(bool enable) {
 
 void MainWindow::zoomOutChanged(bool enable) {
     ui->actionZoomOut->setEnabled(enable);
+}
+
+void MainWindow::restoreChanged(bool enable) {
     ui->actionRestore->setEnabled(enable);
 }
