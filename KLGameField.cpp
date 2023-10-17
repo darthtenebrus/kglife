@@ -526,6 +526,7 @@ void KLGameField::changeBackgroundColor(bool) {
 }
 
 void KLGameField::changeMoveMode(bool mMode) {
+    cancelTimerInstantly();
     m_MoveMode = mMode;
     setStatusTip(!m_MoveMode ?
                  tr("Set or erase a single cell by double click or drag a line with left button pressed") :

@@ -47,12 +47,12 @@
         <translation>Выберите цвет фона</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="531"/>
+        <location filename="KLGameField.cpp" line="532"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Установите или снимите клетку двойным нажатием или проведите линию, зажав левую кнопку</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="532"/>
+        <location filename="KLGameField.cpp" line="533"/>
         <source>Drag the mouse to move field</source>
         <translation>Зажмите левую кнопку и передвиньте поле с помощью мыши</translation>
     </message>

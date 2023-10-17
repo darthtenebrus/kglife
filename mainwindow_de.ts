@@ -50,12 +50,12 @@
         <translation>Hintergrundfarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="531"/>
+        <location filename="KLGameField.cpp" line="532"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Mausdoppelklick um die Einzelle setzen oder löschen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="532"/>
+        <location filename="KLGameField.cpp" line="533"/>
         <source>Drag the mouse to move field</source>
         <translation>Linke Maustaste halten um das Feld zu bewegen</translation>
     </message>
