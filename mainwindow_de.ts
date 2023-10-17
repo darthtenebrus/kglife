@@ -10,13 +10,13 @@
     </message>
     <message>
         <location filename="KLGameField.cpp" line="404"/>
-        <location filename="KLGameField.cpp" line="472"/>
+        <location filename="KLGameField.cpp" line="473"/>
         <source>This application (*.kgol)</source>
         <translation>Diese App (*.kgol)</translation>
     </message>
     <message>
         <location filename="KLGameField.cpp" line="413"/>
-        <location filename="KLGameField.cpp" line="482"/>
+        <location filename="KLGameField.cpp" line="483"/>
         <source>Open file failed</source>
         <translation>Dateiladen Versager</translation>
     </message>
@@ -30,32 +30,32 @@
     </message>
     <message>
         <location filename="KLGameField.cpp" line="465"/>
-        <location filename="KLGameField.cpp" line="497"/>
+        <location filename="KLGameField.cpp" line="498"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="471"/>
+        <location filename="KLGameField.cpp" line="472"/>
         <source>Save colony current state</source>
         <translation>Den Kolonie zustand sparen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="504"/>
+        <location filename="KLGameField.cpp" line="505"/>
         <source>Choose cells color</source>
         <translation>Zellefarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="517"/>
+        <location filename="KLGameField.cpp" line="518"/>
         <source>Choose background color</source>
         <translation>Hintergrundfarbe wahlen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="530"/>
+        <location filename="KLGameField.cpp" line="531"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Mausdoppelklick um die Einzelle setzen oder löschen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="531"/>
+        <location filename="KLGameField.cpp" line="532"/>
         <source>Drag the mouse to move field</source>
         <translation>Linke Maustaste halten um das Feld zu bewegen</translation>
     </message>

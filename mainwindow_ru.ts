@@ -5,21 +5,21 @@
     <name>KLGameField</name>
     <message>
         <location filename="KLGameField.cpp" line="404"/>
-        <location filename="KLGameField.cpp" line="472"/>
+        <location filename="KLGameField.cpp" line="473"/>
         <source>This application (*.kgol)</source>
         <oldsource>This application (*.kgol) (*.kgol)</oldsource>
         <translation>Это приложение (*.kgol)</translation>
     </message>
     <message>
         <location filename="KLGameField.cpp" line="465"/>
-        <location filename="KLGameField.cpp" line="497"/>
+        <location filename="KLGameField.cpp" line="498"/>
         <source>Error</source>
         <oldsource>error</oldsource>
         <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="KLGameField.cpp" line="413"/>
-        <location filename="KLGameField.cpp" line="482"/>
+        <location filename="KLGameField.cpp" line="483"/>
         <source>Open file failed</source>
         <translation>Не удалось открыть файл</translation>
     </message>
@@ -32,27 +32,27 @@
         <translation>Неверный формат файла</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="471"/>
+        <location filename="KLGameField.cpp" line="472"/>
         <source>Save colony current state</source>
         <translation>Сохранить текущее состояние колонии</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="504"/>
+        <location filename="KLGameField.cpp" line="505"/>
         <source>Choose cells color</source>
         <translation>Выберите цвет клеток</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="517"/>
+        <location filename="KLGameField.cpp" line="518"/>
         <source>Choose background color</source>
         <translation>Выберите цвет фона</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="530"/>
+        <location filename="KLGameField.cpp" line="531"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Установите или снимите клетку двойным нажатием или проведите линию, зажав левую кнопку</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="531"/>
+        <location filename="KLGameField.cpp" line="532"/>
         <source>Drag the mouse to move field</source>
         <translation>Зажмите левую кнопку и передвиньте поле с помощью мыши</translation>
     </message>

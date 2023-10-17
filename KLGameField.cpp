@@ -394,8 +394,8 @@ void KLGameField::newAction(bool) {
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
     m_Generation = 0;
-    repaint();
     emit changeGeneration(m_Generation);
+    restoreScreen();
 }
 
 void KLGameField::openAction(bool) {
@@ -464,6 +464,7 @@ void KLGameField::openAction(bool) {
 
         QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
     }
+    restoreScreen();
 }
 
 void KLGameField::saveAction(bool) {
