@@ -9,8 +9,9 @@ description: |
 website: https://www.darkguard.net
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
-architectures: [amd64, arm64]
-
+architectures:
+  - build-on: [amd64]
+  - build-on: [arm64]
 apps:
   kglife:
     command: usr/bin/kglife
@@ -29,7 +30,9 @@ parts:
     plugin: dump
     source: desktop/
     override-stage:
-      snapcraftctl stage
+      craftctl default
+
+      # Point icon to the correct location
       sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/kglife.desktop
     organize:
       64x64/kglife.png: kglife.png
