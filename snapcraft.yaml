@@ -34,7 +34,6 @@ parts:
       snapcraftctl stage
     organize:
       64x64/kglife.png: kglife.png
-      kglife.desktop: kglife.desktop
     stage: [kglife.png, kglife.desktop]
   my-part:
     build-attributes:
