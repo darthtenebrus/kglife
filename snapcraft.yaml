@@ -32,7 +32,6 @@ parts:
     override-stage:
       craftctl default
 
-      # Point icon to the correct location
       sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/kglife.desktop
     organize:
       64x64/kglife.png: kglife.png
