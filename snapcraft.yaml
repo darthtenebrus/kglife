@@ -29,9 +29,8 @@ parts:
     after: [my-part]
     plugin: dump
     source: desktop/
-    override-stage:
+    override-stage: |
       craftctl default
-
       sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/kglife.desktop
     organize:
       64x64/kglife.png: kglife.png
