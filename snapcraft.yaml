@@ -1,0 +1,50 @@
+name: kglife # you probably want to 'snapcraft register <name>'
+base: core22 # the base snap is the execution environment for this snap
+version: '1.0-4' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Another Game Of Life under Qt # 79 char long summary
+description: |
+  Another Convey Game Of Life realization. Create your own colonies and
+  experiment with them.
+
+website: https://www.darkguard.net
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  kglife:
+    command: usr/bin/kglife
+    desktop: kglife.desktop
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - desktop
+      - desktop-legacy
+
+
+parts:
+  org-desk:
+    after: [my-part]
+    plugin: dump
+    source: .
+    organize:
+      desktop/64x64/kglife.png:kglife.png
+      desktop/kglife.desktop:kglife.desktop
+  my-part:
+    build-attributes:
+      - enable-patchelf
+    # See 'snapcraft plugins'
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+    source: .
+    build-packages:
+      - gcc
+      - cmake
+      - qtbase5-dev
+      - qttools5-dev
+      - qttools5-dev-tools
+      - qtchooser
+      - libx11-dev
+
