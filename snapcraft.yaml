@@ -28,8 +28,8 @@ parts:
     plugin: dump
     source: .
     organize:
-      desktop/64x64/kglife.png:kglife.png
-      desktop/kglife.desktop:kglife.desktop
+      desktop/64x64/kglife.png: kglife.png
+      desktop/kglife.desktop: kglife.desktop
   my-part:
     build-attributes:
       - enable-patchelf
