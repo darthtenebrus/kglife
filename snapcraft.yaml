@@ -29,9 +29,10 @@ parts:
     plugin: dump
     source: desktop/
     override-stage:
-      # Point icon to the correct location
-      sed -i.bak -e 's|Icon=kglife|Icon=kglife.png|g' kglife.desktop
       snapcraftctl stage
+      # Point icon to the correct location
+      sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/kglife.desktop
+      #
     organize:
       64x64/kglife.png: kglife.png
     stage: [kglife.png, kglife.desktop]
