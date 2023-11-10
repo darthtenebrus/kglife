@@ -36,13 +36,13 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>150</width>
+       <width>138</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>150</width>
+       <width>138</width>
        <height>16777215</height>
       </size>
      </property>
@@ -58,18 +58,30 @@
        <height>32</height>
       </size>
      </property>
+     <property name="gridSize">
+      <size>
+       <width>128</width>
+       <height>72</height>
+      </size>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::IconMode</enum>
+     </property>
+     <property name="uniformItemSizes">
+      <bool>true</bool>
+     </property>
      <property name="selectionRectVisible">
       <bool>true</bool>
      </property>
      <property name="currentRow">
-      <number>0</number>
+      <number>-1</number>
      </property>
      <item>
       <property name="text">
        <string>Colors</string>
       </property>
       <property name="icon">
-       <iconset theme="preferences-other">
+       <iconset theme="preferences-system">
         <normaloff>.</normaloff>.</iconset>
       </property>
      </item>

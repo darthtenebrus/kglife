@@ -5,39 +5,39 @@
     <name>ConfigDialog</name>
     <message>
         <location filename="configdialog.ui" line="14"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="155"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="158"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="155"/>
         <source>Kglife - Settings</source>
         <translation>Kglife - Настройки</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="69"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="160"/>
+        <location filename="configdialog.ui" line="81"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="163"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="160"/>
         <source>Colors</source>
         <translation>Цвета</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="78"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="162"/>
+        <location filename="configdialog.ui" line="90"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="165"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="162"/>
         <source>Patterns</source>
         <translation>Шаблоны</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="114"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="165"/>
+        <location filename="configdialog.ui" line="126"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="168"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="165"/>
         <source>Cell Color</source>
         <translation>Цвет клетки</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="121"/>
-        <location filename="configdialog.ui" line="135"/>
-        <location filename="configdialog.ui" line="149"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="166"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="168"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="170"/>
+        <location filename="configdialog.ui" line="133"/>
+        <location filename="configdialog.ui" line="147"/>
+        <location filename="configdialog.ui" line="161"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="169"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="171"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="173"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="166"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="168"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="170"/>
@@ -45,15 +45,15 @@
         <translation>Выбор...</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="142"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="169"/>
+        <location filename="configdialog.ui" line="154"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="172"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="169"/>
         <source>Cells Border Color</source>
         <translation>Цвет бордюра клетки</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="128"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="167"/>
+        <location filename="configdialog.ui" line="140"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="170"/>
         <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="167"/>
         <source>Background Color</source>
         <translation>Цвет фона</translation>
