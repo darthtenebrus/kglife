@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     gameField = new KLGameField(m_data["cellsColor"].value<QColor>(),
                                 m_data["backColor"].value<QColor>(),
+                                m_data["borderColor"].value<QColor>(),
                                 timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 

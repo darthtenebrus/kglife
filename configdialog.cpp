@@ -14,13 +14,17 @@
 #endif
 
 
-ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor, QWidget *parent) :
+ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
+                           QColor &betweenColor,
+                           QWidget *parent) :
         QDialog(parent), ui(new Ui::ConfigDialog) {
     ui->setupUi(this);
     mBackColor = bColor;
     mCellColor = cellColor;
+    mBetweenColor = betweenColor;
     setButtonIconColor(ui->buttonCellColor, mCellColor);
     setButtonIconColor(ui->buttonBackColor, mBackColor);
+    setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked,
             this, &QDialog::accept);
@@ -48,6 +52,17 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor, QWidget *parent) :
             setButtonIconColor(ui->buttonCellColor, mCellColor);
         }
     });
+
+    connect(ui->buttonBetweenColor, &QPushButton::clicked, this, [=]() {
+        const QColor &ccolor = QColorDialog::getColor(mBetweenColor, this,
+                                                      tr("Choose border color"));
+
+        if (ccolor.isValid()) {
+            mBetweenColor = ccolor;
+            setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
+        }
+    });
+
 
 
 }

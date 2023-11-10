@@ -37,7 +37,8 @@ private:
     QSettings settings;
     PreferencesType defs = {
             {"cellsColor",QVariant(QColor(0x00FF55))},
-            {"backColor",QVariant(QColor("#000000"))}
+            {"backColor",QVariant(QColor("#000000"))},
+            {"borderColor", QVariant(QColor("#232323"))}
     };
     PreferencesType m_data;
 

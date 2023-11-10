@@ -16,7 +16,7 @@ class ConfigDialog : public QDialog {
 Q_OBJECT
 
 public:
-    explicit ConfigDialog(QColor &, QColor &, QWidget *parent = nullptr);
+    explicit ConfigDialog(QColor &, QColor &, QColor &, QWidget *parent = nullptr);
 
     ~ConfigDialog() override;
 

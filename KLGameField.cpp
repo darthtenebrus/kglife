@@ -25,9 +25,11 @@
 #define DIVISOR 2000
 
 KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor,
+                         const QColor &betweenColor,
                          int timerInterval, QWidget *parent) : QWidget(parent),
                                                                m_ColorCells(cellsColor),
                                                                m_ColorBackground(backgroundColor),
+                                                               m_colorBetween(betweenColor),
                                                                evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
@@ -82,8 +84,10 @@ void KLGameField::paintEvent(QPaintEvent *e) {
 void KLGameField::actualDoRePaint() {
 
     QPainter painter(this);
-
-    painter.setBackground(QBrush("#232323"));
+    int h = height();
+    int w = width();
+    const QPoint &fd = getStandardFieldDefs(w, h);
+    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.x(), fd.y(), m_colorBetween);
 
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
@@ -572,15 +576,17 @@ void KLGameField::cRestore(bool) {
 
 void KLGameField::setupGame(void) {
     
-    auto *cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, this);
+    auto *cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, m_colorBetween, this);
 
     cDialog->setModal(true);
     int res = cDialog->exec();
     if (res == QDialog::Accepted) {
         m_ColorCells = cDialog->getMCellColor();
         m_ColorBackground = cDialog->getMBackColor();
+        m_colorBetween = cDialog->getMBetweenColor();
         emit changeSetting("cellsColor", m_ColorCells);
         emit changeSetting("backColor", m_ColorBackground);
+        emit changeSetting("borderColor", m_colorBetween);
     }
     delete cDialog;
 
