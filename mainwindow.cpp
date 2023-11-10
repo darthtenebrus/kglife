@@ -60,10 +60,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     });
 
-    connect(ui->actionCellsColor, &QAction::triggered, gameField,
-            &KLGameField::changeCellsColor);
-    connect(ui->actionBackgroundColor, &QAction::triggered, gameField,
-            &KLGameField::changeBackgroundColor);
+    connect(ui->actionSetup, &QAction::triggered, gameField,
+            &KLGameField::setupGame);
 
     connect(ui->actionZoomIn, &QAction::triggered, gameField, &KLGameField::cZoomIn);
     connect(ui->actionZoomOut, &QAction::triggered, gameField, &KLGameField::cZoomOut);

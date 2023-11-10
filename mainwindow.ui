@@ -66,7 +66,7 @@
      <x>0</x>
      <y>0</y>
      <width>4095</width>
-     <height>35</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuControl">
@@ -89,14 +89,7 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menuColors">
-     <property name="title">
-      <string>Colors...</string>
-     </property>
-     <addaction name="actionCellsColor"/>
-     <addaction name="actionBackgroundColor"/>
-    </widget>
-    <addaction name="menuColors"/>
+    <addaction name="actionSetup"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -150,6 +143,7 @@
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
    <addaction name="actionRestore"/>
+   <addaction name="actionSetup"/>
    <addaction name="separator"/>
   </widget>
   <action name="actionNewGame">
@@ -216,16 +210,6 @@
     <string>Load colony from file</string>
    </property>
   </action>
-  <action name="actionCellsColor">
-   <property name="text">
-    <string>Cells</string>
-   </property>
-  </action>
-  <action name="actionBackgroundColor">
-   <property name="text">
-    <string>Background</string>
-   </property>
-  </action>
   <action name="actionMove">
    <property name="checkable">
     <bool>true</bool>
@@ -267,10 +251,22 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-fit-best"/>
+    <iconset theme="zoom-fit-best">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Restore</string>
+   </property>
+  </action>
+  <action name="actionSetup">
+   <property name="icon">
+    <iconset theme="preferences-other"/>
+   </property>
+   <property name="text">
+    <string>Setup Kglife</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup Kglife</string>
    </property>
   </action>
  </widget>

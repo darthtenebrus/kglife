@@ -34,7 +34,7 @@ add_executable(${PROJECT_NAME}
         KLGameField.h
         LoadGameException.h
         ${RES_FILES}
-        ${QM_FILES} )
+        ${QM_FILES} configdialog.cpp configdialog.h configdialog.ui)
 
 target_link_libraries(${PROJECT_NAME}
         Qt5::Core

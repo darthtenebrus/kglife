@@ -12,9 +12,11 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
-#include <QColorDialog>
 #include "LoadGameException.h"
-
+#include "configdialog.h"
+#ifdef _DEBUG
+#include <QDebug>
+#endif
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -499,31 +501,6 @@ void KLGameField::saveAction(bool) {
     }
 }
 
-void KLGameField::changeCellsColor(bool) {
-
-    const QColor &ccolor = QColorDialog::getColor(m_ColorCells, this,
-                                                  tr("Choose cells color"));
-
-    if (ccolor.isValid()) {
-        m_ColorCells = ccolor;
-        repaint();
-        emit changeSetting("cellsColor", m_ColorCells);
-    }
-
-}
-
-void KLGameField::changeBackgroundColor(bool) {
-
-    const QColor &ccolor = QColorDialog::getColor(m_ColorBackground, this,
-                                                  tr("Choose background color"));
-
-    if (ccolor.isValid()) {
-        m_ColorBackground = ccolor;
-        repaint();
-        emit changeSetting("backColor", m_ColorBackground);
-    }
-
-}
 
 void KLGameField::changeMoveMode(bool mMode) {
     cancelTimerInstantly();
@@ -591,6 +568,22 @@ void KLGameField::cZoomOut(bool) {
 void KLGameField::cRestore(bool) {
     cancelTimerInstantly();
     restoreScreen();
+}
+
+void KLGameField::setupGame(void) {
+    
+    auto *cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, this);
+
+    cDialog->setModal(true);
+    int res = cDialog->exec();
+    if (res == QDialog::Accepted) {
+        m_ColorCells = cDialog->getMCellColor();
+        m_ColorBackground = cDialog->getMBackColor();
+        emit changeSetting("cellsColor", m_ColorCells);
+        emit changeSetting("backColor", m_ColorBackground);
+    }
+    delete cDialog;
+
 }
 
 

@@ -85,8 +85,7 @@ public slots:
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 
-    void changeCellsColor(bool);
-    void changeBackgroundColor(bool);
+    void setupGame(void);
     void changeMoveMode(bool);
 
     void cZoomIn(bool);
