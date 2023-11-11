@@ -37,6 +37,7 @@ private:
 
 private slots:
     void currentChanged(const QModelIndex &, const QModelIndex &);
+    void restoreDefaults(bool);
 
 };
 

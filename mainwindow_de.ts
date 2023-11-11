@@ -59,17 +59,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="40"/>
+        <location filename="configdialog.cpp" line="42"/>
         <source>Choose background color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="50"/>
+        <location filename="configdialog.cpp" line="52"/>
         <source>Choose cells color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="60"/>
+        <location filename="configdialog.cpp" line="62"/>
         <source>Choose border color</source>
         <translation type="unfinished"></translation>
     </message>

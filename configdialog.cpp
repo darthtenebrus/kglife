@@ -32,6 +32,8 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
             this, &QDialog::accept);
     connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked,
             this, &QDialog::reject);
+    connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked,
+            this, &ConfigDialog::restoreDefaults);
     connect(ui->listWidget->selectionModel(), &QItemSelectionModel::currentRowChanged,
             this, &ConfigDialog::currentChanged);
 
@@ -95,5 +97,15 @@ void ConfigDialog::setButtonIconColor(QPushButton *button, QColor &color) {
     QPixmap pixmap(iSize.width(),iSize.height());
     pixmap.fill(color);
     button->setIcon(QIcon(pixmap));
+}
+
+void ConfigDialog::restoreDefaults(bool) {
+    mBackColor = QColor("#000000");
+    mBetweenColor = QColor("#232323");
+    mCellColor = QColor("#00ff00");
+    setButtonIconColor(ui->buttonBackColor, mBackColor);
+    setButtonIconColor(ui->buttonCellColor, mCellColor);
+    setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
+
 }
 
