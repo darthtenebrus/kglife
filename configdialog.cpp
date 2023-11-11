@@ -6,6 +6,7 @@
 
 #include "configdialog.h"
 #include "ui_configdialog.h"
+#include "DialogItemDelegate.h"
 #include <QPushButton>
 #include <QColorDialog>
 #include <QIcon>
@@ -19,6 +20,7 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
                            QWidget *parent) :
         QDialog(parent), ui(new Ui::ConfigDialog) {
     ui->setupUi(this);
+    ui->listWidget->setItemDelegate(new DialogItemDelegate(ui->listWidget));
     mBackColor = bColor;
     mCellColor = cellColor;
     mBetweenColor = betweenColor;
@@ -88,7 +90,9 @@ const QColor &ConfigDialog::getMBetweenColor() const {
 }
 
 void ConfigDialog::setButtonIconColor(QPushButton *button, QColor &color) {
-    QPixmap pixmap(16,16);
+
+    const QSize &iSize = button->iconSize();
+    QPixmap pixmap(iSize.width(),iSize.height());
     pixmap.fill(color);
     button->setIcon(QIcon(pixmap));
 }

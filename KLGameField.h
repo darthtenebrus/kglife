@@ -49,7 +49,7 @@ private:
     QPoint getMainOffset() const;
 
     [[nodiscard]]
-    QPoint getStandardFieldDefs(int &, int &) const;
+    QSize getStandardFieldDefs(int &, int &) const;
 
     int m_TimerInterval;
     int m_Generation = 0;

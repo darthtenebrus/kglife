@@ -33,6 +33,8 @@ add_executable(${PROJECT_NAME}
         KLGameField.cpp
         KLGameField.h
         LoadGameException.h
+        DialogItemDelegate.cpp
+        DialogItemDelegate.h
         ${RES_FILES}
         ${QM_FILES} configdialog.cpp configdialog.h configdialog.ui)
 

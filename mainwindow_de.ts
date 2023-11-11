@@ -5,71 +5,71 @@
     <name>ConfigDialog</name>
     <message>
         <location filename="configdialog.ui" line="14"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="159"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="155"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="164"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="163"/>
         <source>Kglife - Settings</source>
         <translation>Kglife - Setzung</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="84"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="164"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="160"/>
+        <location filename="configdialog.ui" line="90"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="169"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="168"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="93"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="166"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="162"/>
+        <location filename="configdialog.ui" line="99"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="171"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="170"/>
         <source>Patterns</source>
         <translation type="unfinished">Modelle</translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="129"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="169"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="165"/>
+        <location filename="configdialog.ui" line="135"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="174"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="173"/>
         <source>Cell Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="136"/>
-        <location filename="configdialog.ui" line="150"/>
-        <location filename="configdialog.ui" line="164"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="170"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="172"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="174"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="166"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="168"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="170"/>
+        <location filename="configdialog.ui" line="142"/>
+        <location filename="configdialog.ui" line="162"/>
+        <location filename="configdialog.ui" line="182"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="175"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="177"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="179"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="174"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="176"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="178"/>
         <source>Select...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="157"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="173"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="169"/>
+        <location filename="configdialog.ui" line="175"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="178"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="177"/>
         <source>Cells Border Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.ui" line="143"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="171"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="167"/>
+        <location filename="configdialog.ui" line="155"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="176"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="175"/>
         <source>Background Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="38"/>
+        <location filename="configdialog.cpp" line="40"/>
         <source>Choose background color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="48"/>
+        <location filename="configdialog.cpp" line="50"/>
         <source>Choose cells color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="58"/>
+        <location filename="configdialog.cpp" line="60"/>
         <source>Choose border color</source>
         <translation type="unfinished"></translation>
     </message>

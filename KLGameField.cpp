@@ -86,8 +86,8 @@ void KLGameField::actualDoRePaint() {
     QPainter painter(this);
     int h = height();
     int w = width();
-    const QPoint &fd = getStandardFieldDefs(w, h);
-    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.x(), fd.y(), m_colorBetween);
+    const QSize &fd = getStandardFieldDefs(w, h);
+    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.width(), fd.height(), m_colorBetween);
 
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
@@ -114,10 +114,10 @@ void KLGameField::recalcScreenCells() {
 
     int h = height();
     int w = width();
-    QPoint fd = getStandardFieldDefs(w, h);
+    const QSize &fd = getStandardFieldDefs(w, h);
 
-    m_ScrCellsX = fd.x() / (m_cellSize + SPACE);
-    m_ScrCellsY = fd.y() / (m_cellSize + SPACE);
+    m_ScrCellsX = fd.width() / (m_cellSize + SPACE);
+    m_ScrCellsY = fd.height() / (m_cellSize + SPACE);
 
     if (m_ScrCellsX > m_cellsX) {
         m_ScrCellsX = m_cellsX;
@@ -139,8 +139,8 @@ void KLGameField::recalcScreenCells() {
     }
 
 
-    m_remScrX = (fd.x() - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
-    m_remScrY = (fd.y() - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
+    m_remScrX = (fd.width() - (m_cellSize + SPACE) * m_ScrCellsX) / 2;
+    m_remScrY = (fd.height() - (m_cellSize + SPACE) * m_ScrCellsY) / 2;
 
 }
 
@@ -544,10 +544,10 @@ void KLGameField::initTotalCells() {
     QDesktopWidget *desktopwidget = QApplication::desktop(); // Get display resolution
     int dw = desktopwidget->width();
     int dh = desktopwidget->height();
-    QPoint fd = getStandardFieldDefs(dw, dh);
+    const QSize &fd = getStandardFieldDefs(dw, dh);
 
-    m_cellsX = fd.x() / (m_cellSize + SPACE);
-    m_cellsY = fd.y() / (m_cellSize + SPACE);
+    m_cellsX = fd.width() / (m_cellSize + SPACE);
+    m_cellsY = fd.height() / (m_cellSize + SPACE);
     m_MainLayer = initLayer(m_MainLayer);
     m_NextStepLayer = initLayer(m_NextStepLayer);
     m_Generation = 0;
@@ -555,7 +555,7 @@ void KLGameField::initTotalCells() {
 
 }
 
-QPoint KLGameField::getStandardFieldDefs(int &x, int &y) const {
+QSize KLGameField::getStandardFieldDefs(int &x, int &y) const {
     return {x - (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2};
 }
 
@@ -575,7 +575,8 @@ void KLGameField::cRestore(bool) {
 }
 
 void KLGameField::setupGame(void) {
-    
+
+    cancelTimerInstantly();
     auto *cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, m_colorBetween, this);
 
     cDialog->setModal(true);
