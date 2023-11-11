@@ -42,8 +42,9 @@ private:
     int calculateNeighbors(int, int);
     uchar fromMainLayer(int, int);
     void copyToLayer(uchar *, int, int, uchar);
-
     bool checkMousePosition(QPoint &) const;
+
+    void tryLoadFromFile(const QString &);
 
     [[nodiscard]]
     QPoint getMainOffset() const;

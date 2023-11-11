@@ -52,6 +52,7 @@ parts:
       - qtbase5-dev
       - qttools5-dev
       - qttools5-dev-tools
+      - libkf5config-dev
       - qtchooser
       - libx11-dev
 

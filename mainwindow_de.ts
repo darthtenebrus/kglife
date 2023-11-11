@@ -5,120 +5,120 @@
     <name>ConfigDialog</name>
     <message>
         <location filename="configdialog.ui" line="14"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="164"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="163"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="174"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="175"/>
         <source>Kglife - Settings</source>
         <translation>Kglife - Setzung</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="90"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="169"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="168"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="179"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="180"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="99"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="171"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="170"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="181"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="182"/>
         <source>Patterns</source>
-        <translation type="unfinished">Modelle</translation>
+        <translation>Modelle</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="135"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="174"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="173"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="184"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="185"/>
         <source>Cell Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzellefarbe</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="142"/>
         <location filename="configdialog.ui" line="162"/>
         <location filename="configdialog.ui" line="182"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="175"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="177"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="179"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="174"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="176"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="178"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="185"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="187"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="189"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="186"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="188"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="190"/>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwahl...</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="175"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="178"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="177"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="188"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="189"/>
         <source>Cells Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzellerandfarbe</translation>
     </message>
     <message>
         <location filename="configdialog.ui" line="155"/>
-        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="176"/>
-        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="175"/>
+        <location filename="cmake-build-debug/kglife_autogen/include/ui_configdialog.h" line="186"/>
+        <location filename="cmake-build-release/kglife_autogen/include/ui_configdialog.h" line="187"/>
         <source>Background Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundfarbe</translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="42"/>
+        <location filename="configdialog.cpp" line="47"/>
         <source>Choose background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundfarbe anwahlen</translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="52"/>
+        <location filename="configdialog.cpp" line="57"/>
         <source>Choose cells color</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzellefarbe anwahlen</translation>
     </message>
     <message>
-        <location filename="configdialog.cpp" line="62"/>
+        <location filename="configdialog.cpp" line="67"/>
         <source>Choose border color</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzellerandfarbe anwahlen</translation>
     </message>
 </context>
 <context>
     <name>KLGameField</name>
     <message>
-        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="408"/>
         <source>Load colony from file</source>
         <translation>Kolonie von der Datei einladen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="410"/>
-        <location filename="KLGameField.cpp" line="479"/>
+        <location filename="KLGameField.cpp" line="409"/>
+        <location filename="KLGameField.cpp" line="422"/>
         <source>This application (*.kgol)</source>
         <translation>Diese App (*.kgol)</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="419"/>
-        <location filename="KLGameField.cpp" line="489"/>
+        <location filename="KLGameField.cpp" line="432"/>
+        <location filename="KLGameField.cpp" line="543"/>
         <source>Open file failed</source>
         <translation>Dateiladen Versager</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="425"/>
-        <location filename="KLGameField.cpp" line="437"/>
-        <location filename="KLGameField.cpp" line="447"/>
-        <location filename="KLGameField.cpp" line="459"/>
+        <location filename="KLGameField.cpp" line="549"/>
+        <location filename="KLGameField.cpp" line="561"/>
+        <location filename="KLGameField.cpp" line="571"/>
+        <location filename="KLGameField.cpp" line="583"/>
         <source>Invalid file format</source>
         <translation>Ungültiges Dateiformat</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="471"/>
-        <location filename="KLGameField.cpp" line="504"/>
+        <location filename="KLGameField.cpp" line="447"/>
+        <location filename="KLGameField.cpp" line="595"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="478"/>
+        <location filename="KLGameField.cpp" line="421"/>
         <source>Save colony current state</source>
-        <translation>Den Kolonie zustand sparen</translation>
+        <translation>Den Koloniezustand sparen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="513"/>
+        <location filename="KLGameField.cpp" line="456"/>
         <source>Set or erase a single cell by double click or drag a line with left button pressed</source>
         <translation>Mausdoppelklick um die Einzelle setzen oder löschen</translation>
     </message>
     <message>
-        <location filename="KLGameField.cpp" line="514"/>
+        <location filename="KLGameField.cpp" line="457"/>
         <source>Drag the mouse to move field</source>
         <translation>Linke Maustaste halten um das Feld zu bewegen</translation>
     </message>

@@ -6,6 +6,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_FIND_MODULE_DIR})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-D_DEBUG)
@@ -17,6 +19,9 @@ find_package(Qt5 COMPONENTS
         Gui
         Widgets
         LinguistTools
+        REQUIRED)
+find_package(KF5 COMPONENTS
+        Config
         REQUIRED)
 set(LING_OPTIONS -no-obsolete)
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} mainwindow_ru.ts OPTIONS ${LING_OPTIONS})
@@ -38,10 +43,13 @@ add_executable(${PROJECT_NAME}
         ${RES_FILES}
         ${QM_FILES} configdialog.cpp configdialog.h configdialog.ui)
 
+
 target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        KF5::ConfigCore
         )
+
 
 install(TARGETS ${PROJECT_NAME})

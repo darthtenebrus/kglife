@@ -10,6 +10,11 @@
 #include <QPushButton>
 #include <QColorDialog>
 #include <QIcon>
+#include <QFileInfo>
+#include <QDir>
+#include <QStandardPaths>
+#include <KConfig>
+#include <KConfigGroup>
 #ifdef _DEBUG
 #include <QDebug>
 #endif
@@ -68,7 +73,6 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
     });
 
 
-
 }
 
 ConfigDialog::~ConfigDialog() {
@@ -76,7 +80,11 @@ ConfigDialog::~ConfigDialog() {
 }
 
 void ConfigDialog::currentChanged(const QModelIndex &current, const QModelIndex &prev) {
-    ui->stackedWidget->setCurrentIndex(current.row());
+    int cr = current.row();
+    if (cr == 1) {
+        fillPatternList(ui->patternList);
+    }
+    ui->stackedWidget->setCurrentIndex(cr);
 }
 
 const QColor &ConfigDialog::getMCellColor() const {
@@ -107,5 +115,34 @@ void ConfigDialog::restoreDefaults(bool) {
     setButtonIconColor(ui->buttonCellColor, mCellColor);
     setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
 
+}
+
+void ConfigDialog::fillPatternList(QListWidget *list) {
+
+
+    const QString &fn = QStandardPaths::locate(QStandardPaths::DataLocation, ".", QStandardPaths::LocateDirectory);
+    if (fn.isEmpty()) {
+        return;
+    }
+    const QString &bd = QFileInfo(fn).absoluteFilePath();
+
+    for(QFileInfo &finfo : QDir(bd).entryInfoList(QDir::nameFiltersFromString("*.desktop"))) {
+        const QString &fabsPath = finfo.absoluteFilePath();
+
+        KConfig kdfile(fabsPath, KConfig::SimpleConfig);
+        KConfigGroup group = kdfile.group(QStringLiteral("GOLColony"));
+        const QString &kgolFilePath = finfo.absolutePath() +
+                                      QDir::separator() + group.readEntry("FileName");
+        const QString &displayTitle = group.readEntry("Description");
+#ifdef _DEBUG
+        qDebug() << "displayTitle = " << displayTitle;
+        qDebug() << "kgolFilePath = " << kgolFilePath;
+#endif
+        auto *item = new QListWidgetItem();
+        item->setData(Qt::DisplayRole, displayTitle);
+        item->setData(Qt::UserRole, kgolFilePath);
+        list->addItem(item);
+
+    }
 }
 

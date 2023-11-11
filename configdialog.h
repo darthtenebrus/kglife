@@ -6,6 +6,7 @@
 #define KGLIFE_CONFIGDIALOG_H
 
 #include <QDialog>
+#include <QListWidget>
 
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +35,7 @@ private:
     QColor mBetweenColor;
 
     void setButtonIconColor(QPushButton *, QColor &);
+    void fillPatternList(QListWidget *);
 
 private slots:
     void currentChanged(const QModelIndex &, const QModelIndex &);

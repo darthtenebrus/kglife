@@ -6,7 +6,6 @@
 #include <QApplication>
 #include<QDesktopWidget>
 #include "KLGameField.h"
-#include "mainwindow.h"
 #include <QMouseEvent>
 #include <QTimer>
 #include <QFileDialog>
@@ -413,63 +412,7 @@ void KLGameField::openAction(bool) {
         return;
     }
 
-    try {
-        QFile file(path);
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            throw LoadGameException(tr("Open file failed").toStdString());
-        }
-
-        const QByteArray &header = file.read(8);
-        const QString &strhead = QString::fromLatin1(header);
-        if (strhead != "KGOL_SIG") {
-            throw LoadGameException(tr("Invalid file format").toStdString());
-        }
-
-
-        QByteArray content;
-        while (!file.atEnd()) {
-            content = file.readAll();
-        }
-        file.close();
-        const QString &strContent = QString::fromLatin1(content);
-        const QStringList &coords = strContent.split("CX");
-        if (coords.empty()) {
-            throw LoadGameException(tr("Invalid file format").toStdString());
-        }
-
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
-
-        for (const QString &item: coords) {
-            if (item.isEmpty()) {
-                continue;
-            } else if (!item.contains('Y')) {
-                throw LoadGameException(tr("Invalid file format").toStdString());
-            }
-
-            const QStringList &pairXY = item.split('Y');
-            bool ready = false;
-            int resX;
-            int resY = pairXY[1].toInt(&ready);
-            if (ready) {
-                resX = pairXY[0].toInt(&ready);
-            }
-
-            if (!ready) {
-                throw LoadGameException(tr("Invalid file format").toStdString());
-            }
-
-            if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
-                continue;
-            }
-
-
-            copyToLayer(m_MainLayer, resX, resY, 1);
-        }
-    } catch (const LoadGameException &ex) {
-
-        QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
-    }
+    tryLoadFromFile(path);
     restoreScreen();
 }
 
@@ -591,6 +534,66 @@ void KLGameField::setupGame(void) {
     }
     delete cDialog;
 
+}
+
+void KLGameField::tryLoadFromFile(const QString &path) {
+    try {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            throw LoadGameException(tr("Open file failed").toStdString());
+        }
+
+        const QByteArray &header = file.read(8);
+        const QString &strhead = QString::fromLatin1(header);
+        if (strhead != "KGOL_SIG") {
+            throw LoadGameException(tr("Invalid file format").toStdString());
+        }
+
+
+        QByteArray content;
+        while (!file.atEnd()) {
+            content = file.readAll();
+        }
+        file.close();
+        const QString &strContent = QString::fromLatin1(content);
+        const QStringList &coords = strContent.split("CX");
+        if (coords.empty()) {
+            throw LoadGameException(tr("Invalid file format").toStdString());
+        }
+
+        m_MainLayer = initLayer(m_MainLayer);
+        m_NextStepLayer = initLayer(m_NextStepLayer);
+
+        for (const QString &item: coords) {
+            if (item.isEmpty()) {
+                continue;
+            } else if (!item.contains('Y')) {
+                throw LoadGameException(tr("Invalid file format").toStdString());
+            }
+
+            const QStringList &pairXY = item.split('Y');
+            bool ready = false;
+            int resX;
+            int resY = pairXY[1].toInt(&ready);
+            if (ready) {
+                resX = pairXY[0].toInt(&ready);
+            }
+
+            if (!ready) {
+                throw LoadGameException(tr("Invalid file format").toStdString());
+            }
+
+            if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
+                continue;
+            }
+
+
+            copyToLayer(m_MainLayer, resX, resY, 1);
+        }
+    } catch (const LoadGameException &ex) {
+
+        QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
+    }
 }
 
 
