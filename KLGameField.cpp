@@ -531,6 +531,21 @@ void KLGameField::setupGame(void) {
         emit changeSetting("cellsColor", m_ColorCells);
         emit changeSetting("backColor", m_ColorBackground);
         emit changeSetting("borderColor", m_colorBetween);
+
+        const QString &tPath = cDialog->getTemplatePath();
+        if (!tPath.isEmpty()) {
+            QMessageBox::StandardButton button = QMessageBox::warning(this, tr("Info"),
+                                                                      tr("Do you really want to load "
+                                                                         "colony from the selected template?"),
+                                                                      QMessageBox::StandardButtons(
+                                                                              QMessageBox::Yes | QMessageBox::No));
+
+            if (button == QMessageBox::Yes) {
+                tryLoadFromFile(tPath);
+                restoreScreen();
+            }
+        }
+
     }
     delete cDialog;
 

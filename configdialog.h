@@ -26,19 +26,23 @@ public:
     [[nodiscard]] const QColor &getMBackColor() const;
 
 
-    const QColor &getMBetweenColor() const;
+    [[nodiscard]] const QColor &getMBetweenColor() const;
+
+    const QString &getTemplatePath() const;
 
 private:
     Ui::ConfigDialog *ui;
     QColor mCellColor;
     QColor mBackColor;
     QColor mBetweenColor;
+    QString templatePath = QString();
 
     void setButtonIconColor(QPushButton *, QColor &);
     void fillPatternList(QListWidget *);
 
 private slots:
     void currentChanged(const QModelIndex &, const QModelIndex &);
+    void patternSelected(const QModelIndex &, const QModelIndex &);
     void restoreDefaults(bool);
 
 };

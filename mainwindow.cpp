@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
                  MainWindow::orgName, "config"),
         timerSlider(new QSlider(Qt::Horizontal, this)) {
     ui->setupUi(this);
+    ui->actionShowToolbar->setChecked(true);
+    ui->actionShowStatusBar->setChecked(true);
     timerSlider->setValue(5);
     timerSlider->setSliderPosition(5);
     timerSlider->setSingleStep(1);
@@ -63,6 +65,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSetup, &QAction::triggered, gameField,
             &KLGameField::setupGame);
+
+    connect(ui->actionShowToolbar, &QAction::triggered, this, [=](bool en) {
+        ui->toolBar->setHidden(!en);
+    });
+
+    connect(ui->actionShowStatusBar, &QAction::triggered, this, [=](bool en) {
+        ui->statusbar->setHidden(!en);
+    });
 
     connect(ui->actionZoomIn, &QAction::triggered, gameField, &KLGameField::cZoomIn);
     connect(ui->actionZoomOut, &QAction::triggered, gameField, &KLGameField::cZoomOut);

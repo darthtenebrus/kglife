@@ -42,6 +42,9 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
     connect(ui->listWidget->selectionModel(), &QItemSelectionModel::currentRowChanged,
             this, &ConfigDialog::currentChanged);
 
+    connect(ui->patternList->selectionModel(), &QItemSelectionModel::currentRowChanged,
+            this, &ConfigDialog::patternSelected);
+
     connect(ui->buttonBackColor, &QPushButton::clicked, this, [=]() {
         const QColor &ccolor = QColorDialog::getColor(mBackColor, this,
                                                       tr("Choose background color"));
@@ -119,30 +122,50 @@ void ConfigDialog::restoreDefaults(bool) {
 
 void ConfigDialog::fillPatternList(QListWidget *list) {
 
-
-    const QString &fn = QStandardPaths::locate(QStandardPaths::DataLocation, ".", QStandardPaths::LocateDirectory);
+    if (list->count()) {
+        return;
+    }
+    const QString &fn = QStandardPaths::locate(QStandardPaths::DataLocation, "colonies", QStandardPaths::LocateDirectory);
     if (fn.isEmpty()) {
         return;
     }
-    const QString &bd = QFileInfo(fn).absoluteFilePath();
+#ifdef _DEBUG
+    qDebug() << "fn = " << fn;
+#endif
 
-    for(QFileInfo &finfo : QDir(bd).entryInfoList(QDir::nameFiltersFromString("*.desktop"))) {
+    for(QFileInfo &finfo : QDir(fn).entryInfoList(QDir::nameFiltersFromString("*.desktop"))) {
         const QString &fabsPath = finfo.absoluteFilePath();
 
         KConfig kdfile(fabsPath, KConfig::SimpleConfig);
         KConfigGroup group = kdfile.group(QStringLiteral("GOLColony"));
         const QString &kgolFilePath = finfo.absolutePath() +
                                       QDir::separator() + group.readEntry("FileName");
-        const QString &displayTitle = group.readEntry("Description");
-#ifdef _DEBUG
-        qDebug() << "displayTitle = " << displayTitle;
-        qDebug() << "kgolFilePath = " << kgolFilePath;
-#endif
+        const QString &displayTitle = group.readEntry("Name");
+
         auto *item = new QListWidgetItem();
         item->setData(Qt::DisplayRole, displayTitle);
         item->setData(Qt::UserRole, kgolFilePath);
+        item->setData(Qt::UserRole + 100, group.readEntry("Description"));
+        item->setData(Qt::UserRole + 101, group.readEntry("Author"));
+        item->setData(Qt::UserRole + 102, group.readEntry("AuthorEmail"));
+        item->setSizeHint(QSize(item->sizeHint().width(), 72));
         list->addItem(item);
 
     }
+    ui->descData->clear();
+    ui->authorData->clear();
+    ui->emailData->clear();
+}
+
+const QString &ConfigDialog::getTemplatePath() const {
+    return templatePath;
+}
+
+void ConfigDialog::patternSelected(const QModelIndex &current, const QModelIndex &prev) {
+    QListWidgetItem *item = ui->patternList->item(current.row());
+    ui->descData->setText(item->data(Qt::UserRole + 100).value<QString>());
+    ui->authorData->setText(item->data(Qt::UserRole + 101).value<QString>());
+    ui->emailData->setText(item->data(Qt::UserRole + 102).value<QString>());
+    templatePath = item->data(Qt::UserRole).value<QString>();
 }
 
