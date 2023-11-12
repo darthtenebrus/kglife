@@ -42,7 +42,7 @@ parts:
     plugin: dump
     source: templates/
     organize:
-      "*": usr/share/kglife/templates
+      "*": usr/share/kglife/templates/
     stage:
       - usr/share/kglife/templates
   my-part:
