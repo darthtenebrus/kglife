@@ -37,6 +37,14 @@ parts:
     organize:
       64x64/kglife.png: kglife.png
     stage: [kglife.png, kglife.desktop]
+  org-templates:
+    after: [org-desk]
+    plugin: dump
+    source: templates/
+    organize:
+      "*": usr/share/kglife/templates
+    stage:
+      - usr/share/kglife/templates
   my-part:
     build-attributes:
       - enable-patchelf
@@ -53,6 +61,7 @@ parts:
       - qttools5-dev
       - qttools5-dev-tools
       - libkf5config-dev
+      - extra-cmake-modules
       - qtchooser
       - libx11-dev
 
