@@ -11,11 +11,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QDialogButtonBox>
 #include "LoadGameException.h"
 #include "configdialog.h"
-#ifdef _DEBUG
-#include <QDebug>
-#endif
+
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -520,34 +519,15 @@ void KLGameField::cRestore(bool) {
 void KLGameField::setupGame(void) {
 
     cancelTimerInstantly();
-    auto *cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, m_colorBetween, this);
-
+    cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, m_colorBetween, this);
     cDialog->setModal(true);
     int res = cDialog->exec();
     if (res == QDialog::Accepted) {
-        m_ColorCells = cDialog->getMCellColor();
-        m_ColorBackground = cDialog->getMBackColor();
-        m_colorBetween = cDialog->getMBetweenColor();
-        emit changeSetting("cellsColor", m_ColorCells);
-        emit changeSetting("backColor", m_ColorBackground);
-        emit changeSetting("borderColor", m_colorBetween);
-
-        const QString &tPath = cDialog->getTemplatePath();
-        if (!tPath.isEmpty()) {
-            QMessageBox::StandardButton button = QMessageBox::warning(this, tr("Info"),
-                                                                      tr("Do you really want to load "
-                                                                         "colony from the selected template?"),
-                                                                      QMessageBox::StandardButtons(
-                                                                              QMessageBox::Yes | QMessageBox::No));
-
-            if (button == QMessageBox::Yes) {
-                tryLoadFromFile(tPath);
-                restoreScreen();
-            }
-        }
+        applySetup(true);
 
     }
     delete cDialog;
+    cDialog = nullptr;
 
 }
 
@@ -608,6 +588,41 @@ void KLGameField::tryLoadFromFile(const QString &path) {
     } catch (const LoadGameException &ex) {
 
         QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
+    }
+}
+
+void KLGameField::cdApply(bool b) {
+
+    applySetup(false);
+    emit settingsApplied();
+    repaint();
+}
+
+void KLGameField::applySetup(bool confirm) {
+    m_ColorCells = cDialog->getMCellColor();
+    m_ColorBackground = cDialog->getMBackColor();
+    m_colorBetween = cDialog->getMBetweenColor();
+    emit changeSetting("cellsColor", m_ColorCells);
+    emit changeSetting("backColor", m_ColorBackground);
+    emit changeSetting("borderColor", m_colorBetween);
+
+    const QString &tPath = cDialog->getTemplatePath();
+    if (!tPath.isEmpty()) {
+        if (confirm) {
+            QMessageBox::StandardButton button = QMessageBox::warning(this, tr("Info"),
+                                                                      tr("Do you really want to load "
+                                                                         "colony from the selected template?"),
+                                                                      QMessageBox::StandardButtons(
+                                                                              QMessageBox::Yes | QMessageBox::No));
+
+            if (button == QMessageBox::Yes) {
+                tryLoadFromFile(tPath);
+                restoreScreen();
+            }
+        } else {
+            tryLoadFromFile(tPath);
+            restoreScreen();
+        }
     }
 }
 

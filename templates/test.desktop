@@ -1,0 +1,15 @@
+[GOLColony]
+Name=Test
+Name[de]=Prüfvorschrift
+Name[en]=Test
+Name[es]=Prueba
+Name[ru]=Тест
+Description=A simple test
+Description[en]=A simple test
+Description[de]=Der einfache Prüfvorschrift
+Description[es]=Una prueba simple
+Description[ru]=Простой тест
+VersionFormat=1
+Author=Eugene E. Sorochinskiy
+AuthorEmail=webmaster@darkguard.net
+FileName=test.kgol

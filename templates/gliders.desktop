@@ -1,0 +1,15 @@
+[GOLColony]
+Name=Gliders
+Name[de]=Segelflugzeuge
+Name[en]=Gliders
+Name[es]=Planeadoras
+Name[ru]=Глайдеры
+Description=A simple collection of gliders
+Description[en]=A simple collection of gliders
+Description[de]=Segelflugzeugeanzahl
+Description[es]=un montón de las planeadoras
+Description[ru]=Набор глайдеров
+VersionFormat=1
+Author=Eugene E. Sorochinskiy
+AuthorEmail=webmaster@darkguard.net
+FileName=gliders.kgol

@@ -7,6 +7,7 @@
 
 
 #include <QWidget>
+#include "configdialog.h"
 
 class KLGameField : public QWidget {
 Q_OBJECT
@@ -52,6 +53,8 @@ private:
     [[nodiscard]]
     QSize getStandardFieldDefs(int &, int &) const;
 
+    void applySetup(bool);
+
     int m_TimerInterval;
     int m_Generation = 0;
 
@@ -80,6 +83,7 @@ private:
     QColor m_ColorCells;
     QColor m_ColorBackground;
     QColor m_colorBetween;
+    ConfigDialog *cDialog = nullptr;
 
 public slots:
     void newAction(bool);
@@ -95,6 +99,7 @@ public slots:
     void cZoomIn(bool);
     void cZoomOut(bool);
     void cRestore(bool);
+    void cdApply(bool);
 
 private slots:
     void nextGeneration(void);
@@ -108,6 +113,7 @@ signals:
     void changeZoomIn(bool);
     void changeZoomOut(bool);
     void changeRestore(bool);
+    void settingsApplied(void);
 
 };
 

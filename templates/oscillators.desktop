@@ -1,0 +1,15 @@
+[GOLColony]
+Name=Oscillators
+Name[de]=Oszillatoren
+Name[en]=Oscillators
+Name[es]=Oscillatores
+Name[ru]=Осцилляторы
+Description=Different oscillators
+Description[en]=Different oscillators
+Description[de]=Verschiedene Oszillatoren
+Description[es]=un montón de oscillatores
+Description[ru]=Различные осцилляторы
+VersionFormat=1
+Author=Eugene E. Sorochinskiy
+AuthorEmail=webmaster@darkguard.net
+FileName=oscillators.kgol

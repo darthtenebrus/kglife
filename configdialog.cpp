@@ -7,6 +7,7 @@
 #include "configdialog.h"
 #include "ui_configdialog.h"
 #include "DialogItemDelegate.h"
+#include "KLGameField.h"
 #include <QPushButton>
 #include <QColorDialog>
 #include <QIcon>
@@ -15,9 +16,6 @@
 #include <QStandardPaths>
 #include <KConfig>
 #include <KConfigGroup>
-#ifdef _DEBUG
-#include <QDebug>
-#endif
 
 
 ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
@@ -39,6 +37,11 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
             this, &QDialog::reject);
     connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked,
             this, &ConfigDialog::restoreDefaults);
+    connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked,
+            dynamic_cast<KLGameField *>(parent), &KLGameField::cdApply);
+    connect(dynamic_cast<KLGameField *>(parent), &KLGameField::settingsApplied, this, [=]() {
+        toggleButtons(false);
+    });
     connect(ui->listWidget->selectionModel(), &QItemSelectionModel::currentRowChanged,
             this, &ConfigDialog::currentChanged);
 
@@ -52,6 +55,7 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
         if (ccolor.isValid()) {
             mBackColor = ccolor;
             setButtonIconColor(ui->buttonBackColor, mBackColor);
+            toggleButtons(true);
         }
     });
 
@@ -62,6 +66,7 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
         if (ccolor.isValid()) {
             mCellColor = ccolor;
             setButtonIconColor(ui->buttonCellColor, mCellColor);
+            toggleButtons(true);
         }
     });
 
@@ -72,9 +77,11 @@ ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
         if (ccolor.isValid()) {
             mBetweenColor = ccolor;
             setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
+            toggleButtons(true);
         }
     });
 
+    toggleButtons(false);
 
 }
 
@@ -117,6 +124,8 @@ void ConfigDialog::restoreDefaults(bool) {
     setButtonIconColor(ui->buttonBackColor, mBackColor);
     setButtonIconColor(ui->buttonCellColor, mCellColor);
     setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);
+    templatePath.clear();
+    toggleButtons(true);
 
 }
 
@@ -125,32 +134,34 @@ void ConfigDialog::fillPatternList(QListWidget *list) {
     if (list->count()) {
         return;
     }
-    const QString &fn = QStandardPaths::locate(QStandardPaths::DataLocation, "colonies", QStandardPaths::LocateDirectory);
-    if (fn.isEmpty()) {
-        return;
-    }
-#ifdef _DEBUG
-    qDebug() << "fn = " << fn;
-#endif
+    const QStringList &fnlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates",
+                                                          QStandardPaths::LocateDirectory);
+    for(const QString &fn : fnlist) {
+        const QDir &fndir = QDir(fn);
+        if (!fndir.exists() || fndir.isEmpty()) {
+            return;
+        }
 
-    for(QFileInfo &finfo : QDir(fn).entryInfoList(QDir::nameFiltersFromString("*.desktop"))) {
-        const QString &fabsPath = finfo.absoluteFilePath();
+        for (QFileInfo &finfo: fndir.entryInfoList(QDir::nameFiltersFromString("*.desktop"))) {
+            const QString &fabsPath = finfo.absoluteFilePath();
 
-        KConfig kdfile(fabsPath, KConfig::SimpleConfig);
-        KConfigGroup group = kdfile.group(QStringLiteral("GOLColony"));
-        const QString &kgolFilePath = finfo.absolutePath() +
-                                      QDir::separator() + group.readEntry("FileName");
-        const QString &displayTitle = group.readEntry("Name");
+            KConfig kdfile(fabsPath, KConfig::SimpleConfig);
 
-        auto *item = new QListWidgetItem();
-        item->setData(Qt::DisplayRole, displayTitle);
-        item->setData(Qt::UserRole, kgolFilePath);
-        item->setData(Qt::UserRole + 100, group.readEntry("Description"));
-        item->setData(Qt::UserRole + 101, group.readEntry("Author"));
-        item->setData(Qt::UserRole + 102, group.readEntry("AuthorEmail"));
-        item->setSizeHint(QSize(item->sizeHint().width(), 72));
-        list->addItem(item);
+            KConfigGroup group = kdfile.group(QStringLiteral("GOLColony"));
+            const QString &kgolFilePath = finfo.absolutePath() +
+                                          QDir::separator() + group.readEntry("FileName");
+            const QString &displayTitle = group.readEntry("Name");
 
+            auto *item = new QListWidgetItem();
+            item->setData(Qt::DisplayRole, displayTitle);
+            item->setData(Qt::UserRole, kgolFilePath);
+            item->setData(Qt::UserRole + 100, group.readEntry("Description"));
+            item->setData(Qt::UserRole + 101, group.readEntry("Author"));
+            item->setData(Qt::UserRole + 102, group.readEntry("AuthorEmail"));
+            item->setSizeHint(QSize(item->sizeHint().width(), 72));
+            list->addItem(item);
+
+        }
     }
     ui->descData->clear();
     ui->authorData->clear();
@@ -167,5 +178,11 @@ void ConfigDialog::patternSelected(const QModelIndex &current, const QModelIndex
     ui->authorData->setText(item->data(Qt::UserRole + 101).value<QString>());
     ui->emailData->setText(item->data(Qt::UserRole + 102).value<QString>());
     templatePath = item->data(Qt::UserRole).value<QString>();
+    toggleButtons(true);
+}
+
+void ConfigDialog::toggleButtons(bool enable) {
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(enable);
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(enable);
 }
 

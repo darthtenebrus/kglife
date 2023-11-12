@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QMessageBox>
+#include <QWhatsThis>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
@@ -19,8 +20,13 @@ MainWindow::MainWindow(QWidget *parent) :
                  MainWindow::orgName, "config"),
         timerSlider(new QSlider(Qt::Horizontal, this)) {
     ui->setupUi(this);
+    QAction *actionWhatsThis = QWhatsThis::createAction(this);
+    ui->toolBar->addAction(actionWhatsThis);
+    ui->toolBar->addSeparator();
     ui->actionShowToolbar->setChecked(true);
     ui->actionShowStatusBar->setChecked(true);
+    ui->menuHelp->insertAction(ui->actionAboutQt, actionWhatsThis);
+    ui->menuHelp->insertSeparator(ui->actionAboutQt);
     timerSlider->setValue(5);
     timerSlider->setSliderPosition(5);
     timerSlider->setSingleStep(1);
@@ -28,8 +34,9 @@ MainWindow::MainWindow(QWidget *parent) :
     timerSlider->setMinimum(1);
     timerSlider->setMaximum(10);
     timerSlider->setTracking(true);
-    timerSlider->setToolTip(tr("Generation Change Speed"));
+    timerSlider->setToolTip(tr("Generation Change Rate"));
     timerSlider->setFixedWidth(200);
+    timerSlider->setWhatsThis(tr("You can change generation rate even when evolution is in progress"));
     ui->toolBar->addWidget(timerSlider);
 
     fillDataFromSettings();
@@ -40,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
                                 timerSlider->value(), this);
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
+    gameField->setWhatsThis(tr("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
+                               "zoom in and out whith a mouse wheel or action controls"));
     ui->centralwidget->layout()->addWidget(gameField);
 
 

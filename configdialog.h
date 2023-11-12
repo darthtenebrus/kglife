@@ -28,7 +28,9 @@ public:
 
     [[nodiscard]] const QColor &getMBetweenColor() const;
 
-    const QString &getTemplatePath() const;
+    [[nodiscard]] const QString &getTemplatePath() const;
+
+    void toggleButtons(bool);
 
 private:
     Ui::ConfigDialog *ui;
