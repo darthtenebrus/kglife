@@ -16,6 +16,16 @@
 #include <QStandardPaths>
 #include <KConfig>
 #include <KConfigGroup>
+#include "preferences.h"
+
+namespace KGLGlobals {
+    extern PreferencesType defs;
+/*
+ *      {"cellsColor",QVariant(QColor(0x00FF55))},
+        {"backColor",QVariant(QColor("#000000"))},
+        {"borderColor", QVariant(QColor("#232323"))}
+ */
+}
 
 
 ConfigDialog::ConfigDialog(QColor &bColor, QColor &cellColor,
@@ -118,9 +128,9 @@ void ConfigDialog::setButtonIconColor(QPushButton *button, QColor &color) {
 }
 
 void ConfigDialog::restoreDefaults(bool) {
-    mBackColor = QColor("#000000");
-    mBetweenColor = QColor("#232323");
-    mCellColor = QColor("#00ff00");
+    mBackColor = KGLGlobals::defs["backColor"].value<QColor>();
+    mBetweenColor = KGLGlobals::defs["borderColor"].value<QColor>();
+    mCellColor = KGLGlobals::defs["cellsColor"].value<QColor>();
     setButtonIconColor(ui->buttonBackColor, mBackColor);
     setButtonIconColor(ui->buttonCellColor, mCellColor);
     setButtonIconColor(ui->buttonBetweenColor, mBetweenColor);

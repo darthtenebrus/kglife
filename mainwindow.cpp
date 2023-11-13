@@ -12,6 +12,14 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 
+namespace KGLGlobals {
+    PreferencesType defs = {
+            {"cellsColor",  QVariant(QColor(0x00FF55))},
+            {"backColor",   QVariant(QColor("black"))},
+            {"borderColor", QVariant(QColor(0x232323))}
+    };
+}
+
 QString MainWindow::orgName = "kglife";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -123,8 +131,8 @@ void MainWindow::colonyIsEmpty(void) {
 
 void MainWindow::fillDataFromSettings(void)  {
 
-    for (const QString &key: defs.keys()) {
-        m_data.insert(key, settings.value(key, defs[key]));
+    for (const QString &key: KGLGlobals::defs.keys()) {
+        m_data.insert(key, settings.value(key, KGLGlobals::defs[key]));
     }
 
 }

@@ -53,7 +53,7 @@ private:
     [[nodiscard]]
     QSize getStandardFieldDefs(int &, int &) const;
 
-    void applySetup(bool);
+    void applySetup(ConfigDialog *, bool);
 
     int m_TimerInterval;
     int m_Generation = 0;
@@ -83,7 +83,6 @@ private:
     QColor m_ColorCells;
     QColor m_ColorBackground;
     QColor m_colorBetween;
-    ConfigDialog *cDialog = nullptr;
 
 public slots:
     void newAction(bool);
@@ -93,7 +92,7 @@ public slots:
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 
-    void setupGame(void);
+    void setupGame();
     void changeMoveMode(bool);
 
     void cZoomIn(bool);

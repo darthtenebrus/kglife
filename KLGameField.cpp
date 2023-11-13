@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QDialogButtonBox>
+#include <QPushButton>
 #include "LoadGameException.h"
 #include "configdialog.h"
 
@@ -516,19 +517,17 @@ void KLGameField::cRestore(bool) {
     restoreScreen();
 }
 
-void KLGameField::setupGame(void) {
+void KLGameField::setupGame() {
 
     cancelTimerInstantly();
-    cDialog = new ConfigDialog(m_ColorBackground, m_ColorCells, m_colorBetween, this);
+    std::unique_ptr<ConfigDialog> cDialog = std::make_unique<ConfigDialog>(m_ColorBackground,
+                                                                           m_ColorCells, m_colorBetween, this);
     cDialog->setModal(true);
     int res = cDialog->exec();
     if (res == QDialog::Accepted) {
-        applySetup(true);
+        applySetup(cDialog.get(), true);
 
     }
-    delete cDialog;
-    cDialog = nullptr;
-
 }
 
 void KLGameField::tryLoadFromFile(const QString &path) {
@@ -593,12 +592,14 @@ void KLGameField::tryLoadFromFile(const QString &path) {
 
 void KLGameField::cdApply(bool b) {
 
-    applySetup(false);
+    auto *btn = dynamic_cast<QPushButton *>(sender());
+    auto *cd = dynamic_cast<ConfigDialog *>(btn->parent()->parent());
+    applySetup(cd, false);
     emit settingsApplied();
     repaint();
 }
 
-void KLGameField::applySetup(bool confirm) {
+void KLGameField::applySetup(ConfigDialog *cDialog, bool confirm) {
     m_ColorCells = cDialog->getMCellColor();
     m_ColorBackground = cDialog->getMBackColor();
     m_colorBetween = cDialog->getMBetweenColor();
