@@ -27,8 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(mySlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
 
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-    gameField->setWhatsThis(i18n("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
-                               "zoom in and out with a mouse wheel or action controls"));
+
     setCentralWidget(gameField);
     setupToolbar();
 

@@ -457,9 +457,15 @@ void KLGameField::saveAction(bool) {
 void KLGameField::changeMoveMode(bool mMode) {
     cancelTimerInstantly();
     m_MoveMode = mMode;
-    setStatusTip(!m_MoveMode ?
-                 i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
-                 i18n("Drag the mouse to move field"));
+    const QString &trans = !m_MoveMode ?
+                           i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
+                           i18n("Drag the mouse to move field");
+    const QString &whats = !m_MoveMode ? i18n("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
+                               "zoom in and out with a mouse wheel or action controls") :
+                           i18n("In move mode you simply drag the mouse to move the field and see the cells beyond the edges");
+    setStatusTip(trans);
+    setToolTip(trans);
+    setWhatsThis(whats);
 }
 
 int KLGameField::sgn(int val) {
