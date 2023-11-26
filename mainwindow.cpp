@@ -101,21 +101,21 @@ void MainWindow::setupToolbar() {
     resWAction->setText(i18n("Time step control"));
 
     QAction *actionNewGame = actionCollection()->addAction(QStringLiteral("game_new"));
-    actionNewGame->setText(i18n("New Game"));
+    actionNewGame->setText(i18n("New &Game"));
     actionNewGame->setIcon(QIcon::fromTheme("document-new"));
     actionNewGame->setWhatsThis(i18n("Clear the field and stop evolution"));
-    actionCollection()->setDefaultShortcut(actionNewGame,  Qt::CTRL + Qt::Key_N);
+    actionCollection()->setDefaultShortcut(actionNewGame,  Qt::ALT + Qt::Key_G);
     connect(actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
 
     QAction *actionNextStep = actionCollection()->addAction(QStringLiteral("game_next_step"));
-    actionNextStep->setText(i18n("Next Step"));
+    actionNextStep->setText(i18n("&Next Step"));
     actionNextStep->setIcon(QIcon::fromTheme("media-skip-forward"));
     actionNextStep->setWhatsThis(i18n("Next single evolution step"));
     actionCollection()->setDefaultShortcut(actionNextStep,  Qt::ALT + Qt::Key_N);
     connect(actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
 
     QAction *actionStartStop = actionCollection()->addAction(QStringLiteral("game_start_stop"));
-    actionStartStop->setText(i18n("Start/Stop Game"));
+    actionStartStop->setText(i18n("&Start/Stop Game"));
     actionStartStop->setIcon(QIcon::fromTheme("media-playback-start-symbolic"));
     actionStartStop->setWhatsThis(i18n("Start or stop continuous evolution.<br> The icon changes to match the current mode"));
     actionCollection()->setDefaultShortcut(actionStartStop,  Qt::ALT + Qt::Key_S);
@@ -123,7 +123,7 @@ void MainWindow::setupToolbar() {
 
 
     QAction *actionMove = actionCollection()->addAction(QStringLiteral("move_mode"));
-    actionMove->setText(i18n("Move"));
+    actionMove->setText(i18n("&Move"));
     actionMove->setIcon(QIcon(":/images/move.png"));
     actionMove->setCheckable(true);
     actionMove->setChecked(false);

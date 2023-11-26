@@ -18,4 +18,14 @@
          <label>Template Path</label>
       </entry>
   </group>
+  <group name="Field type">
+      <entry name="spheric" type="Bool">
+          <label>Spheric</label>
+          <default>true</default>
+      </entry>
+      <entry name="walled" type="Bool">
+          <label>Wall-Edged</label>
+          <default>false</default>
+      </entry>
+  </group>
 </kcfg>

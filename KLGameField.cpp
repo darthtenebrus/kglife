@@ -203,6 +203,8 @@ void KLGameField::recalculate(void) {
 }
 
 int KLGameField::calculateNeighbors(int x, int y) {
+    bool isFieldSpheric = Settings::spheric();
+    bool isFieldWalled = Settings::walled();
     int locNeighbors = 0;
     for (int dy = -1; dy <= 1; ++dy) {
         for (int dx = -1; dx <= 1; ++dx) {
@@ -214,24 +216,31 @@ int KLGameField::calculateNeighbors(int x, int y) {
             int newY = y + dy;
             int newX = x + dx;
 
-            if (newY < 0) {
-                newY = m_cellsY - 1;
+            if (isFieldSpheric) {
+                if (newY < 0) {
+                    newY = m_cellsY - 1;
+                }
+
+                if (newY >= m_cellsY) {
+                    newY = 0;
+                }
+
+
+                if (newX < 0) {
+                    newX = m_cellsX - 1;
+                }
+
+                if (newX >= m_cellsX) {
+                    newX = 0;
+                }
+                locNeighbors += fromMainLayer(newX, newY);
+            } else if (isFieldWalled) {
+                if (newY < 0 || newY >= m_cellsY || newX < 0 || newX >= m_cellsX) {
+                    continue;
+                } else {
+                    locNeighbors += fromMainLayer(newX, newY);
+                }
             }
-
-            if (newY >= m_cellsY) {
-                newY = 0;
-            }
-
-
-            if (newX < 0) {
-                newX = m_cellsX - 1;
-            }
-
-            if (newX >= m_cellsX) {
-                newX = 0;
-            }
-
-            locNeighbors += fromMainLayer(newX, newY);
         }
     }
     return locNeighbors;

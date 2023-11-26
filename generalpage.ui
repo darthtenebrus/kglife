@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
-    <height>416</height>
+    <width>733</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,6 +52,41 @@
       </item>
       <item row="2" column="1">
        <widget class="KColorButton" name="kcfg_bordercolor"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Field Edges Type</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QRadioButton" name="kcfg_spheric">
+        <property name="text">
+         <string>Spheric</string>
+        </property>
+        <property name="shortcut">
+         <string>Alt+S</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="kcfg_walled">
+        <property name="text">
+         <string>Wall-edged</string>
+        </property>
+        <property name="shortcut">
+         <string>Alt+W</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

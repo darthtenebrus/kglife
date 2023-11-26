@@ -48,7 +48,6 @@ target_sources(${PROJECT_NAME} PRIVATE
         generalpage.cpp
         generalpage.h
         generalpage.ui
-
         patternspage.cpp
         patternspage.h
         patternspage.ui
