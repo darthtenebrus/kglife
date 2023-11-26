@@ -103,19 +103,21 @@ void MainWindow::setupToolbar() {
     QAction *actionNewGame = actionCollection()->addAction(QStringLiteral("game_new"));
     actionNewGame->setText(i18n("New Game"));
     actionNewGame->setIcon(QIcon::fromTheme("document-new"));
+    actionNewGame->setWhatsThis(i18n("Clear the field and stop evolution"));
     actionCollection()->setDefaultShortcut(actionNewGame,  Qt::CTRL + Qt::Key_N);
     connect(actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
 
     QAction *actionNextStep = actionCollection()->addAction(QStringLiteral("game_next_step"));
     actionNextStep->setText(i18n("Next Step"));
     actionNextStep->setIcon(QIcon::fromTheme("media-skip-forward"));
+    actionNextStep->setWhatsThis(i18n("Next single evolution step"));
     actionCollection()->setDefaultShortcut(actionNextStep,  Qt::ALT + Qt::Key_N);
     connect(actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
-
 
     QAction *actionStartStop = actionCollection()->addAction(QStringLiteral("game_start_stop"));
     actionStartStop->setText(i18n("Start/Stop Game"));
     actionStartStop->setIcon(QIcon::fromTheme("media-playback-start-symbolic"));
+    actionStartStop->setWhatsThis(i18n("Start or stop continuous evolution.<br> The icon changes to match the current mode"));
     actionCollection()->setDefaultShortcut(actionStartStop,  Qt::ALT + Qt::Key_S);
     connect(actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
 
@@ -125,22 +127,24 @@ void MainWindow::setupToolbar() {
     actionMove->setIcon(QIcon(":/images/move.png"));
     actionMove->setCheckable(true);
     actionMove->setChecked(false);
+    actionMove->setWhatsThis(i18n("Click here to enter field move mode.<br>In this mode you can move the field to see "
+                                  "the cells that don't fit the screen due to current zoom"));
     actionCollection()->setDefaultShortcut(actionMove,  Qt::ALT + Qt::Key_M);
     connect(actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
     connect(actionMove, &QAction::triggered, this, &MainWindow::changeMoveMode);
 
     QAction *actionZoomIn = KStandardAction::zoomIn(gameField, &KLGameField::cZoomIn, actionCollection());
-    actionZoomIn->setWhatsThis(i18n("Zoom scale in. You can also use mouse wheel. &lt;br&gt; Dimmed on maximum zoom"));
+    actionZoomIn->setWhatsThis(i18n("Zoom scale in. You can also use mouse wheel.<br> Dimmed on maximum zoom"));
     QAction *actionZoomOut = KStandardAction::zoomOut(gameField, &KLGameField::cZoomOut, actionCollection());
-    actionZoomOut->setWhatsThis(i18n("Zoom scale out. You can also use mouse wheel.&lt;br&gt;  Dimmed on minimal zoom"));
+    actionZoomOut->setWhatsThis(i18n("Zoom scale out. You can also use mouse wheel.<br>  Dimmed on minimal zoom"));
     actionZoomOut->setEnabled(false);
 
     QAction *actZoom = KStandardAction::actualSize(gameField, &KLGameField::cRestore, actionCollection());
-    actZoom->setWhatsThis(i18n("Restore initial zoom.&lt;br&gt; Dimmed when the zoom is minimal"));
+    actZoom->setWhatsThis(i18n("Restore initial zoom.<br>Dimmed when the zoom is minimal"));
     actZoom->setEnabled(false);
 
-    const QSize &wsize = QApplication::desktop()->size() * 0.9;
-    setupGUI(wsize);
+    const QSize &wsize = QApplication::desktop()->size() * 0.7;
+    setupGUI();
     setMinimumSize(wsize);
 
 }
