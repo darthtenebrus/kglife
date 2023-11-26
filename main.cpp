@@ -5,7 +5,6 @@
 #include <iostream>
 #include <QSystemSemaphore>
 #include <QSharedMemory>
-#include <QMessageBox>
 #include <KLocalizedString>
 #include <KCrash>
 #include <KAboutData>
