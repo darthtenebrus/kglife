@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Simple Game Of Life
+Name[de]=Einfach das Lebenspiel
+Name[en]=Simple Game Of Life
+Name[es]=El facil Juego De La Vida
+Name[ru]=Просто игра "Жизнь"
+Comment=Simple Game Of Life realization
+Comment[en]=Simple Game Of Life realization
+Comment[de]=Die andere Lebenspielrealisation
+Comment[es]=La otra implementación del Juego De La Vida
+Comment[ru]=Простая реализация игры "Жизнь"
+Keywords=Games;Game Of Life;Life
+Keywords[de]=Spielung;Lebenspiel;Leben
+Keywords[es]=Juegos;Juego;Vida
+Keywords[ru]=Игры;Жизнь;
+Exec=kglife
+Icon=kglife
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Game;GNOME;KDE;
