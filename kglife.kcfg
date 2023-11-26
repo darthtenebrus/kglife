@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <group name="General">
+     <entry name="bordercolor" type="Color">
+        <label>Border Color</label>
+        <default>#232323</default>
+     </entry>
+      <entry name="backcolor" type="Color">
+         <label>Foreground Color</label>
+         <default>#000000</default>
+      </entry>
+      <entry name="cellcolor" type="Color">
+         <label>Cell Color</label>
+         <default>#00FF55</default>
+      </entry>
+      <entry name="templatefile" type="String">
+         <label>Template Path</label>
+      </entry>
+  </group>
+</kcfg>

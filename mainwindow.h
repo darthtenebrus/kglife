@@ -8,15 +8,11 @@
 #include <QMainWindow>
 #include <QSlider>
 #include <QSettings>
+#include <KXmlGuiWindow>
 #include "KLGameField.h"
-#include "preferences.h"
+#include "myslider.h"
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow {
+class MainWindow : public KXmlGuiWindow {
 Q_OBJECT
 
 
@@ -24,36 +20,24 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    static QString orgName;
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
 
 private:
-    Ui::MainWindow *ui;
+    MySlider *mySlider;
     KLGameField *gameField;
-    QSlider *timerSlider;
+    void setupToolbar();
 
-    QSettings settings;
 
-    PreferencesType m_data;
-
-    void fillDataFromSettings(void);
-    void writeSettingsDirect(void);
 
 public slots:
     void controlsChanged(bool);
     void generationChanged(int);
     void colonyIsEmpty(void);
-    void settingChanged(const QString &, const QColor &);
 
     void zoomInChanged(bool);
     void zoomOutChanged(bool);
-
     void restoreChanged(bool);
 
-
-
+    void changeMoveMode(bool);
 };
 
 

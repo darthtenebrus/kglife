@@ -4,103 +4,37 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_MainWindow.h" resolved
 
-#include <QVBoxLayout>
-#include <QSlider>
-#include <QMessageBox>
-#include <QWhatsThis>
+#include <KLocalizedString>
+#include <KStandardAction>
+#include <KActionCollection>
+#include <KToolBar>
+#include <QDomElement>
+#include <QDesktopWidget>
+#include <QApplication>
+#include <QStatusBar>
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "version.h"
+#include "myslider.h"
 
-namespace KGLGlobals {
-    PreferencesType defs = {
-            {"cellsColor",  QVariant(QColor(0x00FF55))},
-            {"backColor",   QVariant(QColor("black"))},
-            {"borderColor", QVariant(QColor(0x232323))}
-    };
-}
 
-QString MainWindow::orgName = "kglife";
 
 MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent), ui(new Ui::MainWindow),
-        settings(QSettings::NativeFormat, QSettings::UserScope,
-                 MainWindow::orgName, "config"),
-        timerSlider(new QSlider(Qt::Horizontal, this)) {
-    ui->setupUi(this);
-    QAction *actionWhatsThis = QWhatsThis::createAction(this);
-    ui->toolBar->addAction(actionWhatsThis);
-    ui->toolBar->addSeparator();
-    ui->actionShowToolbar->setChecked(true);
-    ui->actionShowStatusBar->setChecked(true);
-    ui->menuHelp->insertAction(ui->actionAboutQt, actionWhatsThis);
-    ui->menuHelp->insertSeparator(ui->actionAboutQt);
-    timerSlider->setValue(5);
-    timerSlider->setSliderPosition(5);
-    timerSlider->setSingleStep(1);
-    timerSlider->setPageStep(1);
-    timerSlider->setMinimum(1);
-    timerSlider->setMaximum(10);
-    timerSlider->setTracking(true);
-    timerSlider->setToolTip(tr("Generation Change Rate"));
-    timerSlider->setFixedWidth(200);
-    timerSlider->setWhatsThis(tr("You can change generation rate even when evolution is in progress"));
-    ui->toolBar->addWidget(timerSlider);
+        KXmlGuiWindow(parent) {
 
-    fillDataFromSettings();
+    mySlider = new MySlider(Qt::Horizontal, toolBar());
+    mySlider->retranslateUi();
 
-    gameField = new KLGameField(m_data["cellsColor"].value<QColor>(),
-                                m_data["backColor"].value<QColor>(),
-                                m_data["borderColor"].value<QColor>(),
-                                timerSlider->value(), this);
+    gameField = new KLGameField(mySlider->value(), this);
+    connect(mySlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
+
     gameField->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-
-    gameField->setWhatsThis(tr("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
-                               "zoom in and out whith a mouse wheel or action controls"));
-    ui->centralwidget->layout()->addWidget(gameField);
-
-
-    connect(ui->actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
-    connect(ui->actionOpen, &QAction::triggered, gameField, &KLGameField::openAction);
-    connect(ui->actionSave, &QAction::triggered, gameField, &KLGameField::saveAction);
-
-    connect(ui->actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
-    connect(ui->actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
-    connect(ui->actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
-    connect(ui->actionAboutQt, &QAction::triggered, this, [=]{
-        QMessageBox::aboutQt(this);
-
-    });
-
-    connect(ui->actionAbout, &QAction::triggered, this, [=]{
-        QMessageBox::about(this, "KGLife",
-                           QString("KGLife v. %1\n").arg(APP_VERSION) +
-        tr("A simple Game Of Life Qt realization") +
-        "\n© 2023 E.Sorochinskiy");
-
-    });
-
-    connect(ui->actionSetup, &QAction::triggered, gameField,
-            &KLGameField::setupGame);
-
-    connect(ui->actionShowToolbar, &QAction::triggered, this, [=](bool en) {
-        ui->toolBar->setHidden(!en);
-    });
-
-    connect(ui->actionShowStatusBar, &QAction::triggered, this, [=](bool en) {
-        ui->statusbar->setHidden(!en);
-    });
-
-    connect(ui->actionZoomIn, &QAction::triggered, gameField, &KLGameField::cZoomIn);
-    connect(ui->actionZoomOut, &QAction::triggered, gameField, &KLGameField::cZoomOut);
-    connect(ui->actionRestore, &QAction::triggered, gameField, &KLGameField::cRestore);
-
-    connect(timerSlider, &QSlider::valueChanged, gameField, &KLGameField::timerChanged);
+    gameField->setWhatsThis(i18n("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
+                               "zoom in and out with a mouse wheel or action controls"));
+    setCentralWidget(gameField);
+    setupToolbar();
 
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
     connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);
     connect(gameField, &KLGameField::emptyColony, this, &MainWindow::colonyIsEmpty);
-    connect(gameField, &KLGameField::changeSetting, this, &MainWindow::settingChanged);
 
     connect(gameField, &KLGameField::changeZoomIn, this, &MainWindow::zoomInChanged);
     connect(gameField, &KLGameField::changeZoomOut, this, &MainWindow::zoomOutChanged);
@@ -110,60 +44,103 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
     delete gameField;
-    delete ui;
 }
 
 void MainWindow::controlsChanged(bool enabled) {
 
-    ui->actionNextStep->setEnabled(enabled);
-    ui->actionStartStop->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-pause"));
-    ui->actionStartStop->setToolTip(enabled ? tr("Start evolution") : tr("Stop evolution"));
+    QAction *actionStartStop = actionCollection()->action(QStringLiteral("game_start_stop"));
+    actionStartStop->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-pause"));
+    actionStartStop->setToolTip(enabled ? i18n("Start evolution") : i18n("Stop evolution"));
+    stateChanged(enabled ? "paused_state" : "gameplay_state");
+}
+
+void MainWindow::changeMoveMode(bool enabled) {
+    stateChanged(enabled ? "move_mode_state" : "paused_state");
 }
 
 void MainWindow::generationChanged(int cgen) {
-    ui->statusbar->showMessage(tr("Generation: %1").arg(cgen));
+    statusBar()->showMessage(i18n("Generation: %1", cgen));
 
 }
 
 void MainWindow::colonyIsEmpty(void) {
-    ui->statusbar->showMessage(tr("Colony is empty"));
-}
 
-void MainWindow::fillDataFromSettings(void)  {
-
-    for (const QString &key: KGLGlobals::defs.keys()) {
-        m_data.insert(key, settings.value(key, KGLGlobals::defs[key]));
-    }
-
+    statusBar()->showMessage(i18n("Colony is empty"));
 }
 
 
-void MainWindow::closeEvent(QCloseEvent *event) {
-    gameField->cancelTimerInstantly();
-    writeSettingsDirect();
-    QWidget::closeEvent(event);
-}
-
-void MainWindow::writeSettingsDirect(void) {
-    for (const QString &key: m_data.keys()) {
-        settings.setValue(key, m_data.value(key));
-    }
-    settings.sync();
-
-}
-
-void MainWindow::settingChanged(const QString &setting, const QColor &color) {
-    m_data[setting] = QVariant(color);
-}
 
 void MainWindow::zoomInChanged(bool enable) {
-    ui->actionZoomIn->setEnabled(enable);
+
+    actionCollection()->action(QStringLiteral("view_zoom_in"))->setEnabled(enable);
 }
 
 void MainWindow::zoomOutChanged(bool enable) {
-    ui->actionZoomOut->setEnabled(enable);
+    actionCollection()->action(QStringLiteral("view_zoom_out"))->setEnabled(enable);
 }
 
 void MainWindow::restoreChanged(bool enable) {
-    ui->actionRestore->setEnabled(enable);
+    actionCollection()->action(QStringLiteral("view_actual_size"))->setEnabled(enable);
+}
+
+
+
+void MainWindow::setupToolbar() {
+    QAction *prefAction = KStandardAction::preferences(gameField, &KLGameField::setupGame, actionCollection());
+    prefAction->setWhatsThis(i18n("Open configuration dialog"));
+    QAction *actionOpen = KStandardAction::open(gameField, &KLGameField::openAction, actionCollection());
+    actionOpen->setWhatsThis(i18n("Load saved colony"));
+    QAction *actionSave = KStandardAction::save(gameField, &KLGameField::saveAction, actionCollection());
+    actionSave->setWhatsThis(i18n("Save current colony"));
+    
+    auto *wa = new QWidgetAction(this);
+    wa->setDefaultWidget(mySlider);
+
+    // Add actions for the timestep widget's functions
+    QAction *resWAction = actionCollection()->addAction(QStringLiteral("timestep_control"), wa);
+    resWAction->setText(i18n("Time step control"));
+
+    QAction *actionNewGame = actionCollection()->addAction(QStringLiteral("game_new"));
+    actionNewGame->setText(i18n("New Game"));
+    actionNewGame->setIcon(QIcon::fromTheme("document-new"));
+    actionCollection()->setDefaultShortcut(actionNewGame,  Qt::CTRL + Qt::Key_N);
+    connect(actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
+
+    QAction *actionNextStep = actionCollection()->addAction(QStringLiteral("game_next_step"));
+    actionNextStep->setText(i18n("Next Step"));
+    actionNextStep->setIcon(QIcon::fromTheme("media-skip-forward"));
+    actionCollection()->setDefaultShortcut(actionNextStep,  Qt::ALT + Qt::Key_N);
+    connect(actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
+
+
+    QAction *actionStartStop = actionCollection()->addAction(QStringLiteral("game_start_stop"));
+    actionStartStop->setText(i18n("Start/Stop Game"));
+    actionStartStop->setIcon(QIcon::fromTheme("media-playback-start-symbolic"));
+    actionCollection()->setDefaultShortcut(actionStartStop,  Qt::ALT + Qt::Key_S);
+    connect(actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
+
+
+    QAction *actionMove = actionCollection()->addAction(QStringLiteral("move_mode"));
+    actionMove->setText(i18n("Move"));
+    actionMove->setIcon(QIcon(":/images/move.png"));
+    actionMove->setCheckable(true);
+    actionMove->setChecked(false);
+    actionCollection()->setDefaultShortcut(actionMove,  Qt::ALT + Qt::Key_M);
+    connect(actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
+    connect(actionMove, &QAction::triggered, this, &MainWindow::changeMoveMode);
+
+    QAction *actionZoomIn = KStandardAction::zoomIn(gameField, &KLGameField::cZoomIn, actionCollection());
+    actionZoomIn->setWhatsThis(i18n("Zoom scale in. You can also use mouse wheel. &lt;br&gt; Dimmed on maximum zoom"));
+    QAction *actionZoomOut = KStandardAction::zoomOut(gameField, &KLGameField::cZoomOut, actionCollection());
+    actionZoomOut->setWhatsThis(i18n("Zoom scale out. You can also use mouse wheel.&lt;br&gt;  Dimmed on minimal zoom"));
+    actionZoomOut->setEnabled(false);
+
+    QAction *actZoom = KStandardAction::actualSize(gameField, &KLGameField::cRestore, actionCollection());
+    actZoom->setWhatsThis(i18n("Restore initial zoom.&lt;br&gt; Dimmed when the zoom is minimal"));
+    actZoom->setEnabled(false);
+
+    const QSize &wsize = QApplication::desktop()->size() * 0.9;
+    setupGUI(wsize);
+    setMinimumSize(wsize);
+
 }

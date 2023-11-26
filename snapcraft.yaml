@@ -33,18 +33,10 @@ parts:
       craftctl default
 
       # Point icon to the correct location
-      sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/kglife.desktop
+      sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/org.kde.kglife.desktop
     organize:
       64x64/kglife.png: kglife.png
-    stage: [kglife.png, kglife.desktop]
-  org-templates:
-    after: [org-desk]
-    plugin: dump
-    source: templates/
-    organize:
-      "*": usr/share/kglife/templates/
-    stage:
-      - usr/share/kglife/templates
+    stage: [kglife.png, org.kde.kglife.desktop]
   my-part:
     build-attributes:
       - enable-patchelf
@@ -53,6 +45,10 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DKDE_INSTALL_USE_QT_SYS_PATHS=false
+      - "-DENABLE_TESTING=OFF"
+      - "-DBUILD_TESTING=OFF"
+      - "-DKDE_SKIP_TEST_SETTINGS=ON"
     source: .
     build-packages:
       - gcc
@@ -60,8 +56,13 @@ parts:
       - qtbase5-dev
       - qttools5-dev
       - qttools5-dev-tools
-      - libkf5config-dev
+      - libkf5configwidgets-dev
+      - libkf5xmlgui-dev
+      - libkf5crash-dev
+      - libkf5doctools-dev
+      - libkf5i18n-dev
       - extra-cmake-modules
       - qtchooser
       - libx11-dev
+
 

@@ -15,7 +15,7 @@ class LoadGameException : public std::exception {
 public:
     LoadGameException(const std::string &message) : message_(message) {}
 
-    virtual const char* what() const throw() {
+    const char* what() const throw() override {
 
         return message_.c_str();
     }

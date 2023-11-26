@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.kglife.desktop</id>
+  <project_license>GPL-3.0+</project_license>
+  <name>kglife</name>
+
+  <name xml:lang="de">kglife</name>
+  <name xml:lang="en-GB">kglife</name>
+  <name xml:lang="ru">kglife</name>
+
+  <summary>Game Of Life</summary>
+  <summary xml:lang="de">Schlangespiel</summary>
+  <summary xml:lang="ru">Игра Змейка</summary>
+  <description>
+    <p>
+      Another Convey's Game Of Life realization. Save edit and modify your colonies. Use pre-installed templates
+    </p>
+
+    <p xml:lang="de">Die andere Lebenspiel von Convey.</p>
+    <p xml:lang="en-GB">Another Convey's Game Of Life realization. Save edit and modify your colonies. Use pre-installed templates</p>
+    <p xml:lang="ru">Еще одна реализация игры "Жизнь" Конвея. Создавайте, модифицируйте ваши колонии клеток и эксперементируйте с ними. Используйте готовые шаблоны</p>
+  </description>
+  <url type="homepage">https://apps.kde.org/kglife</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=kglife</url>
+  <url type="help">https://docs.kde.org/?application=kglife</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=kglife&amp;source=appdata</url>
+  <content_rating type="oars-1.1"/>
+
+  <project_group>KDE</project_group>
+  <launchable type="desktop-id">org.kde.kglife.desktop</launchable>
+  <provides>
+    <binary>kglife</binary>
+  </provides>
+  <releases>
+    <release version="1.0-3" date="2023-11-22"/>
+  </releases>
+</component>

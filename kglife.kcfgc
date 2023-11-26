@@ -1,0 +1,5 @@
+File=kglife.kcfg
+ClassName=Settings
+Mutators=true
+DefaultValueGetters=true
+Singleton=true

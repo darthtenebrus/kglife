@@ -7,16 +7,14 @@
 
 
 #include <QWidget>
-#include "configdialog.h"
 
 class KLGameField : public QWidget {
 Q_OBJECT
 public:
-    KLGameField(const QColor &cellsColor, const QColor &BackgroundColor,
-                const QColor &betweenColor,
-                int timerInterval, QWidget *parent = nullptr);
+    KLGameField(int, QWidget * = nullptr);
     ~KLGameField() override;
     void cancelTimerInstantly(void);
+
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -53,7 +51,6 @@ private:
     [[nodiscard]]
     QSize getStandardFieldDefs(int &, int &) const;
 
-    void applySetup(ConfigDialog *, bool);
 
     int m_TimerInterval;
     int m_Generation = 0;
@@ -80,9 +77,6 @@ private:
     bool m_LeftbPressed = false;
     bool m_MoveMode = false;
 
-    QColor m_ColorCells;
-    QColor m_ColorBackground;
-    QColor m_colorBetween;
 
 public slots:
     void newAction(bool);
@@ -98,7 +92,7 @@ public slots:
     void cZoomIn(bool);
     void cZoomOut(bool);
     void cRestore(bool);
-    void cdApply(bool);
+    void cdApply(const QString &);
 
 private slots:
     void nextGeneration(void);
@@ -107,12 +101,10 @@ signals:
     void changeControls(bool);
     void changeGeneration(int);
     void emptyColony(void);
-    void changeSetting(const QString &, const QColor &);
 
     void changeZoomIn(bool);
     void changeZoomOut(bool);
     void changeRestore(bool);
-    void settingsApplied(void);
 
 };
 

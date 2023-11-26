@@ -9,12 +9,14 @@
 #include <QMouseEvent>
 #include <QTimer>
 #include <QFileDialog>
-#include <QMessageBox>
+#include <KMessageBox>
 #include <QTextStream>
-#include <QDialogButtonBox>
-#include <QPushButton>
+#include <KLocalizedString>
+#include <KConfigDialog>
 #include "LoadGameException.h"
-#include "configdialog.h"
+#include "kglife.h"
+#include "generalpage.h"
+#include "patternspage.h"
 
 
 #define FIELD_OFFSET 1
@@ -23,12 +25,7 @@
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
 
-KLGameField::KLGameField(const QColor &cellsColor, const QColor &backgroundColor,
-                         const QColor &betweenColor,
-                         int timerInterval, QWidget *parent) : QWidget(parent),
-                                                               m_ColorCells(cellsColor),
-                                                               m_ColorBackground(backgroundColor),
-                                                               m_colorBetween(betweenColor),
+KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
                                                                evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
@@ -76,7 +73,7 @@ void KLGameField::wheelEvent(QWheelEvent *event) {
 
 }
 
-void KLGameField::paintEvent(QPaintEvent *e) {
+void KLGameField::paintEvent(QPaintEvent *) {
     actualDoRePaint();
 }
 
@@ -86,7 +83,7 @@ void KLGameField::actualDoRePaint() {
     int h = height();
     int w = width();
     const QSize &fd = getStandardFieldDefs(w, h);
-    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.width(), fd.height(), m_colorBetween);
+    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.width(), fd.height(), Settings::bordercolor());
 
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
@@ -94,8 +91,7 @@ void KLGameField::actualDoRePaint() {
         for (int x = 0; x < m_ScrCellsX; ++x) {
             QBrush color;
 
-            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(m_ColorCells) : QBrush(
-                    m_ColorBackground);
+            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(Settings::cellcolor()) : Settings::backcolor();
             painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
                                    m_cellSize, m_cellSize), color);
 
@@ -405,8 +401,8 @@ void KLGameField::newAction(bool) {
 
 void KLGameField::openAction(bool) {
     cancelTimerInstantly();
-    const QString &path = QFileDialog::getOpenFileName(this, tr("Load colony from file"),
-                                                       QDir::homePath(), tr("This application (*.kgol)"));
+    const QString &path = QFileDialog::getOpenFileName(this, i18n("Load colony from file"),
+                                                       QDir::homePath(), i18n("This application (*.kgol)"));
 
     if ("" == path) {
         return;
@@ -418,8 +414,8 @@ void KLGameField::openAction(bool) {
 
 void KLGameField::saveAction(bool) {
     cancelTimerInstantly();
-    const QString &path = QFileDialog::getSaveFileName(this, tr("Save colony current state"),
-                                                       QDir::homePath(), tr("This application (*.kgol)"));
+    const QString &path = QFileDialog::getSaveFileName(this, i18n("Save colony current state"),
+                                                       QDir::homePath(), i18n("This application (*.kgol)"));
 
     if ("" == path) {
         return;
@@ -429,7 +425,7 @@ void KLGameField::saveAction(bool) {
     try {
         QFile file(path);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
-            throw LoadGameException(tr("Open file failed").toStdString());
+            throw LoadGameException(i18n("Open file failed").toStdString());
         }
         QTextStream out(&file);
 
@@ -444,7 +440,7 @@ void KLGameField::saveAction(bool) {
 
         file.close();
     } catch (const LoadGameException &ex) {
-        QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
     }
 }
 
@@ -453,8 +449,8 @@ void KLGameField::changeMoveMode(bool mMode) {
     cancelTimerInstantly();
     m_MoveMode = mMode;
     setStatusTip(!m_MoveMode ?
-                 tr("Set or erase a single cell by double click or drag a line with left button pressed") :
-                 tr("Drag the mouse to move field"));
+                 i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
+                 i18n("Drag the mouse to move field"));
 }
 
 int KLGameField::sgn(int val) {
@@ -520,27 +516,31 @@ void KLGameField::cRestore(bool) {
 void KLGameField::setupGame() {
 
     cancelTimerInstantly();
-    std::unique_ptr<ConfigDialog> cDialog = std::make_unique<ConfigDialog>(m_ColorBackground,
-                                                                           m_ColorCells, m_colorBetween, this);
-    cDialog->setModal(true);
-    int res = cDialog->exec();
-    if (res == QDialog::Accepted) {
-        applySetup(cDialog.get(), true);
-
+    auto *dialog = KConfigDialog::exists(QStringLiteral("Settings"));
+    if (!dialog) {
+        dialog = new KConfigDialog(this, QStringLiteral("Settings"), Settings::self());
+        dialog->setFaceType(KPageDialog::List);
+        dialog->addPage(new GeneralPage(this), i18n("General"), "preferences-system", i18n("General"));
+        dialog->addPage(new PatternsPage(Settings::self(), this), i18n("Patterns"), "template", i18n("Patterns"));
+        dialog->setModal(true);
+        connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }
+    dialog->show();
+
+
 }
 
 void KLGameField::tryLoadFromFile(const QString &path) {
     try {
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            throw LoadGameException(tr("Open file failed").toStdString());
+            throw LoadGameException(i18n("Open file failed").toStdString());
         }
 
         const QByteArray &header = file.read(8);
         const QString &strhead = QString::fromLatin1(header);
         if (strhead != "KGOL_SIG") {
-            throw LoadGameException(tr("Invalid file format").toStdString());
+            throw LoadGameException(i18n("Invalid file format").toStdString());
         }
 
 
@@ -552,7 +552,7 @@ void KLGameField::tryLoadFromFile(const QString &path) {
         const QString &strContent = QString::fromLatin1(content);
         const QStringList &coords = strContent.split("CX");
         if (coords.empty()) {
-            throw LoadGameException(tr("Invalid file format").toStdString());
+            throw LoadGameException(i18n("Invalid file format").toStdString());
         }
 
         m_MainLayer = initLayer(m_MainLayer);
@@ -562,7 +562,7 @@ void KLGameField::tryLoadFromFile(const QString &path) {
             if (item.isEmpty()) {
                 continue;
             } else if (!item.contains('Y')) {
-                throw LoadGameException(tr("Invalid file format").toStdString());
+                throw LoadGameException(i18n("Invalid file format").toStdString());
             }
 
             const QStringList &pairXY = item.split('Y');
@@ -574,7 +574,7 @@ void KLGameField::tryLoadFromFile(const QString &path) {
             }
 
             if (!ready) {
-                throw LoadGameException(tr("Invalid file format").toStdString());
+                throw LoadGameException(i18n("Invalid file format").toStdString());
             }
 
             if (resX < 0 || resX >= m_cellsX || resY < 0 || resY >= m_cellsY) {
@@ -586,46 +586,26 @@ void KLGameField::tryLoadFromFile(const QString &path) {
         }
     } catch (const LoadGameException &ex) {
 
-        QMessageBox::critical(this, tr("Error"), QString::fromStdString(ex.what()));
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
     }
 }
 
-void KLGameField::cdApply(bool b) {
+void KLGameField::cdApply(const QString &) {
 
-    auto *btn = dynamic_cast<QPushButton *>(sender());
-    auto *cd = dynamic_cast<ConfigDialog *>(btn->parent()->parent());
-    applySetup(cd, false);
-    emit settingsApplied();
-    repaint();
-}
-
-void KLGameField::applySetup(ConfigDialog *cDialog, bool confirm) {
-    m_ColorCells = cDialog->getMCellColor();
-    m_ColorBackground = cDialog->getMBackColor();
-    m_colorBetween = cDialog->getMBetweenColor();
-    emit changeSetting("cellsColor", m_ColorCells);
-    emit changeSetting("backColor", m_ColorBackground);
-    emit changeSetting("borderColor", m_colorBetween);
-
-    const QString &tPath = cDialog->getTemplatePath();
+    const QString &tPath = Settings::templatefile();
     if (!tPath.isEmpty()) {
-        if (confirm) {
-            QMessageBox::StandardButton button = QMessageBox::warning(this, tr("Info"),
-                                                                      tr("Do you really want to load "
-                                                                         "colony from the selected template?"),
-                                                                      QMessageBox::StandardButtons(
-                                                                              QMessageBox::Yes | QMessageBox::No));
+        KMessageBox::ButtonCode button = KMessageBox::questionYesNo(this,
+                                                                    i18n("Do you really want to load "
+                                                                         "colony from the selected template?"), i18n("Info"));
 
-            if (button == QMessageBox::Yes) {
-                tryLoadFromFile(tPath);
-                restoreScreen();
-            }
-        } else {
+        if (button == KMessageBox::ButtonCode::Yes) {
             tryLoadFromFile(tPath);
             restoreScreen();
         }
     }
 }
+
+
 
 
 

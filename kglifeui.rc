@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gui name="kglife"
+     version="1"
+     xmlns="http://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
+                         http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd">
+
+    <MenuBar>
+        <Menu name="game">
+            <text>&amp;Game</text>
+            <Action name="game_new" />
+            <Separator />
+            <Action name="game_start_stop"/>
+            <Action name="game_next_step"/>
+            <Separator />
+            <Action name="move_mode" />
+        </Menu>
+    </MenuBar>
+
+    <ToolBar name="mainToolBar" noMerge="1" iconText="icononly">
+        <text>Main Toolbar</text>
+        <Action name="game_new" />
+        <Action name="file_open" />
+        <Action name="file_save" />
+        <Separator />
+        <Action name="game_start_stop"/>
+        <Action name="game_next_step"/>
+        <Separator />
+        <Action name="move_mode" />
+        <Action name="view_actual_size" />
+        <Separator />
+        <Action name="view_zoom_in" />
+        <Action name="view_zoom_out" />
+        <Action name="options_configure"/>
+        <Separator />
+        <Action name="timestep_control" />
+    </ToolBar>
+
+    <State name="gameplay_state">
+        <enable>
+            <Action name="game_start_stop"/>
+        </enable>
+        <disable>
+            <Action name="game_new" />
+            <Action name="file_open" />
+            <Action name="file_save" />
+            <Action name="game_next_step"/>
+            <Action name="move_mode" />
+            <Action name="options_configure"/>
+        </disable>
+    </State>
+    <State name="move_mode_state">
+        <disable>
+            <Action name="game_new" />
+            <Action name="game_start_stop"/>
+            <Action name="file_open" />
+            <Action name="file_save" />
+            <Action name="game_next_step"/>
+            <Action name="options_configure"/>
+        </disable>
+    </State>
+    <State name="paused_state">
+        <enable>
+            <Action name="game_start_stop"/>
+            <Action name="game_new" />
+            <Action name="file_open" />
+            <Action name="file_save" />
+            <Action name="game_next_step"/>
+            <Action name="move_mode" />
+            <Action name="options_configure"/>
+        </enable>
+    </State>
+
+</gui>
