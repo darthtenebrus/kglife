@@ -18,7 +18,7 @@
     <widget class="QListWidget" name="patternsList"/>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="patternGroupBox">
      <property name="title">
       <string>Pattern Details</string>
      </property>

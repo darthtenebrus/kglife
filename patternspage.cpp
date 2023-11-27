@@ -35,10 +35,6 @@ void PatternsPage::fillPatternList() {
 
     auto *firstItem = new QListWidgetItem();
     firstItem->setData(Qt::DisplayRole, i18n("<Not selected>"));
-    firstItem->setData(Qt::UserRole, "");
-    firstItem->setData(Qt::UserRole + 100, "");
-    firstItem->setData(Qt::UserRole + 101, "");
-    firstItem->setData(Qt::UserRole + 102, "");
     patternsList->addItem(firstItem);
 
     const QStringList &fnlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates",
@@ -75,9 +71,14 @@ void PatternsPage::fillPatternList() {
 void PatternsPage::patternChanged(int cRow) {
     QListWidgetItem *item = patternsList->item(cRow);
 
-    descData->setText(item->data(Qt::UserRole + 100).value<QString>());
-    authorData->setText(item->data(Qt::UserRole + 101).value<QString>());
-    emailData->setText(item->data(Qt::UserRole + 102).value<QString>());
+    if (!cRow) {
+        patternGroupBox->hide();
+    } else {
+        patternGroupBox->show();
+        descData->setText(item->data(Qt::UserRole + 100).value<QString>());
+        authorData->setText(item->data(Qt::UserRole + 101).value<QString>());
+        emailData->setText(item->data(Qt::UserRole + 102).value<QString>());
+    }
     kcfg_templatefile->setText(item->data(Qt::UserRole).value<QString>());
 }
 
