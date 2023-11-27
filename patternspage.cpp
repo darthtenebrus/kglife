@@ -33,13 +33,13 @@ void PatternsPage::fillPatternList() {
 
     patternsList->clear();
 
-    auto *item = new QListWidgetItem();
-    item->setData(Qt::DisplayRole, i18n("<Not selected>"));
-    item->setData(Qt::UserRole, "");
-    item->setData(Qt::UserRole + 100, "");
-    item->setData(Qt::UserRole + 101, "");
-    item->setData(Qt::UserRole + 102, "");
-    patternsList->addItem(item);
+    auto *firstItem = new QListWidgetItem();
+    firstItem->setData(Qt::DisplayRole, i18n("<Not selected>"));
+    firstItem->setData(Qt::UserRole, "");
+    firstItem->setData(Qt::UserRole + 100, "");
+    firstItem->setData(Qt::UserRole + 101, "");
+    firstItem->setData(Qt::UserRole + 102, "");
+    patternsList->addItem(firstItem);
 
     const QStringList &fnlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates",
                                                           QStandardPaths::LocateDirectory);
