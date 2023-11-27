@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-27 14:19+0300\n"
+"PO-Revision-Date: 2023-11-27 19:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -230,48 +230,48 @@ msgstr "Erstellt von: "
 #: main.cpp:30
 #, kde-format
 msgid "Usage %1 [options]"
-msgstr ""
+msgstr "Benutzen: %1 [Argumente]"
 
 #: main.cpp:31
 #, kde-format
 msgid "Valid options:"
-msgstr ""
+msgstr "Gültige Argumenten:"
 
 #: main.cpp:32
 #, kde-format
 msgid "show this help"
-msgstr ""
+msgstr "Diese Hilfe anzeigen"
 
 #: main.cpp:33
 #, kde-format
 msgid "display version"
-msgstr ""
+msgstr "Die Version anzeigen"
 
 #: main.cpp:38
 #, kde-format
 msgid "Unknown option %1"
-msgstr ""
+msgstr "Unbekannte Argument %1"
 
 #: main.cpp:39
 #, kde-format
 msgid "Launch %1 -h or %1 --help for help"
-msgstr ""
+msgstr "Starten %1 -h oder %1 --help ,um Hilfe zu erhalten"
 
 #: main.cpp:42
 #, kde-format
 msgid ""
 "Launch this application without any parameters to see its main functional"
-msgstr ""
+msgstr "Starten die App ohne Argumente, um die Hauptfunktion zu sehen"
 
 #: main.cpp:74
 #, kde-format
 msgid "Application Already Running"
-msgstr ""
+msgstr "Schon eingelauft"
 
 #: main.cpp:74
 #, kde-format
 msgid "Already Running"
-msgstr ""
+msgstr "Die Anwendung ist schon eingelauft<"
 
 #: main.cpp:79
 #, kde-format
@@ -291,72 +291,72 @@ msgstr ""
 #: main.cpp:86
 #, kde-format
 msgid "Original author"
-msgstr ""
+msgstr "Hauptautor"
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Start evolution"
-msgstr ""
+msgstr "Symbolleiste anzeigen"
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Stop evolution"
-msgstr ""
+msgstr "Statusleiste anzeigen"
 
 #: mainwindow.cpp:61
 #, kde-format
 msgid "Generation: %1"
-msgstr ""
+msgstr "Generation: %1"
 
 #: mainwindow.cpp:67
 #, kde-format
 msgid "Colony is empty"
-msgstr ""
+msgstr "Leerkolonie"
 
 #: mainwindow.cpp:89
 #, kde-format
 msgid "Open configuration dialog"
-msgstr ""
+msgstr "Einrichtungsfenster aufmachen"
 
 #: mainwindow.cpp:91
 #, kde-format
 msgid "Load saved colony"
-msgstr ""
+msgstr "Die gesparte Kolonie einladen"
 
 #: mainwindow.cpp:93
 #, kde-format
 msgid "Save current colony"
-msgstr ""
+msgstr "Den Koloniezustand zur Datei sparen"
 
 #: mainwindow.cpp:100
 #, kde-format
 msgid "Time step control"
-msgstr ""
+msgstr "Geschwindigkeitsregler"
 
 #: mainwindow.cpp:103
 #, kde-format
 msgid "New &Game"
-msgstr ""
+msgstr "Neues &Spiel"
 
 #: mainwindow.cpp:105
 #, kde-format
 msgid "Clear the field and stop evolution"
-msgstr ""
+msgstr "Aufklaren das Spielfeld und die Evolution stoppen"
 
 #: mainwindow.cpp:110
 #, kde-format
 msgid "&Next Step"
-msgstr ""
+msgstr "&Nächster Schritt"
 
 #: mainwindow.cpp:112
 #, kde-format
 msgid "Next single evolution step"
-msgstr ""
+msgstr "Nächster Evolutionsschritt"
 
 #: mainwindow.cpp:117
 #, kde-format
 msgid "&Start/Stop Game"
-msgstr ""
+msgstr "Start/Stop die Evolution"
 
 #: mainwindow.cpp:119
 #, kde-format
@@ -364,6 +364,8 @@ msgid ""
 "Start or stop continuous evolution.<br> The icon changes to match the "
 "current mode"
 msgstr ""
+"Kontinuierliche Weiterentwicklung starten oder stoppen.<br> Das Symbol "
+"ändert sich entsprechend dem aktuellen Modus"
 
 #: mainwindow.cpp:125
 #, kde-format
