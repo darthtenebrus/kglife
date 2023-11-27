@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-27 19:08+0300\n"
+"PO-Revision-Date: 2023-11-27 19:36+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -36,7 +36,7 @@ msgstr "AllgemeineSeite"
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:135
 #, kde-format
 msgid "Borders And Cells"
-msgstr "Kanten und Zellen"
+msgstr "Trennstreifen und Zellen"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:136
 #, kde-format
@@ -51,7 +51,7 @@ msgstr "Rückfarbe"
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:138
 #, kde-format
 msgid "Cells Border Color"
-msgstr "Zellenkantefarbe"
+msgstr "Zellentrennstreifenfarbe"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:139
 #, kde-format

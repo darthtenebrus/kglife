@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-27 12:24+0300\n"
+"PO-Revision-Date: 2023-11-27 19:38+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -39,7 +39,7 @@ msgstr "Общая Страница"
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:135
 #, kde-format
 msgid "Borders And Cells"
-msgstr "Границы и цвета"
+msgstr "Разделители ячеек и клетки"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:136
 #, kde-format
@@ -54,7 +54,7 @@ msgstr "Цвет фона"
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:138
 #, kde-format
 msgid "Cells Border Color"
-msgstr "Цвет границы ячейки"
+msgstr "Цвет разделителя ячеек"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:139
 #, kde-format
@@ -97,8 +97,8 @@ msgid ""
 "The field is surrounded by a neutral wall. No cells are born there and it is "
 "not taken into the account as a neighbour"
 msgstr ""
-"Поле окружено нейтральной стеной. За ней ничего не рождается, а ее эленменты "
-"стена не участвуют в подсчете соседей"
+"Поле окружено нейтральной стеной. За ней ничего не рождается, а ее элементы "
+"не участвуют в подсчете соседей"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:158
 #, kde-format
