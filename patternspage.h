@@ -7,6 +7,7 @@
 
 #include <QListWidget>
 #include <KConfigSkeleton>
+#include <KConfigDialog>
 #include "ui_patternspage.h"
 
 
@@ -18,14 +19,18 @@ class PatternsPage : public QWidget, public Ui::PatternsPage {
 Q_OBJECT
 
 public:
-    explicit PatternsPage(KConfigSkeleton * config, QWidget *parent = nullptr);
+    explicit PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *config, QWidget *parent = nullptr);
 
 private:
+    KConfigSkeleton *mConfig;
+
     void fillPatternList();
-    void setupData(KConfigSkeleton *pSkeleton);
+    void setupData();
+    void cleanup();
 
 private slots:
     void patternChanged(int);
+    void restoreSettingsClicked(bool);
 
 };
 

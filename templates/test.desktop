@@ -11,5 +11,7 @@ Description[es]=Una prueba simple
 Description[ru]=Простой тест
 VersionFormat=1
 Author=Eugene E. Sorochinskiy
+Author[ru]=Евгений Сорочинский
+Author[de]=Eugen Soroschinskii
 AuthorEmail=webmaster@darkguard.net
 FileName=test.kgol

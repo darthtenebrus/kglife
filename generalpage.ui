@@ -91,6 +91,12 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QRadioButton" name="kcfg_spheric">
+        <property name="toolTip">
+         <string>Field is spheric</string>
+        </property>
+        <property name="whatsThis">
+         <string>The field is considered to be a sphere. The cell on the edge has its neighbours at the opposite side</string>
+        </property>
         <property name="text">
          <string>Spheric</string>
         </property>
@@ -104,8 +110,14 @@
       </item>
       <item>
        <widget class="QRadioButton" name="kcfg_walled">
+        <property name="toolTip">
+         <string>Neutral Wall</string>
+        </property>
+        <property name="whatsThis">
+         <string>The field is surrounded by a neutral wall. No cells are born there and it is not taken into the account as a neighbour</string>
+        </property>
         <property name="text">
-         <string>Wall-edged</string>
+         <string>Neutral Wall</string>
         </property>
         <property name="shortcut">
          <string>Alt+W</string>

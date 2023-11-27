@@ -11,5 +11,7 @@ Description[es]=un montón de oscillatores
 Description[ru]=Различные осцилляторы
 VersionFormat=1
 Author=Eugene E. Sorochinskiy
+Author[ru]=Евгений Сорочинский
+Author[de]=Eugen Soroschinskii
 AuthorEmail=webmaster@darkguard.net
 FileName=oscillators.kgol

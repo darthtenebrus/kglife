@@ -11,15 +11,20 @@
 #include "patternspage.h"
 #ifdef _DEBUG
 #include <QDebug>
+#include <QPushButton>
+#include <KConfigDialog>
+
 #endif
 
 
-PatternsPage::PatternsPage(KConfigSkeleton * config, QWidget *parent) :
+PatternsPage::PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *cdialog, QWidget *parent) :
         QWidget(parent), Ui::PatternsPage() {
+    mConfig = pSkeleton;
     setupUi(this);
     connect(patternsList, &QListWidget::currentRowChanged, this, &PatternsPage::patternChanged);
+    connect(cdialog->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &PatternsPage::restoreSettingsClicked);
     fillPatternList();
-    setupData(config);
+    setupData();
 
 }
 
@@ -76,12 +81,12 @@ void PatternsPage::patternChanged(int cRow) {
     kcfg_templatefile->setText(item->data(Qt::UserRole).value<QString>());
 }
 
-void PatternsPage::setupData(KConfigSkeleton *pSkeleton) {
+void PatternsPage::setupData() {
 
     kcfg_templatefile->hide();
     if (patternsList->count() > 1) {
 
-        KConfig * config = pSkeleton->config();
+        KConfig * config = mConfig->config();
         KConfigGroup group = config->group(QStringLiteral("General"));
         QString initialGroup = group.readEntry("templatefile");
 
@@ -95,10 +100,13 @@ void PatternsPage::setupData(KConfigSkeleton *pSkeleton) {
         }
 
     }
-    descData->clear();
-    authorData->clear();
-    emailData->clear();
+    cleanup();
+}
+
+void PatternsPage::restoreSettingsClicked(bool) {
+    cleanup();
+}
+
+void PatternsPage::cleanup() {
     patternsList->setCurrentRow(0);
-
-
 }

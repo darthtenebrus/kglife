@@ -11,5 +11,7 @@ Description[es]=Una de las pistolas de las planeadoras
 Description[ru]=Один из вариантов глайдерного ружья
 VersionFormat=1
 Author=Eugene E. Sorochinskiy
+Author[ru]=Евгений Сорочинский
+Author[de]=Eugen Soroschinskii
 AuthorEmail=webmaster@darkguard.net
 FileName=glider_gun.kgol

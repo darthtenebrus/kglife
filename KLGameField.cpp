@@ -541,7 +541,7 @@ void KLGameField::setupGame() {
         dialog = new KConfigDialog(this, QStringLiteral("Settings"), Settings::self());
         dialog->setFaceType(KPageDialog::List);
         dialog->addPage(new GeneralPage(this), i18n("General"), "preferences-system", i18n("General"));
-        dialog->addPage(new PatternsPage(Settings::self(), this), i18n("Patterns"), "template", i18n("Patterns"));
+        dialog->addPage(new PatternsPage(Settings::self(), dialog, this), i18n("Patterns"), "template", i18n("Patterns"));
         dialog->setModal(true);
         connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }
