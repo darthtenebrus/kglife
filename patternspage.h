@@ -22,10 +22,9 @@ public:
     explicit PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *config, QWidget *parent = nullptr);
 
 private:
-    KConfigSkeleton *mConfig;
 
     void fillPatternList();
-    void setupData();
+    void setupData(KConfigSkeleton *pSkeleton);
     void cleanup();
 
 private slots:

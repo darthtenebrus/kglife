@@ -19,12 +19,12 @@
 
 PatternsPage::PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *cdialog, QWidget *parent) :
         QWidget(parent), Ui::PatternsPage() {
-    mConfig = pSkeleton;
     setupUi(this);
     connect(patternsList, &QListWidget::currentRowChanged, this, &PatternsPage::patternChanged);
-    connect(cdialog->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &PatternsPage::restoreSettingsClicked);
+    connect(cdialog->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this,
+            &PatternsPage::restoreSettingsClicked);
     fillPatternList();
-    setupData();
+    setupData(pSkeleton);
 
 }
 
@@ -81,21 +81,23 @@ void PatternsPage::patternChanged(int cRow) {
     kcfg_templatefile->setText(item->data(Qt::UserRole).value<QString>());
 }
 
-void PatternsPage::setupData() {
+void PatternsPage::setupData(KConfigSkeleton *pSkeleton) {
 
     kcfg_templatefile->hide();
     if (patternsList->count() > 1) {
 
-        KConfig * config = mConfig->config();
+        KConfig * config = pSkeleton->config();
         KConfigGroup group = config->group(QStringLiteral("General"));
         QString initialGroup = group.readEntry("templatefile");
 
-        for (int i = 0; i <  patternsList->count(); i++) {
-            QListWidgetItem *item = patternsList->item(i);
-            const QString &cPath = item->data(Qt::UserRole).value<QString>();
-            if (cPath == initialGroup) {
-                patternsList->setCurrentRow(i);
-                return;
+        if (!initialGroup.isEmpty()) {
+            for (int i = 0; i < patternsList->count(); i++) {
+                QListWidgetItem *item = patternsList->item(i);
+                const QString &cPath = item->data(Qt::UserRole).value<QString>();
+                if (cPath == initialGroup) {
+                    patternsList->setCurrentRow(i);
+                    return;
+                }
             }
         }
 
