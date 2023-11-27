@@ -146,6 +146,11 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
 }
 
+void KLGameField::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    cdApply(nullptr);
+}
+
 uchar *KLGameField::initLayer(uchar *layer) {
     if (nullptr != layer) {
         delete layer;
@@ -607,18 +612,16 @@ void KLGameField::tryLoadFromFile(const QString &path) {
 
 void KLGameField::cdApply(const QString &) {
 
+    static QString sPath = "";
     const QString &tPath = Settings::templatefile();
-    if (!tPath.isEmpty()) {
-        KMessageBox::ButtonCode button = KMessageBox::questionYesNo(this,
-                                                                    i18n("Do you really want to load "
-                                                                         "colony from the selected template?"), i18n("Info"));
-
-        if (button == KMessageBox::ButtonCode::Yes) {
-            tryLoadFromFile(tPath);
-            restoreScreen();
-        }
+    if (!tPath.isEmpty() && tPath != sPath) {
+        sPath = tPath;
+        tryLoadFromFile(tPath);
+        restoreScreen();
     }
 }
+
+
 
 
 

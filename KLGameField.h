@@ -19,6 +19,7 @@ public:
 protected:
     void paintEvent(QPaintEvent *e) override;
     void resizeEvent(QResizeEvent *event) override;
+    void showEvent(QShowEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -105,7 +106,6 @@ signals:
     void changeZoomIn(bool);
     void changeZoomOut(bool);
     void changeRestore(bool);
-
 };
 
 

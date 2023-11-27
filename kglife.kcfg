@@ -12,7 +12,7 @@
       </entry>
       <entry name="cellcolor" type="Color">
          <label>Cell Color</label>
-         <default>#00FF55</default>
+         <default>##0BD06E</default>
       </entry>
       <entry name="templatefile" type="String">
          <label>Template Path</label>
