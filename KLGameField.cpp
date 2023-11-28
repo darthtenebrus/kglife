@@ -434,15 +434,6 @@ QString KLGameField::forceFileNameDialog() {
     return path;
 }
 
-QString &KLGameField::askForFileName() {
-    if (CurrentFilePath.isEmpty()) {
-        const QString &path = forceFileNameDialog();
-        CurrentFilePath = path;
-
-    }
-    return CurrentFilePath;
-}
-
 
 void KLGameField::saveAsAction(bool) {
     cancelTimerInstantly();
@@ -457,13 +448,12 @@ void KLGameField::saveAsAction(bool) {
 
 void KLGameField::saveAction(bool) {
     cancelTimerInstantly();
-    const QString &path = askForFileName();
+    if (CurrentFilePath.isEmpty()) {
+        const QString &path = forceFileNameDialog();
+        CurrentFilePath = path;
 
-    if (path.isEmpty()) {
-        return;
     }
-
-    trySaveToFile(path);
+    trySaveToFile(CurrentFilePath);
 
 }
 

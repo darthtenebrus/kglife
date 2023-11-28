@@ -46,7 +46,6 @@ private:
 
     void tryLoadFromFile(const QString &);
     void trySaveToFile(const QString &);
-    QString &askForFileName();
     QString forceFileNameDialog();
 
 
