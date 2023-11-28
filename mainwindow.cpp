@@ -147,3 +147,12 @@ void MainWindow::setupToolbar() {
     setMinimumSize(wsize);
 
 }
+
+void MainWindow::changeEvent(QEvent *event) {
+    if (event->type() == QEvent::WindowStateChange) {
+        if (windowState() & Qt::WindowMinimized) {
+            gameField->cancelTimerInstantly();
+        }
+    }
+    QWidget::changeEvent(event);
+}

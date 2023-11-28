@@ -10,7 +10,7 @@
 #include <KAboutData>
 #include <KMessageBox>
 #include "mainwindow.h"
-#include "version.h"
+#include "kglife_version.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
                 std::cout << "-v, -V, --version\t" << i18n("display version").toStdString() << "\n\n";
 
             } else if (optVal.toLower() == "-v" || optVal == "--version") {
-                std::cout << progName.toStdString() << " v." << APP_VERSION << "\n\n";
+                std::cout << progName.toStdString() << " v." << KGLIFE_VERSION_STRING << "\n\n";
             } else {
                 std::cout << i18n("Unknown option %1", cmd_args.value(1)).toStdString() << "\n";
                 std::cout << i18n("Launch %1 -h or %1 --help for help", progName).toStdString() << "\n\n";
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     }
 
     KAboutData aboutData(QStringLiteral("kglife"),
-                         i18n("Game Of Life"), APP_VERSION,
+                         i18n("Game Of Life"), KGLIFE_VERSION_STRING,
                          i18n("Convey's Game Of Life for KDE"),
                          KAboutLicense::GPL_V3, "2023 E.Sorochinskiy",
                          i18n("Construct and experement with many cell colonies"),

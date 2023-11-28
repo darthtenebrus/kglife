@@ -20,6 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+protected:
+    void changeEvent(QEvent *event) override;
+
 
 private:
     MySlider *mySlider;

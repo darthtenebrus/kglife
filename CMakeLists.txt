@@ -1,14 +1,20 @@
 cmake_minimum_required(VERSION 3.22)
-project(kglife)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(SOURCE_TEMPLATES templates)
+
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-set(SOURCE_TEMPLATES templates)
+include(ECMSetupVersion)
+set(KGLIFE_VERSION "1.0.5")
+ecm_setup_version(${KGLIFE_VERSION}
+        VARIABLE_PREFIX KGLIFE
+        VERSION_HEADER kglife_version.h)
+project(kglife VERSION ${KGLIFE_VERSION})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
