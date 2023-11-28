@@ -208,7 +208,7 @@ void KLGameField::recalculate(void) {
 }
 
 int KLGameField::calculateNeighbors(int x, int y) {
-    bool isFieldSpheric = Settings::spheric();
+    bool isFieldToroidal = Settings::toroidal();
     bool isFieldWalled = Settings::walled();
     int locNeighbors = 0;
     for (int dy = -1; dy <= 1; ++dy) {
@@ -221,7 +221,7 @@ int KLGameField::calculateNeighbors(int x, int y) {
             int newY = y + dy;
             int newX = x + dx;
 
-            if (isFieldSpheric) {
+            if (isFieldToroidal) {
                 if (newY < 0) {
                     newY = m_cellsY - 1;
                 }

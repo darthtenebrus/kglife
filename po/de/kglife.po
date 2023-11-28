@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-28 12:56+0300\n"
+"POT-Creation-Date: 2023-11-28 18:30+0300\n"
+"PO-Revision-Date: 2023-11-28 18:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -60,22 +60,22 @@ msgstr "Feldränder"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:141
 #, kde-format
-msgid "Field is spheric"
-msgstr "Das Feld ist sphärisch"
+msgid "Field is toroidal"
+msgstr "Das Feld ist toroidisch"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:144
 #, kde-format
 msgid ""
-"The field is considered to be a sphere. The cell on the edge has its "
+"The field is considered to be a toroid. The cell on the edge has its "
 "neighbours at the opposite side"
 msgstr ""
-"Das Feld wird als Kugel betrachtet. Die Zelle am Rand hat ihre Nachbarn auf "
+"Das Feld wird als Toroid betrachtet. Die Zelle am Rand hat ihre Nachbarn auf "
 "der gegenüberliegenden Seite"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:146
 #, kde-format
-msgid "Spheric"
-msgstr "Sphärisch"
+msgid "Toroidal"
+msgstr "Toroidisch"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:148
 #, kde-format
@@ -414,7 +414,11 @@ msgstr ""
 "Veränderen Sie die Geburstgeschwindigkeit sogar wenn die Evolution "
 "progreßiert"
 
-#: patternspage.cpp:37
+#: patternspage.cpp:33
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Keine Auswahl>"
+
+#, kde-format
+#~ msgid "Spheric"
+#~ msgstr "Sphärisch"

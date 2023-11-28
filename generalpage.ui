@@ -92,13 +92,13 @@
       <item>
        <widget class="QRadioButton" name="kcfg_spheric">
         <property name="toolTip">
-         <string>Field is spheric</string>
+         <string>Field is toroidal</string>
         </property>
         <property name="whatsThis">
-         <string>The field is considered to be a sphere. The cell on the edge has its neighbours at the opposite side</string>
+         <string>The field is considered to be a toroid. The cell on the edge has its neighbours at the opposite side</string>
         </property>
         <property name="text">
-         <string>Spheric</string>
+         <string>Toroidal</string>
         </property>
         <property name="shortcut">
          <string>Alt+S</string>

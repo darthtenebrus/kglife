@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-27 19:38+0300\n"
+"POT-Creation-Date: 2023-11-28 18:30+0300\n"
+"PO-Revision-Date: 2023-11-28 18:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -63,22 +63,25 @@ msgstr "Тип границы поля"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:141
 #, kde-format
-msgid "Field is spheric"
-msgstr "Поле сферично"
+msgid "Field is toroidal"
+msgstr "Поле тороидально"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:144
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The field is considered to be a sphere. The cell on the edge has its "
+#| "neighbours at the opposite side"
 msgid ""
-"The field is considered to be a sphere. The cell on the edge has its "
+"The field is considered to be a toroid. The cell on the edge has its "
 "neighbours at the opposite side"
 msgstr ""
-"Поле представляет из себя сферу. Соседями клеток с краю считаются клетки на "
+"Поле представляет из себя тороид. Соседями клеток с краю считаются клетки на "
 "противоположной стороне"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:146
 #, kde-format
-msgid "Spheric"
-msgstr "Сферическая"
+msgid "Toroidal"
+msgstr "Тороид"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:148
 #, kde-format
@@ -416,10 +419,14 @@ msgstr "Скорость смены поколений"
 msgid "You can change generation rate even when evolution is in progress"
 msgstr "Можно изменять скорость смены поколений даже во время эволюции"
 
-#: patternspage.cpp:37
+#: patternspage.cpp:33
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Не выбран>"
+
+#, kde-format
+#~ msgid "Spheric"
+#~ msgstr "Сферическая"
 
 #, kde-format
 #~ msgid "Kglife - Settings"

@@ -19,8 +19,8 @@
       </entry>
   </group>
   <group name="Field type">
-      <entry name="spheric" type="Bool">
-          <label>Spheric</label>
+      <entry name="toroidal" type="Bool">
+          <label>Toroid</label>
           <default>true</default>
       </entry>
       <entry name="walled" type="Bool">
