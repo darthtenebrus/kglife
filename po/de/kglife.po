@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 12:21+0300\n"
-"PO-Revision-Date: 2023-11-27 19:36+0300\n"
+"PO-Revision-Date: 2023-11-28 12:56+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -159,7 +159,7 @@ msgstr "Diese Anwendung (*.kgol)"
 #: KLGameField.cpp:431
 #, kde-format
 msgid "Save colony current state"
-msgstr "Den Koloniezustand sparen"
+msgstr "Den Koloniezustand speichern"
 
 #: KLGameField.cpp:442 KLGameField.cpp:557
 #, kde-format
@@ -321,12 +321,12 @@ msgstr "Einrichtungsfenster aufmachen"
 #: mainwindow.cpp:91
 #, kde-format
 msgid "Load saved colony"
-msgstr "Die gesparte Kolonie einladen"
+msgstr "Die gespeicherte Kolonie einladen"
 
 #: mainwindow.cpp:93
 #, kde-format
 msgid "Save current colony"
-msgstr "Den Koloniezustand zur Datei sparen"
+msgstr "Den Koloniezustand zur Datei speichern"
 
 #: mainwindow.cpp:100
 #, kde-format
