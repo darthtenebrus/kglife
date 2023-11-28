@@ -9,12 +9,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include "patternspage.h"
-#ifdef _DEBUG
-#include <QDebug>
 #include <QPushButton>
 #include <KConfigDialog>
-
-#endif
 
 
 PatternsPage::PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *cdialog, QWidget *parent) :
