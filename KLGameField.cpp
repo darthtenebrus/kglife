@@ -18,12 +18,13 @@
 #include "generalpage.h"
 #include "patternspage.h"
 
-
 #define FIELD_OFFSET 1
 #define SPACE 1
 #define MIN_CELL_SIZE 16
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
+
+QString KLGameField::CurrentFilePath = "";
 
 KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
                                                                evoTimer(new QTimer()) {
@@ -422,20 +423,51 @@ void KLGameField::openAction(bool) {
         return;
     }
 
+    CurrentFilePath = path;
     tryLoadFromFile(path);
     restoreScreen();
 }
 
+QString KLGameField::forceFileNameDialog() {
+    QString path = QFileDialog::getSaveFileName(this, i18n("Save colony current state"),
+                                                       QDir::homePath(), i18n("This application (*.kgol)"));
+    return path;
+}
+
+QString &KLGameField::askForFileName() {
+    if (CurrentFilePath.isEmpty()) {
+        const QString &path = forceFileNameDialog();
+        CurrentFilePath = path;
+
+    }
+    return CurrentFilePath;
+}
+
+
+void KLGameField::saveAsAction(bool) {
+    cancelTimerInstantly();
+    const QString &path = forceFileNameDialog();
+
+    if (path.isEmpty()) {
+        return;
+    }
+    CurrentFilePath = path;
+    trySaveToFile(path);
+}
+
 void KLGameField::saveAction(bool) {
     cancelTimerInstantly();
-    const QString &path = QFileDialog::getSaveFileName(this, i18n("Save colony current state"),
-                                                       QDir::homePath(), i18n("This application (*.kgol)"));
+    const QString &path = askForFileName();
 
-    if ("" == path) {
+    if (path.isEmpty()) {
         return;
     }
 
+    trySaveToFile(path);
 
+}
+
+void KLGameField::trySaveToFile(const QString &path) {
     try {
         QFile file(path);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
@@ -622,6 +654,9 @@ void KLGameField::cdApply(const QString &) {
         repaint();
     }
 }
+
+
+
 
 
 

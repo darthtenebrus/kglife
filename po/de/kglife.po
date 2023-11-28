@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-28 18:30+0300\n"
-"PO-Revision-Date: 2023-11-28 18:32+0300\n"
+"PO-Revision-Date: 2023-11-28 19:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -271,7 +271,7 @@ msgstr "Schon eingelauft"
 #: main.cpp:74
 #, kde-format
 msgid "Already Running"
-msgstr "Die Anwendung ist schon eingelauft<"
+msgstr "Die Anwendung ist schon eingelauft"
 
 #: main.cpp:79
 #, kde-format

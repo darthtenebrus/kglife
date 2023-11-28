@@ -45,6 +45,10 @@ private:
     bool checkMousePosition(QPoint &) const;
 
     void tryLoadFromFile(const QString &);
+    void trySaveToFile(const QString &);
+    QString &askForFileName();
+    QString forceFileNameDialog();
+
 
     [[nodiscard]]
     QPoint getMainOffset() const;
@@ -78,12 +82,15 @@ private:
     bool m_LeftbPressed = false;
     bool m_MoveMode = false;
 
+    static QString CurrentFilePath;
+
 
 public slots:
     void newAction(bool);
     void nextAction(bool);
     void openAction(bool);
     void saveAction(bool);
+    void saveAsAction(bool);
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 

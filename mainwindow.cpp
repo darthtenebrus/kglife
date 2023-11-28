@@ -91,6 +91,9 @@ void MainWindow::setupToolbar() {
     actionOpen->setWhatsThis(i18n("Load saved colony"));
     QAction *actionSave = KStandardAction::save(gameField, &KLGameField::saveAction, actionCollection());
     actionSave->setWhatsThis(i18n("Save current colony"));
+
+    QAction *actionSaveAs = KStandardAction::saveAs(gameField, &KLGameField::saveAsAction, actionCollection());
+    actionSaveAs->setWhatsThis(i18n("Save current colony with different name"));
     
     auto *wa = new QWidgetAction(this);
     wa->setDefaultWidget(mySlider);
