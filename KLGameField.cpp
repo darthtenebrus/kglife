@@ -419,7 +419,7 @@ void KLGameField::openAction(bool) {
     const QString &path = QFileDialog::getOpenFileName(this, i18n("Load colony from file"),
                                                        QDir::homePath(), i18n("This application (*.kgol)"));
 
-    if ("" == path) {
+    if (path.isEmpty()) {
         return;
     }
 
