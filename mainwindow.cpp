@@ -161,8 +161,8 @@ void MainWindow::changeEvent(QEvent *event) {
 }
 
 void MainWindow::setupStatusBar() {
-    mCurrentFile = new QLabel(i18n("Empty"), toolBar());
-    statusBar()->addWidget(mCurrentFile);
+    mCurrentFile = new QLabel(i18n("Empty file"), toolBar());
+    statusBar()->addPermanentWidget(mCurrentFile);
 }
 
 void MainWindow::currentFileChanged(const QString &current) {
