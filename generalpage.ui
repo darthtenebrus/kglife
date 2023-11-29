@@ -90,7 +90,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QRadioButton" name="kcfg_spheric">
+       <widget class="QRadioButton" name="kcfg_toroidal">
         <property name="toolTip">
          <string>Field is toroidal</string>
         </property>
