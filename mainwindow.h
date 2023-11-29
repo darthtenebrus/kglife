@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QSettings>
 #include <KXmlGuiWindow>
+#include <QLabel>
 #include "KLGameField.h"
 #include "myslider.h"
 
@@ -27,7 +28,9 @@ protected:
 private:
     MySlider *mySlider;
     KLGameField *gameField;
+    QLabel *mCurrentFile;
     void setupToolbar();
+    void setupStatusBar();
 
 
 
@@ -39,8 +42,9 @@ public slots:
     void zoomInChanged(bool);
     void zoomOutChanged(bool);
     void restoreChanged(bool);
-
     void changeMoveMode(bool);
+    void currentFileChanged(const QString &);
+
 };
 
 

@@ -16,7 +16,6 @@
 #include "myslider.h"
 
 
-
 MainWindow::MainWindow(QWidget *parent) :
         KXmlGuiWindow(parent) {
 
@@ -30,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setCentralWidget(gameField);
     setupToolbar();
+    setupStatusBar();
 
     connect(gameField, &KLGameField::changeControls, this, &MainWindow::controlsChanged);
     connect(gameField, &KLGameField::changeGeneration, this, &MainWindow::generationChanged);
@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(gameField, &KLGameField::changeZoomIn, this, &MainWindow::zoomInChanged);
     connect(gameField, &KLGameField::changeZoomOut, this, &MainWindow::zoomOutChanged);
     connect(gameField, &KLGameField::changeRestore, this, &MainWindow::restoreChanged);
-
+    connect(gameField, &KLGameField::changeCurrentFile, this, &MainWindow::currentFileChanged);
 }
 
 MainWindow::~MainWindow() {
@@ -94,7 +94,7 @@ void MainWindow::setupToolbar() {
 
     QAction *actionSaveAs = KStandardAction::saveAs(gameField, &KLGameField::saveAsAction, actionCollection());
     actionSaveAs->setWhatsThis(i18n("Save current colony with different name"));
-    
+
     auto *wa = new QWidgetAction(this);
     wa->setDefaultWidget(mySlider);
 
@@ -158,4 +158,13 @@ void MainWindow::changeEvent(QEvent *event) {
         }
     }
     QWidget::changeEvent(event);
+}
+
+void MainWindow::setupStatusBar() {
+    mCurrentFile = new QLabel(i18n("Empty"), toolBar());
+    statusBar()->addWidget(mCurrentFile);
+}
+
+void MainWindow::currentFileChanged(const QString &current) {
+    mCurrentFile->setText(i18n("File name: %1", current));
 }

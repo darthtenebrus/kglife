@@ -14,8 +14,9 @@ architectures:
   - build-on: [arm64]
 apps:
   kglife:
+    common-id: org.kde.kglife
     command: usr/bin/kglife
-    desktop: kglife.desktop
+    desktop: org.kde.kglife.desktop
     extensions:
       - kde-neon
     plugs:

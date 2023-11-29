@@ -82,6 +82,7 @@ private:
     bool m_MoveMode = false;
 
     static QString CurrentFilePath;
+    static void setCurrentPath(KLGameField *th, QString cpath);
 
 
 public slots:
@@ -112,6 +113,7 @@ signals:
     void changeZoomIn(bool);
     void changeZoomOut(bool);
     void changeRestore(bool);
+    void changeCurrentFile(const QString &);
 };
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
-  <id>org.kde.kglife.desktop</id>
+  <id>org.kde.kglife</id>
   <project_license>GPL-3.0+</project_license>
   <name>kglife</name>
 
