@@ -1,11 +1,13 @@
 <?xml version="1.0" ?>
+<!--IMPORTANT: please note that 'Do not change this!' notice does not apply to translators -->
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!-- Define an entity for your application if it is not part of KDE
-Git -->
-<!ENTITY kmyapplication "<application>KGlife</application>">
-<!ENTITY i18n-translatable-entity "<application>Game Of Life</application>">
-<!ENTITY % addindex "IGNORE">
-<!ENTITY % English "INCLUDE">
+
+<!-- Define an entity for your application if it is not part of KDE Git -->
+  <!ENTITY kappname "kglife">
+  <!ENTITY kmyapplication "KGlife">
+  <!ENTITY i18n-translatable-entity "Game Of Life">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
 
 ]>
 
@@ -42,9 +44,9 @@ Git -->
 
     <copyright>
       <year>2023</year>
-      <holder>EUgene E. Sorochinskiy</holder>
+      <holder>Eugene E. Sorochinskiy</holder>
     </copyright>
-    <legalnotice>&CCBYSA4Notice;</legalnotice>
+    <legalnotice>&underGPL;</legalnotice>
 
     <!-- Date of the documentation
     Change date/releaseinfo only if
@@ -138,24 +140,21 @@ Git -->
     many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
     your application. -->
 
-    <para>
 
       <!-- Note that all graphics should be in .png format. Use no gifs because of
       patent issues. -->
 
-      <screenshot>
-        <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="screenshot.png" format="PNG"/>
-          </imageobject>
-          <textobject>
-            <phrase>Screenshot</phrase>
-          </textobject>
-        </mediaobject>
-      </screenshot>
-    </para>
-
+    <screenshot>
+      <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="screenshot.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>Screenshot</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
 
     <sect1 id="kapp-features">
       <title>&kmyapplication; features</title>
@@ -175,13 +174,13 @@ Git -->
           </textobject>
         </mediaobject>
       </screenshot>
-    </para>
+    </sect1>
+  </chapter>
 
-  </sect1>
-</chapter>
-
-<chapter id="commands">
-  <title>Command Reference</title>
+  <chapter id="commands">
+    <title>Command Reference</title>
+    <para>To Do</para>
+  </chapter>
 
   <!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
   application windows and their menubar and toolbar commands for easy reference.
@@ -211,25 +210,27 @@ Git -->
   <chapter id="configuration">
     <title>Game settings</title> <!-- do not change this! -->
     <!--This section describes configuration &GUI;. If your game is configured using menubar exclusively, please remove this section.-->
-    <para>
-      <screenshot>
-        <screeninfo>General configuration</screeninfo>
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="config.png" format="PNG"/>
-          </imageobject>
-          <textobject>
-            <phrase>Congiguration</phrase>
-          </textobject>
-        </mediaobject>
-      </screenshot>
-    </para>
-
-    <para>Menu command
-      <menuchoice><guimenu>Settings</guimenu>
-        <guimenuitem>Configure &kappname;...</guimenuitem>
-        </menuchoice>opens <guilabel>&kappname; configuration dialog</guilabel>.
-    </para>
+    <sect1 id="screen-and-menu">
+      <title>Game settings screen</title>
+      <para>
+        <screenshot>
+          <screeninfo>General configuration</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="config.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>Congiguration</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </para>
+      <para>Menu command
+        <menuchoice><guimenu>Settings</guimenu>
+          <guimenuitem>Configure &kappname;...</guimenuitem>
+          </menuchoice>opens <guilabel>&kappname; configuration dialog</guilabel>.
+      </para>
+    </sect1>
 
     <sect1 id="general-options"><title><guilabel>General</guilabel> options</title>
       <sect2 id="borders-and-cells"><title><guilabel>Borders and cells</guilabel></title>
@@ -287,6 +288,7 @@ Git -->
       </sect2>
     </sect1>
 
+
     <sect1 id="pattern-options"><title><guilabel>Patterns</guilabel> selection pad</title>
       <para>
         <screenshot>
@@ -303,28 +305,21 @@ Git -->
       </para>
     </sect1>
 
-    <para>
-      Also &kappname; has standard &kde; menu <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>,
-      for more information use <ulink url="help:/fundamentals/ui.html#menus-settings">Settings menu</ulink> and
-      <ulink url="help:/fundamentals/ui.html#menus-help">Help menu</ulink>.
-    </para>
+
+    <sect1 id="standard-settings">
+    <title>Standard KDE settings</title>
+      <para>
+        Also &kappname; has standard &kde; menu <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>,
+        for more information use <ulink url="help:/fundamentals/ui.html#menus-settings">Settings menu</ulink> and
+        <ulink url="help:/fundamentals/ui.html#menus-help">Help menu</ulink>.
+      </para>
+    </sect1>
 
   </chapter>
 
 
   <chapter id="faq">
     <title>Questions and Answers</title>
-
-    <!-- (OPTIONAL but recommended) This chapter should include all of the silly
-    (and not-so-silly) newbie questions that fill up your mailbox. This chapter
-    should be reserved for BRIEF questions and answers! If one question uses more
-    than a page or so then it should probably be part of the
-    "Using this Application" chapter instead. You should use links to
-    cross-reference questions to the parts of your documentation that answer them.
-    This is also a great place to provide pointers to other FAQ's if your users
-    must do some complicated configuration on other programs in order for your
-    application work. -->
-
     <qandaset id="faqlist">
       <qandaentry>
         <question>
