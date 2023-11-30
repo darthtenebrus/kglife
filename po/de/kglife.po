@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 11:05+0300\n"
-"PO-Revision-Date: 2023-11-29 11:23+0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2023-11-29 21:51+0300\n"
+"Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +368,7 @@ msgstr "Neues &Spiel"
 #: mainwindow.cpp:108
 #, kde-format
 msgid "Clear the field and stop evolution"
-msgstr "Aufklaren das Spielfeld und die Evolution stoppen"
+msgstr "Aufklaren das Spielfeld und die Evolution halten"
 
 #: mainwindow.cpp:113
 #, kde-format
@@ -383,7 +383,7 @@ msgstr "Nächster Evolutionsschritt"
 #: mainwindow.cpp:120
 #, kde-format
 msgid "&Start/Stop Game"
-msgstr "Start/Stop die Evolution"
+msgstr "Start/Halt die Evolution"
 
 #: mainwindow.cpp:122
 #, kde-format
@@ -391,8 +391,8 @@ msgid ""
 "Start or stop continuous evolution.<br> The icon changes to match the "
 "current mode"
 msgstr ""
-"Kontinuierliche Weiterentwicklung starten oder stoppen.<br> Das Symbol "
-"ändert sich entsprechend dem aktuellen Modus"
+"Kontinuierliche Weiterentwicklung starten oder halten.<br> Das Symbol ändert "
+"sich entsprechend dem aktuellen Modus"
 
 #: mainwindow.cpp:128
 #, kde-format

@@ -10,7 +10,7 @@ set(SOURCE_TEMPLATES templates)
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(ECMSetupVersion)
-set(KGLIFE_VERSION "1.0.5")
+set(KGLIFE_VERSION "1.0.6")
 ecm_setup_version(${KGLIFE_VERSION}
         VARIABLE_PREFIX KGLIFE
         VERSION_HEADER kglife_version.h)
