@@ -90,59 +90,19 @@
 
   </bookinfo>
 
-  <!-- The contents of the documentation begin here.  Label
-  each chapter so with the id attribute. This is necessary for two reasons: it
-  allows you to easily reference the chapter from other chapters of your
-  document, and if there is no ID, the name of the generated HTML files will vary
-  from time to time making it hard to manage for maintainers and for the CVS
-  system. Any chapter labelled (OPTIONAL) may be left out at the author's
-  discretion. Other chapters should not be left out in order to maintain a
-  consistent documentation style across all KDE apps. -->
-
-
-  <!-- KDE Games have special chapters
-
-  Introduction
-
-  How to play
-
-  Game Rules, Strategies and Tips
-
-  Interface Overview
-
-  Frequently asked questions
-
-  Credits and License
-
-  Please use one of index.docbook files from kdegames
-
-  -->
   <chapter id="introduction">
     <title>Introduction</title>
-
-    <!-- The introduction chapter contains a brief introduction for the
-    application that explains what it does and where to report
-    problems. Basically a long version of the abstract.  Don't include a
-    revision history. (see installation appendix comment) -->
 
     <para>
       &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
     </para>
     <para>
-      It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.
+      In common sence it is not a game but a math model, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.
     </para>
   </chapter>
 
   <chapter id="using-kapp">
     <title>Using &kmyapplication;</title>
-
-    <!-- This chapter should tell the user how to use your app. You should use as
-    many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-    your application. -->
-
-
-      <!-- Note that all graphics should be in .png format. Use no gifs because of
-      patent issues. -->
 
     <screenshot>
       <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
@@ -158,10 +118,14 @@
 
     <sect1 id="kapp-features">
       <title>&kmyapplication; features</title>
-
       <para>
         When the application is launched, the colony from the default template is loaded if this template was chosen previously from
         <link linkend="configuration">configuration dialog</link>
+      </para>
+      <para>
+        Use the mouse to set or erase any number of cells or just drag the mouse wit left button pressed to draw a line of cells
+        Then start the evolution of your colony with <link linkend="menu-commands">Start/Stop Game</link> menu command. The colonie should evolve matching several
+        <link linkend="evolution-rules">evolution rules</link>
       </para>
       <screenshot>
         <screeninfo>Evolution Example</screeninfo>
@@ -175,41 +139,130 @@
         </mediaobject>
       </screenshot>
     </sect1>
+    <sect1 id="evolution-rules">
+      <title>&kmyapplication; Rules of evolution</title>
+      <para>
+        The field of the Game of Life is a infinite in classic model, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead (or populated and unpopulated, respectively). Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+      </para>
+      <para>
+        <itemizedlist mark="circle">
+          <listitem>
+            <para>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</para>
+          </listitem>
+          <listitem>
+            <para>Any live cell with two or three live neighbours lives on to the next generation.</para>
+          </listitem>
+          <listitem>
+            <para>Any live cell with more than three live neighbours dies, as if by overpopulation.</para>
+          </listitem>
+          <listitem>
+            <para>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        When you construct an initial pattern on the field, it constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed, live or dead; births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a tick. Each generation is a pure function of the preceding one. The rules continue to be applied repeatedly to create further generations.
+      </para>
+      <para>In current software realization the field by default is <link linkend="field-edge">toroidal</link></para>
+    </sect1>
   </chapter>
 
-  <chapter id="commands">
-    <title>Command Reference</title>
-    <para>To Do</para>
+  <chapter id="interface">
+  <title>Interface Reference</title>
+    <sect1 id="menu-commands">
+    <title>Menu commands</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>O</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>File</guimenu> <guimenuitem>Open...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Load saved colony</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>File</guimenu> <guimenuitem>Save...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Save existing colony</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>File</guimenu> <guimenuitem>Save As...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Save existing colony with different name</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>N</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>New game</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Clear the field and stop current evolution</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Start/Stop game</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Start or stop current evolution</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>M</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Move</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Move mode. In this mode you can move the field by dragging the mouse to see the cells beyond the screen</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
   </chapter>
 
-  <!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
-  application windows and their menubar and toolbar commands for easy reference.
-  Also include any keys that have a special function but have no equivalent in the
-  menus or toolbars.
-  This may not be necessary for small apps or apps with no tool or menu bars.
-
-  Don't bother users with well known kde menu items like Settings->Shortcuts etc.
-
-  Use cases for a command reference:
-
-  Applications with many menu items (Kate/Konqueror)
-  Applications with different modes and menus (KWrite/Konqueror)
-  -> Enables search for menu items
-
-  For Applications with default menu items and some special items where user
-  needs additional information use something like:
-  "Apart from the common KDE menu items you find these action in the menu:
-
-  File -> Special Action: Explanation of special action
-
-  Tools -> Special Tool: Explanation of special tool
-
-  Use variablelist markup for this
-  -->
 
   <chapter id="configuration">
-    <title>Game settings</title> <!-- do not change this! -->
-    <!--This section describes configuration &GUI;. If your game is configured using menubar exclusively, please remove this section.-->
+    <title>Game settings</title>
     <sect1 id="screen-and-menu">
       <title>Game settings screen</title>
       <para>
@@ -225,12 +278,16 @@
           </mediaobject>
         </screenshot>
       </para>
-      <para>Menu command
+    </sect1>
+    <sect1 id="settings-command">
+      <title>Settings menu command</title>
+      <para>
         <menuchoice><guimenu>Settings</guimenu>
           <guimenuitem>Configure &kappname;...</guimenuitem>
           </menuchoice>opens <guilabel>&kappname; configuration dialog</guilabel>.
       </para>
     </sect1>
+
 
     <sect1 id="general-options"><title><guilabel>General</guilabel> options</title>
       <sect2 id="borders-and-cells"><title><guilabel>Borders and cells</guilabel></title>
@@ -302,6 +359,10 @@
             </textobject>
           </mediaobject>
         </screenshot>
+      </para>
+      <para>
+        From patterns list here you can select preinstalled colonie pattern. It will be load and plased to the field after you press Apply or Ok button and also after next application restart
+        The field osn't touched when you cange <link linkend="general-options">other settings</link> in the configuration dialog without touching pattern selection list
       </para>
     </sect1>
 

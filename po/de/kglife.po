@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-29 11:05+0300\n"
-"PO-Revision-Date: 2023-11-29 21:51+0300\n"
+"POT-Creation-Date: 2023-12-01 12:09+0300\n"
+"PO-Revision-Date: 2023-12-01 12:11+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -303,7 +303,9 @@ msgstr "Lebenspiel"
 #: main.cpp:80
 #, kde-format
 msgid "Convey's Game Of Life for KDE"
-msgstr "KDE Lebenspiel von Convey"
+msgstr ""
+"KDE Lebens\n"
+"piel von Convey"
 
 #: main.cpp:82
 #, kde-format
