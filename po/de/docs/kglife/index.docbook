@@ -84,7 +84,7 @@
     <sect1 id="kapp-features">
       <title>Anwendungsfunktionen</title>
       <para>
-        Beim Anwendungstart wird die Kolonie aus der Standardvorlage geladen, wenn diese Vorlage zuvor im
+        Beim Anwendungstart wird die Kolonie aus dem Standardmuster geladen, wenn dieses Muster zuvor im
         <link linkend="configuration">Einrichtungsdialog</link> ausgewählt wurde
       </para>
       <para>
@@ -378,20 +378,20 @@
     <sect1 id="pattern-options"><title><guilabel>Vorlagen</guilabel> Auswahl</title>
       <para>
         <screenshot>
-          <screeninfo>Vorlagenauswahl</screeninfo>
+          <screeninfo>Musterauswahl</screeninfo>
           <mediaobject>
             <imageobject>
               <imagedata fileref="patterns.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Wählen Sie eine Vorlage</phrase>
+              <phrase>Wählen Sie ein Muster</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
       </para>
       <para>
-        Können Sie hier die vorinstallierten Vorlagen auswählen. Nachdem Sie Ja oder Anwendentaste klicken, wird es automatisch geladen und auf das Feld gelegt.
-        Wenn Sie  <link linkend="general-options">die andere Einsetzungen</link> ohne Vorlagenliste tippen, dann keine Vorlagen veränderen.
+        Können Sie hier die vorinstallierten Muster auswählen. Nachdem Sie Ja oder Anwendentaste klicken, wird es automatisch geladen und auf das Feld gelegt.
+        Wenn Sie  <link linkend="general-options">die andere Einsetzungen</link> ohne Vorlagenliste tippen, dann keine Muster veränderen.
       </para>
     </sect1>
 
@@ -421,7 +421,7 @@
       </qandaentry>
       <qandaentry>
         <question>
-          <para>Ich habe eine interessante Kolonievorlage konstruiert. Kann ich vorschlagen, es dem Distributionspaket beizufügen?</para>
+          <para>Ich habe ein interessantes Koloniemuster konstruiert. Kann ich vorschlagen, es dem Distributionspaket beizufügen?</para>
         </question>
         <answer>
           <para>Speichern Sie Ihre Kolonie in der .kgol-Datei und senden Sie eine E-Mail mit der angehängten Datei <link linkend="credits">an die Entwicklermannschaft</link></para>
