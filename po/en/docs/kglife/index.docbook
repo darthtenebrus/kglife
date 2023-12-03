@@ -11,27 +11,13 @@
 
 ]>
 
-
-<!-- The language must NOT be changed here. -->
-<!-- If you are writing original documentation in a language other -->
-<!-- than English, change the language above ONLY, not here -->
-<!-- Change the value of id to the name of your application -->
 <book id="kglife" lang="&language;">
-
-  <!-- This header contains all of the meta-information for the document such
-  as Authors, publish date, the abstract, and Keywords -->
 
   <bookinfo>
     <title>The &kmyapplication; Handbook</title>
 
     <authorgroup>
       <author>
-        <!-- This is just put in as an example.  For real documentation, please
-        define a general entity in entities/contributor.entities, e.g.
-        <!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
-        <!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
-        and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
-        -->
         <personname>
           <firstname>Eugene</firstname>
           <othername>E.</othername>
@@ -47,32 +33,15 @@
       <holder>Eugene E. Sorochinskiy</holder>
     </copyright>
     <legalnotice>&underGPL;</legalnotice>
-
-    <!-- Date of the documentation
-    Change date/releaseinfo only if
-    docbook is updated and verified to be valid for the current app version
-    or
-    docbook is proofread and verified to be valid for the current app version
-    Don't forget to include this last date.
-    Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
-    -->
     <date>2023-11-28</date>
 
-    <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
-    Example:
-    Frameworks xx.yy for docbooks in frameworks
-    Plasma xx.yy for docbooks in plasma workspace
-    Applications xx.yy for docbooks released as Applications
-    xx.yy (Applications xx.yy) for docbooks with own version released as Applications
-    $applicationname xx.yy for applications with independent release schedule (extragear/playground)
-    -->
-    <releaseinfo>&kmyapplication; 1.0.5</releaseinfo>
+    <releaseinfo>&kmyapplication; 1.0.6</releaseinfo>
 
     <!-- Abstract about this handbook -->
 
     <abstract>
       <para>
-        &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+        &kmyapplication; is a software realization of Game Of Life of J. H. Conway.
       </para>
     </abstract>
 
@@ -140,7 +109,7 @@
       </screenshot>
     </sect1>
     <sect1 id="evolution-rules">
-      <title>&kmyapplication; Rules of evolution</title>
+      <title>Rules of evolution</title>
       <para>
         The field of the Game of Life is a infinite in classic model, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead (or populated and unpopulated, respectively). Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
       </para>
@@ -169,8 +138,30 @@
 
   <chapter id="interface">
   <title>Interface Reference</title>
+    <sect1 id="mouse-control">
+      <title>Mouse control</title>
+      <variablelist>
+        <varlistentry>
+          <term>Mouse left button and wheel</term>
+          <listitem>
+            <para>
+              Left mouse click on the game field puts (alive) or erases (dead) a cell.
+              Drag a mouse to draw or erase a continiuos line of cells.
+              Mouse wheel zooms the field in or out.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Timer slider</term>
+          <listitem>
+            <para>Use timer slider control to increase or decrease time interval ticks between generation change</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
     <sect1 id="menu-commands">
-    <title>Menu commands</title>
+      <title>Menu commands</title>
       <variablelist>
         <varlistentry>
           <term>
@@ -256,6 +247,48 @@
             <para>Move mode. In this mode you can move the field by dragging the mouse to see the cells beyond the screen</para>
           </listitem>
         </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>+</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Zoom in</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Zoom the field in</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>-</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Zoom out</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Zoom the field out</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>0</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Actual size</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Restore the actual size of the field</para>
+          </listitem>
+        </varlistentry>
       </variablelist>
     </sect1>
   </chapter>
@@ -273,7 +306,7 @@
               <imagedata fileref="config.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Congiguration</phrase>
+              <phrase>Configuration</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
@@ -313,12 +346,12 @@
               <guilabel>Cells border color</guilabel>
             </term>
             <listitem>
-              <para>Choose border between cells color color</para>
+              <para>Choose border between cells color</para>
             </listitem>
           </varlistentry>
         </variablelist>
       </sect2>
-      <sect2 id="field-edge"><title><guilabel>Field edge type</guilabel></title>
+      <sect2 id="field-edge"><title><guilabel>Field edges type</guilabel></title>
         <variablelist>
           <varlistentry>
             <term>
@@ -361,8 +394,8 @@
         </screenshot>
       </para>
       <para>
-        From patterns list here you can select preinstalled colonie pattern. It will be load and plased to the field after you press Apply or Ok button and also after next application restart
-        The field osn't touched when you cange <link linkend="general-options">other settings</link> in the configuration dialog without touching pattern selection list
+        From patterns list here you can select preinstalled colonie pattern. It will be loaded and placed to the field after you press Apply or Ok button and also after next application restart
+        The field isn't touched when you change <link linkend="general-options">other settings</link> in the configuration dialog without touching pattern selection list
       </para>
     </sect1>
 
@@ -387,7 +420,7 @@
           <para>Can I work with &kmyapplication; from keyboard?</para>
         </question>
         <answer>
-          <para>Of course. Check out the <link linkend="commands">Commands
+          <para>Of course. Check out the <link linkend="menu-commands">Commands
               Section</link> for the answer.</para>
         </answer>
       </qandaentry>
@@ -445,16 +478,6 @@
   <appendix id="installation">
     <title>Installation</title>
 
-    <sect1 id="getting-kapp">
-      <title>How to obtain &kmyapplication;</title>
-
-      <!-- This first entity contains boiler plate for applications that are
-      part of KDE archive.  You should remove it if you are releasing your
-      application -->
-
-      &install.intro.documentation;
-
-    </sect1>
 
     <sect1 id="requirements">
       <title>Requirements</title>

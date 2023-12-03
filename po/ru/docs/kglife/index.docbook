@@ -7,35 +7,21 @@
   <!ENTITY kmyapplication "KGlife">
   <!ENTITY i18n-translatable-entity "Game Of Life">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE">
+  <!ENTITY % Russian "INCLUDE">
 
 ]>
 
-
-<!-- The language must NOT be changed here. -->
-<!-- If you are writing original documentation in a language other -->
-<!-- than English, change the language above ONLY, not here -->
-<!-- Change the value of id to the name of your application -->
 <book id="kglife" lang="&language;">
 
-  <!-- This header contains all of the meta-information for the document such
-  as Authors, publish date, the abstract, and Keywords -->
-
   <bookinfo>
-    <title>The &kmyapplication; Handbook</title>
+    <title>Руководство пользователя &kmyapplication;</title>
 
     <authorgroup>
       <author>
-        <!-- This is just put in as an example.  For real documentation, please
-        define a general entity in entities/contributor.entities, e.g.
-        <!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
-        <!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
-        and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
-        -->
         <personname>
-          <firstname>Eugene</firstname>
-          <othername>E.</othername>
-          <surname>Sorochinskiy</surname>
+          <firstname>Евгений</firstname>
+          <othername>Е.</othername>
+          <surname>Сорочинский</surname>
         </personname>
         <email>gnu@kde.org</email>
       </author>
@@ -44,35 +30,18 @@
 
     <copyright>
       <year>2023</year>
-      <holder>Eugene E. Sorochinskiy</holder>
+      <holder>Евгений E. Сорочинский</holder>
     </copyright>
     <legalnotice>&underGPL;</legalnotice>
-
-    <!-- Date of the documentation
-    Change date/releaseinfo only if
-    docbook is updated and verified to be valid for the current app version
-    or
-    docbook is proofread and verified to be valid for the current app version
-    Don't forget to include this last date.
-    Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
-    -->
     <date>2023-11-28</date>
 
-    <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
-    Example:
-    Frameworks xx.yy for docbooks in frameworks
-    Plasma xx.yy for docbooks in plasma workspace
-    Applications xx.yy for docbooks released as Applications
-    xx.yy (Applications xx.yy) for docbooks with own version released as Applications
-    $applicationname xx.yy for applications with independent release schedule (extragear/playground)
-    -->
-    <releaseinfo>&kmyapplication; 1.0.5</releaseinfo>
+    <releaseinfo>&kmyapplication; 1.0.6</releaseinfo>
 
     <!-- Abstract about this handbook -->
 
     <abstract>
       <para>
-        &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+        &kmyapplication; это программная реализация игры "Жизнь" Дж. Х. Конвея.
       </para>
     </abstract>
 
@@ -84,204 +53,321 @@
       <keyword>KDE</keyword>
       <keyword>kdeutils</keyword>
       <keyword>kglife</keyword>
-      <keyword>game</keyword>
-      <keyword>game of life</keyword>
+      <keyword>игра</keyword>
+      <keyword>Игра "Жизнь"</keyword>
     </keywordset>
 
   </bookinfo>
 
-  <!-- The contents of the documentation begin here.  Label
-  each chapter so with the id attribute. This is necessary for two reasons: it
-  allows you to easily reference the chapter from other chapters of your
-  document, and if there is no ID, the name of the generated HTML files will vary
-  from time to time making it hard to manage for maintainers and for the CVS
-  system. Any chapter labelled (OPTIONAL) may be left out at the author's
-  discretion. Other chapters should not be left out in order to maintain a
-  consistent documentation style across all KDE apps. -->
-
-
-  <!-- KDE Games have special chapters
-
-  Introduction
-
-  How to play
-
-  Game Rules, Strategies and Tips
-
-  Interface Overview
-
-  Frequently asked questions
-
-  Credits and License
-
-  Please use one of index.docbook files from kdegames
-
-  -->
   <chapter id="introduction">
-    <title>Introduction</title>
-
-    <!-- The introduction chapter contains a brief introduction for the
-    application that explains what it does and where to report
-    problems. Basically a long version of the abstract.  Don't include a
-    revision history. (see installation appendix comment) -->
+    <title>Введение</title>
 
     <para>
-      &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+      &kmyapplication;, программная реализация игры "Жизнь". Этот клеточный автомат был смоделирован британским математиком Джоном Хортоном Конвеем в 1970 году.
     </para>
     <para>
-      It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.
+      В широком смысле это не игра, а математическая модель саморазвития, направление которого определяется её начальным состоянием. Взаимодействие с пользователем в процессе эволюции не происходит. Вы создаёте начальную конфигурацию, а потом лишь наблюдаете за её развитием. С точки зрения теории вычислимости эта модель является полной по Тьюрингу, что позволяет.
+      реализовать любую машину Тьюринга.
     </para>
   </chapter>
 
   <chapter id="using-kapp">
     <title>Using &kmyapplication;</title>
 
-    <!-- This chapter should tell the user how to use your app. You should use as
-    many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-    your application. -->
-
-
-      <!-- Note that all graphics should be in .png format. Use no gifs because of
-      patent issues. -->
-
     <screenshot>
-      <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
+      <screeninfo>Начальный экран &kmyapplication;</screeninfo>
       <mediaobject>
         <imageobject>
           <imagedata fileref="screenshot.png" format="PNG"/>
         </imageobject>
         <textobject>
-          <phrase>Screenshot</phrase>
+          <phrase>Снимок экрана</phrase>
         </textobject>
       </mediaobject>
     </screenshot>
 
     <sect1 id="kapp-features">
-      <title>&kmyapplication; features</title>
-
+      <title>Краткое описание &kmyapplication;</title>
       <para>
-        When the application is launched, the colony from the default template is loaded if this template was chosen previously from
-        <link linkend="configuration">configuration dialog</link>
+        При запуске приложения начальная конфигурация-колония автоматически загружается из предварительно выбранного шаблона, если последний был указан в
+        <link linkend="configuration">диалоговом окне настроек</link>
+      </para>
+      <para>
+        При помощи щелчков мыши установите на поле начальную колонию. Можно нанести сразу несколько клеток, зажав левую кнопку и проведя указателем мыши по полю.
+        Запустите процесс развития при помощи комбинации клавиш <link linkend="menu-commands">Начать/очтановить игру</link>, либо через меню. Колония будет развиваться, подчиняясь
+        <link linkend="evolution-rules">правилам эволюции</link>
       </para>
       <screenshot>
-        <screeninfo>Evolution Example</screeninfo>
+        <screeninfo>Пример эволюции колонии</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="evolution.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase>Evolution</phrase>
+            <phrase>Развитие</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
+    <sect1 id="evolution-rules">
+      <title>Правила эволюции</title>
+      <para>
+        Место действия игры — размеченная на клетки плоскость, которая может быть безграничной, ограниченной или замкнутой. Каждая клетка на этой поверхности имеет восемь соседей, окружающих её, и может находиться в двух состояниях: быть «живой» (заполненной) или «мёртвой» (пустой). Распределение живых клеток в начале игры называется первым поколением. Каждое следующее поколение рассчитывается на основе предыдущего по таким правилам:
+      </para>
+      <para>
+        <itemizedlist mark="circle">
+          <listitem>
+            <para>Если у живой клетки есть две или три живые соседки, то эта клетка продолжает жить и переходит в следующее поколение.</para>
+          </listitem>
+          <listitem>
+            <para>Если живых соседей меньше двух, клетка умирает "от одиночества"</para>
+          </listitem>
+          <listitem>
+            <para>Если живых соседей больше трех, клетка умирает "от перенаселённости".</para>
+          </listitem>
+          <listitem>
+            <para>В пустой (мёртвой) клетке, с которой соседствуют три живые клетки, зарождается жизнь.</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+         Рождение и смерть происходят одновременно в момент смены поколений через определенные промежутки времени, называемые тактами (тиками). Таким образом, "приговоренные к смерти" клетки учавствуют в подсчёте соседей для вновь рождающихся, однако вновь рождающаяся не "излечивает от одиночества" погибающую и не порождает перенаселённость для уже живых. Каждая последующая конфигурация однозначно зависит от предыдущей, то есть, последующее поколение функционально зависит от предыдущего.
+      </para>
+      <para>В данной программной реализации модели игры "Жизнь" поле по умолчанию <link linkend="field-edge">является тороидом</link></para>
+    </sect1>
   </chapter>
 
-  <chapter id="commands">
-    <title>Command Reference</title>
-    <para>To Do</para>
+  <chapter id="interface">
+  <title>Обзор интерфейса</title>
+    <sect1 id="mouse-control">
+      <title>Управление мышью</title>
+      <variablelist>
+        <varlistentry>
+          <term>Левая кнопка и колесо мыши</term>
+          <listitem>
+            <para>
+              Левая кнопка мыши установит (живая) или уберет (мёртвая) клетку.
+              Зажмите левую кнопку и проведите по полю, чтобы установить ряд клеток.
+              Вращайте колесо мыши чтобы изменить масштаб поля.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Ползунок контроля скорости</term>
+          <listitem>
+            <para>Передвигайте ползунок, чтобы увеличить или уменьшить интервалы времени между сменой поколений</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="menu-commands">
+      <title>Команды меню</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>O</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Файл</guimenu> <guimenuitem>Открыть...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Загрузить сохранённую колонию</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Файл</guimenu> <guimenuitem>Сохранить...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Сохранить текущую колонию</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Файл</guimenu> <guimenuitem>Сохранить как...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Сохранить текущую колонию под другим именем</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>N</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Игра</guimenu> <guimenuitem>Новая игра</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Очистить поле и остановить эволюцию</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Игра</guimenu> <guimenuitem>Начать/Остановить эволюцию</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Начать или остановить процесс эволюции</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>M</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Игра</guimenu> <guimenuitem>Переместить</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Режим перемещения. В этом режиме можно перемещать поле при помощи мыши, чтобы увидеть клетки за пределами экрана</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>+</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Увеличить</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Увеличить масштаб</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>-</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Уменьшить</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Уменьшить масштаб</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>0</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>View</guimenu> <guimenuitem>Фактический размер</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Восстановить исходный масштаб</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
   </chapter>
 
-  <!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
-  application windows and their menubar and toolbar commands for easy reference.
-  Also include any keys that have a special function but have no equivalent in the
-  menus or toolbars.
-  This may not be necessary for small apps or apps with no tool or menu bars.
-
-  Don't bother users with well known kde menu items like Settings->Shortcuts etc.
-
-  Use cases for a command reference:
-
-  Applications with many menu items (Kate/Konqueror)
-  Applications with different modes and menus (KWrite/Konqueror)
-  -> Enables search for menu items
-
-  For Applications with default menu items and some special items where user
-  needs additional information use something like:
-  "Apart from the common KDE menu items you find these action in the menu:
-
-  File -> Special Action: Explanation of special action
-
-  Tools -> Special Tool: Explanation of special tool
-
-  Use variablelist markup for this
-  -->
 
   <chapter id="configuration">
-    <title>Game settings</title> <!-- do not change this! -->
-    <!--This section describes configuration &GUI;. If your game is configured using menubar exclusively, please remove this section.-->
+    <title>Настройки</title>
     <sect1 id="screen-and-menu">
-      <title>Game settings screen</title>
+      <title>Экран настроек</title>
       <para>
         <screenshot>
-          <screeninfo>General configuration</screeninfo>
+          <screeninfo>Общие настройки</screeninfo>
           <mediaobject>
             <imageobject>
               <imagedata fileref="config.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Congiguration</phrase>
+              <phrase>Настройки</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
       </para>
-      <para>Menu command
-        <menuchoice><guimenu>Settings</guimenu>
-          <guimenuitem>Configure &kappname;...</guimenuitem>
-          </menuchoice>opens <guilabel>&kappname; configuration dialog</guilabel>.
+    </sect1>
+    <sect1 id="settings-command">
+      <title>Меню настроек</title>
+      <para>
+        <menuchoice><guimenu>Настройка</guimenu>
+          <guimenuitem>Настроить &kappname;...</guimenuitem>
+          </menuchoice>Открывает <guilabel>диалоговое окно настроек</guilabel>.
       </para>
     </sect1>
 
-    <sect1 id="general-options"><title><guilabel>General</guilabel> options</title>
-      <sect2 id="borders-and-cells"><title><guilabel>Borders and cells</guilabel></title>
+
+    <sect1 id="general-options"><title><guilabel>Общие</guilabel> настройки</title>
+      <sect2 id="borders-and-cells"><title><guilabel>Разделители ячеек и клетки</guilabel></title>
         <variablelist>
           <varlistentry>
             <term>
-              <guilabel>Cell color</guilabel>
+              <guilabel>Цвет клетки</guilabel>
             </term>
             <listitem>
-              <para>Choose alive cell color</para>
+              <para>Выберите цвет живой клетки</para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Background color</guilabel>
+              <guilabel>Цвет фона</guilabel>
             </term>
             <listitem>
-              <para>Choose empty cell color</para>
+              <para>Выберите цвет пустой (мёртвой) клетки</para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Cells border color</guilabel>
+              <guilabel>Цвет разделителя ячеек</guilabel>
             </term>
             <listitem>
-              <para>Choose border between cells color color</para>
+              <para>Выберите цвет разделителя ячеек</para>
             </listitem>
           </varlistentry>
         </variablelist>
       </sect2>
-      <sect2 id="field-edge"><title><guilabel>Field edge type</guilabel></title>
+      <sect2 id="field-edge"><title><guilabel>Тип границы поля</guilabel></title>
         <variablelist>
           <varlistentry>
             <term>
-              <guilabel>Toroidal</guilabel>
+              <guilabel>Тороид</guilabel>
             </term>
             <listitem>
-              <para>
-              Choose a toroidal field. The field is considered to be a toroid. The cell on the edge has its
-              neighbours at the opposite side
-              </para>
+              <para>Выберите тип поля "тороид". Соседями клеток с краю считаются клетки на противоположной стороне</para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Neutral Wall</guilabel>
+              <guilabel>Нейтральная стена</guilabel>
             </term>
             <listitem>
-              <para>
-              Choose a neutral wall field. The field is surrounded by a neutral wall. No cells are born there and it is not taken into the account as a neighbour
-              </para>
+              <para>Поле окружено нейтральной стеной. За ней ничего не рождается, а ее элементы не участвуют в подсчете соседей</para>
             </listitem>
           </varlistentry>
         </variablelist>
@@ -289,29 +375,33 @@
     </sect1>
 
 
-    <sect1 id="pattern-options"><title><guilabel>Patterns</guilabel> selection pad</title>
+    <sect1 id="pattern-options"><title><guilabel>Шаблоны</guilabel></title>
       <para>
         <screenshot>
-          <screeninfo>Pattern selection</screeninfo>
+          <screeninfo>Выбор шаблона</screeninfo>
           <mediaobject>
             <imageobject>
               <imagedata fileref="patterns.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Choose pattern</phrase>
+              <phrase>Выбор шаблона</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
+      </para>
+      <para>
+        Из списка можно выбрать предустановленный шаблон, который будет загружен и помещен на поле после нажатия кнопки Да или Применить. Этот же шаблон автоматически загрузится при следующем запуске приложения.
+        Если вы меняете <link linkend="general-options">другие настройки</link>, не трогая список, то поле не будет затронуто.
       </para>
     </sect1>
 
 
     <sect1 id="standard-settings">
-    <title>Standard KDE settings</title>
+    <title>Стандартные настройки KDE</title>
       <para>
-        Also &kappname; has standard &kde; menu <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>,
-        for more information use <ulink url="help:/fundamentals/ui.html#menus-settings">Settings menu</ulink> and
-        <ulink url="help:/fundamentals/ui.html#menus-help">Help menu</ulink>.
+        Также у приложения &kappname; имеются стандартные <guimenu>настройки</guimenu> &kde; и меню <guimenu>Помощь</guimenu>,
+        Для получения информации воспользуйтесь меню <ulink url="help:/fundamentals/ui.html#menus-settings">Настройки</ulink> или
+        <ulink url="help:/fundamentals/ui.html#menus-help">Помощь</ulink>.
       </para>
     </sect1>
 
@@ -319,23 +409,22 @@
 
 
   <chapter id="faq">
-    <title>Questions and Answers</title>
+    <title>Часто задаваемые вопросы</title>
     <qandaset id="faqlist">
       <qandaentry>
         <question>
-          <para>Can I work with &kmyapplication; from keyboard?</para>
+          <para>Возможно ли использовать &kmyapplication; только с клавиатуры?</para>
         </question>
         <answer>
-          <para>Of course. Check out the <link linkend="commands">Commands
-              Section</link> for the answer.</para>
+          <para>Конечно. Воспользуйтесь <link linkend="menu-commands">командами меню</link></para>
         </answer>
       </qandaentry>
       <qandaentry>
         <question>
-          <para>I have constructed an interesting colonie pattern. Can I suggest it to be included at the distribution package?</para>
+          <para>Я нашел интересную комбинацию. Можно ли её включить в пакет предустановленных?</para>
         </question>
         <answer>
-          <para>Save your colonie to the .kgol file and send email to the <link linkend="credits">developer's team</link> with the file attached.</para>
+          <para>Сохраните свою колонию в файл .kgol и пришлите письмо <link linkend="credits">команде разработчиков</link> с прикреплённым файлом.</para>
         </answer>
       </qandaentry>
     </qandaset>
@@ -343,10 +432,6 @@
 
   <chapter id="credits">
 
-    <!-- Include credits for the programmers, documentation writers, and
-    contributors here. The license for your software should then be included below
-    the credits with a reference to the appropriate license file included in the KDE
-    distribution. -->
 
     <title>Credits and License</title>
 
@@ -354,49 +439,23 @@
       &kmyapplication;
     </para>
     <para>
-      Program copyright 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
+      Права пренадлежат 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
     </para>
-    <!--para>
-    Contributors:
-    <itemizedlist>
-    <listitem><para>Konqui the &kde; Dragon <email>konqui@kde.org</email></para>
-    </listitem>
-    <listitem><para>Tux the &Linux; Penguin <email>tux@linux.org</email></para>
-    </listitem>
-    </itemizedlist>
-    </para-->
 
     <para>
-      Documentation copyright 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
+      Документация 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
     </para>
 
-    &underGPL;           <!--C BY-SA 4.0: do not remove -->
-
+    &underGPL;
 
   </chapter>
 
-  <!-- Appendix Installation is optional, usually not required
-
-  Entities &install.intro.documentation; + &install.compile.documentation; will be removed in later kdoctools
-
-  -->
 
   <appendix id="installation">
-    <title>Installation</title>
-
-    <sect1 id="getting-kapp">
-      <title>How to obtain &kmyapplication;</title>
-
-      <!-- This first entity contains boiler plate for applications that are
-      part of KDE archive.  You should remove it if you are releasing your
-      application -->
-
-      &install.intro.documentation;
-
-    </sect1>
+    <title>Установка</title>
 
     <sect1 id="requirements">
-      <title>Requirements</title>
+      <title>Требования</title>
 
       <!--
       List any special requirements for your application here. This should include:
@@ -409,20 +468,20 @@
       -->
 
       <para>
-        In order to successfully use &kmyapplication;, you need few standard libraries from
+        Чтобы использовать &kmyapplication;, нужны библиотеки
         &kde-frameworks; 5.92
       </para>
 
       <!-- For a list of updates, you may refer to the application web site
       or the ChangeLog file, or ... -->
       <para>
-        You can find a list of changes at <ulink
+        Список изменений <ulink
           url="https://apps.kde.org/kapp">https://apps.kde.org/kapp</ulink>.
         </para>
       </sect1>
 
       <sect1 id="compilation">
-        <title>Compilation and Installation</title>
+        <title>Компиляция и установка</title>
 
         <!-- This entity contains the boilerplate text for standard -->
         <!-- compilation instructions.  If your application requires any -->

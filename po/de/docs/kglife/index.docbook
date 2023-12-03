@@ -7,35 +7,21 @@
   <!ENTITY kmyapplication "KGlife">
   <!ENTITY i18n-translatable-entity "Game Of Life">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE">
+  <!ENTITY % German "INCLUDE">
 
 ]>
 
-
-<!-- The language must NOT be changed here. -->
-<!-- If you are writing original documentation in a language other -->
-<!-- than English, change the language above ONLY, not here -->
-<!-- Change the value of id to the name of your application -->
 <book id="kglife" lang="&language;">
 
-  <!-- This header contains all of the meta-information for the document such
-  as Authors, publish date, the abstract, and Keywords -->
-
   <bookinfo>
-    <title>The &kmyapplication; Handbook</title>
+    <title>Das Handebuch von &kmyapplication;</title>
 
     <authorgroup>
       <author>
-        <!-- This is just put in as an example.  For real documentation, please
-        define a general entity in entities/contributor.entities, e.g.
-        <!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
-        <!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
-        and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
-        -->
         <personname>
-          <firstname>Eugene</firstname>
+          <firstname>Eugen</firstname>
           <othername>E.</othername>
-          <surname>Sorochinskiy</surname>
+          <surname>Sorotschinskii</surname>
         </personname>
         <email>gnu@kde.org</email>
       </author>
@@ -44,243 +30,343 @@
 
     <copyright>
       <year>2023</year>
-      <holder>EUgene E. Sorochinskiy</holder>
+      <holder>Eugene E. Sorochinskiy</holder>
     </copyright>
     <legalnotice>&underGPL;</legalnotice>
-
-    <!-- Date of the documentation
-    Change date/releaseinfo only if
-    docbook is updated and verified to be valid for the current app version
-    or
-    docbook is proofread and verified to be valid for the current app version
-    Don't forget to include this last date.
-    Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
-    -->
     <date>2023-11-28</date>
 
-    <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
-    Example:
-    Frameworks xx.yy for docbooks in frameworks
-    Plasma xx.yy for docbooks in plasma workspace
-    Applications xx.yy for docbooks released as Applications
-    xx.yy (Applications xx.yy) for docbooks with own version released as Applications
-    $applicationname xx.yy for applications with independent release schedule (extragear/playground)
-    -->
-    <releaseinfo>&kmyapplication; 1.0.5</releaseinfo>
+    <releaseinfo>&kmyapplication; 1.0.6</releaseinfo>
 
-    <!-- Abstract about this handbook -->
 
     <abstract>
       <para>
-        &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+        &kmyapplication; ist eine Lebenspiel-Software-Realisierung von J. H. Conway.
       </para>
     </abstract>
 
-    <!-- This is a set of Keywords for indexing by search engines.
-    Please at least include KDE, the KDE section it is in, the name
-    of your application, and a few relevant keywords. -->
 
     <keywordset>
       <keyword>KDE</keyword>
       <keyword>kdeutils</keyword>
       <keyword>kglife</keyword>
-      <keyword>game</keyword>
-      <keyword>game of life</keyword>
+      <keyword>spiel</keyword>
+      <keyword>Lebenspiel</keyword>
     </keywordset>
 
   </bookinfo>
 
-  <!-- The contents of the documentation begin here.  Label
-  each chapter so with the id attribute. This is necessary for two reasons: it
-  allows you to easily reference the chapter from other chapters of your
-  document, and if there is no ID, the name of the generated HTML files will vary
-  from time to time making it hard to manage for maintainers and for the CVS
-  system. Any chapter labelled (OPTIONAL) may be left out at the author's
-  discretion. Other chapters should not be left out in order to maintain a
-  consistent documentation style across all KDE apps. -->
-
-
-  <!-- KDE Games have special chapters
-
-  Introduction
-
-  How to play
-
-  Game Rules, Strategies and Tips
-
-  Interface Overview
-
-  Frequently asked questions
-
-  Credits and License
-
-  Please use one of index.docbook files from kdegames
-
-  -->
   <chapter id="introduction">
-    <title>Introduction</title>
-
-    <!-- The introduction chapter contains a brief introduction for the
-    application that explains what it does and where to report
-    problems. Basically a long version of the abstract.  Don't include a
-    revision history. (see installation appendix comment) -->
+    <title>Einführung</title>
 
     <para>
-      &kmyapplication; is a software realization of Game Of Life, a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+      &kmyapplication; ist eine Lebenspiel-Software-Realisierung.Es ist ein Zellenautomat, der 1970 vom britischen Mathematiker John Horton Conway entwickelt wurde.
     </para>
     <para>
-      It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.
+      „Spiel“ versteht sich dabei nicht als Gesellschafts- oder Kampfspiel, sondern als ein Geschehen, das nach festgelegten einfachen Regeln abläuft.
     </para>
   </chapter>
 
   <chapter id="using-kapp">
     <title>Using &kmyapplication;</title>
 
-    <!-- This chapter should tell the user how to use your app. You should use as
-    many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-    your application. -->
-
-
-      <!-- Note that all graphics should be in .png format. Use no gifs because of
-      patent issues. -->
-
     <screenshot>
-      <screeninfo>Here's a screenshot of &kmyapplication;</screeninfo>
+      <screeninfo>Bildschirm von &kmyapplication;</screeninfo>
       <mediaobject>
         <imageobject>
           <imagedata fileref="screenshot.png" format="PNG"/>
         </imageobject>
         <textobject>
-          <phrase>Screenshot</phrase>
+          <phrase>Bildschirm</phrase>
         </textobject>
       </mediaobject>
     </screenshot>
 
     <sect1 id="kapp-features">
-      <title>&kmyapplication; features</title>
-
+      <title>Anwendungsfunktionen</title>
       <para>
-        When the application is launched, the colony from the default template is loaded if this template was chosen previously from
-        <link linkend="configuration">configuration dialog</link>
+        Beim Anwendungstart wird die Kolonie aus der Standardvorlage geladen, wenn diese Vorlage zuvor im
+        <link linkend="configuration">Einrichtungsdialog</link> ausgewählt wurde
+      </para>
+      <para>
+        Benutzen Sie eine Maus, um eine beliebige Anzahl von Zellen festzulegen. Ziehen Sie eine Linie, um eine Reihe von Zellen zu erstellen.
+        Dann fangen Sie mit Ihrer Kolonieentwicklung an, indem drücken Sie die<link linkend="menu-commands">Start/Halt ein Spiel</link>Menübefehl. Die Kolonie sollte sich nach mehreren <link linkend="evolution-rules">Evolutionsregeln</link> entwickeln
       </para>
       <screenshot>
-        <screeninfo>Evolution Example</screeninfo>
+        <screeninfo>Zum Beispiel</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="evolution.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase>Evolution</phrase>
+            <phrase>Zum Beispiel</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
+    <sect1 id="evolution-rules">
+      <title>Evolutionsregeln</title>
+      <para>
+        Die Folgegeneration wird für alle Zellen gleichzeitig berechnet und ersetzt die aktuelle Generation. Der Zustand einer Zelle (lebendig oder tot) in der Folgegeneration hängt nur vom aktuellen Zustand der Zelle selbst und den aktuellen Zuständen ihrer acht Nachbarzellen ab.
+        Die von Conway zu Anfang verwendeten Regeln sind:
+      </para>
+      <para>
+        <itemizedlist mark="circle">
+          <listitem>
+            <para>Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration „geboren“ (zum Leben erweckt)</para>
+          </listitem>
+          <listitem>
+            <para>Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt in der Folgegeneration (an Einsamkeit).</para>
+          </listitem>
+          <listitem>
+            <para>Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben.</para>
+          </listitem>
+          <listitem>
+            <para>Eine lebende Zelle mit mehr als drei lebenden Nachbarn stirbt in der Folgegeneration (an Überbevölkerung).</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        Wenn Sie auf dem Feld ein erstes Muster konstruieren, bildet es den Systemkeim. Die erste Generation entsteht durch gleichzeitige Anwendung der oben genannten Regeln auf jede Zelle im Keim, ob lebend oder tot; Geburten und Todesfälle erfolgen gleichzeitig, und der diskrete Zeitpunkt, in dem dies geschieht, wird manchmal als Tick bezeichnet. Jede Generation ist eine Reinfunktion von vorhergehenden. Die Regeln wenden weiterhin wiederholt an, um weitere Generationen zu schaffen.
+      </para>
+      <para>In dieser Anwendungsrealization ist Das Feld standardmäßig <link linkend="field-edge">toroidish</link></para>
+    </sect1>
   </chapter>
 
-  <chapter id="commands">
-    <title>Command Reference</title>
-    <para>To Do</para>
+  <chapter id="interface">
+  <title>Schnittstellenreferenz</title>
+    <sect1 id="mouse-control">
+      <title>Mauskontrol</title>
+      <variablelist>
+        <varlistentry>
+          <term>Mauslinktaste und Mausrad</term>
+          <listitem>
+            <para>
+              Mauslinktasteklick am Feld wird die Zelle setzen (alive) oder leeeren (tot).
+              Ziehen Sie eine Linie, um eine Reihe von Zellen zu erstellen.
+              Mausrad erhöht oder verringert das Feld.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Schieberegler</term>
+          <listitem>
+            <para>Verwenden Sie den Schieberegler, um die Zeitintervalle zwischen Generationswechseln zu erhöhen oder zu verringern</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="menu-commands">
+      <title>Menübefehle</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>O</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Datei</guimenu> <guimenuitem>Öffnen...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Eine gespeicherte Kolonie laden</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Datei</guimenu> <guimenuitem>Speichern...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Eine aktuelle Kolonie speichern</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Datei</guimenu> <guimenuitem>Speichern unter...</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Eine aktuelle Kolonie unter veränderten Namen speichern</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>N</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Spiel</guimenu> <guimenuitem>Neues Spiel</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Aufklaren das Spielfeld und die Evolution halten</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>S</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Start/Halt ein Spiel</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Kontinuierliche Weiterentwicklung starten oder halten.Das Symbol ändert sich entsprechend dem aktuellen Modus</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>M</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Spiel</guimenu> <guimenuitem>Bewegen</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Machen Sie eine Mausclick, um das Feldverschiebungsmodus zu eintragen. Mit diesem Modus können Sie das Feld verschieben, um die Zellen, die den Bildschirm nicht passen wegen des Maßstabs</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>+</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Ansicht</guimenu> <guimenuitem>Vergrößern</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Zunehmen den Maßstab.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>-</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Ansicht</guimenu> <guimenuitem>Verkleinern</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Verringern den Maßstab.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Ctrl;<keycap>0</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Ansicht</guimenu> <guimenuitem>Tatsächliche Größe</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Wiederherstellen den Maßstab.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
   </chapter>
 
-  <!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
-  application windows and their menubar and toolbar commands for easy reference.
-  Also include any keys that have a special function but have no equivalent in the
-  menus or toolbars.
-  This may not be necessary for small apps or apps with no tool or menu bars.
-
-  Don't bother users with well known kde menu items like Settings->Shortcuts etc.
-
-  Use cases for a command reference:
-
-  Applications with many menu items (Kate/Konqueror)
-  Applications with different modes and menus (KWrite/Konqueror)
-  -> Enables search for menu items
-
-  For Applications with default menu items and some special items where user
-  needs additional information use something like:
-  "Apart from the common KDE menu items you find these action in the menu:
-
-  File -> Special Action: Explanation of special action
-
-  Tools -> Special Tool: Explanation of special tool
-
-  Use variablelist markup for this
-  -->
 
   <chapter id="configuration">
-    <title>Game settings</title> <!-- do not change this! -->
-    <!--This section describes configuration &GUI;. If your game is configured using menubar exclusively, please remove this section.-->
+    <title>Spieleinstellungen</title>
     <sect1 id="screen-and-menu">
-      <title>Game settings screen</title>
+      <title>Spieleinstellungenbildschirm</title>
       <para>
         <screenshot>
-          <screeninfo>General configuration</screeninfo>
+          <screeninfo>Allgemeine einrichtungen</screeninfo>
           <mediaobject>
             <imageobject>
               <imagedata fileref="config.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Congiguration</phrase>
+              <phrase>Einrichtung</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
       </para>
-      <para>Menu command
-        <menuchoice><guimenu>Settings</guimenu>
-          <guimenuitem>Configure &kappname;...</guimenuitem>
-          </menuchoice>opens <guilabel>&kappname; configuration dialog</guilabel>.
+    </sect1>
+    <sect1 id="settings-command">
+      <title>Einstellungsmenübefehl</title>
+      <para>
+        <menuchoice><guimenu>Einstellungen</guimenu>
+          <guimenuitem>&kappname; einrichten...</guimenuitem>
+          </menuchoice>macht <guilabel>&kappname; die Einrichtungsdialog</guilabel> auf.
       </para>
     </sect1>
 
-    <sect1 id="general-options"><title><guilabel>General</guilabel> options</title>
-      <sect2 id="borders-and-cells"><title><guilabel>Borders and cells</guilabel></title>
+
+    <sect1 id="general-options"><title><guilabel>Allgemeine</guilabel> einrichtungen</title>
+      <sect2 id="borders-and-cells"><title><guilabel>Trennstreifen und Zellen</guilabel></title>
         <variablelist>
           <varlistentry>
             <term>
-              <guilabel>Cell color</guilabel>
+              <guilabel>Zellenfarbe</guilabel>
             </term>
             <listitem>
-              <para>Choose alive cell color</para>
+              <para>Wählen Sie eine Lebendenzellenfarbe</para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Background color</guilabel>
+              <guilabel>Rückfarbe</guilabel>
             </term>
             <listitem>
-              <para>Choose empty cell color</para>
+              <para>Wählen Sie eine Leerenzellenfarbe</para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Cells border color</guilabel>
+              <guilabel>Zellentrennstreifenfarbe</guilabel>
             </term>
             <listitem>
-              <para>Choose border between cells color color</para>
+              <para>Wählen Sie eine Zellentrennstreifenfarbe</para>
             </listitem>
           </varlistentry>
         </variablelist>
       </sect2>
-      <sect2 id="field-edge"><title><guilabel>Field edge type</guilabel></title>
+      <sect2 id="field-edge"><title><guilabel>Feldränder</guilabel></title>
         <variablelist>
           <varlistentry>
             <term>
-              <guilabel>Toroidal</guilabel>
+              <guilabel>Toroidisch</guilabel>
             </term>
             <listitem>
               <para>
-              Choose a toroidal field. The field is considered to be a toroid. The cell on the edge has its
-              neighbours at the opposite side
+              Das Feld wird als Toroid betrachtet. Die Zelle am Rand hat ihre Nachbarn auf
+              der gegenüberliegenden Seite
               </para>
             </listitem>
           </varlistentry>
           <varlistentry>
             <term>
-              <guilabel>Neutral Wall</guilabel>
+              <guilabel>Neutralmauer</guilabel>
             </term>
             <listitem>
               <para>
-              Choose a neutral wall field. The field is surrounded by a neutral wall. No cells are born there and it is not taken into the account as a neighbour
+              Das Feld ist von einer neutralen Mauer umgeben. Keine Zellen werden darüber hinaus geboren und sie wird nicht als Nachbar berücksichtigt
               </para>
             </listitem>
           </varlistentry>
@@ -289,29 +375,33 @@
     </sect1>
 
 
-    <sect1 id="pattern-options"><title><guilabel>Patterns</guilabel> selection pad</title>
+    <sect1 id="pattern-options"><title><guilabel>Vorlagen</guilabel> Auswahl</title>
       <para>
         <screenshot>
-          <screeninfo>Pattern selection</screeninfo>
+          <screeninfo>Vorlagenauswahl</screeninfo>
           <mediaobject>
             <imageobject>
               <imagedata fileref="patterns.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Choose pattern</phrase>
+              <phrase>Wählen Sie eine Vorlage</phrase>
             </textobject>
           </mediaobject>
         </screenshot>
+      </para>
+      <para>
+        Können Sie hier die vorinstallierten Vorlagen auswählen. Nachdem Sie Ja oder Anwendentaste klicken, wird es automatisch geladen und auf das Feld gelegt.
+        Wenn Sie  <link linkend="general-options">die andere Einsetzungen</link> ohne Vorlagenliste tippen, dann keine Vorlagen veränderen.
       </para>
     </sect1>
 
 
     <sect1 id="standard-settings">
-    <title>Standard KDE settings</title>
+    <title>Standarde KDE einsetzungen</title>
       <para>
-        Also &kappname; has standard &kde; menu <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>,
-        for more information use <ulink url="help:/fundamentals/ui.html#menus-settings">Settings menu</ulink> and
-        <ulink url="help:/fundamentals/ui.html#menus-help">Help menu</ulink>.
+        Auch &kappname; verfügt über Standard-&kde; Menü<guimenu>Einsetzungen</guimenu> and <guimenu>Hilfe</guimenu>,
+        um mehr Informazion zu bekommen, benutzen Sie <ulink url="help:/fundamentals/ui.html#menus-settings">Einsetzungen</ulink> und
+        <ulink url="help:/fundamentals/ui.html#menus-help">Hilfe</ulink>.
       </para>
     </sect1>
 
@@ -319,23 +409,22 @@
 
 
   <chapter id="faq">
-    <title>Questions and Answers</title>
+    <title>Frage und Antwörte</title>
     <qandaset id="faqlist">
       <qandaentry>
         <question>
-          <para>Can I work with &kmyapplication; from keyboard?</para>
+          <para>Darf ich  &kmyapplication; mit der Tastatur benutzen?</para>
         </question>
         <answer>
-          <para>Of course. Check out the <link linkend="commands">Commands
-              Section</link> for the answer.</para>
+          <para>Ja. Prüfen Sie <link linkend="menu-commands">Menubefehle</link> für das Antwort.</para>
         </answer>
       </qandaentry>
       <qandaentry>
         <question>
-          <para>I have constructed an interesting colonie pattern. Can I suggest it to be included at the distribution package?</para>
+          <para>Ich habe eine interessante Kolonievorlage konstruiert. Kann ich vorschlagen, es dem Distributionspaket beizufügen?</para>
         </question>
         <answer>
-          <para>Save your colonie to the .kgol file and send email to the <link linkend="credits">developer's team</link> with the file attached.</para>
+          <para>Speichern Sie Ihre Kolonie in der .kgol-Datei und senden Sie eine E-Mail mit der angehängten Datei <link linkend="credits">an die Entwicklermannschaft</link></para>
         </answer>
       </qandaentry>
     </qandaset>
@@ -343,31 +432,18 @@
 
   <chapter id="credits">
 
-    <!-- Include credits for the programmers, documentation writers, and
-    contributors here. The license for your software should then be included below
-    the credits with a reference to the appropriate license file included in the KDE
-    distribution. -->
 
-    <title>Credits and License</title>
+    <title>Credits und Lizenz</title>
 
     <para>
       &kmyapplication;
     </para>
     <para>
-      Program copyright 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
+      Programurheberrecht 2023 Eugen E. Sorotschinskii <email>webmaster@darkguard.net</email>
     </para>
-    <!--para>
-    Contributors:
-    <itemizedlist>
-    <listitem><para>Konqui the &kde; Dragon <email>konqui@kde.org</email></para>
-    </listitem>
-    <listitem><para>Tux the &Linux; Penguin <email>tux@linux.org</email></para>
-    </listitem>
-    </itemizedlist>
-    </para-->
 
     <para>
-      Documentation copyright 2023 Eugene E. Sorochinskiy <email>webmaster@darkguard.net</email>
+      Dokumentenurheberrecht 2023 Eugen E. Sorotschinskii <email>webmaster@darkguard.net</email>
     </para>
 
     &underGPL;           <!-- CC BY-SA 4.0: do not remove -->
@@ -375,58 +451,25 @@
 
   </chapter>
 
-  <!-- Appendix Installation is optional, usually not required
-
-  Entities &install.intro.documentation; + &install.compile.documentation; will be removed in later kdoctools
-
-  -->
 
   <appendix id="installation">
     <title>Installation</title>
 
-    <sect1 id="getting-kapp">
-      <title>How to obtain &kmyapplication;</title>
-
-      <!-- This first entity contains boiler plate for applications that are
-      part of KDE archive.  You should remove it if you are releasing your
-      application -->
-
-      &install.intro.documentation;
-
-    </sect1>
-
     <sect1 id="requirements">
-      <title>Requirements</title>
-
-      <!--
-      List any special requirements for your application here. This should include:
-      .Libraries or other software that is not included in kdesupport or kf5
-      .Hardware requirements like amount of RAM, disk space, graphics card
-      capabilities, screen resolution, special expansion cards, etc.
-      .Operating systems the app will run on. If your app is designed only for a
-      specific OS, (you wrote a graphical LILO configurator for example) put this
-      information here.
-      -->
+      <title>Anforderungen</title>
 
       <para>
-        In order to successfully use &kmyapplication;, you need few standard libraries from
-        &kde-frameworks; 5.92
+       Um &kmyapplication; erfolgreich zu nutzen, benötigen Sie einige Standardbibliotheken von &kde-frameworks; 5,92
       </para>
 
-      <!-- For a list of updates, you may refer to the application web site
-      or the ChangeLog file, or ... -->
       <para>
-        You can find a list of changes at <ulink
+        Eine Liste der Änderungen finden Sie unter <ulink
           url="https://apps.kde.org/kapp">https://apps.kde.org/kapp</ulink>.
         </para>
       </sect1>
 
       <sect1 id="compilation">
-        <title>Compilation and Installation</title>
-
-        <!-- This entity contains the boilerplate text for standard -->
-        <!-- compilation instructions.  If your application requires any -->
-        <!-- special handling, remove it, and replace with your own text. -->
+        <title>Zusammenstellung und Installation</title>
 
         &install.compile.documentation;
 
