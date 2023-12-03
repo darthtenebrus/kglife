@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 12:09+0300\n"
-"PO-Revision-Date: 2023-12-03 16:58+0300\n"
+"PO-Revision-Date: 2023-12-03 18:17+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -120,13 +120,13 @@ msgstr "Alt+W"
 #: cmake-build-release/kglife_autogen/include/ui_patternspage.h:125
 #, kde-format
 msgid "PatternsPage"
-msgstr "Vorlagenseite"
+msgstr "Musterseite"
 
 #: cmake-build-debug/kglife_autogen/include/ui_patternspage.h:126
 #: cmake-build-release/kglife_autogen/include/ui_patternspage.h:126
 #, kde-format
 msgid "Pattern Details"
-msgstr "Vorlageneinzelheiten"
+msgstr "Mustereinzelheiten"
 
 #: cmake-build-debug/kglife_autogen/include/ui_patternspage.h:127
 #: cmake-build-release/kglife_autogen/include/ui_patternspage.h:127
@@ -231,7 +231,7 @@ msgstr "Allgemeine"
 #: KLGameField.cpp:577
 #, kde-format
 msgid "Patterns"
-msgstr "Vorlagen"
+msgstr "Muster"
 
 #: KLGameField.cpp:596 KLGameField.cpp:608 KLGameField.cpp:618
 #: KLGameField.cpp:630
