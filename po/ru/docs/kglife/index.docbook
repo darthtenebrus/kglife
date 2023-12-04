@@ -72,7 +72,7 @@
   </chapter>
 
   <chapter id="using-kapp">
-    <title>Using &kmyapplication;</title>
+    <title>Как пользоваться &kmyapplication;</title>
 
     <screenshot>
       <screeninfo>Начальный экран &kmyapplication;</screeninfo>
@@ -433,7 +433,7 @@
   <chapter id="credits">
 
 
-    <title>Credits and License</title>
+    <title>Лицензия и права</title>
 
     <para>
       &kmyapplication;

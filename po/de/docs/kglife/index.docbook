@@ -67,7 +67,7 @@
   </chapter>
 
   <chapter id="using-kapp">
-    <title>Using &kmyapplication;</title>
+    <title>Benutzung von &kmyapplication;</title>
 
     <screenshot>
       <screeninfo>Bildschirm von &kmyapplication;</screeninfo>
@@ -433,7 +433,7 @@
   <chapter id="credits">
 
 
-    <title>Credits und Lizenz</title>
+    <title>Rechte und Lizenz</title>
 
     <para>
       &kmyapplication;
