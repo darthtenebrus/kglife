@@ -13,6 +13,5 @@ Thumbs.db
 cmake-build*/
 
 run-trans.sh
-Messages.sh
 po/*.pot
 po/*.mo
