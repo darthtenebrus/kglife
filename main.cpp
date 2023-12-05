@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
                          i18n("Game Of Life"), KGLIFE_VERSION_STRING,
                          i18n("Convey's Game Of Life for KDE"),
                          KAboutLicense::GPL_V3, "2023 E.Sorochinskiy",
-                         i18n("Construct and experement with many cell colonies"),
+                         i18n("Construct and experiment with many cell colonies"),
                          "https://www.darkguard.net");
 
     aboutData.addAuthor("Eugene E. Sorochinskiy",
