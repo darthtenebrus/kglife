@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
 
     KAboutData aboutData(QStringLiteral("kglife"),
                          i18n("Game Of Life"), KGLIFE_VERSION_STRING,
-                         i18n("Convey's Game Of Life for KDE"),
+                         i18n("Conway's Game Of Life for KDE"),
                          KAboutLicense::GPL_V3, "2023 E.Sorochinskiy",
                          i18n("Construct and experiment with many cell colonies"),
                          "https://www.darkguard.net");
