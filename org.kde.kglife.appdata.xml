@@ -9,15 +9,15 @@
   <name xml:lang="ru">kglife</name>
 
   <summary>Game Of Life</summary>
-  <summary xml:lang="de">Schlangespiel</summary>
-  <summary xml:lang="ru">Игра Змейка</summary>
+  <summary xml:lang="de">Lebenspiel</summary>
+  <summary xml:lang="ru">Игра "Жизнь"</summary>
   <description>
     <p>
       Another Convey's Game Of Life realization. Save edit and modify your colonies. Use pre-installed templates
     </p>
 
-    <p xml:lang="de">Die andere Lebenspiel von Convey.</p>
-    <p xml:lang="en-GB">Another Convey's Game Of Life realization. Save edit and modify your colonies. Use pre-installed templates</p>
+    <p xml:lang="de">Die andere Lebenspiel von Conway.</p>
+    <p xml:lang="en-GB">Another Conway's Game Of Life realization. Save edit and modify your colonies. Use pre-installed templates</p>
     <p xml:lang="ru">Еще одна реализация игры "Жизнь" Конвея. Создавайте, модифицируйте ваши колонии клеток и эксперементируйте с ними. Используйте готовые шаблоны</p>
   </description>
   <url type="homepage">https://apps.kde.org/kglife</url>
