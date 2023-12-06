@@ -1,4 +1,4 @@
-# KGLige
+# KGLife
 
 Game Of Life from J. H. Conway
 
