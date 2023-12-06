@@ -24,6 +24,12 @@ cmake .. -DCMAKE_INSTALL_PREFIX=~/usr -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Rele
 cmake --build .
 ```
 
+## Installation after build
+
+```
+cmake --install .
+```
+
 ## License
 
 This project is licensed under GPL-3.0-or-later.
