@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+
+<!ENTITY % Russian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+    <refentryinfo>
+        <title>Краткая справка по KGlife</title>
+        <date>2023-10-03</date>
+        <productname>KGlife 1.0.6</productname>
+    </refentryinfo>
+
+    <refmeta>
+        <refentrytitle><command>kglife</command></refentrytitle>
+        <manvolnum>1</manvolnum>
+    </refmeta>
+
+    <refnamediv>
+        <refname><command>kglife</command></refname>
+        <refpurpose>Игра "Жизнь" Дж. Х. Конвея</refpurpose>
+    </refnamediv>
+
+    <refsynopsisdiv>
+        <cmdsynopsis>
+            <command>kglife</command>
+            <group choice="opt"><option>-h, -H, --help</option></group>
+            <group choice="opt"><option>-v, --version</option></group>
+        </cmdsynopsis>
+    </refsynopsisdiv>
+
+
+    <refsect1 id="description">
+        <title>Описание</title>
+
+        <para>Еще одна игра "Жизнь"</para>
+    </refsect1>
+
+
+    <refsect1 id="options">
+        <title>Параметры</title>
+
+        <para>
+        Программа соблюдает обычный для GNU команд синтаксис, включая параметры с двумя дефисами (`-').
+        Краткий список параметров предоставлен ниже.
+        </para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Доступные параметпы</title>
+        <variablelist>
+            <varlistentry>
+                <term><option>-h, -H, --help</option></term>
+                <listitem><para>Показать список параметров.</para></listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><option>-v, --version</option></term>
+                <listitem><para>Показать версию программы.</para></listitem>
+            </varlistentry>
+        </variablelist>
+    </refsect1>
+
+    <refsect1>
+        <title>См. также</title>
+
+        <para>
+            Полная документация доступна
+            <ulink url="help:/kglife">help:/kglife</ulink> (ввведите &URL;
+            в &konqueror;, или запустите <userinput><command>khelpcenter</command>
+                <parameter>help:/kglife</parameter></userinput>).</para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Ошибки</title>
+
+        <para>При обнаружении обращайтесь <email>esorochinskiy@kde.org</email>.</para>
+    </refsect1>
+
+    <refsect1>
+        <title>Авторы</title>
+        <para>kglife создана <personname><firstname>Евгением</firstname><surname>Сорочинским</surname></personname> <email>esorochinskiy@kde.org</email>.</para>
+        <para>Эта страница руководства подготовлена <personname><firstname>Евгением</firstname><surname>Сорочинским</surname></personname> <email>esorochinskiy@kde.org</email> для систем &Debian; &GNU;/&Linux; (может быть использована и в сторонних системах).</para>
+    </refsect1>
+
+</refentry>
+

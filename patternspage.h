@@ -21,11 +21,15 @@ Q_OBJECT
 public:
     explicit PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *config, QWidget *parent = nullptr);
 
+    ~PatternsPage() override;
+
 private:
 
     void fillPatternList();
     void setupData(KConfigSkeleton *pSkeleton);
     void cleanup();
+
+    QGraphicsScene *m_Scene;
 
 private slots:
     void patternChanged(int);

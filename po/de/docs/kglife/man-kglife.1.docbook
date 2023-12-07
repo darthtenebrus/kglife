@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+
+<!ENTITY % German "INCLUDE">
+]>
+
+<refentry lang="&language;">
+    <refentryinfo>
+        <title>KGlife Kurzhändebuch</title>
+        <date>2023-10-03</date>
+        <productname>KGlife 1.0.6</productname>
+    </refentryinfo>
+
+    <refmeta>
+        <refentrytitle><command>kglife</command></refentrytitle>
+        <manvolnum>1</manvolnum>
+    </refmeta>
+
+    <refnamediv>
+        <refname><command>kglife</command></refname>
+        <refpurpose>Lebenspiel von J.H. Conway</refpurpose>
+    </refnamediv>
+
+    <refsynopsisdiv>
+        <cmdsynopsis>
+        <command>kglife</command>
+            <group choice="opt"><option>-h, -H, --help</option></group>
+            <group choice="opt"><option>-v, --version</option></group>
+        </cmdsynopsis>
+    </refsynopsisdiv>
+
+
+    <refsect1 id="description">
+        <title>Kurzbeschreibung</title>
+
+        <para>Die andere Lebenspielanwendung.</para>
+
+    </refsect1>
+
+
+    <refsect1 id="options">
+        <title>Argumente</title>
+
+        <para>
+            Dieses Programm folgt der üblichen GNU-Befehlszeilensyntax mit langen
+            Argumenten, die mit zwei Bindestrichen (`-') anfangen.
+            Eine Argumentenzusammenfassung finden Sie unten.
+        </para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Gültige Argumente</title>
+        <variablelist>
+            <varlistentry>
+                <term><option>-h, -H, --help</option></term>
+                <listitem><para>Argumentenzusammenfassung anzeigen.</para></listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><option>-v, --version</option></term>
+                <listitem><para>Anwendungsversion anzeigen.</para></listitem>
+            </varlistentry>
+        </variablelist>
+    </refsect1>
+
+    <refsect1>
+        <title>See Also</title>
+
+        <para>Die ausführlichere Benutzerdokumentation findet man an <ulink
+                url="help:/kglife">help:/kglufe</ulink> (eindrückt man diese &URL;
+            an &konqueror;, oder einlauft man <userinput><command>khelpcenter</command>
+                <parameter>help:/kglife</parameter></userinput>).</para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Fehleren</title>
+
+        <para>Nachdem Sie ein Fehler finden melden Sie sich bitte an <email>esorochinskiy@kde.org</email>.</para>
+    </refsect1>
+
+    <refsect1>
+        <title>Autoren</title>
+        <para>kglife wird von <personname><firstname>Eugen</firstname><surname>Sorotschinskii</surname></personname> <email>esorochinskiy@kde.org</email> erstellt.</para>
+        <para>Dieses Kurzhändebuch wird von <personname><firstname>Eugen</firstname><surname>Sorotschinskii</surname></personname> <email>esorochinskiy@kde.org</email> für &Debian; &GNU;/&Linux; System vorbereitet (das kann man für die andere Systeme benutzen).</para>
+    </refsect1>
+
+</refentry>
+

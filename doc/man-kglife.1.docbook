@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+
+<!ENTITY % English "INCLUDE">
+]>
+
+<refentry lang="&language;">
+    <refentryinfo>
+        <title>KGlife Manual Page</title>
+        <date>2023-10-03</date>
+        <productname>KGlife 1.0.6</productname>
+    </refentryinfo>
+
+    <refmeta>
+        <refentrytitle><command>kglife</command></refentrytitle>
+        <manvolnum>1</manvolnum>
+    </refmeta>
+
+    <refnamediv>
+        <refname><command>kglife</command></refname>
+        <refpurpose>Game Of Life from J.H. Conway</refpurpose>
+    </refnamediv>
+
+    <refsynopsisdiv>
+        <cmdsynopsis>
+        <command>kglife</command>
+            <group choice="opt"><option>-h, -H, --help</option></group>
+            <group choice="opt"><option>-v, --version</option></group>
+        </cmdsynopsis>
+    </refsynopsisdiv>
+
+
+    <refsect1 id="description">
+        <title>Description</title>
+
+        <para>Another Game Of Life realization.</para>
+
+    </refsect1>
+
+
+    <refsect1 id="options">
+        <title>Options</title>
+
+        <para>This program follows the usual GNU command line syntax, with long
+            options starting with two dashes (`-').
+            A summary of options is included below.</para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Valid options</title>
+        <variablelist>
+            <varlistentry>
+                <term><option>-h, -H, --help</option></term>
+                <listitem><para>Show summary of options.</para></listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><option>-v, --version</option></term>
+                <listitem><para>Show program version.</para></listitem>
+            </varlistentry>
+        </variablelist>
+    </refsect1>
+
+    <refsect1>
+        <title>See Also</title>
+
+        <para>More detailed user documentation is available from <ulink
+                url="help:/kglife">help:/kglife</ulink> (either enter this &URL;
+            into &konqueror;, or run <userinput><command>khelpcenter</command>
+                <parameter>help:/kglife</parameter></userinput>).</para>
+
+    </refsect1>
+
+    <refsect1>
+        <title>Bugs</title>
+
+        <para>For further notice please report to <email>esorochinskiy@kde.org</email>.</para>
+    </refsect1>
+
+    <refsect1>
+        <title>Authors</title>
+        <para>kglife was written by <personname><firstname>Eugene</firstname><surname>Sorochinskiy</surname></personname> <email>esorochinskiy@kde.org</email>.</para>
+        <para>This manual page was prepared by <personname><firstname>Eugene</firstname><surname>Sorochinskiy</surname></personname> <email>esorochinskiy@kde.org</email> for the &Debian; &GNU;/&Linux; system (but may be used by others).</para>
+    </refsect1>
+
+</refentry>
+

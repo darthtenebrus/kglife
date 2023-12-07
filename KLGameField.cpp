@@ -572,6 +572,8 @@ void KLGameField::setupGame() {
     auto *dialog = KConfigDialog::exists(QStringLiteral("Settings"));
     if (!dialog) {
         dialog = new KConfigDialog(parentWidget(), QStringLiteral("Settings"), Settings::self());
+        QSize ds = { 940,630 };
+        dialog->setMinimumSize(ds);
         dialog->setFaceType(KPageDialog::List);
         dialog->addPage(new GeneralPage(parentWidget()), i18n("General"), "preferences-system", i18n("General"));
         dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template", i18n("Patterns"));

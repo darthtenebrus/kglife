@@ -14,14 +14,20 @@
 
 
 PatternsPage::PatternsPage(KConfigSkeleton *pSkeleton, KConfigDialog *cdialog, QWidget *parent) :
-        QWidget(parent), Ui::PatternsPage() {
+        QWidget(parent),  Ui::PatternsPage() {
     setupUi(this);
+    m_Scene = new QGraphicsScene(layoutPreview);
+    layoutPreview->setScene(m_Scene);
     connect(patternsList, &QListWidget::currentRowChanged, this, &PatternsPage::patternChanged);
     connect(cdialog->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this,
             &PatternsPage::restoreSettingsClicked);
     fillPatternList();
     setupData(pSkeleton);
 
+}
+
+PatternsPage::~PatternsPage() {
+    delete m_Scene;
 }
 
 
@@ -49,6 +55,9 @@ void PatternsPage::fillPatternList() {
             KConfigGroup group = kdfile.group(QStringLiteral("GOLColony"));
             const QString &kgolFilePath = finfo.absolutePath() +
                                           QDir::separator() + group.readEntry("FileName");
+
+            const QString &imageFilePath = finfo.absolutePath() +
+                                          QDir::separator() + group.readEntry("ImageName");
             const QString &displayTitle = group.readEntry("Name");
 
             auto *item = new QListWidgetItem();
@@ -57,6 +66,8 @@ void PatternsPage::fillPatternList() {
             item->setData(Qt::UserRole + 100, group.readEntry("Description"));
             item->setData(Qt::UserRole + 101, group.readEntry("Author"));
             item->setData(Qt::UserRole + 102, group.readEntry("AuthorEmail"));
+            item->setData(Qt::UserRole + 103, imageFilePath);
+
             item->setSizeHint(QSize(item->sizeHint().width(), 72));
             patternsList->addItem(item);
 
@@ -69,11 +80,28 @@ void PatternsPage::patternChanged(int cRow) {
 
     if (!cRow) {
         patternGroupBox->hide();
+        layoutPreview->hide();
     } else {
         patternGroupBox->show();
+        layoutPreview->show();
         descData->setText(item->data(Qt::UserRole + 100).value<QString>());
         authorData->setText(item->data(Qt::UserRole + 101).value<QString>());
         emailData->setText(item->data(Qt::UserRole + 102).value<QString>());
+        const QString &imageFileData = item->data(Qt::UserRole + 103).value<QString>();
+
+        if (QFile::exists(imageFileData)) {
+
+            const QPixmap &pix = QPixmap(imageFileData);
+            const QSize &siz = {pix.width() + 10, pix.height() + 10};
+            layoutPreview->setMinimumSize(siz);
+            layoutPreview->resize(siz);
+
+            QGraphicsScene *scene = layoutPreview->scene();
+            scene->clear();
+            scene->addPixmap(pix);
+
+        }
+
     }
     kcfg_templatefile->setText(item->data(Qt::UserRole).value<QString>());
 }
