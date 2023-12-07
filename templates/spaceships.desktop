@@ -1,0 +1,18 @@
+[GOLColony]
+Name=Spaceships
+Name[de]=Raumschiffe
+Name[en]=Spaceships
+Name[es]=Naves de espacio
+Name[ru]=Космические корабли
+Description=A set of spaceships
+Description[en]=A set of spaceships
+Description[de]=ein Haufen von Raumschiffen
+Description[es]=un montón de naves de espacio
+Description[ru]=Набор космических кораблей
+VersionFormat=1
+Author=Eugene E. Sorochinskiy
+Author[ru]=Евгений Сорочинский
+Author[de]=Eugen Sorotschinskii
+AuthorEmail=webmaster@darkguard.net
+FileName=spaceships.kgol
+ImageName=spaceships.png

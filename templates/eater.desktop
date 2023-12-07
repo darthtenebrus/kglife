@@ -1,0 +1,18 @@
+[GOLColony]
+Name=Eater
+Name[de]=Fresser
+Name[en]=Eater
+Name[es]=Comador
+Name[ru]=Пожиратель
+Description=One of the eaters
+Description[en]=One of the eaters
+Description[de]=Einfaches Fresser
+Description[es]=Uno de los comadores
+Description[ru]=Пример пожирателя
+VersionFormat=1
+Author=Eugene E. Sorochinskiy
+Author[ru]=Евгений Сорочинский
+Author[de]=Eugen Sorotschinskii
+AuthorEmail=webmaster@darkguard.net
+FileName=eater.kgol
+ImageName=eater.png
