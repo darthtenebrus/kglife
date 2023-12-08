@@ -13,7 +13,6 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <KMessageBox>
-#include <QTextStream>
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include "LoadGameException.h"
@@ -26,6 +25,7 @@
 #define MIN_CELL_SIZE 16
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
+
 
 QString KLGameField::CurrentFilePath = "";
 
@@ -440,6 +440,25 @@ QString KLGameField::forceFileNameDialog() {
 }
 
 
+void KLGameField::exportToAction(bool) {
+    const QString &path = QFileDialog::getSaveFileName(parentWidget(), i18n("Export colony current state"),
+                                                       CurrentFilePath.isEmpty() ? QDir::homePath() :
+                                                       QFileInfo(CurrentFilePath).dir().path(),
+                                                       i18n("Life32/XLife Run Length Encoding (*.rle);;Plaintext (*.cells)"));
+    if (path.isEmpty()) {
+        return;
+    }
+
+
+    QFileInfo fileInfo(path);
+
+    if (fileInfo.suffix().toLower() == "rle") {
+        tryToExportRLE(path);
+    } else if (fileInfo.suffix().toLower() == "cells") {
+        tryToExportCells(path);
+    }
+}
+
 void KLGameField::saveAsAction(bool) {
     cancelTimerInstantly();
     const QString &path = forceFileNameDialog();
@@ -464,7 +483,7 @@ void KLGameField::saveAction(bool) {
 
 }
 
-void KLGameField::setCurrentPath(KLGameField *th, QString cpath) {
+void KLGameField::setCurrentPath(KLGameField *th, const QString& cpath) {
     if (!cpath.isEmpty()) {
         CurrentFilePath = cpath;
         emit th->changeCurrentFile(QFileInfo(cpath).fileName());
@@ -681,6 +700,135 @@ void KLGameField::printGame() {
         painter.end();
     }
 }
+
+bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
+
+    bool isToSave = false;
+    for (int y = 0; y < m_cellsY; ++y) {
+        for (int x = 0; x < m_cellsX; ++x) {
+            if (fromMainLayer(x, y)) {
+                isToSave = true;
+                minOr.setX(std::min(x, minOr.x()));
+                minOr.setY(std::min(y, minOr.y()));
+
+                maxOr.setX(std::max(x, maxOr.x()));
+                maxOr.setY(std::max(y, maxOr.y()));
+            }
+        }
+    }
+    return isToSave;
+}
+
+
+void KLGameField::tryToExportCells(const QString &path) {
+    bool isToSave;
+    try {
+
+        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+        QPoint maxOrigin = QPoint(0, 0);
+
+        QSize delta = QSize(0,0);
+
+        // First we perform minimax tests to determine pattern limits;
+
+        isToSave = doMiniMaxTests(minOrigin, maxOrigin);
+
+        if (!isToSave) {
+            throw LoadGameException(i18n("Colony is empty").toStdString());
+        }
+
+        delta.setWidth(maxOrigin.x() - minOrigin.x());
+        delta.setHeight(maxOrigin.y() - minOrigin.y());
+
+        QFile file(path);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        QTextStream out(&file);
+        out << "! X-Creator: KGLife\n";
+
+        for (int y = 0; y <= delta.height(); ++y) {
+            for (int x = 0; x <= delta.width(); ++x) {
+                out << (fromMainLayer(minOrigin.x() + x, minOrigin.y() + y) ? 'O' : '.');
+            }
+            out << '\n';
+        }
+
+        file.close();
+
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+    }
+}
+
+void KLGameField::tryToExportRLE(const QString &path) {
+
+    bool isToSave;
+    try {
+
+        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+        QPoint maxOrigin = QPoint(0, 0);
+
+        QSize delta = QSize(0,0);
+
+        // First we perform minimax tests to determine pattern limits;
+
+        isToSave = doMiniMaxTests(minOrigin, maxOrigin);
+
+        if (!isToSave) {
+            throw LoadGameException(i18n("Colony is empty").toStdString());
+        }
+
+        delta.setWidth(maxOrigin.x() - minOrigin.x());
+        delta.setHeight(maxOrigin.y() - minOrigin.y());
+
+        QFile file(path);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        QTextStream out(&file);
+        out << "#C X-Creator: KGLife\n";
+        out << "#P " << minOrigin.x() + 1 << " " << minOrigin.y() + 1 << '\n';
+        out << "x = " << delta.width() + 1 << ", y = " << delta.height() + 1 << ", rule=B3/S23\n";
+
+        for (int y = 0; y <= delta.height(); ++y) {
+            int cDead = 0;
+            int cAlive = 0;
+            for (int x = 0; x <= delta.width(); ++x) {
+                if (fromMainLayer(minOrigin.x() + x, minOrigin.y() + y)) {
+                    cAlive++;
+                    flushStream(cDead, 'b', out);
+                } else {
+                    cDead++;
+                    flushStream(cAlive, 'o', out);
+                }
+            }
+            flushStream(cAlive, 'o', out);
+            out << (y == delta.height() ? "!" : "$");
+        }
+
+        file.close();
+
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+    }
+}
+
+void KLGameField::flushStream(int &status, char symbol, QTextStream &s) {
+
+    if (status) {
+        if(status > 1) {
+            s << status;
+        }
+        s << symbol;
+        status = 0;
+    }
+}
+
+
+
 
 
 

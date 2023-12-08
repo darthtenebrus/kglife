@@ -7,6 +7,7 @@
 
 
 #include <QWidget>
+#include <QTextStream>
 
 class KLGameField : public QWidget {
 Q_OBJECT
@@ -55,6 +56,12 @@ private:
     [[nodiscard]]
     QSize getStandardFieldDefs(int &, int &) const;
 
+    void tryToExportRLE(const QString &);
+    void tryToExportCells(const QString &);
+    void flushStream(int &status, char symbol, QTextStream &);
+
+    bool doMiniMaxTests(QPoint &, QPoint &);
+
 
     int m_TimerInterval;
     int m_Generation = 0;
@@ -82,7 +89,7 @@ private:
     bool m_MoveMode = false;
 
     static QString CurrentFilePath;
-    static void setCurrentPath(KLGameField *th, QString cpath);
+    static void setCurrentPath(KLGameField *th, const QString& cpath);
 
 
 public slots:
@@ -91,6 +98,7 @@ public slots:
     void openAction(bool);
     void saveAction(bool);
     void saveAsAction(bool);
+    void exportToAction(bool);
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 
@@ -115,6 +123,7 @@ signals:
     void changeZoomOut(bool);
     void changeRestore(bool);
     void changeCurrentFile(const QString &);
+
 };
 
 
