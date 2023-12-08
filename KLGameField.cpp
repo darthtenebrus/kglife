@@ -3,6 +3,9 @@
 //
 
 #include <QPainter>
+#include <QPrinter>
+#include <QPrintDialog>
+
 #include <QApplication>
 #include<QDesktopWidget>
 #include "KLGameField.h"
@@ -416,7 +419,7 @@ void KLGameField::newAction(bool) {
 
 void KLGameField::openAction(bool) {
     cancelTimerInstantly();
-    const QString &path = QFileDialog::getOpenFileName(this, i18n("Load colony from file"),
+    const QString &path = QFileDialog::getOpenFileName(parentWidget(), i18n("Load colony from file"),
                                                        QDir::homePath(), i18n("This application (*.kgol)"));
 
     if (path.isEmpty()) {
@@ -429,7 +432,7 @@ void KLGameField::openAction(bool) {
 }
 
 QString KLGameField::forceFileNameDialog() {
-    QString path = QFileDialog::getSaveFileName(this, i18n("Save colony current state"),
+    QString path = QFileDialog::getSaveFileName(parentWidget(), i18n("Save colony current state"),
                                                 CurrentFilePath.isEmpty() ? QDir::homePath() :
                                                     QFileInfo(CurrentFilePath).dir().path(),
                                                 i18n("This application (*.kgol)"));
@@ -655,6 +658,27 @@ void KLGameField::cdApply(const QString &) {
         restoreScreen();
     } else {
         repaint();
+    }
+}
+
+void KLGameField::printGame() {
+
+    cancelTimerInstantly();
+    QPrinter printer(QPrinter::HighResolution);
+
+    std::unique_ptr<QPrintDialog> dialog = std::make_unique<QPrintDialog>(&printer, parentWidget());
+    dialog->setWindowTitle(i18n("Print Pattern"));
+
+
+    if (dialog->exec() == QDialog::Accepted) {
+
+        const QRect &destRect = printer.pageLayout().paintRectPixels(printer.resolution());
+        QPixmap pixmap = this->grab().scaled(destRect.size());
+        QPainter painter;
+
+        painter.begin(&printer);
+        painter.drawImage(0, 0, pixmap.toImage());
+        painter.end();
     }
 }
 

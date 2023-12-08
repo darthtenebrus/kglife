@@ -24,6 +24,7 @@
         <Action name="file_open" />
         <Action name="file_save" />
         <Action name="file_save_as" />
+        <Action name="file_print" />
         <Separator />
         <Action name="game_start_stop"/>
         <Action name="game_next_step"/>
@@ -47,6 +48,7 @@
             <Action name="file_open" />
             <Action name="file_save" />
             <Action name="file_save_as" />
+            <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
             <Action name="options_configure"/>
@@ -59,6 +61,7 @@
             <Action name="file_open" />
             <Action name="file_save" />
             <Action name="file_save_as" />
+            <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="options_configure"/>
         </disable>
@@ -70,6 +73,7 @@
             <Action name="file_open" />
             <Action name="file_save" />
             <Action name="file_save_as" />
+            <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
             <Action name="options_configure"/>

@@ -372,6 +372,21 @@
           </varlistentry>
         </variablelist>
       </sect2>
+      <sect2 id="timer-slider"><title><guilabel>Scheiberegler</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Anfangswert</guilabel>
+            </term>
+            <listitem>
+              <para>
+                Wählen Sie eine Anfangsstellung für den Scherberegler an die Hauptsymbolleiste
+                Nachdem die Anwendung geladen wird, denn setzt der Scherberegler sich an die Anfangsstellung
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
     </sect1>
 
 
@@ -390,7 +405,7 @@
         </screenshot>
       </para>
       <para>
-        Können Sie hier die vorinstallierten Muster auswählen. Nachdem Sie Ja oder Anwendentaste klicken, wird es automatisch geladen und auf das Feld gelegt.
+        Können Sie hier die vorinstallierten Muster auswählen. Nachdem Sie "Ja"-Taste oder Anwendentaste klicken, wird es automatisch geladen und auf das Feld gelegt.
         Wenn Sie  <link linkend="general-options">die andere Einsetzungen</link> ohne Vorlagenliste tippen, dann keine Muster veränderen.
       </para>
     </sect1>
@@ -399,7 +414,7 @@
     <sect1 id="standard-settings">
     <title>Standarde KDE einsetzungen</title>
       <para>
-        Auch &kappname; verfügt über Standard-&kde; Menü<guimenu>Einsetzungen</guimenu> and <guimenu>Hilfe</guimenu>,
+        Auch verfügt &kappname; über Standard-&kde; Menü<guimenu>Einsetzungen</guimenu> und <guimenu>Hilfe</guimenu>,
         um mehr Informazion zu bekommen, benutzen Sie <ulink url="help:/fundamentals/ui.html#menus-settings">Einsetzungen</ulink> und
         <ulink url="help:/fundamentals/ui.html#menus-help">Hilfe</ulink>.
       </para>
@@ -413,7 +428,7 @@
     <qandaset id="faqlist">
       <qandaentry>
         <question>
-          <para>Darf ich  &kmyapplication; mit der Tastatur benutzen?</para>
+          <para>Darf ich &kmyapplication; mit der Tastatur benutzen?</para>
         </question>
         <answer>
           <para>Ja. Prüfen Sie <link linkend="menu-commands">Menubefehle</link> für das Antwort.</para>
@@ -446,8 +461,7 @@
       Dokumentenurheberrecht 2023 Eugen E. Sorotschinskii <email>webmaster@darkguard.net</email>
     </para>
 
-    &underGPL;           <!-- CC BY-SA 4.0: do not remove -->
-
+    &underGPL;
 
   </chapter>
 

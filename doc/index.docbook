@@ -376,6 +376,21 @@
           </varlistentry>
         </variablelist>
       </sect2>
+      <sect2 id="timer-slider"><title><guilabel>Timer slider</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Initial value</guilabel>
+            </term>
+            <listitem>
+              <para>
+                Choose an initial position for the timer slider control on the toolbar
+                This position is set after the application is loaded.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
     </sect1>
 
 

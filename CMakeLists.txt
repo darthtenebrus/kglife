@@ -29,6 +29,7 @@ endif()
 
 find_package(Qt5 COMPONENTS
         Core
+        PrintSupport
         REQUIRED)
 find_package(KF5 COMPONENTS
         Config
@@ -68,6 +69,7 @@ kconfig_add_kcfg_files(${PROJECT_NAME}_SRCS GENERATE_MOC ${PROJECT_NAME}.kcfgc)
 
 
 target_link_libraries(${PROJECT_NAME}
+        Qt5::PrintSupport
         KF5::ConfigCore
         KF5::ConfigWidgets
         KF5::I18n

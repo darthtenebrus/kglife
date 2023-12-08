@@ -95,6 +95,7 @@ public slots:
     void timerChanged(int);
 
     void setupGame();
+    void printGame();
     void changeMoveMode(bool);
 
     void cZoomIn(bool);

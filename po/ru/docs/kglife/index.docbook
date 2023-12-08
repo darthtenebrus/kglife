@@ -372,6 +372,21 @@
           </varlistentry>
         </variablelist>
       </sect2>
+      <sect2 id="timer-slider"><title><guilabel>Ползунок контороля скорости</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Начальное значение</guilabel>
+            </term>
+            <listitem>
+              <para>
+                Устанавливает начальное положение ползунка контроля скорости на панели инструментов.
+                Эта позиция ползунка устанавливается при загрузке приложения
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
     </sect1>
 
 

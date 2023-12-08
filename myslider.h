@@ -10,7 +10,7 @@ class MySlider : public QSlider {
 Q_OBJECT
 
 public:
-    explicit MySlider(Qt::Orientation orientation, QWidget *parent = nullptr);
+    explicit MySlider(int value, Qt::Orientation orientation, QWidget *parent = nullptr);
     void retranslateUi();
 
 

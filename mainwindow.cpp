@@ -13,13 +13,14 @@
 #include <QApplication>
 #include <QStatusBar>
 #include "mainwindow.h"
+#include "kglife.h"
 #include "myslider.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
         KXmlGuiWindow(parent) {
 
-    mySlider = new MySlider(Qt::Horizontal, toolBar());
+    mySlider = new MySlider(Settings::slidervalue(), Qt::Horizontal, toolBar());
     mySlider->retranslateUi();
 
     gameField = new KLGameField(mySlider->value(), this);
@@ -85,6 +86,10 @@ void MainWindow::restoreChanged(bool enable) {
 
 
 void MainWindow::setupToolbar() {
+
+    QAction *printAction = KStandardAction::print(gameField, &KLGameField::printGame, actionCollection());
+    printAction->setWhatsThis(i18n("Print Pattern"));
+
     QAction *prefAction = KStandardAction::preferences(gameField, &KLGameField::setupGame, actionCollection());
     prefAction->setWhatsThis(i18n("Open configuration dialog"));
     QAction *actionOpen = KStandardAction::open(gameField, &KLGameField::openAction, actionCollection());

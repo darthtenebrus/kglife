@@ -5,11 +5,11 @@
 #include <KLocalizedString>
 #include "myslider.h"
 
-MySlider::MySlider(Qt::Orientation orientation, QWidget *parent) :
+MySlider::MySlider(int value, Qt::Orientation orientation, QWidget *parent) :
             QSlider(orientation, parent) {
 
-    setValue(5);
-    setSliderPosition(5);
+    setValue(value);
+    setSliderPosition(value);
     setSingleStep(1);
     setPageStep(1);
     setMinimum(1);
