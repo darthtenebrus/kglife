@@ -46,8 +46,14 @@ private:
     bool checkMousePosition(QPoint &) const;
 
     void tryLoadFromFile(const QString &);
+    void tryToImportNative(const QString &);
+    void tryToImportCells(const QString &);
+
     void trySaveToFile(const QString &);
     void tryToExportNative(const QString &);
+    void tryToExportRLE(const QString &);
+    void tryToExportCells(const QString &);
+
     QString forceFileNameDialog();
 
 
@@ -57,8 +63,6 @@ private:
     [[nodiscard]]
     QSize getStandardFieldDefs(int &, int &) const;
 
-    void tryToExportRLE(const QString &);
-    void tryToExportCells(const QString &);
     void flushStream(int &status, char symbol, QTextStream &);
 
     bool doMiniMaxTests(QPoint &, QPoint &);

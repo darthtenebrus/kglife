@@ -26,6 +26,11 @@
 #define MIN_CELL_SIZE 16
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
+#ifdef _DEBUG
+
+#include <QDebug>
+
+#endif
 
 
 QString KLGameField::CurrentFilePath = "";
@@ -88,7 +93,7 @@ void KLGameField::actualDoRePaint() {
     int h = height();
     int w = width();
     const QSize &fd = getStandardFieldDefs(w, h);
-    painter.fillRect(FIELD_OFFSET + SPACE,FIELD_OFFSET + SPACE,fd.width(), fd.height(), Settings::bordercolor());
+    painter.fillRect(FIELD_OFFSET + SPACE, FIELD_OFFSET + SPACE, fd.width(), fd.height(), Settings::bordercolor());
 
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
@@ -96,7 +101,8 @@ void KLGameField::actualDoRePaint() {
         for (int x = 0; x < m_ScrCellsX; ++x) {
             QBrush color;
 
-            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(Settings::cellcolor()) : Settings::backcolor();
+            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(Settings::cellcolor())
+                                                                                : Settings::backcolor();
             painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
                                    m_cellSize, m_cellSize), color);
 
@@ -420,8 +426,12 @@ void KLGameField::newAction(bool) {
 
 void KLGameField::openAction(bool) {
     cancelTimerInstantly();
+    const QString &filters = i18n("This application (*.kgol);;"
+                                  "Life32/XLife Run Length Encoding (*.rle);;"
+                                  "Plaintext (*.cells)");
+    QString fStr = filters.split(";;").at(0);
     const QString &path = QFileDialog::getOpenFileName(parentWidget(), i18n("Load colony from file"),
-                                                       QDir::homePath(), i18n("This application (*.kgol)"));
+                                                       QDir::homePath(), filters, &fStr);
 
     if (path.isEmpty()) {
         return;
@@ -439,8 +449,8 @@ QString KLGameField::forceFileNameDialog() {
     QString fStr = filters.split(";;").at(0);
     QString path = QFileDialog::getSaveFileName(parentWidget(), i18n("Save colony current state"),
                                                 CurrentFilePath.isEmpty() ? QDir::homePath() :
-                                                    QFileInfo(CurrentFilePath).dir().path(),
-                                                    filters, &fStr);
+                                                QFileInfo(CurrentFilePath).dir().path(),
+                                                filters, &fStr);
     return path;
 }
 
@@ -469,7 +479,7 @@ void KLGameField::saveAction(bool) {
 
 }
 
-void KLGameField::setCurrentPath(KLGameField *th, const QString& cpath) {
+void KLGameField::setCurrentPath(KLGameField *th, const QString &cpath) {
     if (!cpath.isEmpty()) {
         CurrentFilePath = cpath;
         emit th->changeCurrentFile(QFileInfo(cpath).fileName());
@@ -485,6 +495,8 @@ void KLGameField::trySaveToFile(const QString &path) {
         tryToExportRLE(path);
     } else if (fileInfo.suffix().toLower() == "cells") {
         tryToExportCells(path);
+    } else {
+        tryToExportNative(path);
     }
 }
 
@@ -495,8 +507,9 @@ void KLGameField::changeMoveMode(bool mMode) {
     const QString &trans = !m_MoveMode ?
                            i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
                            i18n("Drag the mouse to move field");
-    const QString &whats = !m_MoveMode ? i18n("Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
-                               "zoom in and out with a mouse wheel or action controls") :
+    const QString &whats = !m_MoveMode ? i18n(
+            "Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
+            "zoom in and out with a mouse wheel or action controls") :
                            i18n("In move mode you simply drag the mouse to move the field and see the cells beyond the edges");
     setStatusTip(trans);
     setToolTip(trans);
@@ -569,11 +582,12 @@ void KLGameField::setupGame() {
     auto *dialog = KConfigDialog::exists(QStringLiteral("Settings"));
     if (!dialog) {
         dialog = new KConfigDialog(parentWidget(), QStringLiteral("Settings"), Settings::self());
-        QSize ds = { 940,630 };
+        QSize ds = {940, 630};
         dialog->setMinimumSize(ds);
         dialog->setFaceType(KPageDialog::List);
         dialog->addPage(new GeneralPage(parentWidget()), i18n("General"), "preferences-system", i18n("General"));
-        dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template", i18n("Patterns"));
+        dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template",
+                        i18n("Patterns"));
         dialog->setModal(true);
         connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }
@@ -583,6 +597,75 @@ void KLGameField::setupGame() {
 }
 
 void KLGameField::tryLoadFromFile(const QString &path) {
+    QFileInfo fileInfo(path);
+    if (fileInfo.suffix().toLower() == "kgol") {
+        tryToImportNative(path);
+    } else if (fileInfo.suffix().toLower() == "cells") {
+        tryToImportCells(path);
+    } else {
+        tryToImportNative(path);
+    }
+
+}
+
+void KLGameField::tryToImportCells(const QString &path) {
+    try {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        m_MainLayer = initLayer(m_MainLayer);
+        m_NextStepLayer = initLayer(m_NextStepLayer);
+
+
+        QStringList strBuffer;
+        QTextStream in(&file);
+
+        while (!in.atEnd()) {
+
+            QString strContent = in.readLine();
+            if (strContent[0] == '!') {
+                continue;
+            } else if (strContent[0].toLatin1() == '.' || strContent[0].toLatin1() == 'O') {
+                strBuffer.append(strContent);
+            }
+        }
+        file.close();
+#ifdef _DEBUG
+        qDebug() << m_ScrCellsY;
+        qDebug() << strBuffer.count();
+#endif
+        int origX = (m_ScrCellsX - strBuffer[0].length()) / 2;
+        int origY = (m_ScrCellsY - strBuffer.count()) / 2;
+        int dy = origY;
+        for (QString &strContent: strBuffer) {
+            int dx = origX;
+            for (int i = 0; i < strContent.length(); i++) {
+                const QCharRef &ch = strContent[i];
+
+                switch (ch.toLatin1()) {
+                    case '.':
+                        break;
+                    case 'O':
+                        if (dx < 0 || dx >= m_cellsX || dy < 0 || dy >= m_cellsY) {
+                            continue;
+                        }
+
+                        copyToLayer(m_MainLayer, dx, dy, 1);
+                }
+                dx++;
+            }
+            dy++;
+        }
+
+
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+    }
+}
+
+void KLGameField::tryToImportNative(const QString &path) {
     try {
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -737,7 +820,7 @@ void KLGameField::tryToExportCells(const QString &path) {
         QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
         QPoint maxOrigin = QPoint(0, 0);
 
-        QSize delta = QSize(0,0);
+        QSize delta = QSize(0, 0);
 
         // First we perform minimax tests to determine pattern limits;
 
@@ -780,7 +863,7 @@ void KLGameField::tryToExportRLE(const QString &path) {
         QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
         QPoint maxOrigin = QPoint(0, 0);
 
-        QSize delta = QSize(0,0);
+        QSize delta = QSize(0, 0);
 
         // First we perform minimax tests to determine pattern limits;
 
@@ -829,7 +912,7 @@ void KLGameField::tryToExportRLE(const QString &path) {
 void KLGameField::flushStream(int &status, char symbol, QTextStream &s) {
 
     if (status) {
-        if(status > 1) {
+        if (status > 1) {
             s << status;
         }
         s << symbol;
