@@ -612,6 +612,9 @@ void KLGameField::tryToImportRLE(const QString &path) {
             throw LoadGameException(i18n("Open file failed").toStdString());
         }
 
+        m_MainLayer = initLayer(m_MainLayer);
+        m_NextStepLayer = initLayer(m_NextStepLayer);
+
         QStringList strBuffer;
         QTextStream in(&file);
 
@@ -648,19 +651,22 @@ void KLGameField::tryToImportRLE(const QString &path) {
         // In this case deltaX == 0 = fuckup, since
         // x = 3, y = 3, rule=B3/S23 should always present in this format
         if(!origX) {
-            origX = (m_ScrCellsX - (deltaX ? deltaX : (m_ScrCellsX / 2))) / 2;
+            if(deltaX < m_cellsX) {
+                origX = (m_ScrCellsX - (deltaX ? deltaX : (m_ScrCellsX / 2))) / 2;
+            }
         }
 
         // In this case deltaX == 0 = fuckup, since
         // x = 3, y = 3, rule=B3/S23 should always present in this format
+        const QString &resultContent = strBuffer.join("");
+        const QStringList &resContentList = resultContent.split('$');
+
 
         if(!origY) {
-            origY = (m_ScrCellsY - (deltaY ? deltaY : strBuffer.count())) / 2;
+            if(deltaY < m_cellsY) {
+                origY = (m_ScrCellsY - (deltaY ? deltaY : resContentList.count())) / 2;
+            }
         }
-
-        const QString &resultContent = strBuffer.join("");
-
-        const QStringList &resContentList = resultContent.split('$');
 
         int dy = origY;
         for(QString item : resContentList) {
