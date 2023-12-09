@@ -27,9 +27,7 @@
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
 #ifdef _DEBUG
-
 #include <QDebug>
-
 #endif
 
 
@@ -428,7 +426,7 @@ void KLGameField::openAction(bool) {
     cancelTimerInstantly();
     const QString &filters = i18n("This application (*.kgol);;"
                                   "Life32/XLife Run Length Encoding (*.rle);;"
-                                  "Plaintext (*.cells)");
+                                  "Plaintext (*.cells);;All files(*.*)");
     QString fStr = filters.split(";;").at(0);
     const QString &path = QFileDialog::getOpenFileName(parentWidget(), i18n("Load colony from file"),
                                                        QDir::homePath(), filters, &fStr);
@@ -600,10 +598,133 @@ void KLGameField::tryLoadFromFile(const QString &path) {
     QFileInfo fileInfo(path);
     if (fileInfo.suffix().toLower() == "kgol") {
         tryToImportNative(path);
+    } else if (fileInfo.suffix().toLower() == "rle") {
+        tryToImportRLE(path);
     } else if (fileInfo.suffix().toLower() == "cells") {
         tryToImportCells(path);
     } else {
         tryToImportNative(path);
+    }
+
+}
+
+void KLGameField::tryToImportRLE(const QString &path) {
+
+    try {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        QStringList strBuffer;
+        QTextStream in(&file);
+
+        int origX = 0;
+        int origY = 0;
+        int deltaX = 0;
+        int deltaY = 0;
+        while (!in.atEnd()) {
+
+            const QString &strContent = in.readLine();
+            if (strContent.startsWith('#')) {
+                if (strContent[1].toLatin1() == 'P') {
+                    QRegExp re(R"(\s*([0-9]+)\s+([0-9]+))");
+                    if(re.indexIn(strContent) != -1) {
+                        origX = re.cap(1).toInt() - 1;
+                        origY = re.cap(2).toInt() - 1;
+#ifdef _DEBUG
+                        qDebug() << "origX = " << origX;
+                        qDebug() << "origY = " << origY;
+#endif
+                    }
+                } else {
+                    continue;
+                }
+            } else if (strContent.toLower().startsWith('x')) {
+                QRegExp re(R"(\s*x\s*=\s*([0-9]+)[^y]+y\s*=\s*([0-9]+))");
+
+                if(re.indexIn(strContent) != -1) {
+                    deltaX = re.cap(1).toInt() ;
+                    deltaY = re.cap(2).toInt();
+#ifdef _DEBUG
+        qDebug() << "len = " << deltaX;
+        qDebug() << "height = " << deltaY;
+#endif
+                }
+            } else {
+                strBuffer.append(strContent);
+            }
+        }
+        file.close();
+
+        // In this case deltaX == 0 = fuckup, since
+        // x = 3, y = 3, rule=B3/S23 should always present in this format
+        if(!origX) {
+            origX = (m_ScrCellsX - (deltaX ? deltaX : (m_ScrCellsX / 2))) / 2;
+        }
+
+        // In this case deltaX == 0 = fuckup, since
+        // x = 3, y = 3, rule=B3/S23 should always present in this format
+
+        if(!origY) {
+            origY = (m_ScrCellsY - (deltaY ? deltaY : strBuffer.count())) / 2;
+        }
+
+        const QString &resultContent = strBuffer.join("");
+#ifdef _DEBUG
+        qDebug() << "content = " << resultContent;
+#endif
+
+        const QStringList &resContentList = resultContent.split('$');
+
+        int dy = origY;
+        for(QString item : resContentList) {
+            if (item.endsWith('!')) {
+                item.chop(1);
+            }
+            int dx = origX;
+
+            QRegExp re(R"(([0-9]*)([bo]{1}))");
+
+            int lastPos = 0;
+            while ((lastPos = re.indexIn(item, lastPos)) != -1) {
+
+                lastPos += re.matchedLength();
+
+                int quantity = 1;
+                if (!re.cap(1).isEmpty()) {
+                    quantity = re.cap(1).toInt();
+                }
+                const QString &symbol = re.cap(2);
+#ifdef _DEBUG
+                qDebug() << "item = " << item;
+                qDebug() << "quantity = " << quantity;
+                qDebug() << "symbol = " << symbol;
+#endif
+                for(int j = 1; j <= quantity; j++) {
+#ifdef _DEBUG
+                    qDebug() << "dx = " << dx;
+                    qDebug() << "dy = " << dy;
+#endif
+
+                    if (dx < 0 || dx >= m_cellsX || dy < 0 || dy >= m_cellsY) {
+                        continue;
+                    }
+
+                    if (symbol == "o") {
+                        copyToLayer(m_MainLayer, dx, dy, 1);
+                    } else if (symbol == "b") {
+                        copyToLayer(m_MainLayer, dx, dy, 0);
+                    }
+                    dx++;
+                }
+
+            }
+            dy++;
+        }
+
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
     }
 
 }
@@ -632,10 +753,7 @@ void KLGameField::tryToImportCells(const QString &path) {
             }
         }
         file.close();
-#ifdef _DEBUG
-        qDebug() << m_ScrCellsY;
-        qDebug() << strBuffer.count();
-#endif
+
         int origX = (m_ScrCellsX - strBuffer[0].length()) / 2;
         int origY = (m_ScrCellsY - strBuffer.count()) / 2;
         int dy = origY;
@@ -925,6 +1043,7 @@ void KLGameField::flushStream(int &status, char symbol, QTextStream &s) {
         status = 0;
     }
 }
+
 
 
 

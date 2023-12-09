@@ -48,6 +48,7 @@ private:
     void tryLoadFromFile(const QString &);
     void tryToImportNative(const QString &);
     void tryToImportCells(const QString &);
+    void tryToImportRLE(const QString &);
 
     void trySaveToFile(const QString &);
     void tryToExportNative(const QString &);
@@ -103,7 +104,6 @@ public slots:
     void openAction(bool);
     void saveAction(bool);
     void saveAsAction(bool);
-
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 
