@@ -100,12 +100,6 @@ void MainWindow::setupToolbar() {
     QAction *actionSaveAs = KStandardAction::saveAs(gameField, &KLGameField::saveAsAction, actionCollection());
     actionSaveAs->setWhatsThis(i18n("Save current colony with different name"));
 
-    QAction *actionExport = actionCollection()->addAction(QStringLiteral("file_export_as"));
-    actionExport->setText(i18n("&Export to..."));
-    actionExport->setWhatsThis(i18n("Export pattern to common formats"));
-    actionExport->setToolTip(i18n("Export pattern to common formats"));
-    actionCollection()->setDefaultShortcut(actionExport, Qt::CTRL + Qt::Key_E);
-    connect(actionExport, &QAction::triggered, gameField, &KLGameField::exportToAction);
 
     auto *wa = new QWidgetAction(this);
     wa->setDefaultWidget(mySlider);

@@ -47,6 +47,7 @@ private:
 
     void tryLoadFromFile(const QString &);
     void trySaveToFile(const QString &);
+    void tryToExportNative(const QString &);
     QString forceFileNameDialog();
 
 
@@ -98,7 +99,7 @@ public slots:
     void openAction(bool);
     void saveAction(bool);
     void saveAsAction(bool);
-    void exportToAction(bool);
+
     void checkTimerAndUpdate(bool);
     void timerChanged(int);
 

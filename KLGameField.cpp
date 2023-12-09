@@ -15,6 +15,7 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
+#include <QBuffer>
 #include "LoadGameException.h"
 #include "kglife.h"
 #include "generalpage.h"
@@ -432,32 +433,17 @@ void KLGameField::openAction(bool) {
 }
 
 QString KLGameField::forceFileNameDialog() {
+    const QString &filters = i18n("This application (*.kgol);;"
+                                  "Life32/XLife Run Length Encoding (*.rle);;"
+                                  "Plaintext (*.cells)");
+    QString fStr = filters.split(";;").at(0);
     QString path = QFileDialog::getSaveFileName(parentWidget(), i18n("Save colony current state"),
                                                 CurrentFilePath.isEmpty() ? QDir::homePath() :
                                                     QFileInfo(CurrentFilePath).dir().path(),
-                                                i18n("This application (*.kgol)"));
+                                                    filters, &fStr);
     return path;
 }
 
-
-void KLGameField::exportToAction(bool) {
-    const QString &path = QFileDialog::getSaveFileName(parentWidget(), i18n("Export colony current state"),
-                                                       CurrentFilePath.isEmpty() ? QDir::homePath() :
-                                                       QFileInfo(CurrentFilePath).dir().path(),
-                                                       i18n("Life32/XLife Run Length Encoding (*.rle);;Plaintext (*.cells)"));
-    if (path.isEmpty()) {
-        return;
-    }
-
-
-    QFileInfo fileInfo(path);
-
-    if (fileInfo.suffix().toLower() == "rle") {
-        tryToExportRLE(path);
-    } else if (fileInfo.suffix().toLower() == "cells") {
-        tryToExportCells(path);
-    }
-}
 
 void KLGameField::saveAsAction(bool) {
     cancelTimerInstantly();
@@ -491,25 +477,14 @@ void KLGameField::setCurrentPath(KLGameField *th, const QString& cpath) {
 }
 
 void KLGameField::trySaveToFile(const QString &path) {
-    try {
-        QFile file(path);
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
-            throw LoadGameException(i18n("Open file failed").toStdString());
-        }
-        QTextStream out(&file);
 
-        out << "KGOL_SIG";
-        for (int y = 0; y < m_cellsY; ++y) {
-            for (int x = 0; x < m_cellsX; ++x) {
-                if (fromMainLayer(x, y)) {
-                    out << "CX" << x << "Y" << y;
-                }
-            }
-        }
-
-        file.close();
-    } catch (const LoadGameException &ex) {
-        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+    QFileInfo fileInfo(path);
+    if (fileInfo.suffix().toLower() == "kgol") {
+        tryToExportNative(path);
+    } else if (fileInfo.suffix().toLower() == "rle") {
+        tryToExportRLE(path);
+    } else if (fileInfo.suffix().toLower() == "cells") {
+        tryToExportCells(path);
     }
 }
 
@@ -719,6 +694,39 @@ bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
     return isToSave;
 }
 
+void KLGameField::tryToExportNative(const QString &path) {
+    try {
+        QFile file(path);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        bool isToSave = false;
+
+        QTextStream out(&file);
+        out << "KGOL_SIG";
+
+        for (int y = 0; y < m_cellsY; ++y) {
+            for (int x = 0; x < m_cellsX; ++x) {
+                if (fromMainLayer(x, y)) {
+                    isToSave = true;
+                    out << "CX" << x << "Y" << y;
+                }
+            }
+        }
+
+        if (!isToSave) {
+            file.close();
+            file.remove();
+            throw LoadGameException(i18n("Colony is empty").toStdString());
+        }
+
+        file.close();
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+    }
+}
+
 
 void KLGameField::tryToExportCells(const QString &path) {
     bool isToSave;
@@ -806,7 +814,7 @@ void KLGameField::tryToExportRLE(const QString &path) {
                 }
             }
             flushStream(cAlive, 'o', out);
-            out << (y == delta.height() ? "!" : "$");
+            out << (y == delta.height() ? '!' : '$');
         }
 
         file.close();

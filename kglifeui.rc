@@ -7,10 +7,6 @@
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd">
 
     <MenuBar>
-        <Menu name="file">
-            <Action name="file_export_as" />
-            <Action name="file_print" />
-        </Menu>
         <Menu name="game">
             <text>&amp;Game</text>
             <Action name="game_new" />
@@ -53,7 +49,6 @@
             <Action name="file_save" />
             <Action name="file_save_as" />
             <Action name="file_print" />
-            <Action name="file_export_as" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
             <Action name="options_configure"/>
@@ -67,7 +62,6 @@
             <Action name="file_save" />
             <Action name="file_save_as" />
             <Action name="file_print" />
-            <Action name="file_export_as" />
             <Action name="game_next_step"/>
             <Action name="options_configure"/>
         </disable>
@@ -80,11 +74,9 @@
             <Action name="file_save" />
             <Action name="file_save_as" />
             <Action name="file_print" />
-            <Action name="file_export_as" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
             <Action name="options_configure"/>
         </enable>
     </State>
-
 </gui>
