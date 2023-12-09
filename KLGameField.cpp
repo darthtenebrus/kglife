@@ -702,25 +702,27 @@ void KLGameField::tryToExportNative(const QString &path) {
         }
 
         bool isToSave = false;
+        QByteArray ba;
 
-        QTextStream out(&file);
-        out << "KGOL_SIG";
+        QTextStream tmp(&ba);
 
         for (int y = 0; y < m_cellsY; ++y) {
             for (int x = 0; x < m_cellsX; ++x) {
                 if (fromMainLayer(x, y)) {
                     isToSave = true;
-                    out << "CX" << x << "Y" << y;
+                    tmp << "CX" << x << "Y" << y;
                 }
             }
         }
 
         if (!isToSave) {
-            file.close();
-            file.remove();
             throw LoadGameException(i18n("Colony is empty").toStdString());
         }
 
+        tmp.flush();
+        QTextStream out(&file);
+        out << "KGOL_SIG";
+        out << ba;
         file.close();
     } catch (const LoadGameException &ex) {
         KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
