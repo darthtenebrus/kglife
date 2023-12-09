@@ -675,6 +675,7 @@ void KLGameField::tryToImportNative(const QString &path) {
         const QByteArray &header = file.read(8);
         const QString &strhead = QString::fromLatin1(header);
         if (strhead != "KGOL_SIG") {
+            file.close();
             throw LoadGameException(i18n("Invalid file format").toStdString());
         }
 
@@ -687,6 +688,7 @@ void KLGameField::tryToImportNative(const QString &path) {
         const QString &strContent = QString::fromLatin1(content);
         const QStringList &coords = strContent.split("CX");
         if (coords.empty()) {
+            file.close();
             throw LoadGameException(i18n("Invalid file format").toStdString());
         }
 
@@ -697,6 +699,7 @@ void KLGameField::tryToImportNative(const QString &path) {
             if (item.isEmpty()) {
                 continue;
             } else if (!item.contains('Y')) {
+                file.close();
                 throw LoadGameException(i18n("Invalid file format").toStdString());
             }
 
@@ -709,6 +712,7 @@ void KLGameField::tryToImportNative(const QString &path) {
             }
 
             if (!ready) {
+                file.close();
                 throw LoadGameException(i18n("Invalid file format").toStdString());
             }
 
@@ -719,8 +723,10 @@ void KLGameField::tryToImportNative(const QString &path) {
 
             copyToLayer(m_MainLayer, resX, resY, 1);
         }
-    } catch (const LoadGameException &ex) {
 
+        file.close();
+
+    } catch (const LoadGameException &ex) {
         KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
     }
 }
