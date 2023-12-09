@@ -26,10 +26,6 @@
 #define MIN_CELL_SIZE 16
 #define MAX_CELL_SIZE 128
 #define DIVISOR 2000
-#ifdef _DEBUG
-#include <QDebug>
-#endif
-
 
 QString KLGameField::CurrentFilePath = "";
 
@@ -632,10 +628,6 @@ void KLGameField::tryToImportRLE(const QString &path) {
                     if(re.indexIn(strContent) != -1) {
                         origX = re.cap(1).toInt() - 1;
                         origY = re.cap(2).toInt() - 1;
-#ifdef _DEBUG
-                        qDebug() << "origX = " << origX;
-                        qDebug() << "origY = " << origY;
-#endif
                     }
                 } else {
                     continue;
@@ -646,10 +638,6 @@ void KLGameField::tryToImportRLE(const QString &path) {
                 if(re.indexIn(strContent) != -1) {
                     deltaX = re.cap(1).toInt() ;
                     deltaY = re.cap(2).toInt();
-#ifdef _DEBUG
-        qDebug() << "len = " << deltaX;
-        qDebug() << "height = " << deltaY;
-#endif
                 }
             } else {
                 strBuffer.append(strContent);
@@ -671,9 +659,6 @@ void KLGameField::tryToImportRLE(const QString &path) {
         }
 
         const QString &resultContent = strBuffer.join("");
-#ifdef _DEBUG
-        qDebug() << "content = " << resultContent;
-#endif
 
         const QStringList &resContentList = resultContent.split('$');
 
@@ -696,16 +681,7 @@ void KLGameField::tryToImportRLE(const QString &path) {
                     quantity = re.cap(1).toInt();
                 }
                 const QString &symbol = re.cap(2);
-#ifdef _DEBUG
-                qDebug() << "item = " << item;
-                qDebug() << "quantity = " << quantity;
-                qDebug() << "symbol = " << symbol;
-#endif
                 for(int j = 1; j <= quantity; j++) {
-#ifdef _DEBUG
-                    qDebug() << "dx = " << dx;
-                    qDebug() << "dy = " << dy;
-#endif
 
                     if (dx < 0 || dx >= m_cellsX || dy < 0 || dy >= m_cellsY) {
                         continue;
