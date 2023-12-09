@@ -483,9 +483,7 @@ void KLGameField::setCurrentPath(KLGameField *th, const QString &cpath) {
 void KLGameField::trySaveToFile(const QString &path) {
 
     QFileInfo fileInfo(path);
-    if (fileInfo.suffix().toLower() == "kgol") {
-        tryToExportNative(path);
-    } else if (fileInfo.suffix().toLower() == "rle") {
+    if (fileInfo.suffix().toLower() == "rle") {
         tryToExportRLE(path);
     } else if (fileInfo.suffix().toLower() == "cells") {
         tryToExportCells(path);
@@ -592,9 +590,7 @@ void KLGameField::setupGame() {
 
 void KLGameField::tryLoadFromFile(const QString &path) {
     QFileInfo fileInfo(path);
-    if (fileInfo.suffix().toLower() == "kgol") {
-        tryToImportNative(path);
-    } else if (fileInfo.suffix().toLower() == "rle") {
+    if (fileInfo.suffix().toLower() == "rle") {
         tryToImportRLE(path);
     } else if (fileInfo.suffix().toLower() == "cells") {
         tryToImportCells(path);
@@ -656,12 +652,12 @@ void KLGameField::tryToImportRLE(const QString &path) {
             }
         }
 
-        // In this case deltaX == 0 = fuckup, since
-        // x = 3, y = 3, rule=B3/S23 should always present in this format
+
         const QString &resultContent = strBuffer.join("");
         const QStringList &resContentList = resultContent.split('$');
 
-
+        // In this case deltaX == 0 = fuckup, since
+        // x = 3, y = 3, rule=B3/S23 should always present in this format
         if(!origY) {
             if(deltaY < m_cellsY) {
                 origY = (m_ScrCellsY - (deltaY ? deltaY : resContentList.count())) / 2;
