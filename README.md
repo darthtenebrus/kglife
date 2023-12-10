@@ -12,7 +12,7 @@ Current features:
 
 ## Screenshots
 
-![Plasmoid full view](doc/screenshot.png)
+![Plasmoid full view](doc/evolution.png)
 ![Plasmoid full view](doc/config.png)
 ![Plasmoid full view](doc/patterns.png)
 
