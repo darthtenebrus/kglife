@@ -12,13 +12,16 @@ Current features:
 
 ## Screenshots
 
-WIP
+[Plasmoid full view](doc/screenshot.png)
+![Plasmoid full view](doc/config.png)
+![Plasmoid full view](doc/patterns.png)
+
 
 ## Build
 
 ```
 mkdir -p build && cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=~/usr -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
+cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/kde/datadir -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
         -DKDE_INSTALL_USE_QT_SYS_PATHS=false \
         -DENABLE_TESTING=OFF \
         -DBUILD_TESTING=OFF \
