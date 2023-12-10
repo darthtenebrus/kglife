@@ -5,6 +5,8 @@ Game Of Life from J. H. Conway
 Current features:
 
 * Load save and edit cell patterns
+* Pattern printing support
+* Supports work with different file formats: native, XLife RLE, CELLS
 * A set of pre-installed patterns
 * Flexible color settings
 

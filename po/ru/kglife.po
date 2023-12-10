@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-09 10:53+0300\n"
-"PO-Revision-Date: 2023-12-09 10:54+0300\n"
+"POT-Creation-Date: 2023-12-10 09:16+0300\n"
+"PO-Revision-Date: 2023-12-10 09:17+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -185,15 +185,19 @@ msgstr "Основная панель инструментов"
 
 #: KLGameField.cpp:423
 #, kde-format
+msgid ""
+"This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
+"Plaintext (*.cells);;All files(*.*)"
+msgstr ""
+"Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*."
+"cells);;Все файлы (*.*)"
+
+#: KLGameField.cpp:427
+#, kde-format
 msgid "Load colony from file"
 msgstr "Загрузить колонию из файла"
 
-#: KLGameField.cpp:424
-#, kde-format
-msgid "This application (*.kgol)"
-msgstr "Это приложение (*.kgol)"
-
-#: KLGameField.cpp:436
+#: KLGameField.cpp:440
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -201,12 +205,12 @@ msgid ""
 msgstr ""
 "Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:440
+#: KLGameField.cpp:444
 #, kde-format
 msgid "Save colony current state"
 msgstr "Сохранить текущее состояние колонии"
 
-#: KLGameField.cpp:496
+#: KLGameField.cpp:500
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
@@ -215,12 +219,12 @@ msgstr ""
 "Установите или снимите клетку двойным нажатием или проведите линию, зажав "
 "левую кнопку"
 
-#: KLGameField.cpp:497
+#: KLGameField.cpp:501
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Зажмите левую кнопку и передвиньте поле с помощью мыши"
 
-#: KLGameField.cpp:498
+#: KLGameField.cpp:503
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -230,7 +234,7 @@ msgstr ""
 "левую кнопку. Можно изменять масштаб при помощи колеса мыши или элементов "
 "управления"
 
-#: KLGameField.cpp:500
+#: KLGameField.cpp:505
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -239,40 +243,40 @@ msgstr ""
 "В режиме перемещения просто перетащите мышкой поле, чтобы увидеть клетки за "
 "его пределами"
 
-#: KLGameField.cpp:575
+#: KLGameField.cpp:580
 #, kde-format
 msgid "General"
 msgstr "Общие"
 
-#: KLGameField.cpp:576
+#: KLGameField.cpp:581 KLGameField.cpp:582
 #, kde-format
 msgid "Patterns"
 msgstr "Шаблоны"
 
-#: KLGameField.cpp:589 KLGameField.cpp:701 KLGameField.cpp:755
-#: KLGameField.cpp:798
+#: KLGameField.cpp:608 KLGameField.cpp:714 KLGameField.cpp:768
+#: KLGameField.cpp:886 KLGameField.cpp:940 KLGameField.cpp:983
 #, kde-format
 msgid "Open file failed"
 msgstr "Не удалось открыть файл"
 
-#: KLGameField.cpp:595 KLGameField.cpp:607 KLGameField.cpp:617
-#: KLGameField.cpp:629
-#, kde-format
-msgid "Invalid file format"
-msgstr "Неверный формат файла"
-
-#: KLGameField.cpp:641 KLGameField.cpp:728 KLGameField.cpp:771
-#: KLGameField.cpp:825
+#: KLGameField.cpp:705 KLGameField.cpp:760 KLGameField.cpp:826
+#: KLGameField.cpp:913 KLGameField.cpp:956 KLGameField.cpp:1010
 #, kde-format
 msgid "Error"
 msgstr "Ошибка"
 
-#: KLGameField.cpp:664 mainwindow.cpp:91
+#: KLGameField.cpp:775 KLGameField.cpp:788 KLGameField.cpp:799
+#: KLGameField.cpp:812
+#, kde-format
+msgid "Invalid file format"
+msgstr "Неверный формат файла"
+
+#: KLGameField.cpp:849 mainwindow.cpp:91
 #, kde-format
 msgid "Print Pattern"
 msgstr "Печать текущей конфигурации"
 
-#: KLGameField.cpp:719 KLGameField.cpp:747 KLGameField.cpp:790
+#: KLGameField.cpp:904 KLGameField.cpp:932 KLGameField.cpp:975
 #: mainwindow.cpp:68
 #, kde-format
 msgid "Colony is empty"
@@ -485,6 +489,10 @@ msgstr "Можно изменять скорость смены поколени
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Не выбран>"
+
+#, kde-format
+#~ msgid "This application (*.kgol)"
+#~ msgstr "Это приложение (*.kgol)"
 
 #, kde-format
 #~ msgid "Spheric"
