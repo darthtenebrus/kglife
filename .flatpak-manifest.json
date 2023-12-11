@@ -12,6 +12,9 @@
       {
          "buildsystem": "cmake-ninja",
          "name": "kglife",
+         "config-opts": [
+            "-DCMAKE_BUILD_TYPE=Release"
+         ],
          "sources": [
             {
                "type": "dir",
@@ -22,5 +25,6 @@
    ],
    "runtime": "org.kde.Platform",
    "runtime-version": "5.15-22.08",
+   "rename-icon": "kglife",
    "sdk": "org.kde.Sdk"
 }
