@@ -16,3 +16,4 @@ run-trans.sh
 po/*.pot
 po/*.mo
 test-build.sh
+build/

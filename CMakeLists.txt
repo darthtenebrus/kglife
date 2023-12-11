@@ -80,7 +80,7 @@ target_link_libraries(${PROJECT_NAME}
 
 
 install(TARGETS ${PROJECT_NAME} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS org.kde.${PROJECT_NAME}.desktop  DESTINATION  ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.${PROJECT_NAME}.desktop  DESTINATION  ${KDE_INSTALL_APPDIR})
 
 ecm_install_icons(ICONS
         desktop/64-apps-${PROJECT_NAME}.png
