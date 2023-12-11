@@ -19,7 +19,7 @@ Current features:
 
 ## Build
 
-```
+```bash
 mkdir -p build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/kde/datadir -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
         -DKDE_INSTALL_USE_QT_SYS_PATHS=false \
@@ -31,7 +31,7 @@ cmake --build .
 
 ## Installation after build
 
-```
+```bash
 cmake --install .
 ```
 
