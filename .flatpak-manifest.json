@@ -1,0 +1,25 @@
+{
+   "command": "kglife",
+   "desktop-file-name-suffix": " (Nightly)",
+   "finish-args": [
+      "--share=ipc",
+      "--socket=fallback-x11",
+      "--socket=wayland"
+   ],
+   "id": "org.kde.kglife",
+   "modules": [
+      {
+         "buildsystem": "cmake-ninja",
+         "name": "kglife",
+         "sources": [
+            {
+               "type": "dir",
+               "path": "."
+            }
+         ]
+      }
+   ],
+   "runtime": "org.kde.Platform",
+   "runtime-version": "5.15-22.08",
+   "sdk": "org.kde.Sdk"
+}
