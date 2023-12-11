@@ -16,7 +16,7 @@ apps:
   kglife:
     common-id: org.kde.kglife
     command: usr/bin/kglife
-    desktop: org.kde.kglife.desktop
+    desktop: usr/share/applications/org.kde.kglife.desktop
     extensions:
       - kde-neon
     plugs:
@@ -26,18 +26,6 @@ apps:
 
 
 parts:
-  org-desk:
-    after: [my-part]
-    plugin: dump
-    source: desktop/
-    override-stage: |
-      craftctl default
-
-      # Point icon to the correct location
-      sed -i -e 's|Icon=kglife|Icon=kglife.png|g' $CRAFT_STAGE/org.kde.kglife.desktop
-    organize:
-      64x64/kglife.png: kglife.png
-    stage: [kglife.png, org.kde.kglife.desktop]
   my-part:
     build-attributes:
       - enable-patchelf
@@ -51,6 +39,11 @@ parts:
       - "-DBUILD_TESTING=OFF"
       - "-DKDE_SKIP_TEST_SETTINGS=ON"
     source: .
+    override-stage: |
+      craftctl default
+
+      # Point icon to the correct location
+      sed -i -e 's|Icon=kglife|Icon=/usr/share/icons/hicolor/64x64/apps/kglife.png|g' $CRAFT_STAGE/usr/share/applications/org.kde.kglife.desktop
     build-packages:
       - gcc
       - cmake

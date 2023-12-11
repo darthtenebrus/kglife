@@ -17,6 +17,7 @@ ecm_setup_version(${KGLIFE_VERSION}
         VERSION_HEADER kglife_version.h)
 project(kglife VERSION ${KGLIFE_VERSION})
 
+include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -79,6 +80,17 @@ target_link_libraries(${PROJECT_NAME}
 
 
 install(TARGETS ${PROJECT_NAME} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(PROGRAMS org.kde.${PROJECT_NAME}.desktop  DESTINATION  ${KDE_INSTALL_APPDIR})
+
+ecm_install_icons(ICONS
+        desktop/64-apps-${PROJECT_NAME}.png
+        desktop/48-apps-${PROJECT_NAME}.png
+        desktop/32-apps-${PROJECT_NAME}.png
+        desktop/24-apps-${PROJECT_NAME}.png
+        DESTINATION  ${KDE_INSTALL_ICONDIR}
+        THEME hicolor)
+
+
 install(FILES ${PROJECT_NAME}.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR})
 install(FILES ${PROJECT_NAME}ui.rc  DESTINATION  ${KDE_INSTALL_KXMLGUI5DIR}/${PROJECT_NAME})
 install(FILES org.kde.${PROJECT_NAME}.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})

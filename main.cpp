@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
                             "webmaster@darkguard.net");
     KAboutData::setApplicationData(aboutData);
     QIcon icon;
-    icon.addFile(QString::fromUtf8(":/images/desktop/64x64/kglife.png"), QSize(), QIcon::Normal, QIcon::Off);
+    icon.addFile(QString::fromUtf8(":/images/desktop/64-apps-kglife.png"), QSize(), QIcon::Normal, QIcon::Off);
     QApplication::setWindowIcon(icon);
     KCrash::initialize();
 
