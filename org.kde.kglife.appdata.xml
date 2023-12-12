@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>org.kde.kglife</id>
   <project_license>GPL-3.0+</project_license>
-  <metadata_license>GPL-3.0+</metadata_license>
+  <metadata_license>FSFAP</metadata_license>
   <name>kglife</name>
 
   <name xml:lang="de">kglife</name>
@@ -33,9 +33,9 @@
     <binary>kglife</binary>
   </provides>
   <releases>
-    <release version="1.0-7" date="2023-12-10"/>
-    <release version="1.0-6" date="2023-11-30"/>
-    <release version="1.0-5" date="2023-11-12"/>
-    <release version="1.0-4" date="2023-10-19"/>
+    <release version="1.0.7" date="2023-12-10"/>
+    <release version="1.0.6" date="2023-11-30"/>
+    <release version="1.0.5" date="2023-11-12"/>
+    <release version="1.0.4" date="2023-10-19"/>
   </releases>
 </component>
