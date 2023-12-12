@@ -20,6 +20,7 @@
 #include "kglife.h"
 #include "generalpage.h"
 #include "patternspage.h"
+#include "generatorpage.h"
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -30,6 +31,7 @@
 QString KLGameField::CurrentFilePath = "";
 
 KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
+                                                               mGenerator(new CellsGenerator()),
                                                                evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
@@ -38,6 +40,10 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
     m_TimerInterval = DIVISOR / timerInterval;
     initTotalCells();
     connect(evoTimer, &QTimer::timeout, this, &KLGameField::nextGeneration);
+    connect(mGenerator, &CellsGenerator::resultReady, this, &KLGameField::generatorReady);
+    connect(mGenerator, &CellsGenerator::resultFinished, this, [=]() {
+        repaint();
+    });
 }
 
 KLGameField::~KLGameField() {
@@ -45,6 +51,7 @@ KLGameField::~KLGameField() {
     delete m_MainLayer;
     delete m_NextStepLayer;
     delete evoTimer;
+    delete mGenerator;
 }
 
 void KLGameField::restoreScreen() {
@@ -580,6 +587,7 @@ void KLGameField::setupGame() {
         dialog->addPage(new GeneralPage(parentWidget()), i18n("General"), "preferences-system", i18n("General"));
         dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template",
                         i18n("Patterns"));
+        dialog->addPage(new GeneratorPage(parentWidget()), i18n("Generator"), "start-here-symbolic", i18n("Generator"));
         dialog->setModal(true);
         connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }
@@ -1020,6 +1028,27 @@ void KLGameField::flushStream(int &status, char symbol, QTextStream &s) {
         s << symbol;
         status = 0;
     }
+}
+
+void KLGameField::generatorReady(int rx, int ry) {
+
+    if (rx >= 0 && rx < m_cellsX && ry >= 0 && ry < m_cellsY && !fromMainLayer(rx, ry)) {
+        copyToLayer(m_MainLayer, rx, ry, 1);
+    }
+}
+
+void KLGameField::startCellsGenerator(bool) {
+
+    if (Settings::initbeforegenerate()) {
+        m_MainLayer = initLayer(m_MainLayer);
+        m_NextStepLayer = initLayer(m_NextStepLayer);
+        restoreScreen();
+    }
+    int totalQuantity = m_ScrCellsX * m_ScrCellsY;
+    int percentToFill = Settings::fillpercentvalue();
+    int readyQuantity = totalQuantity / 100 * percentToFill;
+    mGenerator->init(QSize(m_ScrCellsX, m_ScrCellsY), readyQuantity);
+    mGenerator->start(QThread::LowPriority);
 }
 
 

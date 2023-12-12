@@ -115,6 +115,12 @@ void MainWindow::setupToolbar() {
     actionCollection()->setDefaultShortcut(actionNewGame,  Qt::ALT + Qt::Key_G);
     connect(actionNewGame, &QAction::triggered, gameField, &KLGameField::newAction);
 
+    QAction *actionGenerate = actionCollection()->addAction(QStringLiteral("generate_random"));
+    actionGenerate->setText(i18n("Generate &Random"));
+    actionGenerate->setWhatsThis(i18n("Generates random pattern"));
+    actionCollection()->setDefaultShortcut(actionGenerate,  Qt::ALT + Qt::Key_R);
+    connect(actionGenerate, &QAction::triggered, gameField, &KLGameField::startCellsGenerator);
+
     QAction *actionNextStep = actionCollection()->addAction(QStringLiteral("game_next_step"));
     actionNextStep->setText(i18n("&Next Step"));
     actionNextStep->setIcon(QIcon::fromTheme("media-skip-forward"));

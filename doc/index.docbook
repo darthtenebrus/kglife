@@ -223,6 +223,20 @@
           <term>
             <menuchoice>
               <shortcut>
+                <keycombo action="simul">&Alt;<keycap>R</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Generate random</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Generates random pattern</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
                 <keycombo action="simul">&Alt;<keycap>S</keycap>
                 </keycombo>
               </shortcut>

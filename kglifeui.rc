@@ -10,6 +10,7 @@
         <Menu name="game">
             <text>&amp;Game</text>
             <Action name="game_new" />
+            <Action name="generate_random" />
             <Separator />
             <Action name="game_start_stop"/>
             <Action name="game_next_step"/>
@@ -45,6 +46,7 @@
         </enable>
         <disable>
             <Action name="game_new" />
+            <Action name="generate_random" />
             <Action name="file_open" />
             <Action name="file_save" />
             <Action name="file_save_as" />
@@ -57,6 +59,7 @@
     <State name="move_mode_state">
         <disable>
             <Action name="game_new" />
+            <Action name="generate_random" />
             <Action name="game_start_stop"/>
             <Action name="file_open" />
             <Action name="file_save" />
@@ -70,6 +73,7 @@
         <enable>
             <Action name="game_start_stop"/>
             <Action name="game_new" />
+            <Action name="generate_random" />
             <Action name="file_open" />
             <Action name="file_save" />
             <Action name="file_save_as" />

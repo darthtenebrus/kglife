@@ -215,6 +215,22 @@
             <para>Aufklaren das Spielfeld und die Evolution halten</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>R</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Zufällig erzeugen</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Zufälliges Muster erzeugen</para>
+          </listitem>
+        </varlistentry>
+
         <varlistentry>
           <term>
             <menuchoice>

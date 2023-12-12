@@ -224,6 +224,20 @@
           <term>
             <menuchoice>
               <shortcut>
+                <keycombo action="simul">&Alt;<keycap>R</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Случайная генерация</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Генерирует случайную конфигурацию</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
                 <keycombo action="simul">&Alt;<keycap>S</keycap>
                 </keycombo>
               </shortcut>

@@ -15,8 +15,7 @@ class CellsGenerator : public QThread {
 public:
     explicit CellsGenerator(const QSize &maxLimit = QSize(-1, -1), int quantity = -1, QObject *parent = nullptr);
 
-    void setLimit(const QSize &ml);
-    void setQuantity(int mQuantity);
+    void init(const QSize &ml, int mQuantity);
 
 Q_OBJECT
 protected:
@@ -24,6 +23,7 @@ protected:
 
 signals:
     void resultReady(int, int);
+    void resultFinished();
 
 
 private:

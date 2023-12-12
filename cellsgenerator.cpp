@@ -16,6 +16,7 @@ void CellsGenerator::run() {
             emit resultReady(locX, locY);
         }
         mutex.unlock();
+        emit resultFinished();
     }
 }
 
@@ -33,14 +34,9 @@ int CellsGenerator::localRand(int max) {
     return ret;
 }
 
-void CellsGenerator::setLimit(const QSize &ml) {
+void CellsGenerator::init(const QSize &ml, int mq) {
     mutex.lock();
     mLimit = ml;
-    mutex.unlock();
-}
-
-void CellsGenerator::setQuantity(int mq) {
-    mutex.lock();
     mQuantity = mq;
     mutex.unlock();
 }

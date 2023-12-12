@@ -62,6 +62,9 @@ target_sources(${PROJECT_NAME} PRIVATE
         patternspage.ui
         cellsgenerator.cpp
         cellsgenerator.h
+        generatorpage.cpp
+        generatorpage.h
+        generatorpage.ui
         ${RES_FILES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY AUTOUIC_OPTIONS --tr i18n --idbased --include KLocalizedString)

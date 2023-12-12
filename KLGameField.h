@@ -8,6 +8,7 @@
 
 #include <QWidget>
 #include <QTextStream>
+#include "cellsgenerator.h"
 
 class KLGameField : public QWidget {
 Q_OBJECT
@@ -87,6 +88,7 @@ private:
     int m_ScrCellsX;
     int m_ScrCellsY;
 
+    CellsGenerator *mGenerator = nullptr;
     uchar *m_MainLayer = nullptr;
     uchar *m_NextStepLayer = nullptr;
     QTimer *evoTimer = nullptr;
@@ -115,6 +117,8 @@ public slots:
     void cZoomOut(bool);
     void cRestore(bool);
     void cdApply(const QString &);
+    void generatorReady(int, int);
+    void startCellsGenerator(bool);
 
 private slots:
     void nextGeneration(void);
