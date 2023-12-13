@@ -15,6 +15,7 @@ Current features:
 ![Plasmoid full view](doc/evolution.png)
 ![Plasmoid full view](doc/config.png)
 ![Plasmoid full view](doc/patterns.png)
+![Plasmoid full view](doc/generator.png)
 
 
 ## Build
