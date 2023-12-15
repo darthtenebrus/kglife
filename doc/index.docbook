@@ -407,7 +407,6 @@
       </sect2>
     </sect1>
 
-
     <sect1 id="pattern-options"><title><guilabel>Patterns</guilabel> selection pad</title>
       <para>
         <screenshot>
@@ -428,6 +427,47 @@
       </para>
     </sect1>
 
+    <sect1 id="generator-options"><title><guilabel>Generator</guilabel> selection pad</title>
+      <para>
+        <screenshot>
+          <screeninfo>Generator options</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="generator.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>Generator options</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </para>
+      <para>
+        Set generator options for the <link linkend="menu-commands">pattern random generator</link>
+      </para>
+    </sect1>
+
+    <sect1 id="generator-options-desc"><title><guilabel>Generator</guilabel> options</title>
+      <sect2 id="generator-params"><title><guilabel>Generator parameters</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Percentage fill</guilabel>
+            </term>
+            <listitem>
+              <para>Set how much the field would be filled by alive cells during generation</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Init field before generating</guilabel>
+            </term>
+            <listitem>
+              <para>Should the field be cleared before generating</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+    </sect1>
 
     <sect1 id="standard-settings">
     <title>Standard KDE settings</title>

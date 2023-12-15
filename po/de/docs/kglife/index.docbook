@@ -427,6 +427,48 @@
     </sect1>
 
 
+    <sect1 id="generator-options"><title><guilabel>Generator</guilabel></title>
+      <para>
+        <screenshot>
+          <screeninfo>Generatorparameter</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="generator.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>Generatorparameter</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </para>
+      <para>
+        Setzan Sie hier die Parameter von <link linkend="menu-commands">Mustergenerator</link>
+      </para>
+    </sect1>
+
+    <sect1 id="generator-options-desc"><title><guilabel>Generator</guilabel></title>
+      <sect2 id="generator-params"><title><guilabel>Generatorparameter</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Prozentualfüllung</guilabel>
+            </term>
+            <listitem>
+              <para>Setzen Sie die Feldprozentualfüllung, wenn Sie Zufälligerzeugen benutzen</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Feldeinklärung vor der Generierung</guilabel>
+            </term>
+            <listitem>
+              <para>Wenn das Feld geklärt vor der Generierung werden sollte</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+    </sect1>
+
     <sect1 id="standard-settings">
     <title>Standarde KDE einsetzungen</title>
       <para>

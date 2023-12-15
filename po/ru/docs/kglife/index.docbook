@@ -424,6 +424,48 @@
       </para>
     </sect1>
 
+    <sect1 id="generator-options"><title><guilabel>Генератор</guilabel></title>
+      <para>
+        <screenshot>
+          <screeninfo>Параметры генератора</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="generator.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>Параметры генератора</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </para>
+      <para>
+        Здесь можно установить параметры для <link linkend="menu-commands">генератора шаблонов</link>
+      </para>
+    </sect1>
+
+    <sect1 id="generator-options-desc"><title><guilabel>Генератор</guilabel></title>
+      <sect2 id="generator-params"><title><guilabel>Параметры генератора</guilabel></title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Процент заполнения</guilabel>
+            </term>
+            <listitem>
+              <para>Устанавливает процент заполнения поля живыми клетками при случайной генерации</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Инициализировать поле перед генерацией</guilabel>
+            </term>
+            <listitem>
+              <para>Следует ли очистить поле перед генерацией</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+    </sect1>
+
 
     <sect1 id="standard-settings">
     <title>Стандартные настройки KDE</title>
