@@ -13,10 +13,10 @@ Current features:
 
 ## Screenshots
 
-![Plasmoid full view](doc/evolution.png)
-![Plasmoid full view](doc/config.png)
-![Plasmoid full view](doc/patterns.png)
-![Plasmoid full view](doc/generator.png)
+![Main Window full view](doc/evolution.png)
+![Settings full view](doc/config.png)
+![Pattern Settings full view](doc/patterns.png)
+![Generator Settings full view](doc/generator.png)
 
 
 ## Build
