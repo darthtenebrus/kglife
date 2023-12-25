@@ -653,7 +653,7 @@ void KLGameField::tryToImportRLE(const QString &path) {
         file.close();
 
         // In this case deltaX == 0 = fuckup, since
-        // x = 3, y = 3, rule=B3/S23 should always present in this format
+        // x = <int>, y = <int>, rule=B3/S23 should always present in this format
         if(!origX) {
             if(deltaX < m_cellsX) {
                 origX = (m_ScrCellsX - (deltaX ? deltaX : (m_ScrCellsX / 2))) / 2;
@@ -664,8 +664,8 @@ void KLGameField::tryToImportRLE(const QString &path) {
         const QString &resultContent = strBuffer.join("");
         const QStringList &resContentList = resultContent.split('$');
 
-        // In this case deltaX == 0 = fuckup, since
-        // x = 3, y = 3, rule=B3/S23 should always present in this format
+        // In this case deltaY == 0 = fuckup, since
+        // x = <int>, y = <int>, rule=B3/S23 should always present in this format
         if(!origY) {
             if(deltaY < m_cellsY) {
                 origY = (m_ScrCellsY - (deltaY ? deltaY : resContentList.count())) / 2;

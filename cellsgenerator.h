@@ -29,9 +29,9 @@ signals:
 private:
     QSize mLimit;
     int mQuantity;
-
     QMutex mutex;
-    int localRand(int max);
+
+    static int localRand(int max);
 
 };
 
