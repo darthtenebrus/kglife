@@ -34,7 +34,7 @@ int CellsGenerator::localRand(int max) {
     std::mt19937_64 mt(rd());
     double trialprop = Settings::probtrial();
     int settExpected = Settings::expectedval();
-    int expectval = (settExpected <= mLimit.height() ? settExpected : mLimit.height());
+    int expectval = (settExpected <= max ? settExpected : max);
 
     std::binomial_distribution dist_binom(max, trialprop);
     std::poisson_distribution dist_poi(expectval);
