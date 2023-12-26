@@ -4,7 +4,7 @@
 
 #include <random>
 #include "cellsgenerator.h"
-
+#include "kglife.h"
 
 void CellsGenerator::run() {
 
@@ -26,10 +26,33 @@ CellsGenerator::CellsGenerator(const QSize &maxLimit, int quantity, QObject *par
 }
 
 int CellsGenerator::localRand(int max) {
+
+    auto distType = static_cast<Settings::DistribType>(Settings::distribution());
+
+    int ret = 0;
     std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(0, max);
-    int ret = abs(dist(mt));
+    std::mt19937_64 mt(rd());
+    double trialprop = Settings::probtrial();
+    int settExpected = Settings::expectedval();
+    int expectval = (settExpected <= mLimit.height() ? settExpected : mLimit.height());
+
+    std::binomial_distribution dist_binom(max, trialprop);
+    std::poisson_distribution dist_poi(expectval);
+    std::uniform_int_distribution<> dist_uni(0, max);
+
+    switch (distType) {
+        case Settings::BINOMIAL:
+            ret = abs(dist_binom(mt));
+            break;
+
+        case Settings::POISSON:
+            ret = abs(dist_poi(mt));
+            break;
+        case Settings::UNIFORM:
+        default:
+            ret = abs(dist_uni(mt));
+
+    }
 
     return ret;
 }

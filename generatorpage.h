@@ -6,22 +6,20 @@
 #define KGLIFE_GENERATORPAGE_H
 
 #include <QWidget>
+#include "ui_generatorpage.h"
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GeneratorPage; }
 QT_END_NAMESPACE
 
-class GeneratorPage : public QWidget {
+class GeneratorPage : public QWidget, public Ui::GeneratorPage {
 Q_OBJECT
 
 public:
-    explicit GeneratorPage(QWidget *parent = nullptr);
+    explicit GeneratorPage(int expectVal, QWidget *parent = nullptr);
 
-    ~GeneratorPage() override;
 
-private:
-    Ui::GeneratorPage *ui;
 };
 
 

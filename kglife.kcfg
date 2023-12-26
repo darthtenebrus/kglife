@@ -41,5 +41,21 @@
             <label>Init Field Before Generate</label>
             <default>true</default>
         </entry>
+        <entry name="distribution" type="Enum">
+            <label>Distribution</label>
+            <choices name="DistribType">
+                <choice name="UNIFORM" value="UNIFORM"/>
+                <choice name="BINOMIAL" value="BINOMIAL"/>
+                <choice name="POISSON" value="POISSON"/>
+            </choices>
+        </entry>
+        <entry name="probtrial" type="Double">
+            <label>Trial probability</label>
+            <default>0.5</default>
+        </entry>
+        <entry name="expectedval" type="Int">
+            <label>Expected value</label>
+            <default>10</default>
+        </entry>
     </group>
 </kcfg>

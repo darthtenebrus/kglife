@@ -31,7 +31,7 @@ private:
     int mQuantity;
     QMutex mutex;
 
-    static int localRand(int max);
+    int localRand(int max);
 
 };
 
