@@ -29,7 +29,7 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void recalcScreenCells(void);
 
-    int sgn(int val);
+    static int sgn(int val);
     void intentToMoveField(int x, int y);
 
 private:
