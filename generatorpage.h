@@ -19,6 +19,8 @@ Q_OBJECT
 public:
     explicit GeneratorPage(int expectValX, int expectValY, QWidget *parent = nullptr);
 
+private slots:
+    void indexIsChanged(int index);
 
 };
 

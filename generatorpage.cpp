@@ -18,11 +18,7 @@ GeneratorPage::GeneratorPage(int expectValX, int expectValY, QWidget *parent) :
     kcfg_probtrialforX->setDisabled(true);
     kcfg_expectedvalforX->setDisabled(true);
 
-    connect(kcfg_distributionforX, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
-        auto distType = static_cast<Settings::DistribType>(index);
-        kcfg_probtrialforX->setEnabled(distType == Settings::BINOMIAL);
-        kcfg_expectedvalforX->setEnabled(distType == Settings::POISSON);
-    });
+    connect(kcfg_distributionforX, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &GeneratorPage::indexIsChanged);
     kcfg_expectedvalforX->setMaximum(expectValX);
 
 
@@ -33,11 +29,23 @@ GeneratorPage::GeneratorPage(int expectValX, int expectValY, QWidget *parent) :
     kcfg_probtrialforY->setDisabled(true);
     kcfg_expectedvalforY->setDisabled(true);
 
-    connect(kcfg_distributionforY, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
-        auto distType = static_cast<Settings::DistribType>(index);
-        kcfg_probtrialforY->setEnabled(distType == Settings::BINOMIAL);
-        kcfg_expectedvalforY->setEnabled(distType == Settings::POISSON);
-    });
+    connect(kcfg_distributionforY, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &GeneratorPage::indexIsChanged);
     kcfg_expectedvalforY->setMaximum(expectValY);
+}
+
+void GeneratorPage::indexIsChanged(int index) {
+    auto distType = static_cast<Settings::DistribType>(index);
+    QObject *objSender = sender();
+    QDoubleSpinBox *prtrial;
+    QSpinBox *expected;
+    if (objSender->objectName() == "kcfg_distributionforX") {
+        prtrial = kcfg_probtrialforX;
+        expected = kcfg_expectedvalforX;
+    } else if(objSender->objectName() == "kcfg_distributionforY") {
+        prtrial = kcfg_probtrialforY;
+        expected = kcfg_expectedvalforY;
+    }
+    prtrial->setEnabled(distType == Settings::BINOMIAL);
+    expected->setEnabled(distType == Settings::POISSON);
 }
 
