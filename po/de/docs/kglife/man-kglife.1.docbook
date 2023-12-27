@@ -67,7 +67,7 @@
         <title>See Also</title>
 
         <para>Die ausführlichere Benutzerdokumentation findet man an <ulink
-                url="help:/kglife">help:/kglufe</ulink> (eindrückt man diese &URL;
+                url="help:/kglife">help:/kglife</ulink> (eindrückt man diese &URL;
             an &konqueror;, oder einlauft man <userinput><command>khelpcenter</command>
                 <parameter>help:/kglife</parameter></userinput>).</para>
 

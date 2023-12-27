@@ -65,7 +65,7 @@
         <title>См. также</title>
 
         <para>
-            Полная документация доступна
+            Полная документация доступна на
             <ulink url="help:/kglife">help:/kglife</ulink> (ввведите &URL;
             в &konqueror;, или запустите <userinput><command>khelpcenter</command>
                 <parameter>help:/kglife</parameter></userinput>).</para>
