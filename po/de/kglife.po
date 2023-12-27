@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-12 17:01+0300\n"
-"PO-Revision-Date: 2023-12-12 17:11+0300\n"
+"POT-Creation-Date: 2023-12-27 11:15+0300\n"
+"PO-Revision-Date: 2023-12-27 11:25+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -128,25 +128,65 @@ msgstr "Schieberegler"
 msgid "Initial Value"
 msgstr "Anfangswert"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:91
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:241
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:235
 #, kde-format
 msgid "GeneratorPage"
 msgstr "GeneratorSeite"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:92
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:242
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:236
 #, kde-format
 msgid "Generator parameters"
 msgstr "Generatorparameter"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:93
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:243
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:237
 #, kde-format
 msgid "Percentage Fill"
 msgstr "Prozentualfüllung"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:94
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:244
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:238
 #, kde-format
 msgid "Init field before generating"
 msgstr "Feldeinklärung vor der Generierung"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:245
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:239
+#, kde-format
+msgid "Generator Distribution for X-axis"
+msgstr "X-Achsegeneratorverteilung"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:246
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:250
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:240
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:244
+#, kde-format
+msgid "Distribution Type"
+msgstr "Verteilungsart"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:247
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:251
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:241
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:245
+#, kde-format
+msgid "Binomial Trial Success Probability"
+msgstr "Binomialversuchserfolgswahrscheinlichkeit"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:248
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:252
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:242
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:246
+#, kde-format
+msgid "Poisson Mean Value"
+msgstr "Mittelwert von Poisson"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:249
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:243
+#, kde-format
+msgid "Generator Distribution For Y-axis"
+msgstr "Y-Achsegeneratorverteilung"
 
 #: cmake-build-debug/kglife_autogen/include/ui_patternspage.h:151
 #: cmake-build-release/kglife_autogen/include/ui_patternspage.h:151
@@ -187,6 +227,21 @@ msgstr "Autor:"
 #, kde-format
 msgid "Author E-Mail:"
 msgstr "E-Mail von Autor:"
+
+#: generatorpage.cpp:15
+#, kde-format
+msgid "Uniform"
+msgstr "Gleichmäßig"
+
+#: generatorpage.cpp:16
+#, kde-format
+msgid "Binomial"
+msgstr "Binomial"
+
+#: generatorpage.cpp:17
+#, kde-format
+msgid "Poisson"
+msgstr "Poisson"
 
 #. i18n: ectx: Menu (game)
 #: kglifeui.rc:11
