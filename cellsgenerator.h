@@ -27,11 +27,15 @@ signals:
 
 
 private:
+    enum SettingsAxis {
+        X_AXIS,
+        Y_AXIS
+    };
     QSize mLimit;
     int mQuantity;
     QMutex mutex;
 
-    static int localRand(int max);
+    static int localRand(int max, SettingsAxis axis = X_AXIS);
 
 };
 

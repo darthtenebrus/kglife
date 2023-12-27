@@ -9,22 +9,35 @@
 #include "kglife.h"
 
 
-
-GeneratorPage::GeneratorPage(int expectVal, QWidget *parent) :
+GeneratorPage::GeneratorPage(int expectValX, int expectValY, QWidget *parent) :
         QWidget(parent), Ui::GeneratorPage() {
     setupUi(this);
-    kcfg_distribution->addItem(i18n("Uniform"));
-    kcfg_distribution->addItem(i18n("Binomial"));
-    kcfg_distribution->addItem(i18n("Poisson"));
-    kcfg_probtrial->setDisabled(true);
-    kcfg_expectedval->setDisabled(true);
+    kcfg_distributionforX->addItem(i18n("Uniform"));
+    kcfg_distributionforX->addItem(i18n("Binomial"));
+    kcfg_distributionforX->addItem(i18n("Poisson"));
+    kcfg_probtrialforX->setDisabled(true);
+    kcfg_expectedvalforX->setDisabled(true);
 
-   connect(kcfg_distribution, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
-       auto distType = static_cast<Settings::DistribType>(index);
-       kcfg_probtrial->setEnabled(distType == Settings::BINOMIAL);
-       kcfg_expectedval->setEnabled(distType == Settings::POISSON);
-   });
+    connect(kcfg_distributionforX, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+        auto distType = static_cast<Settings::DistribType>(index);
+        kcfg_probtrialforX->setEnabled(distType == Settings::BINOMIAL);
+        kcfg_expectedvalforX->setEnabled(distType == Settings::POISSON);
+    });
+    kcfg_expectedvalforX->setMaximum(expectValX);
 
-   kcfg_expectedval->setMaximum(expectVal);
+
+    for (int i = 0; i < kcfg_distributionforX->count(); ++i) {
+        kcfg_distributionforY->addItem(kcfg_distributionforX->itemText(i));
+    }
+
+    kcfg_probtrialforY->setDisabled(true);
+    kcfg_expectedvalforY->setDisabled(true);
+
+    connect(kcfg_distributionforY, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+        auto distType = static_cast<Settings::DistribType>(index);
+        kcfg_probtrialforY->setEnabled(distType == Settings::BINOMIAL);
+        kcfg_expectedvalforY->setEnabled(distType == Settings::POISSON);
+    });
+    kcfg_expectedvalforY->setMaximum(expectValY);
 }
 

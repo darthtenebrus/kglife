@@ -17,7 +17,7 @@ class GeneratorPage : public QWidget, public Ui::GeneratorPage {
 Q_OBJECT
 
 public:
-    explicit GeneratorPage(int expectVal, QWidget *parent = nullptr);
+    explicit GeneratorPage(int expectValX, int expectValY, QWidget *parent = nullptr);
 
 
 };

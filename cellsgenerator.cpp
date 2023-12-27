@@ -11,8 +11,8 @@ void CellsGenerator::run() {
     if (mLimit.width() > 0 && mLimit.height() > 0 && mQuantity > 0) {
         mutex.lock();
         for (int i = 1; i < mQuantity; i++) {
-            int locX = localRand(mLimit.width());
-            int locY = localRand(mLimit.height());
+            int locX = localRand(mLimit.width(), X_AXIS);
+            int locY = localRand(mLimit.height(), Y_AXIS);
             emit resultReady(locX, locY);
         }
         mutex.unlock();
@@ -25,15 +25,31 @@ CellsGenerator::CellsGenerator(const QSize &maxLimit, int quantity, QObject *par
     mQuantity = quantity;
 }
 
-int CellsGenerator::localRand(int max) {
+int CellsGenerator::localRand(int max, SettingsAxis axis) {
 
-    auto distType = static_cast<Settings::DistribType>(Settings::distribution());
 
     int ret = 0;
     std::random_device rd;
     std::mt19937_64 mt(rd());
-    double trialprop = Settings::probtrial();
-    int settExpected = Settings::expectedval();
+    Settings::DistribType distType;
+    double trialprop;
+    int settExpected;
+
+    switch (axis) {
+        case Y_AXIS:
+            distType = static_cast<Settings::DistribType>(Settings::distributionforY());
+            trialprop = Settings::probtrialforY();
+            settExpected = Settings::expectedvalforY();
+            break;
+
+        case X_AXIS:
+        default:
+            distType = static_cast<Settings::DistribType>(Settings::distributionforX());
+            trialprop = Settings::probtrialforX();
+            settExpected = Settings::expectedvalforX();
+            break;
+
+    }
     int expectval = (settExpected <= max ? settExpected : max);
 
     std::binomial_distribution dist_binom(max, trialprop);

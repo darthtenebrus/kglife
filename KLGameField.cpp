@@ -587,7 +587,7 @@ void KLGameField::setupGame() {
         dialog->addPage(new GeneralPage(parentWidget()), i18n("General"), "preferences-system", i18n("General"));
         dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template",
                         i18n("Patterns"));
-        dialog->addPage(new GeneratorPage(m_cellsY - 1, parentWidget()), i18n("Generator"), "start-here-symbolic", i18n("Generator"));
+        dialog->addPage(new GeneratorPage(m_cellsX - 1, m_cellsY - 1, parentWidget()), i18n("Generator"), "start-here-symbolic", i18n("Generator"));
         dialog->setModal(true);
         connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }

@@ -41,7 +41,7 @@
             <label>Init Field Before Generate</label>
             <default>true</default>
         </entry>
-        <entry name="distribution" type="Enum">
+        <entry name="distributionforX" type="Enum">
             <label>Distribution</label>
             <choices name="DistribType">
                 <choice name="UNIFORM" value="UNIFORM"/>
@@ -49,11 +49,28 @@
                 <choice name="POISSON" value="POISSON"/>
             </choices>
         </entry>
-        <entry name="probtrial" type="Double">
+        <entry name="probtrialforX" type="Double">
             <label>Trial probability</label>
             <default>0.5</default>
         </entry>
-        <entry name="expectedval" type="Int">
+        <entry name="expectedvalforX" type="Int">
+            <label>Expected value</label>
+            <default>10</default>
+        </entry>
+
+        <entry name="distributionforY" type="Enum">
+            <label>Distribution</label>
+            <choices name="DistribTypeOrdinate">
+                <choice name="UNIFORMY" value="UNIFORM"/>
+                <choice name="BINOMIALY" value="BINOMIAL"/>
+                <choice name="POISSONY" value="POISSON"/>
+            </choices>
+        </entry>
+        <entry name="probtrialforY" type="Double">
+            <label>Trial probability</label>
+            <default>0.5</default>
+        </entry>
+        <entry name="expectedvalforY" type="Int">
             <label>Expected value</label>
             <default>10</default>
         </entry>
