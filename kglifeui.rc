@@ -16,6 +16,7 @@
             <Action name="game_next_step"/>
             <Separator />
             <Action name="move_mode" />
+            <Action name="select_mode" />
         </Menu>
     </MenuBar>
 
@@ -31,6 +32,7 @@
         <Action name="game_next_step"/>
         <Separator />
         <Action name="move_mode" />
+        <Action name="select_mode" />
         <Action name="view_actual_size" />
         <Separator />
         <Action name="view_zoom_in" />
@@ -53,6 +55,7 @@
             <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
+            <Action name="select_mode" />
             <Action name="options_configure"/>
         </disable>
     </State>
@@ -67,8 +70,25 @@
             <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="options_configure"/>
+            <Action name="select_mode" />
         </disable>
     </State>
+
+    <State name="select_mode_state">
+        <disable>
+            <Action name="game_new" />
+            <Action name="generate_random" />
+            <Action name="game_start_stop"/>
+            <Action name="file_open" />
+            <Action name="file_save" />
+            <Action name="file_save_as" />
+            <Action name="file_print" />
+            <Action name="game_next_step"/>
+            <Action name="options_configure"/>
+            <Action name="move_mode" />
+        </disable>
+    </State>
+
     <State name="paused_state">
         <enable>
             <Action name="game_start_stop"/>
@@ -80,6 +100,7 @@
             <Action name="file_print" />
             <Action name="game_next_step"/>
             <Action name="move_mode" />
+            <Action name="select_mode" />
             <Action name="options_configure"/>
         </enable>
     </State>

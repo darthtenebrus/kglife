@@ -43,7 +43,9 @@ public slots:
     void zoomOutChanged(bool);
     void restoreChanged(bool);
     void changeMoveMode(bool);
+    void changeSelectMode(bool);
     void currentFileChanged(const QString &);
+
 
 };
 

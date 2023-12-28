@@ -55,7 +55,13 @@ void MainWindow::controlsChanged(bool enabled) {
 }
 
 void MainWindow::changeMoveMode(bool enabled) {
+
     stateChanged(enabled ? "move_mode_state" : "paused_state");
+}
+
+void MainWindow::changeSelectMode(bool enabled) {
+
+    stateChanged(enabled ? "select_mode_state" : "paused_state");
 }
 
 void MainWindow::generationChanged(int cgen) {
@@ -135,7 +141,7 @@ void MainWindow::setupToolbar() {
     actionCollection()->setDefaultShortcut(actionStartStop,  Qt::ALT + Qt::Key_S);
     connect(actionStartStop, &QAction::triggered, gameField, &KLGameField::checkTimerAndUpdate);
 
-
+    // Move
     QAction *actionMove = actionCollection()->addAction(QStringLiteral("move_mode"));
     actionMove->setText(i18n("&Move"));
     actionMove->setIcon(QIcon(":/images/move.png"));
@@ -147,6 +153,20 @@ void MainWindow::setupToolbar() {
     connect(actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
     connect(actionMove, &QAction::triggered, this, &MainWindow::changeMoveMode);
 
+
+    // Select
+
+    QAction *actionSelect = actionCollection()->addAction(QStringLiteral("select_mode"));
+    actionSelect->setText(i18n("&Select"));
+    actionSelect->setIcon(QIcon::fromTheme("edit-select-all-symbolic"));
+    actionSelect->setCheckable(true);
+    actionSelect->setChecked(false);
+    actionSelect->setWhatsThis(i18n("Click here to enter select mode.<br>In this mode you can select alive cells to cut and copy"));
+    actionCollection()->setDefaultShortcut(actionSelect,  Qt::ALT + Qt::Key_L);
+    connect(actionSelect, &QAction::triggered, gameField, &KLGameField::changeSelectMode);
+    connect(actionSelect, &QAction::triggered, this, &MainWindow::changeSelectMode);
+
+    // Zoom In
     QAction *actionZoomIn = KStandardAction::zoomIn(gameField, &KLGameField::cZoomIn, actionCollection());
     actionZoomIn->setWhatsThis(i18n("Zoom scale in. You can also use mouse wheel.<br> Dimmed on maximum zoom"));
     QAction *actionZoomOut = KStandardAction::zoomOut(gameField, &KLGameField::cZoomOut, actionCollection());

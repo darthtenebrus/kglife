@@ -21,6 +21,9 @@
 #include "generalpage.h"
 #include "patternspage.h"
 #include "generatorpage.h"
+#ifdef _DEBUG
+#include <QDebug>
+#endif
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -48,6 +51,7 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
 
 KLGameField::~KLGameField() {
 
+    delete m_SelectionLayer;
     delete m_MainLayer;
     delete m_NextStepLayer;
     delete evoTimer;
@@ -98,17 +102,32 @@ void KLGameField::actualDoRePaint() {
 
     const QPoint &mainOffset = getMainOffset();
     painter.translate(mainOffset.x(), mainOffset.y());
+    bool hasSelected = false;
     for (int y = 0; y < m_ScrCellsY; ++y) {
         for (int x = 0; x < m_ScrCellsX; ++x) {
             QBrush color;
-
-            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? QBrush(Settings::cellcolor())
-                                                                                : Settings::backcolor();
+            hasSelected = (hasSelected || fromLayer(m_SelectionLayer, m_CurrMemOffsetX + x, m_CurrMemOffsetY + y));
+            color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? (
+                    fromLayer(m_SelectionLayer, m_CurrMemOffsetX + x, m_CurrMemOffsetY + y) ? Settings::selectedcolor() : Settings::cellcolor()
+                    ) : Settings::backcolor();
             painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
                                    m_cellSize, m_cellSize), color);
 
         }
 
+    }
+
+    if (hasSelected) {
+        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+        QPoint maxOrigin = QPoint(0, 0);
+
+        doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
+        if (!maxOrigin.isNull()) {
+            painter.setPen(QPen(Settings::selectedcolor()));
+            auto startPoint = (minOrigin - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE);
+            auto finalPoint = (maxOrigin + QPoint(1, 1) - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE) - QPoint(SPACE * 2, SPACE * 2);
+            painter.drawRect(QRect(startPoint, finalPoint));
+        }
     }
 
     emit changeZoomIn(m_cellSize < MAX_CELL_SIZE);
@@ -163,18 +182,17 @@ void KLGameField::showEvent(QShowEvent *event) {
     cdApply(nullptr);
 }
 
-uchar *KLGameField::initLayer(uchar *layer) {
-    if (nullptr != layer) {
-        delete layer;
-    }
+uchar *KLGameField::initLayer(uchar *layer) const {
 
-    layer = new uchar[m_cellsX * m_cellsY];
+    if (!layer) {
+        layer = new uchar[m_cellsX * m_cellsY];
+    }
     memset(layer, 0, m_cellsX * m_cellsY);
     return layer;
 
 }
 
-void KLGameField::swapLayers(void) {
+void KLGameField::swapLayers() {
 
     uchar *tmp;
     tmp = m_MainLayer;
@@ -182,7 +200,7 @@ void KLGameField::swapLayers(void) {
     m_NextStepLayer = tmp;
 }
 
-void KLGameField::recalculate(void) {
+void KLGameField::recalculate() {
 
     int nEmpties = 0;
     for (int y = 0; y < m_cellsY; ++y) {
@@ -264,10 +282,14 @@ int KLGameField::calculateNeighbors(int x, int y) {
 }
 
 uchar KLGameField::fromMainLayer(int x, int y) {
-    return m_MainLayer[y * m_cellsX + x];
+    return fromLayer(m_MainLayer, x, y);
 }
 
-void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) {
+uchar KLGameField::fromLayer(uchar *layer, int x, int y) const {
+    return layer[y * m_cellsX + x];
+}
+
+void KLGameField::copyToLayer(uchar *layer, int x, int y, uchar val) const {
     layer[y * m_cellsX + x] = val;
 }
 
@@ -293,8 +315,16 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     int cellY = newPos.y() / (m_cellSize + SPACE);
 
     m_Generation = 0;
-    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
-                !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+
+    if (m_SelectionMode) {
+        if (fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY)) {
+            copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                        !fromLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+        }
+    } else {
+        copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                    !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+    }
     repaint();
 }
 
@@ -321,8 +351,16 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
                 if (cellX != oldCellX || cellY != oldCellY) {
                     oldCellX = cellX;
                     oldCellY = cellY;
-                    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
-                                !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+
+                    if (m_SelectionMode) {
+                        if (fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY)) {
+                            copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                                        !fromLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+                        }
+                    } else {
+                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
+                                    !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+                    }
                     repaint();
                 }
             } else {
@@ -355,7 +393,7 @@ void KLGameField::nextAction(bool) {
     repaint();
 }
 
-void KLGameField::nextGeneration(void) {
+void KLGameField::nextGeneration() {
     nextAction(true);
 }
 
@@ -418,8 +456,7 @@ bool KLGameField::checkMousePosition(QPoint &mpos) const {
 
 void KLGameField::newAction(bool) {
     cancelTimerInstantly();
-    m_MainLayer = initLayer(m_MainLayer);
-    m_NextStepLayer = initLayer(m_NextStepLayer);
+    initLayers();
     m_Generation = 0;
     emit changeGeneration(m_Generation);
     restoreScreen();
@@ -515,6 +552,27 @@ void KLGameField::changeMoveMode(bool mMode) {
     setWhatsThis(whats);
 }
 
+void KLGameField::changeSelectMode(bool mMode) {
+    cancelTimerInstantly();
+    m_SelectionMode = mMode;
+
+    if (!m_SelectionMode) {
+        clearSelection();
+        repaint();
+    }
+
+    const QString &trans = !m_SelectionMode ?
+                           i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
+                           i18n("Drag the mouse to select the live cells");
+    const QString &whats = !m_SelectionMode ? i18n(
+            "Put any cells here by mouse click or simply drag a line of cells.<br>You can also "
+            "zoom in and out with a mouse wheel or action controls") :
+                           i18n("In select mode you simply drag the mouse to select the live cells");
+    setStatusTip(trans);
+    setToolTip(trans);
+    setWhatsThis(whats);
+}
+
 int KLGameField::sgn(int val) {
     return (0 < val) - (val < 0);
 }
@@ -549,8 +607,8 @@ void KLGameField::initTotalCells() {
 
     m_cellsX = fd.width() / (m_cellSize + SPACE);
     m_cellsY = fd.height() / (m_cellSize + SPACE);
-    m_MainLayer = initLayer(m_MainLayer);
-    m_NextStepLayer = initLayer(m_NextStepLayer);
+
+    initLayers();
     m_Generation = 0;
     emit changeGeneration(m_Generation);
 
@@ -616,9 +674,7 @@ void KLGameField::tryToImportRLE(const QString &path) {
             throw LoadGameException(i18n("Open file failed").toStdString());
         }
 
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
-
+        initLayers();
         QStringList strBuffer;
         QTextStream in(&file);
 
@@ -722,10 +778,7 @@ void KLGameField::tryToImportCells(const QString &path) {
             throw LoadGameException(i18n("Open file failed").toStdString());
         }
 
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
-
-
+        initLayers();
         QStringList strBuffer;
         QTextStream in(&file);
 
@@ -796,8 +849,7 @@ void KLGameField::tryToImportNative(const QString &path) {
             throw LoadGameException(i18n("Invalid file format").toStdString());
         }
 
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
+        initLayers();
 
         for (const QString &item: coords) {
             if (item.isEmpty()) {
@@ -869,12 +921,11 @@ void KLGameField::printGame() {
     }
 }
 
-bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
-
+bool KLGameField::doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr) {
     bool isToSave = false;
     for (int y = 0; y < m_cellsY; ++y) {
         for (int x = 0; x < m_cellsX; ++x) {
-            if (fromMainLayer(x, y)) {
+            if (fromLayer(layer, x, y)) {
                 isToSave = true;
                 minOr.setX(std::min(x, minOr.x()));
                 minOr.setY(std::min(y, minOr.y()));
@@ -885,6 +936,10 @@ bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
         }
     }
     return isToSave;
+}
+
+bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
+   return doMiniMaxTestsOnLayer(m_MainLayer, minOr, maxOr);
 }
 
 void KLGameField::tryToExportNative(const QString &path) {
@@ -1040,8 +1095,8 @@ void KLGameField::generatorReady(int rx, int ry) {
 void KLGameField::startCellsGenerator(bool) {
 
     if (Settings::initbeforegenerate()) {
-        m_MainLayer = initLayer(m_MainLayer);
-        m_NextStepLayer = initLayer(m_NextStepLayer);
+
+        initLayers();
         restoreScreen();
     }
     int totalQuantity = m_ScrCellsX * m_ScrCellsY;
@@ -1051,6 +1106,16 @@ void KLGameField::startCellsGenerator(bool) {
     // actual max values: m_ScrCellsX  - 1 and m_ScrCellsY - 1
     mGenerator->init(QSize(m_ScrCellsX - 1, m_ScrCellsY - 1), readyQuantity);
     mGenerator->start(QThread::LowPriority);
+}
+
+void KLGameField::initLayers() {
+    m_SelectionLayer = initLayer(m_SelectionLayer);
+    m_MainLayer = initLayer(m_MainLayer);
+    m_NextStepLayer = initLayer(m_NextStepLayer);
+}
+
+void KLGameField::clearSelection() {
+    memset(m_SelectionLayer, 0, m_cellsX * m_cellsY);
 }
 
 

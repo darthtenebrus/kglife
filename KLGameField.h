@@ -33,17 +33,22 @@ protected:
     void intentToMoveField(int x, int y);
 
 private:
+    void initLayers();
+    void clearSelection();
     void initTotalCells();
     void changeDelta(int);
     void restoreScreen();
 
     void recalculate(void);
     void actualDoRePaint();
-    uchar *initLayer(uchar *);
+    uchar *initLayer(uchar *) const;
     void swapLayers(void);
     int calculateNeighbors(int, int);
+
     uchar fromMainLayer(int, int);
-    void copyToLayer(uchar *, int, int, uchar);
+    uchar fromLayer(uchar *, int, int) const;
+
+    void copyToLayer(uchar *, int, int, uchar) const;
     bool checkMousePosition(QPoint &) const;
 
     void tryLoadFromFile(const QString &);
@@ -68,7 +73,7 @@ private:
     void flushStream(int &status, char symbol, QTextStream &);
 
     bool doMiniMaxTests(QPoint &, QPoint &);
-
+    bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
 
     int m_TimerInterval;
     int m_Generation = 0;
@@ -89,12 +94,16 @@ private:
     int m_ScrCellsY;
 
     CellsGenerator *mGenerator = nullptr;
+
     uchar *m_MainLayer = nullptr;
     uchar *m_NextStepLayer = nullptr;
+    uchar *m_SelectionLayer = nullptr;
+
     QTimer *evoTimer = nullptr;
     QCursor m_Cursor;
     bool m_LeftbPressed = false;
     bool m_MoveMode = false;
+    bool m_SelectionMode = false;
 
     static QString CurrentFilePath;
     static void setCurrentPath(KLGameField *th, const QString& cpath);
@@ -112,6 +121,7 @@ public slots:
     void setupGame();
     void printGame();
     void changeMoveMode(bool);
+    void changeSelectMode(bool);
 
     void cZoomIn(bool);
     void cZoomOut(bool);
@@ -121,7 +131,7 @@ public slots:
     void startCellsGenerator(bool);
 
 private slots:
-    void nextGeneration(void);
+    void nextGeneration();
 
 signals:
     void changeControls(bool);

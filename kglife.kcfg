@@ -14,6 +14,10 @@
             <label>Cell Color</label>
             <default>#0BD06E</default>
         </entry>
+        <entry name="selectedcolor" type="Color">
+            <label>Selected Color</label>
+            <default>#026433</default>
+        </entry>
         <entry name="slidervalue" type="Int">
             <label>Timer slider value</label>
             <default>5</default>
