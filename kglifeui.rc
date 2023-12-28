@@ -14,9 +14,13 @@
             <Separator />
             <Action name="game_start_stop"/>
             <Action name="game_next_step"/>
-            <Separator />
+        </Menu>
+        <Menu name="selection">
+            <text>Field</text>
             <Action name="move_mode" />
+            <Separator />
             <Action name="select_mode" />
+            <Action name="clear_selection" />
         </Menu>
     </MenuBar>
 
@@ -33,8 +37,9 @@
         <Separator />
         <Action name="move_mode" />
         <Action name="select_mode" />
-        <Action name="view_actual_size" />
+        <Action name="clear_selection" />
         <Separator />
+        <Action name="view_actual_size" />
         <Action name="view_zoom_in" />
         <Action name="view_zoom_out" />
         <Action name="options_configure"/>
@@ -56,6 +61,7 @@
             <Action name="game_next_step"/>
             <Action name="move_mode" />
             <Action name="select_mode" />
+            <Action name="clear_selection" />
             <Action name="options_configure"/>
         </disable>
     </State>

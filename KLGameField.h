@@ -129,6 +129,7 @@ public slots:
     void cdApply(const QString &);
     void generatorReady(int, int);
     void startCellsGenerator(bool);
+    void onSelectClear(bool);
 
 private slots:
     void nextGeneration();

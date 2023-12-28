@@ -157,7 +157,7 @@ void MainWindow::setupToolbar() {
     // Select
 
     QAction *actionSelect = actionCollection()->addAction(QStringLiteral("select_mode"));
-    actionSelect->setText(i18n("&Select"));
+    actionSelect->setText(i18n("&Mouse selection"));
     actionSelect->setIcon(QIcon::fromTheme("edit-select-all-symbolic"));
     actionSelect->setCheckable(true);
     actionSelect->setChecked(false);
@@ -165,6 +165,13 @@ void MainWindow::setupToolbar() {
     actionCollection()->setDefaultShortcut(actionSelect,  Qt::ALT + Qt::Key_L);
     connect(actionSelect, &QAction::triggered, gameField, &KLGameField::changeSelectMode);
     connect(actionSelect, &QAction::triggered, this, &MainWindow::changeSelectMode);
+
+    QAction *actionClearSel = actionCollection()->addAction(QStringLiteral("clear_selection"));
+    actionClearSel->setText(i18n("&Clear selection"));
+    actionClearSel->setIcon(QIcon::fromTheme("edit-select-none"));
+    actionClearSel->setWhatsThis(i18n("Click here to clear selection"));
+    actionCollection()->setDefaultShortcut(actionClearSel,  Qt::ALT + Qt::Key_C);
+    connect(actionClearSel, &QAction::triggered, gameField, &KLGameField::onSelectClear);
 
     // Zoom In
     QAction *actionZoomIn = KStandardAction::zoomIn(gameField, &KLGameField::cZoomIn, actionCollection());

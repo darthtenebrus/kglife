@@ -398,6 +398,7 @@ void KLGameField::nextGeneration() {
 }
 
 void KLGameField::checkTimerAndUpdate(bool) {
+    clearSelection();
     if (!evoTimer->isActive()) {
         evoTimer->start(m_TimerInterval);
         emit changeControls(false);
@@ -555,11 +556,6 @@ void KLGameField::changeMoveMode(bool mMode) {
 void KLGameField::changeSelectMode(bool mMode) {
     cancelTimerInstantly();
     m_SelectionMode = mMode;
-
-    if (!m_SelectionMode) {
-        clearSelection();
-        repaint();
-    }
 
     const QString &trans = !m_SelectionMode ?
                            i18n("Set or erase a single cell by double click or drag a line with left button pressed") :
@@ -1094,8 +1090,8 @@ void KLGameField::generatorReady(int rx, int ry) {
 
 void KLGameField::startCellsGenerator(bool) {
 
+    clearSelection();
     if (Settings::initbeforegenerate()) {
-
         initLayers();
         restoreScreen();
     }
@@ -1116,6 +1112,11 @@ void KLGameField::initLayers() {
 
 void KLGameField::clearSelection() {
     memset(m_SelectionLayer, 0, m_cellsX * m_cellsY);
+    repaint();
+}
+
+void KLGameField::onSelectClear(bool) {
+    clearSelection();
 }
 
 
