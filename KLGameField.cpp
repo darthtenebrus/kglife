@@ -908,13 +908,29 @@ void KLGameField::tryToImportNative(const QString &path) {
 
 void KLGameField::cdApply(const QString &dname) {
 
-
     if (!dname.isEmpty()) {
         bool isInfinite = Settings::infinite();
         if (m_isInfinite != isInfinite) {
+
+            int oldCellsX = m_cellsX;
+            int oldCellsY = m_cellsX;
+
+            int oldSize = oldCellsX * oldCellsY;
+            auto *tmpLayer = new uchar[oldSize];
+            memcpy(tmpLayer, m_MainLayer, oldSize);
+            
             reallocAllLayers();
             initTotalCells();
             recalcScreenCells();
+
+            for (int y = 0; y < std::min(oldCellsY, m_cellsY); ++y) {
+                for (int x = 0; x < std::min(oldCellsX, m_cellsX); ++x) {
+                    m_MainLayer[y * m_cellsX + x] = tmpLayer[y * oldCellsX + x];
+                }
+            }
+
+
+            delete[] tmpLayer;
         }
     }
 
