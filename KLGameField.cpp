@@ -11,6 +11,8 @@
 #include "KLGameField.h"
 #include <QMouseEvent>
 #include <QTimer>
+#include <QAction>
+#include <QMenu>
 #include <QFileDialog>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -21,9 +23,7 @@
 #include "generalpage.h"
 #include "patternspage.h"
 #include "generatorpage.h"
-#ifdef _DEBUG
-#include <QDebug>
-#endif
+
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -39,6 +39,7 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
     m_cellSize = MIN_CELL_SIZE;
     setMouseTracking(true);
     changeMoveMode(false);
+    setContextMenuPolicy(Qt::CustomContextMenu);
     m_Cursor = cursor();
     m_TimerInterval = DIVISOR / timerInterval;
     initTotalCells();
@@ -47,6 +48,8 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
     connect(mGenerator, &CellsGenerator::resultFinished, this, [=]() {
         repaint();
     });
+
+    connect(this, &QWidget::customContextMenuRequested, this, &KLGameField::showContextMenu);
 }
 
 KLGameField::~KLGameField() {
@@ -912,6 +915,8 @@ void KLGameField::cdApply(const QString &dname) {
         bool isInfinite = Settings::infinite();
         if (m_isInfinite != isInfinite) {
 
+            restoreScreen();
+
             int oldCellsX = m_cellsX;
             int oldCellsY = m_cellsX;
 
@@ -1167,6 +1172,48 @@ void KLGameField::clearSelection() {
 
 void KLGameField::onSelectClear(bool) {
     clearSelection();
+}
+
+void KLGameField::showContextMenu(const QPoint &pos) {
+    QPoint newPos = pos;
+    if (!checkMousePosition(newPos)) {
+        return;
+    }
+    cancelTimerInstantly();
+    QMenu menu;
+    auto *action1 = new QAction(i18n("Paste selection at this position"), this);
+    action1->setObjectName("paste_selected");
+    menu.addAction(action1);
+    m_LeftbPressed = false;
+    QAction *res = menu.exec(mapToGlobal(pos));
+
+    if (res && res->objectName() == "paste_selected") {
+
+
+        int cellX = newPos.x() / (m_cellSize + SPACE);
+        int cellY = newPos.y() / (m_cellSize + SPACE);
+
+        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+        QPoint maxOrigin = QPoint(0, 0);
+
+        doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
+
+        if (!maxOrigin.isNull()) {
+
+            QSize delta(0,0);
+            delta.setWidth(maxOrigin.x() - minOrigin.x());
+            delta.setHeight(maxOrigin.y() - minOrigin.y());
+
+            for (int y = 0; y <= delta.height(); ++y) {
+                for (int x = 0; x <= delta.width(); ++x) {
+                    copyToLayer(m_MainLayer,  m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
+                                fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+                }
+
+            }
+            repaint();
+        }
+    }
 }
 
 

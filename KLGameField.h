@@ -135,6 +135,8 @@ public slots:
 
 private slots:
     void nextGeneration();
+    void showContextMenu(const QPoint &);
+
 
 signals:
     void changeControls(bool);
