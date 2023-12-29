@@ -51,9 +51,7 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
 
 KLGameField::~KLGameField() {
 
-    delete m_SelectionLayer;
-    delete m_MainLayer;
-    delete m_NextStepLayer;
+    reallocAllLayers();
     delete evoTimer;
     delete mGenerator;
 }
@@ -123,7 +121,7 @@ void KLGameField::actualDoRePaint() {
 
         doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
         if (!maxOrigin.isNull()) {
-            painter.setPen(QPen(Settings::selectedcolor()));
+            painter.setPen(QPen(Settings::borderselectioncolor()));
             auto startPoint = (minOrigin - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE);
             auto finalPoint = (maxOrigin + QPoint(1, 1) - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE) - QPoint(SPACE * 2, SPACE * 2);
             painter.drawRect(QRect(startPoint, finalPoint));
@@ -179,7 +177,7 @@ void KLGameField::resizeEvent(QResizeEvent *event) {
 
 void KLGameField::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);
-    cdApply(nullptr);
+    cdApply(QString());
 }
 
 uchar *KLGameField::initLayer(uchar *layer) const {
@@ -240,6 +238,7 @@ void KLGameField::recalculate() {
 int KLGameField::calculateNeighbors(int x, int y) {
     bool isFieldToroidal = Settings::toroidal();
     bool isFieldWalled = Settings::walled();
+    bool isFieldInfinite = Settings::infinite();
     int locNeighbors = 0;
     for (int dy = -1; dy <= 1; ++dy) {
         for (int dx = -1; dx <= 1; ++dx) {
@@ -272,6 +271,12 @@ int KLGameField::calculateNeighbors(int x, int y) {
             } else if (isFieldWalled) {
                 if (newY < 0 || newY >= m_cellsY || newX < 0 || newX >= m_cellsX) {
                     continue;
+                } else {
+                    locNeighbors += fromMainLayer(newX, newY);
+                }
+            } else if (isFieldInfinite) {
+                if (newY < 0 || newY >= m_cellsY || newX < 0 || newX >= m_cellsX) {
+                    locNeighbors = 0;
                 } else {
                     locNeighbors += fromMainLayer(newX, newY);
                 }
@@ -324,6 +329,7 @@ void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
     } else {
         copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
                     !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+        copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY, 0);
     }
     repaint();
 }
@@ -360,6 +366,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
                     } else {
                         copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
                                     !fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+                        copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY, 0);
                     }
                     repaint();
                 }
@@ -594,6 +601,15 @@ void KLGameField::intentToMoveField(int dx, int dy) {
     }
 }
 
+void KLGameField::reallocAllLayers() {
+    delete m_SelectionLayer;
+    m_SelectionLayer = nullptr;
+    delete m_MainLayer;
+    m_MainLayer = nullptr;
+    delete m_NextStepLayer;
+    m_NextStepLayer = nullptr;
+}
+
 void KLGameField::initTotalCells() {
 
     QDesktopWidget *desktopwidget = QApplication::desktop(); // Get display resolution
@@ -603,6 +619,13 @@ void KLGameField::initTotalCells() {
 
     m_cellsX = fd.width() / (m_cellSize + SPACE);
     m_cellsY = fd.height() / (m_cellSize + SPACE);
+
+    bool isInfinite = Settings::infinite();
+    if (isInfinite) {
+        m_cellsX *= 2;
+        m_cellsY *= 2;
+    }
+    m_isInfinite = isInfinite;
 
     initLayers();
     m_Generation = 0;
@@ -883,7 +906,18 @@ void KLGameField::tryToImportNative(const QString &path) {
     }
 }
 
-void KLGameField::cdApply(const QString &) {
+void KLGameField::cdApply(const QString &dname) {
+
+
+    if (!dname.isEmpty()) {
+        bool isInfinite = Settings::infinite();
+        if (m_isInfinite != isInfinite) {
+            reallocAllLayers();
+            initTotalCells();
+            recalcScreenCells();
+        }
+    }
+
 
     static QString sPath = "";
     const QString &tPath = Settings::templatefile();
@@ -1118,6 +1152,7 @@ void KLGameField::clearSelection() {
 void KLGameField::onSelectClear(bool) {
     clearSelection();
 }
+
 
 
 

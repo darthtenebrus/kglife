@@ -35,6 +35,7 @@ protected:
 private:
     void initLayers();
     void clearSelection();
+    void reallocAllLayers();
     void initTotalCells();
     void changeDelta(int);
     void restoreScreen();
@@ -104,6 +105,7 @@ private:
     bool m_LeftbPressed = false;
     bool m_MoveMode = false;
     bool m_SelectionMode = false;
+    bool m_isInfinite = false;
 
     static QString CurrentFilePath;
     static void setCurrentPath(KLGameField *th, const QString& cpath);

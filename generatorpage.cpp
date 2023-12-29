@@ -44,6 +44,8 @@ void GeneratorPage::indexIsChanged(int index) {
     } else if(objSender->objectName() == "kcfg_distributionforY") {
         prtrial = kcfg_probtrialforY;
         expected = kcfg_expectedvalforY;
+    } else {
+        return;
     }
     prtrial->setEnabled(distType == Settings::BINOMIAL);
     expected->setEnabled(distType == Settings::POISSON);

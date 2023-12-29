@@ -18,6 +18,10 @@
             <label>Selected Color</label>
             <default>#026433</default>
         </entry>
+        <entry name="borderselectioncolor" type="Color">
+            <label>Selected Color</label>
+            <default>#FF0000</default>
+        </entry>
         <entry name="slidervalue" type="Int">
             <label>Timer slider value</label>
             <default>5</default>
@@ -33,6 +37,10 @@
         </entry>
         <entry name="walled" type="Bool">
             <label>Neutral Wall</label>
+            <default>false</default>
+        </entry>
+        <entry name="infinite" type="Bool">
+            <label>Infinite</label>
             <default>false</default>
         </entry>
     </group>
