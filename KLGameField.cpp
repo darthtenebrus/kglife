@@ -68,6 +68,7 @@ KLGameField::~KLGameField() {
         factory()->removeClient(this);
     }
 
+    delete _clientBuilder;
 }
 
 void KLGameField::restoreScreen() {
@@ -1296,11 +1297,11 @@ void KLGameField::fillOrEmptySelected(bool) {
 }
 
 void KLGameField::setupFactory() {
-    if (factory() == nullptr) {
+    if (!factory()) {
         if (clientBuilder() == nullptr) {
             // Client builder does not get deleted automatically, we handle this
-            _clientBuilder = std::make_unique<KXMLGUIBuilder>(this);
-            setClientBuilder(_clientBuilder.get());
+            _clientBuilder = new KXMLGUIBuilder(this);
+            setClientBuilder(_clientBuilder);
         }
 
         auto factory = new KXMLGUIFactory(clientBuilder());

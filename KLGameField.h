@@ -114,7 +114,7 @@ private:
     bool m_SelectionMode = false;
     bool m_isInfinite = false;
 
-    std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
+    KXMLGUIBuilder *_clientBuilder;
     QPointer<QMenu> popupMenu;
 
 
