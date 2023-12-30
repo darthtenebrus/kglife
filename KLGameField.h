@@ -8,9 +8,11 @@
 
 #include <QWidget>
 #include <QTextStream>
+#include <KXMLGUIClient>
+#include <KXMLGUIBuilder>
 #include "cellsgenerator.h"
 
-class KLGameField : public QWidget {
+class KLGameField : public QWidget, public KXMLGUIClient {
 Q_OBJECT
 public:
     KLGameField(int, QWidget * = nullptr);
@@ -33,6 +35,7 @@ protected:
     void intentToMoveField(int x, int y);
 
 private:
+    void setupCommonActions();
     void initLayers();
     void clearSelection();
     void reallocAllLayers();
@@ -106,6 +109,9 @@ private:
     bool m_MoveMode = false;
     bool m_SelectionMode = false;
     bool m_isInfinite = false;
+
+    std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
+
 
     static QString CurrentFilePath;
     static void setCurrentPath(KLGameField *th, const QString& cpath);

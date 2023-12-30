@@ -7,8 +7,10 @@
 #include <QPrintDialog>
 
 #include <QApplication>
-#include<QDesktopWidget>
+#include <KActionCollection>
+#include <QDesktopWidget>
 #include "KLGameField.h"
+#include <KXMLGUIFactory>
 #include <QMouseEvent>
 #include <QTimer>
 #include <QAction>
@@ -18,6 +20,8 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <QBuffer>
+#include <QPointer>
+#include <memory>
 #include "LoadGameException.h"
 #include "kglife.h"
 #include "generalpage.h"
@@ -34,6 +38,7 @@
 QString KLGameField::CurrentFilePath = "";
 
 KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
+                                                               KXMLGUIClient(),
                                                                mGenerator(new CellsGenerator()),
                                                                evoTimer(new QTimer()) {
     m_cellSize = MIN_CELL_SIZE;
@@ -49,6 +54,7 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
         repaint();
     });
 
+    setupCommonActions();
     connect(this, &QWidget::customContextMenuRequested, this, &KLGameField::showContextMenu);
 }
 
@@ -57,6 +63,11 @@ KLGameField::~KLGameField() {
     reallocAllLayers();
     delete evoTimer;
     delete mGenerator;
+
+    if (factory()) {
+        factory()->removeClient(this);
+    }
+
 }
 
 void KLGameField::restoreScreen() {
@@ -109,8 +120,9 @@ void KLGameField::actualDoRePaint() {
             QBrush color;
             hasSelected = (hasSelected || fromLayer(m_SelectionLayer, m_CurrMemOffsetX + x, m_CurrMemOffsetY + y));
             color = (fromMainLayer(m_CurrMemOffsetX + x, m_CurrMemOffsetY + y)) ? (
-                    fromLayer(m_SelectionLayer, m_CurrMemOffsetX + x, m_CurrMemOffsetY + y) ? Settings::selectedcolor() : Settings::cellcolor()
-                    ) : Settings::backcolor();
+                    fromLayer(m_SelectionLayer, m_CurrMemOffsetX + x, m_CurrMemOffsetY + y) ? Settings::selectedcolor()
+                                                                                            : Settings::cellcolor()
+            ) : Settings::backcolor();
             painter.fillRect(QRect(x * (m_cellSize + SPACE), y * (m_cellSize + SPACE),
                                    m_cellSize, m_cellSize), color);
 
@@ -126,7 +138,9 @@ void KLGameField::actualDoRePaint() {
         if (!maxOrigin.isNull()) {
             painter.setPen(QPen(Settings::borderselectioncolor()));
             auto startPoint = (minOrigin - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE);
-            auto finalPoint = (maxOrigin + QPoint(1, 1) - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE) - QPoint(SPACE * 2, SPACE * 2);
+            auto finalPoint =
+                    (maxOrigin + QPoint(1, 1) - QPoint(m_CurrMemOffsetX, m_CurrMemOffsetY)) * (m_cellSize + SPACE) -
+                    QPoint(SPACE * 2, SPACE * 2);
             painter.drawRect(QRect(startPoint, finalPoint));
         }
     }
@@ -364,7 +378,8 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
                     if (m_SelectionMode) {
                         if (fromMainLayer(m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY)) {
                             copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
-                                        !fromLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY));
+                                        !fromLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX,
+                                                   m_CurrMemOffsetY + cellY));
                         }
                     } else {
                         copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX, m_CurrMemOffsetY + cellY,
@@ -667,7 +682,8 @@ void KLGameField::setupGame() {
         dialog->addPage(new GeneralPage(parentWidget()), i18n("General"), "preferences-system", i18n("General"));
         dialog->addPage(new PatternsPage(Settings::self(), dialog, parentWidget()), i18n("Patterns"), "template",
                         i18n("Patterns"));
-        dialog->addPage(new GeneratorPage(m_cellsX - 1, m_cellsY - 1, parentWidget()), i18n("Generator"), "start-here-symbolic", i18n("Generator"));
+        dialog->addPage(new GeneratorPage(m_cellsX - 1, m_cellsY - 1, parentWidget()), i18n("Generator"),
+                        "start-here-symbolic", i18n("Generator"));
         dialog->setModal(true);
         connect(dialog, &KConfigDialog::settingsChanged, this, &KLGameField::cdApply);
     }
@@ -710,7 +726,7 @@ void KLGameField::tryToImportRLE(const QString &path) {
             if (strContent.startsWith('#')) {
                 if (strContent[1].toLatin1() == 'P') {
                     QRegExp re(R"(\s*([0-9]+)\s+([0-9]+))");
-                    if(re.indexIn(strContent) != -1) {
+                    if (re.indexIn(strContent) != -1) {
                         origX = re.cap(1).toInt() - 1;
                         origY = re.cap(2).toInt() - 1;
                     }
@@ -720,8 +736,8 @@ void KLGameField::tryToImportRLE(const QString &path) {
             } else if (strContent.toLower().startsWith('x')) {
                 QRegExp re(R"(\s*x\s*=\s*([0-9]+)[^y]+y\s*=\s*([0-9]+))");
 
-                if(re.indexIn(strContent) != -1) {
-                    deltaX = re.cap(1).toInt() ;
+                if (re.indexIn(strContent) != -1) {
+                    deltaX = re.cap(1).toInt();
                     deltaY = re.cap(2).toInt();
                 }
             } else {
@@ -732,8 +748,8 @@ void KLGameField::tryToImportRLE(const QString &path) {
 
         // In this case deltaX == 0 = fuckup, since
         // x = <int>, y = <int>, rule=B3/S23 should always present in this format
-        if(!origX) {
-            if(deltaX < m_cellsX) {
+        if (!origX) {
+            if (deltaX < m_cellsX) {
                 origX = (m_ScrCellsX - (deltaX ? deltaX : (m_ScrCellsX / 2))) / 2;
             }
         }
@@ -744,14 +760,14 @@ void KLGameField::tryToImportRLE(const QString &path) {
 
         // In this case deltaY == 0 = fuckup, since
         // x = <int>, y = <int>, rule=B3/S23 should always present in this format
-        if(!origY) {
-            if(deltaY < m_cellsY) {
+        if (!origY) {
+            if (deltaY < m_cellsY) {
                 origY = (m_ScrCellsY - (deltaY ? deltaY : resContentList.count())) / 2;
             }
         }
 
         int dy = origY;
-        for(QString item : resContentList) {
+        for (QString item: resContentList) {
             if (item.endsWith('!')) {
                 item.chop(1);
             }
@@ -769,7 +785,7 @@ void KLGameField::tryToImportRLE(const QString &path) {
                     quantity = re.cap(1).toInt();
                 }
                 const QString &symbol = re.cap(2);
-                for(int j = 1; j <= quantity; j++) {
+                for (int j = 1; j <= quantity; j++) {
 
                     if (dx < 0 || dx >= m_cellsX || dy < 0 || dy >= m_cellsY) {
                         continue;
@@ -923,7 +939,7 @@ void KLGameField::cdApply(const QString &dname) {
             int oldSize = oldCellsX * oldCellsY;
             auto *tmpLayer = new uchar[oldSize];
             memcpy(tmpLayer, m_MainLayer, oldSize);
-            
+
             reallocAllLayers();
             initTotalCells();
             recalcScreenCells();
@@ -990,7 +1006,7 @@ bool KLGameField::doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &max
 }
 
 bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
-   return doMiniMaxTestsOnLayer(m_MainLayer, minOr, maxOr);
+    return doMiniMaxTestsOnLayer(m_MainLayer, minOr, maxOr);
 }
 
 void KLGameField::tryToExportNative(const QString &path) {
@@ -1180,16 +1196,29 @@ void KLGameField::showContextMenu(const QPoint &pos) {
         return;
     }
     cancelTimerInstantly();
-    QMenu menu;
-    auto *action1 = new QAction(i18n("Paste selection at this position"), this);
-    action1->setObjectName("paste_selected");
-    menu.addAction(action1);
+    if (factory() == nullptr) {
+        if (clientBuilder() == nullptr) {
+            // Client builder does not get deleted automatically, we handle this
+            _clientBuilder = std::make_unique<KXMLGUIBuilder>(this);
+            setClientBuilder(_clientBuilder.get());
+        }
+
+        auto factory = new KXMLGUIFactory(clientBuilder());
+        factory->addClient(this);
+    }
+
+    QPointer<QMenu> menu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
+
+
+    if (menu.isNull()) {
+        return;
+    }
+
+
     m_LeftbPressed = false;
-    QAction *res = menu.exec(mapToGlobal(pos));
+    QAction *res = menu->exec(mapToGlobal(pos));
 
-    if (res && res->objectName() == "paste_selected") {
-
-
+    if (res) {
         int cellX = newPos.x() / (m_cellSize + SPACE);
         int cellY = newPos.y() / (m_cellSize + SPACE);
 
@@ -1200,20 +1229,54 @@ void KLGameField::showContextMenu(const QPoint &pos) {
 
         if (!maxOrigin.isNull()) {
 
-            QSize delta(0,0);
+            QSize delta(0, 0);
             delta.setWidth(maxOrigin.x() - minOrigin.x());
             delta.setHeight(maxOrigin.y() - minOrigin.y());
 
+            bool toEmpty = (res->objectName() == "empty_selected");
+            bool toFill = (res->objectName() == "fill_selected");
+
             for (int y = 0; y <= delta.height(); ++y) {
                 for (int x = 0; x <= delta.width(); ++x) {
-                    copyToLayer(m_MainLayer,  m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
-                                fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+                    if (res->objectName() == "paste_selected") {
+                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
+                                    fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+                    } else if (toEmpty || toFill) {
+                        copyToLayer(m_MainLayer, minOrigin.x() + x, minOrigin.y() + y, toEmpty ? 0 : 1);
+                        if (toEmpty) {
+                            clearSelection();
+                        }
+                    }
                 }
 
             }
-            repaint();
+
         }
+        repaint();
     }
+}
+
+void KLGameField::setupCommonActions() {
+    setXMLFile(QStringLiteral("actionsui.rc"));
+
+    QAction *pasteAction = actionCollection()->addAction(QStringLiteral("paste_selected"));
+    pasteAction->setText(i18n("Paste at this position"));
+    pasteAction->setIcon(QIcon::fromTheme("edit-paste-symbolic"));
+    pasteAction->setObjectName("paste_selected");
+    actionCollection()->setDefaultShortcut(pasteAction,  Qt::ALT + Qt::Key_P);
+
+    QAction *emptyAction = actionCollection()->addAction(QStringLiteral("empty_selected"));
+    emptyAction->setText(i18n("Empty"));
+    emptyAction->setIcon(QIcon::fromTheme("trash-empty"));
+    emptyAction->setObjectName("empty_selected");
+    actionCollection()->setDefaultShortcut(emptyAction,  Qt::ALT + Qt::Key_E);
+
+    QAction *fillAction = actionCollection()->addAction(QStringLiteral("fill_selected"));
+    fillAction->setText(i18n("Fill"));
+    fillAction->setIcon(QIcon::fromTheme("fill-color"));
+    fillAction->setObjectName("fill_selected");
+    actionCollection()->setDefaultShortcut(fillAction,  Qt::ALT + Qt::Key_F);
+
 }
 
 
