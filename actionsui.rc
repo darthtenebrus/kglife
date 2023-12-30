@@ -6,5 +6,6 @@
         <Action name="paste_selected"/>
         <Action name="empty_selected"/>
         <Action name="fill_selected"/>
+        <Action name="select_untouched"/>
     </Menu>
 </gui>

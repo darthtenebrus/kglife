@@ -132,7 +132,7 @@ void MainWindow::setupToolbar() {
     actionNextStep->setIcon(QIcon::fromTheme("media-skip-forward"));
     actionNextStep->setWhatsThis(i18n("Next single evolution step"));
     actionCollection()->setDefaultShortcut(actionNextStep,  Qt::ALT + Qt::Key_N);
-    connect(actionNextStep, &QAction::triggered, gameField, &KLGameField::nextAction);
+    connect(actionNextStep, &QAction::triggered, gameField, &KLGameField::singleAction);
 
     QAction *actionStartStop = actionCollection()->addAction(QStringLiteral("game_start_stop"));
     actionStartStop->setText(i18n("&Start/Stop Game"));

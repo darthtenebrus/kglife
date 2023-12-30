@@ -14,7 +14,6 @@
 #include <QMouseEvent>
 #include <QTimer>
 #include <QAction>
-#include <QMenu>
 #include <QFileDialog>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -55,6 +54,7 @@ KLGameField::KLGameField(int timerInterval, QWidget *parent) : QWidget(parent),
     });
 
     setupCommonActions();
+    setupFactory();
     connect(this, &QWidget::customContextMenuRequested, this, &KLGameField::showContextMenu);
 }
 
@@ -413,13 +413,18 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
     }
 }
 
-void KLGameField::nextAction(bool) {
+void KLGameField::nextAction() {
     recalculate();
     repaint();
 }
 
 void KLGameField::nextGeneration() {
-    nextAction(true);
+    nextAction();
+}
+
+void KLGameField::singleAction(bool) {
+    clearSelection();
+    nextAction();
 }
 
 void KLGameField::checkTimerAndUpdate(bool) {
@@ -651,7 +656,7 @@ void KLGameField::initTotalCells() {
 
 }
 
-QSize KLGameField::getStandardFieldDefs(int &x, int &y) const {
+QSize KLGameField::getStandardFieldDefs(int &x, int &y) {
     return {x - (FIELD_OFFSET + SPACE) * 2, y - (FIELD_OFFSET + SPACE) * 2};
 }
 
@@ -693,6 +698,7 @@ void KLGameField::setupGame() {
 }
 
 void KLGameField::tryLoadFromFile(const QString &path) {
+    clearSelection();
     QFileInfo fileInfo(path);
     if (fileInfo.suffix().toLower() == "rle") {
         tryToImportRLE(path);
@@ -931,6 +937,7 @@ void KLGameField::cdApply(const QString &dname) {
         bool isInfinite = Settings::infinite();
         if (m_isInfinite != isInfinite) {
 
+            clearSelection();
             restoreScreen();
 
             int oldCellsX = m_cellsX;
@@ -1196,6 +1203,99 @@ void KLGameField::showContextMenu(const QPoint &pos) {
         return;
     }
     cancelTimerInstantly();
+
+    if (popupMenu.isNull()) {
+        return;
+    }
+
+
+    m_LeftbPressed = false;
+    QAction *res = actionCollection()->action(QStringLiteral("paste_selected"));
+
+    const QMetaObject::Connection &popupConn = connect(res, &QAction::triggered, this, [=](bool) {
+        int cellX = newPos.x() / (m_cellSize + SPACE);
+        int cellY = newPos.y() / (m_cellSize + SPACE);
+
+        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+        QPoint maxOrigin = QPoint(0, 0);
+
+        doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
+
+        if (!maxOrigin.isNull()) {
+            QSize delta(0, 0);
+            delta.setWidth(maxOrigin.x() - minOrigin.x());
+            delta.setHeight(maxOrigin.y() - minOrigin.y());
+            for (int y = 0; y <= delta.height(); ++y) {
+                for (int x = 0; x <= delta.width(); ++x) {
+                    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
+                                fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+                }
+            }
+            repaint();
+        }
+    });
+    popupMenu->exec(mapToGlobal(pos));
+    disconnect(popupConn);
+}
+
+void KLGameField::setupCommonActions() {
+    setXMLFile(QStringLiteral("actionsui.rc"));
+
+    QAction *pasteAction = actionCollection()->addAction(QStringLiteral("paste_selected"));
+    pasteAction->setText(i18n("Paste at this position"));
+    pasteAction->setIcon(QIcon::fromTheme("edit-paste-symbolic"));
+    pasteAction->setObjectName("paste_selected");
+
+    QAction *emptyAction = actionCollection()->addAction(QStringLiteral("empty_selected"), this, &KLGameField::fillOrEmptySelected);
+    emptyAction->setText(i18n("Empty"));
+    emptyAction->setIcon(QIcon::fromTheme("trash-empty"));
+    emptyAction->setObjectName("empty_selected");
+    actionCollection()->setDefaultShortcut(emptyAction,  Qt::ALT + Qt::Key_E);
+
+    QAction *fillAction = actionCollection()->addAction(QStringLiteral("fill_selected"), this, &KLGameField::fillOrEmptySelected);
+    fillAction->setText(i18n("Fill"));
+    fillAction->setIcon(QIcon::fromTheme("fill-color"));
+    fillAction->setObjectName("fill_selected");
+    actionCollection()->setDefaultShortcut(fillAction,  Qt::ALT + Qt::Key_F);
+
+    QAction *untouchedAction = actionCollection()->addAction(QStringLiteral("select_untouched"), this, &KLGameField::fillOrEmptySelected);
+    untouchedAction->setText(i18n("Select untouched"));
+    untouchedAction->setObjectName("select_untouched");
+    actionCollection()->setDefaultShortcut(untouchedAction,  Qt::ALT + Qt::Key_U);
+}
+
+void KLGameField::fillOrEmptySelected(bool) {
+
+    QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+    QPoint maxOrigin = QPoint(0, 0);
+
+    doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
+
+    if (!maxOrigin.isNull()) {
+
+
+        bool toEmpty = (sender()->objectName() == "empty_selected");
+        bool toFill = (sender()->objectName() == "fill_selected");
+        bool untouched = (sender()->objectName() == "select_untouched");
+
+        for (int y = minOrigin.y(); y <= maxOrigin.y(); ++y) {
+            for (int x = minOrigin.x(); x <= maxOrigin.x(); ++x) {
+                if (toEmpty || toFill) {
+                    copyToLayer(m_MainLayer, x, y, toEmpty ? 0 : 1);
+                } else if (untouched) {
+                    copyToLayer(m_SelectionLayer, x, y, fromLayer(m_MainLayer, x, y));
+                }
+            }
+        }
+        if (toEmpty) {
+            clearSelection();
+        }
+
+        repaint();
+    }
+}
+
+void KLGameField::setupFactory() {
     if (factory() == nullptr) {
         if (clientBuilder() == nullptr) {
             // Client builder does not get deleted automatically, we handle this
@@ -1207,77 +1307,10 @@ void KLGameField::showContextMenu(const QPoint &pos) {
         factory->addClient(this);
     }
 
-    QPointer<QMenu> menu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
-
-
-    if (menu.isNull()) {
-        return;
-    }
-
-
-    m_LeftbPressed = false;
-    QAction *res = menu->exec(mapToGlobal(pos));
-
-    if (res) {
-        int cellX = newPos.x() / (m_cellSize + SPACE);
-        int cellY = newPos.y() / (m_cellSize + SPACE);
-
-        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
-        QPoint maxOrigin = QPoint(0, 0);
-
-        doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
-
-        if (!maxOrigin.isNull()) {
-
-            QSize delta(0, 0);
-            delta.setWidth(maxOrigin.x() - minOrigin.x());
-            delta.setHeight(maxOrigin.y() - minOrigin.y());
-
-            bool toEmpty = (res->objectName() == "empty_selected");
-            bool toFill = (res->objectName() == "fill_selected");
-
-            for (int y = 0; y <= delta.height(); ++y) {
-                for (int x = 0; x <= delta.width(); ++x) {
-                    if (res->objectName() == "paste_selected") {
-                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
-                                    fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
-                    } else if (toEmpty || toFill) {
-                        copyToLayer(m_MainLayer, minOrigin.x() + x, minOrigin.y() + y, toEmpty ? 0 : 1);
-                        if (toEmpty) {
-                            clearSelection();
-                        }
-                    }
-                }
-
-            }
-
-        }
-        repaint();
-    }
+    popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
 
-void KLGameField::setupCommonActions() {
-    setXMLFile(QStringLiteral("actionsui.rc"));
 
-    QAction *pasteAction = actionCollection()->addAction(QStringLiteral("paste_selected"));
-    pasteAction->setText(i18n("Paste at this position"));
-    pasteAction->setIcon(QIcon::fromTheme("edit-paste-symbolic"));
-    pasteAction->setObjectName("paste_selected");
-    actionCollection()->setDefaultShortcut(pasteAction,  Qt::ALT + Qt::Key_P);
-
-    QAction *emptyAction = actionCollection()->addAction(QStringLiteral("empty_selected"));
-    emptyAction->setText(i18n("Empty"));
-    emptyAction->setIcon(QIcon::fromTheme("trash-empty"));
-    emptyAction->setObjectName("empty_selected");
-    actionCollection()->setDefaultShortcut(emptyAction,  Qt::ALT + Qt::Key_E);
-
-    QAction *fillAction = actionCollection()->addAction(QStringLiteral("fill_selected"));
-    fillAction->setText(i18n("Fill"));
-    fillAction->setIcon(QIcon::fromTheme("fill-color"));
-    fillAction->setObjectName("fill_selected");
-    actionCollection()->setDefaultShortcut(fillAction,  Qt::ALT + Qt::Key_F);
-
-}
 
 
 

@@ -10,6 +10,8 @@
 #include <QTextStream>
 #include <KXMLGUIClient>
 #include <KXMLGUIBuilder>
+#include <QPointer>
+#include <QMenu>
 #include "cellsgenerator.h"
 
 class KLGameField : public QWidget, public KXMLGUIClient {
@@ -36,6 +38,7 @@ protected:
 
 private:
     void setupCommonActions();
+    void setupFactory();
     void initLayers();
     void clearSelection();
     void reallocAllLayers();
@@ -43,7 +46,8 @@ private:
     void changeDelta(int);
     void restoreScreen();
 
-    void recalculate(void);
+    void recalculate();
+    void nextAction();
     void actualDoRePaint();
     uchar *initLayer(uchar *) const;
     void swapLayers(void);
@@ -72,7 +76,7 @@ private:
     QPoint getMainOffset() const;
 
     [[nodiscard]]
-    QSize getStandardFieldDefs(int &, int &) const;
+    static QSize getStandardFieldDefs(int &, int &) ;
 
     void flushStream(int &status, char symbol, QTextStream &);
 
@@ -111,6 +115,7 @@ private:
     bool m_isInfinite = false;
 
     std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
+    QPointer<QMenu> popupMenu;
 
 
     static QString CurrentFilePath;
@@ -119,7 +124,7 @@ private:
 
 public slots:
     void newAction(bool);
-    void nextAction(bool);
+    void singleAction(bool);
     void openAction(bool);
     void saveAction(bool);
     void saveAsAction(bool);
@@ -142,6 +147,7 @@ public slots:
 private slots:
     void nextGeneration();
     void showContextMenu(const QPoint &);
+    void fillOrEmptySelected(bool);
 
 
 signals:
