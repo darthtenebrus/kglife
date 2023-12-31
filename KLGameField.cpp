@@ -19,7 +19,6 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <QBuffer>
-#include <QPointer>
 #include <memory>
 #include "LoadGameException.h"
 #include "kglife.h"
@@ -321,6 +320,10 @@ QPoint KLGameField::getMainOffset() const {
 }
 
 void KLGameField::mouseDoubleClickEvent(QMouseEvent *event) {
+
+    if (event->button() != Qt::LeftButton) {
+        return;
+    }
 
     if (m_MoveMode) {
         return;
