@@ -1264,6 +1264,7 @@ void KLGameField::setupCommonActions() {
 
     QAction *untouchedAction = actionCollection()->addAction(QStringLiteral("select_untouched"), this, &KLGameField::fillOrEmptySelected);
     untouchedAction->setText(i18n("Select untouched"));
+    untouchedAction->setIcon(QIcon::fromTheme("filled-xterm"));
     untouchedAction->setObjectName("select_untouched");
     actionCollection()->setDefaultShortcut(untouchedAction,  Qt::ALT + Qt::Key_U);
 }

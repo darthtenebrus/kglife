@@ -248,6 +248,7 @@
             <para>Начать или остановить процесс эволюции</para>
           </listitem>
         </varlistentry>
+
         <varlistentry>
           <term>
             <menuchoice>
@@ -262,6 +263,37 @@
             <para>Режим перемещения. В этом режиме можно перемещать поле при помощи мыши, чтобы увидеть клетки за пределами экрана</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>L</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Игра</guimenu> <guimenuitem>Выделение мышью</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Режим выделения. В этом режиме можно выделять живые клетки двойным щелчком или проведя по ним курсором с зажатой левой кнопкой</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>C</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Игра</guimenu> <guimenuitem>Очистить выделение</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Очистить выделенную область</para>
+          </listitem>
+        </varlistentry>
+
         <varlistentry>
           <term>
             <menuchoice>

@@ -261,6 +261,37 @@
             <para>Move mode. In this mode you can move the field by dragging the mouse to see the cells beyond the screen</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>L</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Mouse selection</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Selection mode. In this mode you can select live cells by double click or dragging</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <shortcut>
+                <keycombo action="simul">&Alt;<keycap>C</keycap>
+                </keycombo>
+              </shortcut>
+              <guimenu>Game</guimenu> <guimenuitem>Clear selection</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Clear selected area</para>
+          </listitem>
+        </varlistentry>
+
+
         <varlistentry>
           <term>
             <menuchoice>
