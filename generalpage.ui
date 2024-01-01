@@ -224,7 +224,7 @@
          <string/>
         </property>
         <property name="whatsThis">
-         <string>Field is infinite. Cells beyound the edges simply disappear continuing their live cycle. &lt;b&gt;Warning: this is still experimental&lt;/b&gt;</string>
+         <string>Field is infinite. Cells beyond the edges simply disappear continuing their live cycle. &lt;b&gt;Warning: this is still experimental&lt;/b&gt;</string>
         </property>
         <property name="text">
          <string>Infinite</string>

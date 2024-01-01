@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-27 11:15+0300\n"
-"PO-Revision-Date: 2023-12-27 11:25+0300\n"
+"POT-Creation-Date: 2024-01-01 12:14+0300\n"
+"PO-Revision-Date: 2024-01-01 12:26+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -28,50 +28,62 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "webmaster@darkguard.net"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:172
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:172
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:232
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:232
 #, kde-format
 msgid "GeneralPage"
 msgstr "AllgemeineSeite"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:173
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:173
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:233
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:233
 #, kde-format
 msgid "Borders And Cells"
 msgstr "Trennstreifen und Zellen"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:174
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:174
-#, kde-format
-msgid "Cell Color"
-msgstr "Zellenfarbe"
-
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:175
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:175
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:234
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:234
 #, kde-format
 msgid "Background Color"
 msgstr "Rückfarbe"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:176
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:176
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:235
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:235
+#, kde-format
+msgid "Cell Color"
+msgstr "Zellenfarbe"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:236
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:236
 #, kde-format
 msgid "Cells Border Color"
 msgstr "Zellentrennstreifenfarbe"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:177
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:177
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:237
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:237
+#, kde-format
+msgid "Selection Edge Border Color"
+msgstr "Auswahlkantenrandfarbe"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:238
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:238
+#, kde-format
+msgid "Selected Cells Color"
+msgstr "Zellenfarbe"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:239
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:239
 #, kde-format
 msgid "Field Edges Type"
 msgstr "Feldränder"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:179
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:179
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:241
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:241
 #, kde-format
 msgid "Field is toroidal"
 msgstr "Das Feld ist toroidisch"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:182
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:182
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:244
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:244
 #, kde-format
 msgid ""
 "The field is considered to be a toroid. The cell on the edge has its "
@@ -80,28 +92,28 @@ msgstr ""
 "Das Feld wird als Toroid betrachtet. Die Zelle am Rand hat ihre Nachbarn auf "
 "der gegenüberliegenden Seite"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:184
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:184
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:246
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:246
 #, kde-format
 msgid "Toroidal"
 msgstr "Toroidisch"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:186
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:186
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:248
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:248
 #, kde-format
 msgid "Alt+S"
 msgstr "Alt+S"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:189
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:194
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:189
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:194
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:251
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:256
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:251
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:256
 #, kde-format
 msgid "Neutral Wall"
 msgstr "Neutralmauer"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:192
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:192
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:254
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:254
 #, kde-format
 msgid ""
 "The field is surrounded by a neutral wall. No cells are born there and it is "
@@ -110,83 +122,105 @@ msgstr ""
 "Das Feld ist von einer neutralen Mauer umgeben. Keine Zellen werden darüber "
 "hinaus geboren und sie wird nicht als Nachbar berücksichtigt"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:196
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:196
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:258
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:258
 #, kde-format
 msgid "Alt+W"
 msgstr "Alt+W"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:198
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:198
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:261
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:261
+#, kde-format
+msgid "Field is infinite (EXPERIMENTAL)"
+msgstr "Das Feld ist unendlich (EXPERIMENTAL)"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:267
+#, kde-format
+msgid ""
+"Field is infinite. Cells beyond the edges simply disappear continuing their "
+"live cycle. <b>Warning: this is still experimental</b>"
+msgstr ""
+"Das Feld ist unendlich. Wird die Zellen hinter den Rändern einfach "
+"verschwunden, dann sie ihren Lebenszyklus fortsetzen. <b>Achtung: Dies ist "
+"noch experimentell</b>"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:269
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:269
+#, kde-format
+msgid "Infinite"
+msgstr "Unendlich"
+
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:270
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:270
 #, kde-format
 msgid "Timer slider"
 msgstr "Schieberegler"
 
-#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:199
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:199
+#: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:271
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:271
 #, kde-format
 msgid "Initial Value"
 msgstr "Anfangswert"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:241
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:235
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:241
 #, kde-format
 msgid "GeneratorPage"
 msgstr "GeneratorSeite"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:242
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:236
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:242
 #, kde-format
 msgid "Generator parameters"
 msgstr "Generatorparameter"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:243
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:237
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:243
 #, kde-format
 msgid "Percentage Fill"
 msgstr "Prozentualfüllung"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:244
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:238
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:244
 #, kde-format
 msgid "Init field before generating"
 msgstr "Feldeinklärung vor der Generierung"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:245
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:239
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:245
 #, kde-format
-msgid "Generator Distribution for X-axis"
+msgid "Generator distribution for X-axis"
 msgstr "X-Achsegeneratorverteilung"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:246
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:250
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:240
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:244
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:246
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:250
 #, kde-format
-msgid "Distribution Type"
+msgid "Distribution type"
 msgstr "Verteilungsart"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:247
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:251
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:241
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:245
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:247
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:251
 #, kde-format
-msgid "Binomial Trial Success Probability"
+msgid "Binomial trial success probability"
 msgstr "Binomialversuchserfolgswahrscheinlichkeit"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:248
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:252
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:242
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:246
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:248
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:252
 #, kde-format
-msgid "Poisson Mean Value"
+msgid "Poisson mean value"
 msgstr "Mittelwert von Poisson"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generatorpage.h:249
-#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:243
+#: cmake-build-release/kglife_autogen/include/ui_generatorpage.h:249
 #, kde-format
-msgid "Generator Distribution For Y-axis"
-msgstr "Y-Achsegeneratorverteilung"
+msgid "Generator distribution for Y-axis"
+msgstr "X-Achsegeneratorverteilung"
 
 #: cmake-build-debug/kglife_autogen/include/ui_patternspage.h:151
 #: cmake-build-release/kglife_autogen/include/ui_patternspage.h:151
@@ -228,6 +262,13 @@ msgstr "Autor:"
 msgid "Author E-Mail:"
 msgstr "E-Mail von Autor:"
 
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:267
+#, kde-format
+msgid ""
+"Field is infinite. Cells beyound the edges simply disappear continuing their "
+"live cycle. <b>Warning: this is still experimental</b>"
+msgstr "Das Feld ist unendlich. Zellen außerhalb der Ränder"
+
 #: generatorpage.cpp:15
 #, kde-format
 msgid "Uniform"
@@ -249,13 +290,19 @@ msgstr "Poisson"
 msgid "&Game"
 msgstr "&Spiel"
 
+#. i18n: ectx: Menu (selection)
+#: kglifeui.rc:19
+#, kde-format
+msgid "Field"
+msgstr "Feld"
+
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kglifeui.rc:23
+#: kglifeui.rc:28
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hauptsymbolleiste"
 
-#: KLGameField.cpp:430
+#: KLGameField.cpp:502
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -264,12 +311,12 @@ msgstr ""
 "Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells);;"
 "Alle Datei (*.*)"
 
-#: KLGameField.cpp:434
+#: KLGameField.cpp:506
 #, kde-format
 msgid "Load colony from file"
 msgstr "Kolonie von der Datei einladen"
 
-#: KLGameField.cpp:447
+#: KLGameField.cpp:519
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -277,24 +324,24 @@ msgid ""
 msgstr ""
 "Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:451
+#: KLGameField.cpp:523
 #, kde-format
 msgid "Save colony current state"
 msgstr "Den Koloniezustand speichern"
 
-#: KLGameField.cpp:507
+#: KLGameField.cpp:579 KLGameField.cpp:595
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
 "pressed"
 msgstr "Mausdoppelklick um die Einzelle setzen oder löschen"
 
-#: KLGameField.cpp:508
+#: KLGameField.cpp:580
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Linke Maustaste halten um das Feld zu bewegen"
 
-#: KLGameField.cpp:510
+#: KLGameField.cpp:582 KLGameField.cpp:598
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -303,7 +350,7 @@ msgstr ""
 "Stellen Sie hier mit Mausklick beliebige Zellen ein oder ziehen Sie einfach "
 "eine Zelllinie auf"
 
-#: KLGameField.cpp:512
+#: KLGameField.cpp:584
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -312,49 +359,79 @@ msgstr ""
 "Ziehen Sie einfach die Maus, um das Feld zu bewegen und die Zellen über der "
 "Ränder zu sehen"
 
-#: KLGameField.cpp:587
+#: KLGameField.cpp:596
+#, kde-format
+msgid "Drag the mouse to select the live cells"
+msgstr "Linke Maustaste halten um die Lebenzellen zu auswählen"
+
+#: KLGameField.cpp:600
+#, kde-format
+msgid "In select mode you simply drag the mouse to select the live cells"
+msgstr "Ziehen Sie einfach die Maus, um die Lebenzellen zuauswählen"
+
+#: KLGameField.cpp:691
 #, kde-format
 msgid "General"
 msgstr "Allgemeine"
 
-#: KLGameField.cpp:588 KLGameField.cpp:589
+#: KLGameField.cpp:692 KLGameField.cpp:693
 #, kde-format
 msgid "Patterns"
 msgstr "Muster"
 
-#: KLGameField.cpp:590
+#: KLGameField.cpp:694 KLGameField.cpp:695
 #, kde-format
 msgid "Generator"
 msgstr "Generator"
 
-#: KLGameField.cpp:616 KLGameField.cpp:722 KLGameField.cpp:776
-#: KLGameField.cpp:894 KLGameField.cpp:948 KLGameField.cpp:991
+#: KLGameField.cpp:722 KLGameField.cpp:826 KLGameField.cpp:877
+#: KLGameField.cpp:1027 KLGameField.cpp:1081 KLGameField.cpp:1124
 #, kde-format
 msgid "Open file failed"
 msgstr "Dateiladen Fehler"
 
-#: KLGameField.cpp:713 KLGameField.cpp:768 KLGameField.cpp:834
-#: KLGameField.cpp:921 KLGameField.cpp:964 KLGameField.cpp:1018
+#: KLGameField.cpp:817 KLGameField.cpp:869 KLGameField.cpp:934
+#: KLGameField.cpp:1054 KLGameField.cpp:1097 KLGameField.cpp:1151
 #, kde-format
 msgid "Error"
 msgstr "Fehler"
 
-#: KLGameField.cpp:783 KLGameField.cpp:796 KLGameField.cpp:807
-#: KLGameField.cpp:820
+#: KLGameField.cpp:884 KLGameField.cpp:897 KLGameField.cpp:907
+#: KLGameField.cpp:920
 #, kde-format
 msgid "Invalid file format"
 msgstr "Ein Dateiformat ist falsch"
 
-#: KLGameField.cpp:857 mainwindow.cpp:91
+#: KLGameField.cpp:987 mainwindow.cpp:97
 #, kde-format
 msgid "Print Pattern"
 msgstr "Muster abdrucken"
 
-#: KLGameField.cpp:912 KLGameField.cpp:940 KLGameField.cpp:983
-#: mainwindow.cpp:68
+#: KLGameField.cpp:1045 KLGameField.cpp:1073 KLGameField.cpp:1116
+#: mainwindow.cpp:74
 #, kde-format
 msgid "Colony is empty"
 msgstr "Leerkolonie"
+
+#: KLGameField.cpp:1249
+#, kde-format
+msgid "Paste at this position"
+msgstr "An dieser Stelle einfügen"
+
+#: KLGameField.cpp:1254
+#, kde-format
+msgid "Empty"
+msgstr "Leerdatei"
+
+#: KLGameField.cpp:1260
+#, kde-format
+msgid "Fill"
+msgstr "Füllen"
+
+#: KLGameField.cpp:1266
+#, kde-format
+msgid "Select untouched"
+msgstr " Unberührt wählen"
 
 #: main.cpp:25
 #, kde-format
@@ -442,72 +519,72 @@ msgstr "Symbolleiste anzeigen"
 msgid "Stop evolution"
 msgstr "Statusleiste anzeigen"
 
-#: mainwindow.cpp:62
+#: mainwindow.cpp:68
 #, kde-format
 msgid "Generation: %1"
 msgstr "Generation: %1"
 
-#: mainwindow.cpp:94
+#: mainwindow.cpp:100
 #, kde-format
 msgid "Open configuration dialog"
 msgstr "Einrichtungsfenster aufmachen"
 
-#: mainwindow.cpp:96
+#: mainwindow.cpp:102
 #, kde-format
 msgid "Load saved colony"
 msgstr "Die gespeicherte Kolonie einladen"
 
-#: mainwindow.cpp:98
+#: mainwindow.cpp:104
 #, kde-format
 msgid "Save current colony"
 msgstr "Den Koloniezustand zur Datei speichern"
 
-#: mainwindow.cpp:101
+#: mainwindow.cpp:107
 #, kde-format
 msgid "Save current colony with different name"
 msgstr "Den Koloniezustand zur Datei mit dem anderen Namen speichern"
 
-#: mainwindow.cpp:109
+#: mainwindow.cpp:115
 #, kde-format
 msgid "Time step control"
 msgstr "Geschwindigkeitsregler"
 
-#: mainwindow.cpp:112
+#: mainwindow.cpp:118
 #, kde-format
 msgid "New &Game"
 msgstr "Neues &Spiel"
 
-#: mainwindow.cpp:114
+#: mainwindow.cpp:120
 #, kde-format
 msgid "Clear the field and stop evolution"
 msgstr "Aufklaren das Spielfeld und die Evolution halten"
 
-#: mainwindow.cpp:119
+#: mainwindow.cpp:125
 #, kde-format
 msgid "Generate &Random"
 msgstr "&Zufällig erzeugen"
 
-#: mainwindow.cpp:120
+#: mainwindow.cpp:126
 #, kde-format
 msgid "Generates random pattern"
 msgstr "Zufälliges Muster erzeugen"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:131
 #, kde-format
 msgid "&Next Step"
 msgstr "&Nächster Schritt"
 
-#: mainwindow.cpp:127
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Next single evolution step"
 msgstr "Nächster Evolutionsschritt"
 
-#: mainwindow.cpp:132
+#: mainwindow.cpp:138
 #, kde-format
 msgid "&Start/Stop Game"
 msgstr "Start/Halt ein Spiel"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:140
 #, kde-format
 msgid ""
 "Start or stop continuous evolution.<br> The icon changes to match the "
@@ -516,12 +593,12 @@ msgstr ""
 "Kontinuierliche Weiterentwicklung starten oder halten.<br> Das Symbol ändert "
 "sich entsprechend dem aktuellen Modus"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:146
 #, kde-format
 msgid "&Move"
 msgstr "&Bewegen"
 
-#: mainwindow.cpp:144
+#: mainwindow.cpp:150
 #, kde-format
 msgid ""
 "Click here to enter field move mode.<br>In this mode you can move the field "
@@ -531,14 +608,38 @@ msgstr ""
 "diesem Modus können Sie das Feld verschieben, um die Zellen, die den "
 "Bildschirm nicht passen wegen des Maßstabs"
 
-#: mainwindow.cpp:151
+#: mainwindow.cpp:160
+#, kde-format
+msgid "&Mouse selection"
+msgstr "&Mausauswahl"
+
+#: mainwindow.cpp:164
+#, kde-format
+msgid ""
+"Click here to enter select mode.<br>In this mode you can select alive cells "
+"to cut and copy"
+msgstr ""
+"Machen Sie eine Mausclick, um das Auswahlmodus zu eintragen. Mit diesem "
+"Modus können Sie die lebenzellen auswählen, um sie zu kopieren oder löschen"
+
+#: mainwindow.cpp:170
+#, kde-format
+msgid "&Clear selection"
+msgstr "Auswahl löschen"
+
+#: mainwindow.cpp:172
+#, kde-format
+msgid "Click here to clear selection"
+msgstr "Machen Sie hier ein Mausklick, ein Auswahl zu löschen"
+
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Zoom scale in. You can also use mouse wheel.<br> Dimmed on maximum zoom"
 msgstr ""
 "Zunehmen den Maßstab. Können Sie auch das Mausrad benutzen <br> Dunkelt when "
 "der Maßstab maximum ist"
 
-#: mainwindow.cpp:153
+#: mainwindow.cpp:180
 #, kde-format
 msgid ""
 "Zoom scale out. You can also use mouse wheel.<br>  Dimmed on minimal zoom"
@@ -546,17 +647,17 @@ msgstr ""
 "Verringern den Maßstab. Können Sie auch das Mausrad benutzen <br> Dunkelt "
 "when der Maßstab minimum ist"
 
-#: mainwindow.cpp:157
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Restore initial zoom.<br>Dimmed when the zoom is minimal"
 msgstr "Wiederherstellen den Maßstab.<br> Dunkelt when der Maßstab minimum ist"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:203
 #, kde-format
 msgid "Empty file"
 msgstr "Leerdatei"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:208
 #, kde-format
 msgid "File name: %1"
 msgstr "Dateiname: %1"
@@ -577,6 +678,10 @@ msgstr ""
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Keine Auswahl>"
+
+#, kde-format
+#~ msgid "Generator Distribution For Y-axis"
+#~ msgstr "Y-Achsegeneratorverteilung"
 
 #, kde-format
 #~ msgid "This application (*.kgol)"
