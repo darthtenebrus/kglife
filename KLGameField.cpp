@@ -359,6 +359,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
 
     static int oldCellX = -1;
     static int oldCellY = -1;
+    const QCursor &selectCursor = QCursor(QPixmap(":/images/cursor.png"));
 
     QPoint newPos = event->pos();
     if (!checkMousePosition(newPos)) {
@@ -374,7 +375,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
             int cellY = newPos.y() / (m_cellSize + SPACE);
 
             if (!m_MoveMode) {
-
+                
                 if (cellX != oldCellX || cellY != oldCellY) {
                     oldCellX = cellX;
                     oldCellY = cellY;
@@ -412,7 +413,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
 
             }
         } else {
-            setCursor(m_MoveMode ? Qt::OpenHandCursor : Qt::CrossCursor);
+            setCursor(m_MoveMode ? Qt::OpenHandCursor : (m_SelectionMode ? selectCursor : Qt::CrossCursor));
         }
     }
 }
