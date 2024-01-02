@@ -161,6 +161,64 @@
       </variablelist>
     </sect1>
 
+    <sect1 id="context-menu">
+     <title>Контекстное меню</title>
+     <variablelist>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <guimenuitem>Поместить в позицию левого угла меню</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Поместить выделенную область в позицию левого угла меню</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>E</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Очистить выделенную область</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Очистить выделенную область</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>F</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Заполнить выделение</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Заполнить выделенную область живыми клетками</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>U</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Выделить незатронутое</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Выделить незатронутые клетки в пределах прямоугольника, описанного около выделенной области</para>
+        </listitem>
+      </varlistentry>
+     </variablelist>
+    </sect1>
+
     <sect1 id="menu-commands">
       <title>Команды меню</title>
       <variablelist>
@@ -475,7 +533,7 @@
       </para>
     </sect1>
 
-    <sect1 id="generator-options-desc"><title><guilabel>Генератор</guilabel></title>
+    <sect1 id="generator-options-desc"><title><guilabel>Настройка генератора</guilabel></title>
       <sect2 id="generator-params"><title><guilabel>Параметры генератора</guilabel></title>
         <variablelist>
           <varlistentry>
@@ -494,7 +552,58 @@
               <para>Следует ли очистить поле перед генерацией</para>
             </listitem>
           </varlistentry>
+
+          <varlistentry>
+            <term>
+              <guilabel>Распределение генератора по оси...</guilabel>
+            </term>
+            <listitem>
+              <para>Группа настроек, задающих функцию распределения случайной величины, которая представляет собой координату по одной из осей</para>
+              <para>Можно задать как функцию распределения, так и его параметры</para>
+            </listitem>
+          </varlistentry>
         </variablelist>
+      </sect2>
+      <sect2 id="distribution-functions">
+        <title>
+          <guilabel>Поддерживаемые функции распределения</guilabel>
+        </title>
+        <para>
+          <itemizedlist mark="circle">
+            <listitem>
+              <para>Равномерное.</para>
+            </listitem>
+            <listitem>
+              <para>Биномиальное.</para>
+            </listitem>
+            <listitem>
+              <para>Пуассоновское.</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+      <sect2 id="function-parameters">
+        <title>
+          <guilabel>Параметры функций распределения</guilabel>
+        </title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Вероятность успеха испытания</guilabel>
+            </term>
+            <listitem>
+              <para>Успех испытания для биномиального распределения</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Мат.ожидания Пуассона</guilabel>
+            </term>
+            <listitem>
+              <para>Математическое ожидание для пуассоновского распределения</para>
+            </listitem>
+          </varlistentry>
+      </variablelist>
       </sect2>
     </sect1>
 

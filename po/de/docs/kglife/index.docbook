@@ -156,6 +156,64 @@
       </variablelist>
     </sect1>
 
+    <sect1 id="context-menu">
+     <title>Kontextmenu</title>
+     <variablelist>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <guimenuitem>An dieser Stelle bekleisten</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Die ausgewählten Zellen an der linken Menuecke bekleisten</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>E</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Erlöschen</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Die ausgewählte Bereich erlöschen</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>F</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Füllen</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Die ausgewählte Bereich mit den Lebenzellen füllen</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>U</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Unberührt wählen</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Die unberührten Lebenzellen auswählen</para>
+        </listitem>
+      </varlistentry>
+     </variablelist>
+    </sect1>
+
     <sect1 id="menu-commands">
       <title>Menübefehle</title>
       <variablelist>
@@ -465,7 +523,56 @@
               <para>Wenn das Feld geklärt vor der Generierung werden sollte</para>
             </listitem>
           </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Распределение генератора по оси...</guilabel>
+            </term>
+            <listitem>
+              <para>Einstellungsgruppe, die eine Verteilungsfunktion von den Zufallsvariablen besetzt, daß die Koordinate entlang einer der Achsen ist</para>
+            </listitem>
+          </varlistentry>
         </variablelist>
+      </sect2>
+      <sect2 id="distribution-functions">
+        <title>
+          <guilabel>Unterstützte Verteilungsfunktionen</guilabel>
+        </title>
+        <para>
+          <itemizedlist mark="circle">
+            <listitem>
+              <para>Gleichmäßig.</para>
+            </listitem>
+            <listitem>
+              <para>Binomial.</para>
+            </listitem>
+            <listitem>
+              <para>Poisson.</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+      <sect2 id="function-parameters">
+        <title>
+          <guilabel>Die Verteilungsfunktionenargumente</guilabel>
+        </title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Binomialversuchserfolgswahrscheinlichkeit</guilabel>
+            </term>
+            <listitem>
+              <para>Binomialversuchserfolgswahrscheinlichkeit</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Mittelwert von Poisson</guilabel>
+            </term>
+            <listitem>
+              <para>Mittelwert von Poisson</para>
+            </listitem>
+          </varlistentry>
+      </variablelist>
       </sect2>
     </sect1>
 

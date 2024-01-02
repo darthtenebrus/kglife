@@ -159,7 +159,63 @@
         </varlistentry>
       </variablelist>
     </sect1>
-
+    <sect1 id="context-menu">
+     <title>Context menu</title>
+     <variablelist>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <guimenuitem>Paste at this position</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Paste the selected area at the left up corner of the menu</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>E</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Empty</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Empty the selected area</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>F</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Fill</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Fill the selected area with alive cells</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
+            <shortcut>
+              <keycombo action="simul">&Alt;<keycap>U</keycap>
+              </keycombo>
+            </shortcut>
+            <guimenuitem>Select untouched</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Select unselected cells inside the area bounding rectangle</para>
+        </listitem>
+      </varlistentry>
+     </variablelist>
+    </sect1>
     <sect1 id="menu-commands">
       <title>Menu commands</title>
       <variablelist>
@@ -254,7 +310,7 @@
                 <keycombo action="simul">&Alt;<keycap>M</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Move</guimenuitem>
+              <guimenu>Field</guimenu> <guimenuitem>Move</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -269,7 +325,7 @@
                 <keycombo action="simul">&Alt;<keycap>L</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Mouse selection</guimenuitem>
+              <guimenu>Field</guimenu> <guimenuitem>Mouse selection</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -283,15 +339,13 @@
                 <keycombo action="simul">&Alt;<keycap>C</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Clear selection</guimenuitem>
+              <guimenu>Field</guimenu> <guimenuitem>Clear selection</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
             <para>Clear selected area</para>
           </listitem>
         </varlistentry>
-
-
         <varlistentry>
           <term>
             <menuchoice>
@@ -327,7 +381,7 @@
                 <keycombo action="simul">&Ctrl;<keycap>0</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>View</guimenu> <guimenuitem>Actual size</guimenuitem>
+              <guimenu>View</guimenu><guimenuitem>Actual size</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -496,7 +550,58 @@
               <para>Should the field be cleared before generating</para>
             </listitem>
           </varlistentry>
+
+          <varlistentry>
+            <term>
+              <guilabel>Generator distributopn for ... axis</guilabel>
+            </term>
+            <listitem>
+              <para>A group of settings for the distribution function of the random coordinate value</para>
+              <para>Sets the distribution function itself snt its parameters</para>
+            </listitem>
+          </varlistentry>
         </variablelist>
+      </sect2>
+      <sect2 id="distribution-functions">
+        <title>
+          <guilabel>Supported distribution functions</guilabel>
+        </title>
+        <para>
+          <itemizedlist mark="circle">
+            <listitem>
+              <para>Uniform.</para>
+            </listitem>
+            <listitem>
+              <para>Binomial.</para>
+            </listitem>
+            <listitem>
+              <para>Poisson.</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+      <sect2 id="function-parameters">
+        <title>
+          <guilabel>Distribution function parameters</guilabel>
+        </title>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <guilabel>Trial success value</guilabel>
+            </term>
+            <listitem>
+              <para>Sets binomial trial success value</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <guilabel>Poisson mean value</guilabel>
+            </term>
+            <listitem>
+              <para>Sets Poisson mean value</para>
+            </listitem>
+          </varlistentry>
+      </variablelist>
       </sect2>
     </sect1>
 

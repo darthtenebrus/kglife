@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-01 12:14+0300\n"
-"PO-Revision-Date: 2024-01-01 12:26+0300\n"
+"PO-Revision-Date: 2024-01-02 14:48+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -416,12 +416,12 @@ msgstr "Leerkolonie"
 #: KLGameField.cpp:1249
 #, kde-format
 msgid "Paste at this position"
-msgstr "An dieser Stelle einfügen"
+msgstr "An dieser Stelle bekleisten"
 
 #: KLGameField.cpp:1254
 #, kde-format
 msgid "Empty"
-msgstr "Leerdatei"
+msgstr "Erlöschen"
 
 #: KLGameField.cpp:1260
 #, kde-format
