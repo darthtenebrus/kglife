@@ -29,7 +29,6 @@ endif()
 
 
 find_package(Qt5 COMPONENTS
-        Core
         PrintSupport
         REQUIRED)
 find_package(KF5 COMPONENTS
