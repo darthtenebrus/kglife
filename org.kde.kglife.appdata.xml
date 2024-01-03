@@ -33,6 +33,7 @@
     <binary>kglife</binary>
   </provides>
   <releases>
+    <release version="1.0.8" date="2024-01-03"/>
     <release version="1.0.7" date="2023-12-10"/>
     <release version="1.0.6" date="2023-11-30"/>
     <release version="1.0.5" date="2023-11-12"/>
