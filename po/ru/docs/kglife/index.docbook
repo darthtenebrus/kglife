@@ -177,6 +177,16 @@
       <varlistentry>
         <term>
           <menuchoice>
+            <guimenuitem>Сохранить выделенное</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Слхранить выделение в файл, как отдельную колонию</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
             <shortcut>
               <keycombo action="simul">&Alt;<keycap>E</keycap>
               </keycombo>

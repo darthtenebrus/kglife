@@ -4,6 +4,8 @@
 <gui name="actionsui" version="1">
     <Menu name="actions-popup-menu">
         <Action name="paste_selected"/>
+        <Action name="save_selection"/>
+        <Separator />
         <Action name="empty_selected"/>
         <Action name="fill_selected"/>
         <Action name="select_untouched"/>

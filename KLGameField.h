@@ -65,9 +65,13 @@ private:
     void tryToImportRLE(const QString &);
 
     void trySaveToFile(const QString &);
-    void tryToExportNative(const QString &);
-    void tryToExportRLE(const QString &);
-    void tryToExportCells(const QString &);
+    void trySaveToFileLayer(uchar *, const QString &);
+
+
+    void tryToExportFromLayerNative(uchar *, const QString &);
+    void tryToExportFromLayerRLE(uchar *, const QString &);
+    void tryToExportFromLayerCells(uchar *, const QString &);
+
 
     QString forceFileNameDialog();
 
@@ -78,9 +82,8 @@ private:
     [[nodiscard]]
     static QSize getStandardFieldDefs(int &, int &) ;
 
-    void flushStream(int &status, char symbol, QTextStream &);
+    static void flushStream(int &status, char symbol, QTextStream &);
 
-    bool doMiniMaxTests(QPoint &, QPoint &);
     bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
 
     int m_TimerInterval;

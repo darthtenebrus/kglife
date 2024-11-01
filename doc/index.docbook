@@ -175,6 +175,16 @@
       <varlistentry>
         <term>
           <menuchoice>
+            <guimenuitem>Save selected</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Save selected cells to file</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
             <shortcut>
               <keycombo action="simul">&Alt;<keycap>E</keycap>
               </keycombo>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-01 12:14+0300\n"
-"PO-Revision-Date: 2024-01-02 14:48+0300\n"
+"POT-Creation-Date: 2024-10-31 11:04+0300\n"
+"PO-Revision-Date: 2024-10-31 14:32+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -135,6 +135,7 @@ msgid "Field is infinite (EXPERIMENTAL)"
 msgstr "Das Feld ist unendlich (EXPERIMENTAL)"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:267
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:267
 #, kde-format
 msgid ""
 "Field is infinite. Cells beyond the edges simply disappear continuing their "
@@ -262,13 +263,6 @@ msgstr "Autor:"
 msgid "Author E-Mail:"
 msgstr "E-Mail von Autor:"
 
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:267
-#, kde-format
-msgid ""
-"Field is infinite. Cells beyound the edges simply disappear continuing their "
-"live cycle. <b>Warning: this is still experimental</b>"
-msgstr "Das Feld ist unendlich. Zellen außerhalb der Ränder"
-
 #: generatorpage.cpp:15
 #, kde-format
 msgid "Uniform"
@@ -302,7 +296,7 @@ msgstr "Feld"
 msgid "Main Toolbar"
 msgstr "Hauptsymbolleiste"
 
-#: KLGameField.cpp:502
+#: KLGameField.cpp:503
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -311,12 +305,12 @@ msgstr ""
 "Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells);;"
 "Alle Datei (*.*)"
 
-#: KLGameField.cpp:506
+#: KLGameField.cpp:507
 #, kde-format
 msgid "Load colony from file"
 msgstr "Kolonie von der Datei einladen"
 
-#: KLGameField.cpp:519
+#: KLGameField.cpp:520
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -324,24 +318,24 @@ msgid ""
 msgstr ""
 "Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:523
+#: KLGameField.cpp:524
 #, kde-format
 msgid "Save colony current state"
 msgstr "Den Koloniezustand speichern"
 
-#: KLGameField.cpp:579 KLGameField.cpp:595
+#: KLGameField.cpp:585 KLGameField.cpp:601
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
 "pressed"
 msgstr "Mausdoppelklick um die Einzelle setzen oder löschen"
 
-#: KLGameField.cpp:580
+#: KLGameField.cpp:586
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Linke Maustaste halten um das Feld zu bewegen"
 
-#: KLGameField.cpp:582 KLGameField.cpp:598
+#: KLGameField.cpp:588 KLGameField.cpp:604
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -350,7 +344,7 @@ msgstr ""
 "Stellen Sie hier mit Mausklick beliebige Zellen ein oder ziehen Sie einfach "
 "eine Zelllinie auf"
 
-#: KLGameField.cpp:584
+#: KLGameField.cpp:590
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -359,79 +353,84 @@ msgstr ""
 "Ziehen Sie einfach die Maus, um das Feld zu bewegen und die Zellen über der "
 "Ränder zu sehen"
 
-#: KLGameField.cpp:596
+#: KLGameField.cpp:602
 #, kde-format
 msgid "Drag the mouse to select the live cells"
 msgstr "Linke Maustaste halten um die Lebenzellen zu auswählen"
 
-#: KLGameField.cpp:600
+#: KLGameField.cpp:606
 #, kde-format
 msgid "In select mode you simply drag the mouse to select the live cells"
 msgstr "Ziehen Sie einfach die Maus, um die Lebenzellen zuauswählen"
 
-#: KLGameField.cpp:691
+#: KLGameField.cpp:697
 #, kde-format
 msgid "General"
 msgstr "Allgemeine"
 
-#: KLGameField.cpp:692 KLGameField.cpp:693
+#: KLGameField.cpp:698 KLGameField.cpp:699
 #, kde-format
 msgid "Patterns"
 msgstr "Muster"
 
-#: KLGameField.cpp:694 KLGameField.cpp:695
+#: KLGameField.cpp:700 KLGameField.cpp:701
 #, kde-format
 msgid "Generator"
 msgstr "Generator"
 
-#: KLGameField.cpp:722 KLGameField.cpp:826 KLGameField.cpp:877
-#: KLGameField.cpp:1027 KLGameField.cpp:1081 KLGameField.cpp:1124
+#: KLGameField.cpp:728 KLGameField.cpp:832 KLGameField.cpp:883
+#: KLGameField.cpp:1030 KLGameField.cpp:1083 KLGameField.cpp:1126
 #, kde-format
 msgid "Open file failed"
 msgstr "Dateiladen Fehler"
 
-#: KLGameField.cpp:817 KLGameField.cpp:869 KLGameField.cpp:934
-#: KLGameField.cpp:1054 KLGameField.cpp:1097 KLGameField.cpp:1151
+#: KLGameField.cpp:823 KLGameField.cpp:875 KLGameField.cpp:940
+#: KLGameField.cpp:1057 KLGameField.cpp:1099 KLGameField.cpp:1153
 #, kde-format
 msgid "Error"
 msgstr "Fehler"
 
-#: KLGameField.cpp:884 KLGameField.cpp:897 KLGameField.cpp:907
-#: KLGameField.cpp:920
+#: KLGameField.cpp:890 KLGameField.cpp:903 KLGameField.cpp:913
+#: KLGameField.cpp:926
 #, kde-format
 msgid "Invalid file format"
 msgstr "Ein Dateiformat ist falsch"
 
-#: KLGameField.cpp:987 mainwindow.cpp:97
+#: KLGameField.cpp:993 mainwindow.cpp:97
 #, kde-format
 msgid "Print Pattern"
 msgstr "Muster abdrucken"
 
-#: KLGameField.cpp:1045 KLGameField.cpp:1073 KLGameField.cpp:1116
+#: KLGameField.cpp:1048 KLGameField.cpp:1075 KLGameField.cpp:1118
 #: mainwindow.cpp:74
 #, kde-format
 msgid "Colony is empty"
 msgstr "Leerkolonie"
 
-#: KLGameField.cpp:1249
+#: KLGameField.cpp:1260
 #, kde-format
 msgid "Paste at this position"
 msgstr "An dieser Stelle bekleisten"
 
-#: KLGameField.cpp:1254
+#: KLGameField.cpp:1266
 #, kde-format
 msgid "Empty"
 msgstr "Erlöschen"
 
-#: KLGameField.cpp:1260
+#: KLGameField.cpp:1273
 #, kde-format
 msgid "Fill"
 msgstr "Füllen"
 
-#: KLGameField.cpp:1266
+#: KLGameField.cpp:1280
 #, kde-format
 msgid "Select untouched"
 msgstr " Unberührt wählen"
+
+#: KLGameField.cpp:1287
+#, kde-format
+msgid "Save selected"
+msgstr "Ausgewählten speichern"
 
 #: main.cpp:25
 #, kde-format
@@ -678,6 +677,12 @@ msgstr ""
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Keine Auswahl>"
+
+#, kde-format
+#~ msgid ""
+#~ "Field is infinite. Cells beyound the edges simply disappear continuing "
+#~ "their live cycle. <b>Warning: this is still experimental</b>"
+#~ msgstr "Das Feld ist unendlich. Zellen außerhalb der Ränder"
 
 #, kde-format
 #~ msgid "Generator Distribution For Y-axis"

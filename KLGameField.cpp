@@ -375,7 +375,7 @@ void KLGameField::mouseMoveEvent(QMouseEvent *event) {
             int cellY = newPos.y() / (m_cellSize + SPACE);
 
             if (!m_MoveMode) {
-                
+
                 if (cellX != oldCellX || cellY != oldCellY) {
                     oldCellX = cellX;
                     oldCellY = cellY;
@@ -561,14 +561,19 @@ void KLGameField::setCurrentPath(KLGameField *th, const QString &cpath) {
 }
 
 void KLGameField::trySaveToFile(const QString &path) {
+    trySaveToFileLayer(m_MainLayer, path);
+}
+
+
+void KLGameField::trySaveToFileLayer(uchar *layer, const QString &path) {
 
     QFileInfo fileInfo(path);
     if (fileInfo.suffix().toLower() == "rle") {
-        tryToExportRLE(path);
+        tryToExportFromLayerRLE(layer, path);
     } else if (fileInfo.suffix().toLower() == "cells") {
-        tryToExportCells(path);
+        tryToExportFromLayerCells(layer, path);
     } else {
-        tryToExportNative(path);
+        tryToExportFromLayerNative(layer, path);
     }
 }
 
@@ -1017,11 +1022,8 @@ bool KLGameField::doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &max
     return isToSave;
 }
 
-bool KLGameField::doMiniMaxTests(QPoint &minOr, QPoint &maxOr) {
-    return doMiniMaxTestsOnLayer(m_MainLayer, minOr, maxOr);
-}
 
-void KLGameField::tryToExportNative(const QString &path) {
+void KLGameField::tryToExportFromLayerNative(uchar *layer, const QString &path) {
     try {
         QFile file(path);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
@@ -1035,7 +1037,7 @@ void KLGameField::tryToExportNative(const QString &path) {
 
         for (int y = 0; y < m_cellsY; ++y) {
             for (int x = 0; x < m_cellsX; ++x) {
-                if (fromMainLayer(x, y)) {
+                if (fromLayer(layer, x, y)) {
                     isToSave = true;
                     tmp << "CX" << x << "Y" << y;
                 }
@@ -1056,8 +1058,7 @@ void KLGameField::tryToExportNative(const QString &path) {
     }
 }
 
-
-void KLGameField::tryToExportCells(const QString &path) {
+void KLGameField::tryToExportFromLayerCells(uchar *layer, const QString &path) {
     bool isToSave;
     try {
 
@@ -1068,7 +1069,7 @@ void KLGameField::tryToExportCells(const QString &path) {
 
         // First we perform minimax tests to determine pattern limits;
 
-        isToSave = doMiniMaxTests(minOrigin, maxOrigin);
+        isToSave = doMiniMaxTestsOnLayer(layer, minOrigin, maxOrigin);
 
         if (!isToSave) {
             throw LoadGameException(i18n("Colony is empty").toStdString());
@@ -1087,7 +1088,7 @@ void KLGameField::tryToExportCells(const QString &path) {
 
         for (int y = 0; y <= delta.height(); ++y) {
             for (int x = 0; x <= delta.width(); ++x) {
-                out << (fromMainLayer(minOrigin.x() + x, minOrigin.y() + y) ? 'O' : '.');
+                out << (fromLayer(layer, minOrigin.x() + x, minOrigin.y() + y) ? 'O' : '.');
             }
             out << '\n';
         }
@@ -1099,7 +1100,7 @@ void KLGameField::tryToExportCells(const QString &path) {
     }
 }
 
-void KLGameField::tryToExportRLE(const QString &path) {
+void KLGameField::tryToExportFromLayerRLE(uchar *layer, const QString &path) {
 
     bool isToSave;
     try {
@@ -1111,7 +1112,7 @@ void KLGameField::tryToExportRLE(const QString &path) {
 
         // First we perform minimax tests to determine pattern limits;
 
-        isToSave = doMiniMaxTests(minOrigin, maxOrigin);
+        isToSave = doMiniMaxTestsOnLayer(layer, minOrigin, maxOrigin);
 
         if (!isToSave) {
             throw LoadGameException(i18n("Colony is empty").toStdString());
@@ -1134,7 +1135,7 @@ void KLGameField::tryToExportRLE(const QString &path) {
             int cDead = 0;
             int cAlive = 0;
             for (int x = 0; x <= delta.width(); ++x) {
-                if (fromMainLayer(minOrigin.x() + x, minOrigin.y() + y)) {
+                if (fromLayer(layer, minOrigin.x() + x, minOrigin.y() + y)) {
                     cAlive++;
                     flushStream(cDead, 'b', out);
                 } else {
@@ -1213,34 +1214,43 @@ void KLGameField::showContextMenu(const QPoint &pos) {
         return;
     }
 
-
     m_LeftbPressed = false;
+
+    QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+    QPoint maxOrigin = QPoint(0, 0);
+
+    bool isToCopy = doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
     QAction *res = actionCollection()->action(QStringLiteral("paste_selected"));
+    res->setEnabled(isToCopy);
 
-    const QMetaObject::Connection &popupConn = connect(res, &QAction::triggered, this, [=](bool) {
-        int cellX = newPos.x() / (m_cellSize + SPACE);
-        int cellY = newPos.y() / (m_cellSize + SPACE);
+    actionCollection()->action(QStringLiteral("fill_selected"))->setEnabled(isToCopy);
+    actionCollection()->action(QStringLiteral("empty_selected"))->setEnabled(isToCopy);
+    actionCollection()->action(QStringLiteral("select_untouched"))->setEnabled(isToCopy);
+    actionCollection()->action(QStringLiteral("save_selection"))->setEnabled(isToCopy);
 
-        QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
-        QPoint maxOrigin = QPoint(0, 0);
+    if (isToCopy) {
+        const QMetaObject::Connection &popupConn = connect(res, &QAction::triggered, this, [=](bool) {
+            int cellX = newPos.x() / (m_cellSize + SPACE);
+            int cellY = newPos.y() / (m_cellSize + SPACE);
 
-        doMiniMaxTestsOnLayer(m_SelectionLayer, minOrigin, maxOrigin);
-
-        if (!maxOrigin.isNull()) {
-            QSize delta(0, 0);
-            delta.setWidth(maxOrigin.x() - minOrigin.x());
-            delta.setHeight(maxOrigin.y() - minOrigin.y());
-            for (int y = 0; y <= delta.height(); ++y) {
-                for (int x = 0; x <= delta.width(); ++x) {
-                    copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
-                                fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+            if (!maxOrigin.isNull()) {
+                QSize delta(0, 0);
+                delta.setWidth(maxOrigin.x() - minOrigin.x());
+                delta.setHeight(maxOrigin.y() - minOrigin.y());
+                for (int y = 0; y <= delta.height(); ++y) {
+                    for (int x = 0; x <= delta.width(); ++x) {
+                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + cellX + x, m_CurrMemOffsetY + cellY + y,
+                                    fromLayer(m_SelectionLayer, minOrigin.x() + x, minOrigin.y() + y));
+                    }
                 }
+                repaint();
             }
-            repaint();
-        }
-    });
-    popupMenu->exec(mapToGlobal(pos));
-    disconnect(popupConn);
+        });
+        popupMenu->exec(mapToGlobal(pos));
+        disconnect(popupConn);
+    } else {
+        popupMenu->exec(mapToGlobal(pos));
+    }
 }
 
 void KLGameField::setupCommonActions() {
@@ -1251,23 +1261,33 @@ void KLGameField::setupCommonActions() {
     pasteAction->setIcon(QIcon::fromTheme("edit-paste-symbolic"));
     pasteAction->setObjectName("paste_selected");
 
-    QAction *emptyAction = actionCollection()->addAction(QStringLiteral("empty_selected"), this, &KLGameField::fillOrEmptySelected);
+    QAction *emptyAction = actionCollection()->addAction(QStringLiteral("empty_selected"), this,
+                                                         &KLGameField::fillOrEmptySelected);
     emptyAction->setText(i18n("Empty"));
     emptyAction->setIcon(QIcon::fromTheme("trash-empty"));
     emptyAction->setObjectName("empty_selected");
-    actionCollection()->setDefaultShortcut(emptyAction,  Qt::ALT + Qt::Key_E);
+    actionCollection()->setDefaultShortcut(emptyAction, Qt::ALT + Qt::Key_E);
 
-    QAction *fillAction = actionCollection()->addAction(QStringLiteral("fill_selected"), this, &KLGameField::fillOrEmptySelected);
+    QAction *fillAction = actionCollection()->addAction(QStringLiteral("fill_selected"), this,
+                                                        &KLGameField::fillOrEmptySelected);
     fillAction->setText(i18n("Fill"));
     fillAction->setIcon(QIcon::fromTheme("fill-color"));
     fillAction->setObjectName("fill_selected");
-    actionCollection()->setDefaultShortcut(fillAction,  Qt::ALT + Qt::Key_F);
+    actionCollection()->setDefaultShortcut(fillAction, Qt::ALT + Qt::Key_F);
 
-    QAction *untouchedAction = actionCollection()->addAction(QStringLiteral("select_untouched"), this, &KLGameField::fillOrEmptySelected);
+    QAction *untouchedAction = actionCollection()->addAction(QStringLiteral("select_untouched"), this,
+                                                             &KLGameField::fillOrEmptySelected);
     untouchedAction->setText(i18n("Select untouched"));
     untouchedAction->setIcon(QIcon::fromTheme("filled-xterm"));
     untouchedAction->setObjectName("select_untouched");
-    actionCollection()->setDefaultShortcut(untouchedAction,  Qt::ALT + Qt::Key_U);
+    actionCollection()->setDefaultShortcut(untouchedAction, Qt::ALT + Qt::Key_U);
+
+    QAction *saveAction = actionCollection()->addAction(QStringLiteral("save_selection"), this,
+                                                        &KLGameField::fillOrEmptySelected);
+    saveAction->setText(i18n("Save selected"));
+    saveAction->setIcon(QIcon::fromTheme("document-save"));
+    saveAction->setObjectName("save_selection");
+
 }
 
 void KLGameField::fillOrEmptySelected(bool) {
@@ -1279,10 +1299,20 @@ void KLGameField::fillOrEmptySelected(bool) {
 
     if (!maxOrigin.isNull()) {
 
-
         bool toEmpty = (sender()->objectName() == "empty_selected");
         bool toFill = (sender()->objectName() == "fill_selected");
         bool untouched = (sender()->objectName() == "select_untouched");
+        bool toSave = (sender()->objectName() == "save_selection");
+
+        if (toSave) {
+            const QString &path = forceFileNameDialog();
+
+            if (path.isEmpty()) {
+                return;
+            }
+            trySaveToFileLayer(m_SelectionLayer, path);
+            return;
+        }
 
         for (int y = minOrigin.y(); y <= maxOrigin.y(); ++y) {
             for (int x = minOrigin.x(); x <= maxOrigin.x(); ++x) {

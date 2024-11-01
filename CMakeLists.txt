@@ -11,7 +11,7 @@ set(DOC_DIR doc)
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(ECMSetupVersion)
-set(KGLIFE_VERSION "1.0.7")
+set(KGLIFE_VERSION "1.0.9")
 ecm_setup_version(${KGLIFE_VERSION}
         VARIABLE_PREFIX KGLIFE
         VERSION_HEADER kglife_version.h)
@@ -29,7 +29,6 @@ endif()
 
 
 find_package(Qt5 COMPONENTS
-        Core
         PrintSupport
         REQUIRED)
 find_package(KF5 COMPONENTS
@@ -92,7 +91,7 @@ ecm_install_icons(ICONS
         desktop/48-apps-${PROJECT_NAME}.png
         desktop/32-apps-${PROJECT_NAME}.png
         desktop/24-apps-${PROJECT_NAME}.png
-        DESTINATION  ${KDE_INSTALL_ICONDIR}
+        DESTINATION ${KDE_INSTALL_ICONDIR}
         THEME hicolor)
 
 
