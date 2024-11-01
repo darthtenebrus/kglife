@@ -172,6 +172,16 @@
       <varlistentry>
         <term>
           <menuchoice>
+            <guimenuitem>Ausgewählten speichern</guimenuitem>
+          </menuchoice>
+        </term>
+        <listitem>
+          <para>Die ausgewählten Zellen speichern</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <menuchoice>
             <shortcut>
               <keycombo action="simul">&Alt;<keycap>E</keycap>
               </keycombo>

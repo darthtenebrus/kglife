@@ -47,7 +47,6 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::controlsChanged(bool enabled) {
-
     QAction *actionStartStop = actionCollection()->action(QStringLiteral("game_start_stop"));
     actionStartStop->setIcon(QIcon::fromTheme(enabled ? "media-playback-start-symbolic" : "media-playback-pause"));
     actionStartStop->setToolTip(enabled ? i18n("Start evolution") : i18n("Stop evolution"));
@@ -55,12 +54,10 @@ void MainWindow::controlsChanged(bool enabled) {
 }
 
 void MainWindow::changeMoveMode(bool enabled) {
-
     stateChanged(enabled ? "move_mode_state" : "paused_state");
 }
 
 void MainWindow::changeSelectMode(bool enabled) {
-
     stateChanged(enabled ? "select_mode_state" : "paused_state");
 }
 
@@ -70,7 +67,6 @@ void MainWindow::generationChanged(int cgen) {
 }
 
 void MainWindow::colonyIsEmpty(void) {
-
     statusBar()->showMessage(i18n("Colony is empty"));
 }
 
@@ -92,7 +88,6 @@ void MainWindow::restoreChanged(bool enable) {
 
 
 void MainWindow::setupToolbar() {
-
     QAction *printAction = KStandardAction::print(gameField, &KLGameField::printGame, actionCollection());
     printAction->setWhatsThis(i18n("Print Pattern"));
 
@@ -105,7 +100,6 @@ void MainWindow::setupToolbar() {
 
     QAction *actionSaveAs = KStandardAction::saveAs(gameField, &KLGameField::saveAsAction, actionCollection());
     actionSaveAs->setWhatsThis(i18n("Save current colony with different name"));
-
 
     auto *wa = new QWidgetAction(this);
     wa->setDefaultWidget(mySlider);
@@ -153,7 +147,6 @@ void MainWindow::setupToolbar() {
     connect(actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
     connect(actionMove, &QAction::triggered, this, &MainWindow::changeMoveMode);
 
-
     // Select
 
     QAction *actionSelect = actionCollection()->addAction(QStringLiteral("select_mode"));
@@ -172,7 +165,6 @@ void MainWindow::setupToolbar() {
     actionClearSel->setWhatsThis(i18n("Click here to clear selection"));
     actionCollection()->setDefaultShortcut(actionClearSel,  Qt::ALT + Qt::Key_C);
     connect(actionClearSel, &QAction::triggered, gameField, &KLGameField::onSelectClear);
-
     // Zoom In
     QAction *actionZoomIn = KStandardAction::zoomIn(gameField, &KLGameField::cZoomIn, actionCollection());
     actionZoomIn->setWhatsThis(i18n("Zoom scale in. You can also use mouse wheel.<br> Dimmed on maximum zoom"));

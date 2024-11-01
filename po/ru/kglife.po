@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-01 12:14+0300\n"
-"PO-Revision-Date: 2024-01-01 12:15+0300\n"
+"POT-Creation-Date: 2024-10-31 11:04+0300\n"
+"PO-Revision-Date: 2024-10-31 13:52+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -138,6 +138,7 @@ msgid "Field is infinite (EXPERIMENTAL)"
 msgstr "Поле бесконечно (ЭКСПЕРЕМЕНТАЛЬНЫЙ РЕЖИМ)"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:267
+#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:267
 #, kde-format
 msgid ""
 "Field is infinite. Cells beyond the edges simply disappear continuing their "
@@ -264,15 +265,6 @@ msgstr "Автор:"
 msgid "Author E-Mail:"
 msgstr "Эл-почта автора:"
 
-#: cmake-build-release/kglife_autogen/include/ui_generalpage.h:267
-#, kde-format
-msgid ""
-"Field is infinite. Cells beyound the edges simply disappear continuing their "
-"live cycle. <b>Warning: this is still experimental</b>"
-msgstr ""
-"Поле бесконечно. Клетки за его пределами продолжают свой жизненный цикл "
-"<b>ЭКСПЕРЕМЕНТАЛЬНЫЙ РЕЖИМ</b>"
-
 #: generatorpage.cpp:15
 #, kde-format
 msgid "Uniform"
@@ -306,7 +298,7 @@ msgstr "Поле"
 msgid "Main Toolbar"
 msgstr "Основная панель инструментов"
 
-#: KLGameField.cpp:502
+#: KLGameField.cpp:503
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -315,12 +307,12 @@ msgstr ""
 "Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*."
 "cells);;Все файлы (*.*)"
 
-#: KLGameField.cpp:506
+#: KLGameField.cpp:507
 #, kde-format
 msgid "Load colony from file"
 msgstr "Загрузить колонию из файла"
 
-#: KLGameField.cpp:519
+#: KLGameField.cpp:520
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -328,12 +320,12 @@ msgid ""
 msgstr ""
 "Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:523
+#: KLGameField.cpp:524
 #, kde-format
 msgid "Save colony current state"
 msgstr "Сохранить текущее состояние колонии"
 
-#: KLGameField.cpp:579 KLGameField.cpp:595
+#: KLGameField.cpp:585 KLGameField.cpp:601
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
@@ -342,12 +334,12 @@ msgstr ""
 "Установите или снимите клетку двойным нажатием или проведите линию, зажав "
 "левую кнопку"
 
-#: KLGameField.cpp:580
+#: KLGameField.cpp:586
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Зажмите левую кнопку и передвиньте поле с помощью мыши"
 
-#: KLGameField.cpp:582 KLGameField.cpp:598
+#: KLGameField.cpp:588 KLGameField.cpp:604
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -357,7 +349,7 @@ msgstr ""
 "левую кнопку. Можно изменять масштаб при помощи колеса мыши или элементов "
 "управления"
 
-#: KLGameField.cpp:584
+#: KLGameField.cpp:590
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -366,81 +358,86 @@ msgstr ""
 "В режиме перемещения просто перетащите мышкой поле, чтобы увидеть клетки за "
 "его пределами"
 
-#: KLGameField.cpp:596
+#: KLGameField.cpp:602
 #, kde-format
 msgid "Drag the mouse to select the live cells"
 msgstr "Зажмите левую кнопку и передвиньте мышь чтобы выделить живые клетки"
 
-#: KLGameField.cpp:600
+#: KLGameField.cpp:606
 #, kde-format
 msgid "In select mode you simply drag the mouse to select the live cells"
 msgstr ""
 "В режиме отметки просто проведите курсором мыши с нажатой левой кнопкой, "
 "чтобы выделить живые клетки"
 
-#: KLGameField.cpp:691
+#: KLGameField.cpp:697
 #, kde-format
 msgid "General"
 msgstr "Общие"
 
-#: KLGameField.cpp:692 KLGameField.cpp:693
+#: KLGameField.cpp:698 KLGameField.cpp:699
 #, kde-format
 msgid "Patterns"
 msgstr "Шаблоны"
 
-#: KLGameField.cpp:694 KLGameField.cpp:695
+#: KLGameField.cpp:700 KLGameField.cpp:701
 #, kde-format
 msgid "Generator"
 msgstr "Генератор"
 
-#: KLGameField.cpp:722 KLGameField.cpp:826 KLGameField.cpp:877
-#: KLGameField.cpp:1027 KLGameField.cpp:1081 KLGameField.cpp:1124
+#: KLGameField.cpp:728 KLGameField.cpp:832 KLGameField.cpp:883
+#: KLGameField.cpp:1030 KLGameField.cpp:1083 KLGameField.cpp:1126
 #, kde-format
 msgid "Open file failed"
 msgstr "Не удалось открыть файл"
 
-#: KLGameField.cpp:817 KLGameField.cpp:869 KLGameField.cpp:934
-#: KLGameField.cpp:1054 KLGameField.cpp:1097 KLGameField.cpp:1151
+#: KLGameField.cpp:823 KLGameField.cpp:875 KLGameField.cpp:940
+#: KLGameField.cpp:1057 KLGameField.cpp:1099 KLGameField.cpp:1153
 #, kde-format
 msgid "Error"
 msgstr "Ошибка"
 
-#: KLGameField.cpp:884 KLGameField.cpp:897 KLGameField.cpp:907
-#: KLGameField.cpp:920
+#: KLGameField.cpp:890 KLGameField.cpp:903 KLGameField.cpp:913
+#: KLGameField.cpp:926
 #, kde-format
 msgid "Invalid file format"
 msgstr "Неверный формат файла"
 
-#: KLGameField.cpp:987 mainwindow.cpp:97
+#: KLGameField.cpp:993 mainwindow.cpp:97
 #, kde-format
 msgid "Print Pattern"
 msgstr "Печать текущей конфигурации"
 
-#: KLGameField.cpp:1045 KLGameField.cpp:1073 KLGameField.cpp:1116
+#: KLGameField.cpp:1048 KLGameField.cpp:1075 KLGameField.cpp:1118
 #: mainwindow.cpp:74
 #, kde-format
 msgid "Colony is empty"
 msgstr "Колония пуста"
 
-#: KLGameField.cpp:1249
+#: KLGameField.cpp:1260
 #, kde-format
 msgid "Paste at this position"
 msgstr "Поместить в позицию левого угла меню"
 
-#: KLGameField.cpp:1254
+#: KLGameField.cpp:1266
 #, kde-format
 msgid "Empty"
 msgstr "Очистить выделенную область"
 
-#: KLGameField.cpp:1260
+#: KLGameField.cpp:1273
 #, kde-format
 msgid "Fill"
 msgstr "Заполнить выделение"
 
-#: KLGameField.cpp:1266
+#: KLGameField.cpp:1280
 #, kde-format
 msgid "Select untouched"
 msgstr "Выделить незатронутое"
+
+#: KLGameField.cpp:1287
+#, kde-format
+msgid "Save selected"
+msgstr "Сохранить выделенное"
 
 #: main.cpp:25
 #, kde-format
@@ -683,6 +680,14 @@ msgstr "Можно изменять скорость смены поколени
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Не выбран>"
+
+#, kde-format
+#~ msgid ""
+#~ "Field is infinite. Cells beyound the edges simply disappear continuing "
+#~ "their live cycle. <b>Warning: this is still experimental</b>"
+#~ msgstr ""
+#~ "Поле бесконечно. Клетки за его пределами продолжают свой жизненный цикл "
+#~ "<b>ЭКСПЕРЕМЕНТАЛЬНЫЙ РЕЖИМ</b>"
 
 #, kde-format
 #~ msgid "Generator Distribution For Y-axis"
