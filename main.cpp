@@ -11,7 +11,6 @@
 #include <KMessageBox>
 #include "mainwindow.h"
 #include "kglife_version.h"
-#include <KX11Extras>
 #include <KWindowSystem>
 
 
@@ -77,7 +76,7 @@ int main(int argc, char *argv[]) {
 
     if (is_running) {
         if (KWindowSystem::isPlatformX11()) {
-            KX11Extras::activateWindow(wid, std::time(nullptr));
+            KWindowSystem::activateWindow(wid, std::time(nullptr));
         } else {
             KMessageBox::error(nullptr, i18n("Application Already Running"), i18n("Already Running"));
         }
