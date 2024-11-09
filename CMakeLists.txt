@@ -11,7 +11,7 @@ set(DOC_DIR doc)
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(ECMSetupVersion)
-set(KGLIFE_VERSION "1.0.9")
+set(KGLIFE_VERSION "1.1.0")
 ecm_setup_version(${KGLIFE_VERSION}
         VARIABLE_PREFIX KGLIFE
         VERSION_HEADER kglife_version.h)
@@ -38,6 +38,7 @@ find_package(KF5 COMPONENTS
         I18n
         DocTools
         XmlGui
+        WindowSystem
         REQUIRED)
 
 
@@ -80,6 +81,7 @@ target_link_libraries(${PROJECT_NAME}
         KF5::I18n
         KF5::Crash
         KF5::XmlGui
+        KF5::WindowSystem
         )
 
 

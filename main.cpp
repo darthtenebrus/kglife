@@ -11,6 +11,9 @@
 #include <KMessageBox>
 #include "mainwindow.h"
 #include "kglife_version.h"
+#include <KX11Extras>
+#include <KWindowSystem>
+
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -60,18 +63,24 @@ int main(int argc, char *argv[]) {
     }
 #endif
 
+    WId wid;
     QSharedMemory sharedMemory(shared_id);
     bool is_running = false;
     if (sharedMemory.attach())
     {
         is_running = true;
+        memcpy(&wid, sharedMemory.data(), sizeof(WId));
     } else {
-        sharedMemory.create(1);
+        sharedMemory.create(sizeof(WId));
     }
     semaphore.release();
 
     if (is_running) {
-        KMessageBox::error(nullptr, i18n("Application Already Running"), i18n("Already Running"));
+        if (KWindowSystem::isPlatformX11()) {
+            KX11Extras::activateWindow(wid, std::time(nullptr));
+        } else {
+            KMessageBox::error(nullptr, i18n("Application Already Running"), i18n("Already Running"));
+        }
         return 1;
     }
 
@@ -100,7 +109,8 @@ int main(int argc, char *argv[]) {
     aboutData.processCommandLine(&parser);
 
     auto *w(new MainWindow());
-
+    wid = w->winId();
+    memcpy(sharedMemory.data(), &wid, sizeof(WId));
     w->showMaximized();
     return QApplication::exec();
 }
