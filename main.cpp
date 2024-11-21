@@ -75,11 +75,7 @@ int main(int argc, char *argv[]) {
     semaphore.release();
 
     if (is_running) {
-        if (KWindowSystem::isPlatformX11()) {
-            KWindowSystem::activateWindow(wid, std::time(nullptr));
-        } else {
-            KMessageBox::error(nullptr, i18n("Application Already Running"), i18n("Already Running"));
-        }
+        KWindowSystem::activateWindow(wid, std::time(nullptr));
         return 1;
     }
 
@@ -98,7 +94,7 @@ int main(int argc, char *argv[]) {
                             "webmaster@darkguard.net");
     KAboutData::setApplicationData(aboutData);
     QIcon icon;
-    icon.addFile(QString::fromUtf8(":/images/desktop/64-apps-kglife.png"), QSize(), QIcon::Normal, QIcon::Off);
+    icon.addFile(QString::fromUtf8(":/images/desktop-icon"), QSize(), QIcon::Normal, QIcon::Off);
     QApplication::setWindowIcon(icon);
     KCrash::initialize();
 
