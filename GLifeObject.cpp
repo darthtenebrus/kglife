@@ -9,7 +9,7 @@ void GLifeObject::add(const QVector<int>& chorde) {
 
 }
 
-GLifeObject::GLifeObject(QObject *parent) : QObject(parent) {}
+GLifeObject::GLifeObject(const QPoint &absPoint, QObject *parent) : QObject(parent), absol(absPoint) {}
 
 GLifeObject::~GLifeObject() = default;
 

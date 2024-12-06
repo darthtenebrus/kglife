@@ -1202,9 +1202,10 @@ void KLGameField::onSelectClear(bool) {
     clearSelection();
 }
 
-QList<GLifeObject> KLGameField::buildChordesGroups() {
+const QList<GLifeObject> &KLGameField::buildChordesGroups() {
 
-    QList<GLifeObject> objList;
+    static QList<GLifeObject> objList;
+    objList.clear();
     QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
     QPoint maxOrigin = QPoint(0, 0);
     QSize delta = QSize(0, 0);
@@ -1231,7 +1232,7 @@ QList<GLifeObject> KLGameField::buildChordesGroups() {
                     const QPoint &absPoint = minOrigin + QPoint(bx, y);
                     QVector<int> currentChorde = {absPoint.x(), absPoint.y(), len};
                     if (objList.isEmpty()){
-                        GLifeObject obj;
+                        GLifeObject obj(absPoint);
                         obj.add(currentChorde);
                         objList.append(obj);
                     } else {
@@ -1244,7 +1245,7 @@ QList<GLifeObject> KLGameField::buildChordesGroups() {
                             }
                         }
                         if (!added) {
-                            GLifeObject obj;
+                            GLifeObject obj(absPoint);
                             obj.add(currentChorde);
                             objList.append(obj);
                         }

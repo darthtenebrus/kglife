@@ -12,7 +12,7 @@
 class GLifeObject : public QObject {
 Q_OBJECT
 public:
-    explicit GLifeObject(QObject *parent = nullptr);
+    explicit GLifeObject(const QPoint &, QObject *parent = nullptr);
 
     GLifeObject(const GLifeObject &);
 

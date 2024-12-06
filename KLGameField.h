@@ -87,7 +87,7 @@ private:
 
     bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
 
-    QList<GLifeObject> buildChordesGroups();
+    const QList<GLifeObject> &buildChordesGroups();
 
     int m_TimerInterval;
     int m_Generation = 0;
