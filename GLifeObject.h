@@ -14,18 +14,25 @@ Q_OBJECT
 public:
     explicit GLifeObject(QObject *parent = nullptr);
 
+    GLifeObject(const GLifeObject &);
+
     ~GLifeObject() override;
 
-    void add(const std::vector<int> &);
+    void add(const QVector<int> &);
+
+    bool hasLinkedForChorde(const QVector<int> &checked);
+
+    GLifeObject& operator=(const GLifeObject& other) noexcept ;
+
     [[nodiscard]]
-    const QList<std::vector<int>> &listChordes() const;
+    const QList<QVector<int>> &listChordes() const;
 
     void setAbsol(const QPoint &);
 
 private:
 
     QPoint absol;
-    QList<std::vector<int>> chordes;
+    QList<QVector<int>> chordes;
 
 };
 

@@ -25,8 +25,6 @@
 #include "generalpage.h"
 #include "patternspage.h"
 #include "generatorpage.h"
-#include "GLifeObject.h"
-
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -1204,9 +1202,9 @@ void KLGameField::onSelectClear(bool) {
     clearSelection();
 }
 
-void KLGameField::chordesAction(bool) {
+QList<GLifeObject> KLGameField::buildChordesGroups() {
 
-    GLifeObject obj;
+    QList<GLifeObject> objList;
     QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
     QPoint maxOrigin = QPoint(0, 0);
     QSize delta = QSize(0, 0);
@@ -1229,20 +1227,53 @@ void KLGameField::chordesAction(bool) {
                 }
 
                 if (len) {
-                    obj.setAbsol(minOrigin + QPoint(bx, y));
-                    obj.add({bx, y, len});
+
+                    const QPoint &absPoint = minOrigin + QPoint(bx, y);
+                    QVector<int> currentChorde = {absPoint.x(), absPoint.y(), len};
+                    if (objList.isEmpty()){
+                        GLifeObject obj;
+                        obj.add(currentChorde);
+                        objList.append(obj);
+                    } else {
+                        bool added = false;
+                        for (GLifeObject &lifeObj : objList) {
+                            if (lifeObj.hasLinkedForChorde(currentChorde)) {
+                                lifeObj.add(currentChorde);
+                                added = true;
+                                break;
+                            }
+                        }
+                        if (!added) {
+                            GLifeObject obj;
+                            obj.add(currentChorde);
+                            objList.append(obj);
+                        }
+                    }
                 }
             } while(x <= delta.width());
 
-
         }
+
+    }
+
+    return objList;
+    
+}
+
+
+void KLGameField::chordesAction(bool) {
+
+    const QList<GLifeObject> &objList = buildChordesGroups();
 
 #ifdef _DEBUG
-        for(auto vec : obj.listChordes()) {
-            qDebug() << "result = " << vec;
+    int i = 0;
+    for (auto gObj : objList) {
+        qDebug() << "object " << i++;
+        for (auto vec : gObj.listChordes()) {
+            qDebug() << "vec = " << vec;
         }
-#endif
     }
+#endif
 
 }
 
@@ -1388,6 +1419,7 @@ void KLGameField::setupFactory() {
 
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
+
 
 
 

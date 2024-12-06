@@ -13,6 +13,7 @@
 #include <QPointer>
 #include <QMenu>
 #include "cellsgenerator.h"
+#include "GLifeObject.h"
 
 class KLGameField : public QWidget, public KXMLGUIClient {
 Q_OBJECT
@@ -85,6 +86,8 @@ private:
     static void flushStream(int &status, char symbol, QTextStream &);
 
     bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
+
+    QList<GLifeObject> buildChordesGroups();
 
     int m_TimerInterval;
     int m_Generation = 0;
