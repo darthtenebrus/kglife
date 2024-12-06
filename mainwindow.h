@@ -5,13 +5,17 @@
 #ifndef KGLIVE_MAINWINDOW_H
 #define KGLIVE_MAINWINDOW_H
 
+#include <QMenuBar>
 #include <QMainWindow>
 #include <QSlider>
 #include <QSettings>
 #include <KXmlGuiWindow>
 #include <QLabel>
+#include <KToggleAction>
+#include <KHamburgerMenu>
 #include "KLGameField.h"
 #include "myslider.h"
+
 
 class MainWindow : public KXmlGuiWindow {
 Q_OBJECT
@@ -29,8 +33,12 @@ private:
     MySlider *mySlider;
     KLGameField *gameField;
     QLabel *mCurrentFile;
+
+    KToggleAction *_toggleMenuBarAction;
+    KHamburgerMenu *_hamburgerMenu;
     void setupToolbar();
     void setupStatusBar();
+    void fillUpperHamburger(QMenu *);
 
 
 
@@ -46,6 +54,8 @@ public slots:
     void changeSelectMode(bool);
     void currentFileChanged(const QString &);
 
+private slots:
+        void updateHamburgerMenu();
 
 };
 

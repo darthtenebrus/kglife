@@ -25,6 +25,7 @@
 #include "generalpage.h"
 #include "patternspage.h"
 #include "generatorpage.h"
+#include "GLifeObject.h"
 
 
 #define FIELD_OFFSET 1
@@ -502,7 +503,7 @@ void KLGameField::openAction(bool) {
     cancelTimerInstantly();
     const QString &filters = i18n("This application (*.kgol);;"
                                   "Life32/XLife Run Length Encoding (*.rle);;"
-                                  "Plaintext (*.cells);;All files(*.*)");
+                                  "Plaintext (*.cells);;All files (*.*)");
     QString fStr = filters.split(";;").at(0);
     const QString &path = QFileDialog::getOpenFileName(parentWidget(), i18n("Load colony from file"),
                                                        QDir::homePath(), filters, &fStr);
@@ -1203,6 +1204,48 @@ void KLGameField::onSelectClear(bool) {
     clearSelection();
 }
 
+void KLGameField::chordesAction(bool) {
+
+    GLifeObject obj;
+    QPoint minOrigin = QPoint(m_cellsX, m_cellsY);
+    QPoint maxOrigin = QPoint(0, 0);
+    QSize delta = QSize(0, 0);
+    bool isToAnalyze = doMiniMaxTestsOnLayer(m_MainLayer, minOrigin, maxOrigin);
+    if (isToAnalyze) {
+        delta.setWidth(maxOrigin.x() - minOrigin.x());
+        delta.setHeight(maxOrigin.y() - minOrigin.y());
+
+        for (int y = 0; y <= delta.height(); ++y) {
+            int x = 0;
+            do {
+                while (x <= delta.width() && !fromLayer(m_MainLayer, minOrigin.x() + x, minOrigin.y() + y)) {
+                    x++;
+                }
+                int len = 0;
+                int bx = x;
+                while (fromLayer(m_MainLayer, minOrigin.x() + x, minOrigin.y() + y)) {
+                    x++;
+                    len++;
+                }
+
+                if (len) {
+                    obj.setAbsol(minOrigin + QPoint(bx, y));
+                    obj.add({bx, y, len});
+                }
+            } while(x <= delta.width());
+
+
+        }
+
+#ifdef _DEBUG
+        for(auto vec : obj.listChordes()) {
+            qDebug() << "result = " << vec;
+        }
+#endif
+    }
+
+}
+
 void KLGameField::showContextMenu(const QPoint &pos) {
     QPoint newPos = pos;
     if (!checkMousePosition(newPos)) {
@@ -1345,6 +1388,7 @@ void KLGameField::setupFactory() {
 
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
+
 
 
 

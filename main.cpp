@@ -11,7 +11,7 @@
 #include <KMessageBox>
 #include "mainwindow.h"
 #include "kglife_version.h"
-#include <KWindowSystem>
+#include <KX11Extras>
 
 
 int main(int argc, char *argv[]) {
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     semaphore.release();
 
     if (is_running) {
-        KWindowSystem::activateWindow(wid, std::time(nullptr));
+        KX11Extras::activateWindow(wid, std::time(nullptr));
         return 1;
     }
 

@@ -147,6 +147,8 @@ public slots:
     void startCellsGenerator(bool);
     void onSelectClear(bool);
 
+    void chordesAction(bool);
+
 private slots:
     void nextGeneration();
     void showContextMenu(const QPoint &);

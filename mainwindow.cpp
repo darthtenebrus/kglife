@@ -8,6 +8,8 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KToolBar>
+#include <KXMLGUIFactory>
+
 #include <QDomElement>
 #include <QDesktopWidget>
 #include <QApplication>
@@ -147,6 +149,12 @@ void MainWindow::setupToolbar() {
     connect(actionMove, &QAction::triggered, gameField, &KLGameField::changeMoveMode);
     connect(actionMove, &QAction::triggered, this, &MainWindow::changeMoveMode);
 
+    // Analysis
+
+    QAction *actionAnalys = actionCollection()->addAction(QStringLiteral("sort_chordes"));
+    actionAnalys->setText(i18n("Object chordes sort"));
+    connect(actionAnalys, &QAction::triggered, gameField, &KLGameField::chordesAction);
+
     // Select
 
     QAction *actionSelect = actionCollection()->addAction(QStringLiteral("select_mode"));
@@ -176,8 +184,20 @@ void MainWindow::setupToolbar() {
     actZoom->setWhatsThis(i18n("Restore initial zoom.<br>Dimmed when the zoom is minimal"));
     actZoom->setEnabled(false);
 
+    _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible,
+                                                                       actionCollection());
+    actionCollection()->setDefaultShortcut(_toggleMenuBarAction, Qt::SHIFT + Qt::Key_M);
+
     const QSize &wsize = QApplication::desktop()->size() * 0.7;
+
+    // Hamburger menu for when the menubar is hidden
+    _hamburgerMenu = KStandardAction::hamburgerMenu(nullptr, nullptr, actionCollection());
+    _hamburgerMenu->setShowMenuBarAction(_toggleMenuBarAction);
+    _hamburgerMenu->setMenuBar(menuBar());
+    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, this, &MainWindow::updateHamburgerMenu);
+
     setupGUI();
+
     setMinimumSize(wsize);
 
 }
@@ -198,4 +218,51 @@ void MainWindow::setupStatusBar() {
 
 void MainWindow::currentFileChanged(const QString &current) {
     mCurrentFile->setText(i18n("File name: %1", current));
+}
+
+void MainWindow::updateHamburgerMenu() {
+
+    KActionCollection *collection = actionCollection();
+
+    QMenu *menu = _hamburgerMenu->menu();
+    if (!menu) {
+        menu = new QMenu(widget());
+        _hamburgerMenu->setMenu(menu);
+    } else {
+        menu->clear();
+    }
+
+
+    fillUpperHamburger(menu);
+    menu->addSeparator();
+
+    auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")),
+                                       dynamic_cast<QMenu *>(factory()->container(QStringLiteral("settings"),
+                                                                                 nullptr))->title());
+    configureMenu->addAction(toolBarMenuAction());
+    configureMenu->addSeparator();
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureToolbars)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::Preferences)));
+    _hamburgerMenu->hideActionsOf(configureMenu);
+
+}
+
+void MainWindow::fillUpperHamburger(QMenu *menu) {
+
+    QStringList qsl = {
+            QStringLiteral("file"),
+            QStringLiteral("game"),
+            QStringLiteral("view"),
+            QStringLiteral("selection"),
+            QStringLiteral("analysis")
+
+    };
+
+    for (const auto &mName : qsl) {
+        auto fileMenu = dynamic_cast<QMenu *>(factory()->container(mName,this));
+        menu->addMenu(fileMenu);
+    }
+
 }
