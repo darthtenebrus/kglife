@@ -9,7 +9,8 @@ void GLifeObject::add(const QVector<int>& chorde) {
 
 }
 
-GLifeObject::GLifeObject(const QPoint &absPoint, QObject *parent) : QObject(parent), absol(absPoint) {}
+GLifeObject::GLifeObject(const QPoint &absPoint, const QString &lifeObjectName, QObject *parent)
+        : QObject(parent), lifeObjectName(lifeObjectName), absol(absPoint) {}
 
 GLifeObject::~GLifeObject() = default;
 
@@ -17,13 +18,15 @@ const QList<QVector<int>> &GLifeObject::listChordes() const {
     return chordes;
 }
 
-void GLifeObject::setAbsol(const QPoint &absPoint) {
-    absol = absPoint;
+const QString &GLifeObject::getlifeObjectName() const {
+    return lifeObjectName;
 }
+
 
 GLifeObject::GLifeObject(const GLifeObject &src) : QObject(nullptr) {
     absol = src.absol;
     chordes = src.chordes;
+    lifeObjectName = src.lifeObjectName;
 }
 
 bool GLifeObject::hasLinkedForChorde(const QVector<int> &checked) {
@@ -41,5 +44,6 @@ bool GLifeObject::hasLinkedForChorde(const QVector<int> &checked) {
 GLifeObject &GLifeObject::operator=(const GLifeObject &src) noexcept {
     absol = src.absol;
     chordes = src.chordes;
+    lifeObjectName = src.lifeObjectName;
     return *this;
 }

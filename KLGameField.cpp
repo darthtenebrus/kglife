@@ -25,6 +25,7 @@
 #include "generalpage.h"
 #include "patternspage.h"
 #include "generatorpage.h"
+#include "AnalysysDialog.h"
 
 #define FIELD_OFFSET 1
 #define SPACE 1
@@ -1232,7 +1233,7 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
                     const QPoint &absPoint = minOrigin + QPoint(bx, y);
                     QVector<int> currentChorde = {absPoint.x(), absPoint.y(), len};
                     if (objList.isEmpty()){
-                        GLifeObject obj(absPoint);
+                        GLifeObject obj(absPoint, QString("Object %1").arg(x), nullptr);
                         obj.add(currentChorde);
                         objList.append(obj);
                     } else {
@@ -1245,7 +1246,7 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
                             }
                         }
                         if (!added) {
-                            GLifeObject obj(absPoint);
+                            GLifeObject obj(absPoint, QString("Object %1").arg(x), nullptr);
                             obj.add(currentChorde);
                             objList.append(obj);
                         }
@@ -1265,12 +1266,17 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
 void KLGameField::chordesAction(bool) {
 
     const QList<GLifeObject> &objList = buildChordesGroups();
+    if (!objList.empty()) {
+        auto *d = new AnalysysDialog(objList, this);
+        d->setWindowTitle(i18n("Result"));
+        d->exec();
+    }
 
 #ifdef _DEBUG
     int i = 0;
-    for (auto gObj : objList) {
+    for (const auto& gObj : objList) {
         qDebug() << "object " << i++;
-        for (auto vec : gObj.listChordes()) {
+        for (const auto& vec : gObj.listChordes()) {
             qDebug() << "vec = " << vec;
         }
     }

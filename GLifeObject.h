@@ -12,7 +12,7 @@
 class GLifeObject : public QObject {
 Q_OBJECT
 public:
-    explicit GLifeObject(const QPoint &, QObject *parent = nullptr);
+    explicit GLifeObject(const QPoint &, const QString &lifeObjectName, QObject *parent = nullptr);
 
     GLifeObject(const GLifeObject &);
 
@@ -22,15 +22,17 @@ public:
 
     bool hasLinkedForChorde(const QVector<int> &checked);
 
-    GLifeObject& operator=(const GLifeObject& other) noexcept ;
+    GLifeObject& operator=(const GLifeObject& other) noexcept;
 
     [[nodiscard]]
     const QList<QVector<int>> &listChordes() const;
 
-    void setAbsol(const QPoint &);
+    const QString &getlifeObjectName() const;
+
 
 private:
 
+    QString lifeObjectName;
     QPoint absol;
     QList<QVector<int>> chordes;
 

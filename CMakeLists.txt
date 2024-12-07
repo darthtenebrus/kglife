@@ -67,6 +67,9 @@ target_sources(${PROJECT_NAME} PRIVATE
         generatorpage.ui
         GLifeObject.cpp
         GLifeObject.h
+        AnalysysDialog.ui
+        AnalysysDialog.h
+        AnalysysDialog.cpp
         ${RES_FILES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY AUTOUIC_OPTIONS --tr i18n --idbased --include KLocalizedString)
