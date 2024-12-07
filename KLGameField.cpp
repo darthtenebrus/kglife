@@ -1270,6 +1270,7 @@ void KLGameField::chordesAction(bool) {
         auto *d = new AnalysysDialog(objList, this);
         d->setWindowTitle(i18n("Result"));
         d->exec();
+        delete d;
     }
 
 #ifdef _DEBUG
