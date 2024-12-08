@@ -4,10 +4,10 @@
 
 #include "AnalysysDialog.h"
 
-AnalysysDialog::AnalysysDialog(const QList<GLifeObject> &objList, QWidget *parent) : QDialog(parent), Ui_analysDialog(), objList(objList) {
+AnalysysDialog::AnalysysDialog(const QStringList &objList, QWidget *parent) : QDialog(parent), Ui_analysDialog(), objList(objList) {
     setupUi(this);
-    for (GLifeObject o : objList) {
-        lifeObjects->addItem(o.getlifeObjectName());
+    for (QString o : objList) {
+        lifeObjects->addItem(o);
     }
 
 }

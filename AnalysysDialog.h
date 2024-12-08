@@ -11,11 +11,11 @@
 class AnalysysDialog : public QDialog, public Ui_analysDialog {
 
 public:
-    AnalysysDialog(const QList<GLifeObject> &objList,  QWidget *parent = nullptr);
+    AnalysysDialog(const QStringList &objList,  QWidget *parent = nullptr);
 
     ~AnalysysDialog() override;
 private:
-    QList<GLifeObject> objList;
+    QStringList objList;
 };
 
 

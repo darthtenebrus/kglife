@@ -1281,7 +1281,11 @@ void KLGameField::chordesAction(bool) {
     QList<GLifeObject> &objList = buildChordesGroups();
     if (!objList.empty()) {
         analizeObjects(objList);
-        auto *d = new AnalysysDialog(objList, this);
+        QStringList qsl;
+        for (GLifeObject &o : objList) {
+            qsl << o.getlifeObjectName();
+        }
+        auto *d = new AnalysysDialog(qsl, this);
         d->setWindowTitle(i18n("Result"));
         d->exec();
         delete d;
