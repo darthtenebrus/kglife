@@ -27,7 +27,9 @@ public:
     [[nodiscard]]
     const QList<QVector<int>> &listChordes() const;
 
-    const QString &getlifeObjectName() const;
+    [[nodiscard]] const QString &getlifeObjectName() const;
+
+    [[maybe_unused]] void setlifeObjectName(const QString &);
 
 
 private:

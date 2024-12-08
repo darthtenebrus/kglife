@@ -1203,7 +1203,7 @@ void KLGameField::onSelectClear(bool) {
     clearSelection();
 }
 
-const QList<GLifeObject> &KLGameField::buildChordesGroups() {
+QList<GLifeObject> &KLGameField::buildChordesGroups() {
 
     static QList<GLifeObject> objList;
     objList.clear();
@@ -1229,15 +1229,10 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
                 }
 
                 if (len) {
-
                     const QPoint &absPoint = minOrigin + QPoint(bx, y);
                     QVector<int> currentChorde = {absPoint.x(), absPoint.y(), len};
-                    if (objList.isEmpty()){
-                        GLifeObject obj(absPoint, QString("Object %1").arg(x), nullptr);
-                        obj.add(currentChorde);
-                        objList.append(obj);
-                    } else {
-                        bool added = false;
+                    bool added = false;
+                    if (!objList.isEmpty())  {
                         for (GLifeObject &lifeObj : objList) {
                             if (lifeObj.hasLinkedForChorde(currentChorde)) {
                                 lifeObj.add(currentChorde);
@@ -1245,11 +1240,12 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
                                 break;
                             }
                         }
-                        if (!added) {
-                            GLifeObject obj(absPoint, QString("Object %1").arg(x), nullptr);
-                            obj.add(currentChorde);
-                            objList.append(obj);
-                        }
+                    }
+
+                    if (!added) {
+                        GLifeObject obj(absPoint, i18n("Unknown Object"), nullptr);
+                        obj.add(currentChorde);
+                        objList.append(obj);
                     }
                 }
             } while(x <= delta.width());
@@ -1262,11 +1258,29 @@ const QList<GLifeObject> &KLGameField::buildChordesGroups() {
     
 }
 
+void KLGameField::analizeObjects(QList<GLifeObject> &l) const {
+
+    for (GLifeObject &o : l) {
+        const QList<QVector<int>> &vectors = o.listChordes();
+        if (vectors.length() == 2) {
+            if (vectors[0][2] == 2 && vectors[0][2] == vectors[1][2]) {
+                if(vectors[0][0] == vectors[1][0]) {
+                    o.setlifeObjectName(i18n("Square"));
+                } else {
+                    o.setlifeObjectName(i18n("Zigzag"));
+                }
+            }
+        }
+    }
+
+}
+
 
 void KLGameField::chordesAction(bool) {
 
-    const QList<GLifeObject> &objList = buildChordesGroups();
+    QList<GLifeObject> &objList = buildChordesGroups();
     if (!objList.empty()) {
+        analizeObjects(objList);
         auto *d = new AnalysysDialog(objList, this);
         d->setWindowTitle(i18n("Result"));
         d->exec();
@@ -1427,6 +1441,8 @@ void KLGameField::setupFactory() {
 
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
+
+
 
 
 

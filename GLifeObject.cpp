@@ -4,7 +4,7 @@
 
 #include "GLifeObject.h"
 
-void GLifeObject::add(const QVector<int>& chorde) {
+void GLifeObject::add(const QVector<int> &chorde) {
     chordes.append(chorde);
 
 }
@@ -30,10 +30,10 @@ GLifeObject::GLifeObject(const GLifeObject &src) : QObject(nullptr) {
 }
 
 bool GLifeObject::hasLinkedForChorde(const QVector<int> &checked) {
-    for (QVector<int> &cChorde : chordes) {
+    for (QVector<int> &cChorde: chordes) {
         bool isLinked = ((abs(cChorde[1] - checked[1]) == 1) &&
-                ((checked[0] >= cChorde[0] && checked[0] <= cChorde[0] + cChorde[2]) ||
-                (cChorde[0] >= checked[0] && cChorde[0] <= checked[0] + checked[2])));
+                         ((checked[0] >= cChorde[0] && checked[0] <= cChorde[0] + cChorde[2]) ||
+                          (cChorde[0] >= checked[0] && cChorde[0] <= checked[0] + checked[2])));
         if (isLinked) {
             return isLinked;
         }
@@ -46,4 +46,8 @@ GLifeObject &GLifeObject::operator=(const GLifeObject &src) noexcept {
     chordes = src.chordes;
     lifeObjectName = src.lifeObjectName;
     return *this;
+}
+
+[[maybe_unused]] void GLifeObject::setlifeObjectName(const QString &l) {
+    lifeObjectName = l;
 }
