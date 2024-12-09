@@ -9,7 +9,6 @@ AnalysysDialog::AnalysysDialog(const QStringList &objList, QWidget *parent) : QD
     for (QString o : objList) {
         lifeObjects->addItem(o);
     }
-
 }
 
 AnalysysDialog::~AnalysysDialog() = default;

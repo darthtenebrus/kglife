@@ -7,6 +7,7 @@
 #include <QPrintDialog>
 
 #include <QApplication>
+#include <QComboBox>
 #include <KActionCollection>
 #include <QDesktopWidget>
 #include "KLGameField.h"
@@ -1269,12 +1270,45 @@ void KLGameField::analizeObjects(QList<GLifeObject> &l) const {
                 } else {
                     o.setlifeObjectName(i18n("Zigzag"));
                 }
+                continue;
             }
         }
+        if (vectors.length() == 3) {
+            if (vectors[1][0] - vectors[0][0] == 1 &&
+                vectors[0][2] == vectors[1][2] &&
+                vectors[1][2] == 1 &&
+                vectors[2][2] == 3 &&
+                vectors[1][0] - vectors[2][0] == 2) {
+                o.setlifeObjectName(i18n("Glider"));
+                continue;
+            }
+            if (vectors[0][0] == vectors[1][0] &&
+                vectors[1][0] == vectors[2][0] &&
+                vectors[0][2] == vectors[1][2] &&
+                vectors[1][2] == vectors[2][2] &&
+                vectors[2][2] == 1) {
+                o.setlifeObjectName(i18n("Vertical Blinker"));
+                continue;
+            }
+        }
+        if(vectors.length() == 1 && vectors[0][2] == 3) {
+            o.setlifeObjectName(i18n("Horizontal Blinker"));
+        }
     }
-
 }
 
+void KLGameField::reselectObject(const GLifeObject &chosenObj) {
+    clearSelection();
+    for (const QVector<int> &vect : chosenObj.listChordes()) {
+        int cellX = vect[0];
+        int cellY = vect[1];
+        int len = vect[2];
+        for(int i = 0; i < len; i++) {
+            copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX + i, m_CurrMemOffsetY + cellY, 1);
+        }
+    }
+    repaint();
+}
 
 void KLGameField::chordesAction(bool) {
 
@@ -1282,25 +1316,21 @@ void KLGameField::chordesAction(bool) {
     if (!objList.empty()) {
         analizeObjects(objList);
         QStringList qsl;
-        for (GLifeObject &o : objList) {
+        for (const GLifeObject &o : objList) {
             qsl << o.getlifeObjectName();
         }
         auto *d = new AnalysysDialog(qsl, this);
+
+        connect(d->lifeObjects, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+            const GLifeObject &chosenObj = objList[index];
+            reselectObject(chosenObj);
+        });
         d->setWindowTitle(i18n("Result"));
+        reselectObject(objList[0]);
         d->exec();
+        clearSelection();
         delete d;
     }
-
-#ifdef _DEBUG
-    int i = 0;
-    for (const auto& gObj : objList) {
-        qDebug() << "object " << i++;
-        for (const auto& vec : gObj.listChordes()) {
-            qDebug() << "vec = " << vec;
-        }
-    }
-#endif
-
 }
 
 void KLGameField::showContextMenu(const QPoint &pos) {
@@ -1445,6 +1475,7 @@ void KLGameField::setupFactory() {
 
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
+
 
 
 

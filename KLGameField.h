@@ -90,6 +90,8 @@ private:
     QList<GLifeObject> &buildChordesGroups();
     void analizeObjects(QList<GLifeObject> &) const;
 
+    void reselectObject(const GLifeObject &);
+
     int m_TimerInterval;
     int m_Generation = 0;
 
