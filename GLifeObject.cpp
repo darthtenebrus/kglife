@@ -51,3 +51,7 @@ GLifeObject &GLifeObject::operator=(const GLifeObject &src) noexcept {
 [[maybe_unused]] void GLifeObject::setlifeObjectName(const QString &l) {
     lifeObjectName = l;
 }
+
+const QPoint &GLifeObject::getAbsol() const {
+    return absol;
+}

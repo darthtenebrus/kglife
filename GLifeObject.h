@@ -31,6 +31,7 @@ public:
 
     [[maybe_unused]] void setlifeObjectName(const QString &);
 
+    const QPoint &getAbsol() const;
 
 private:
 

@@ -1244,7 +1244,7 @@ QList<GLifeObject> &KLGameField::buildChordesGroups() {
                     }
 
                     if (!added) {
-                        GLifeObject obj(absPoint, i18n("Unknown Object"), nullptr);
+                        GLifeObject obj(minOrigin, i18n("Unknown Object"), nullptr);
                         obj.add(currentChorde);
                         objList.append(obj);
                     }
@@ -1327,9 +1327,44 @@ void KLGameField::chordesAction(bool) {
         });
         d->setWindowTitle(i18n("Result"));
         reselectObject(objList[0]);
-        d->exec();
+        int retCode = d->exec();
         clearSelection();
         delete d;
+        if (retCode == QDialog::Accepted) {
+            QString filters = i18n("Object Vector Format (*.ovf)");
+            const QString &path = QFileDialog::getSaveFileName(parentWidget(), i18n("Save objects model"),
+                                                        CurrentFilePath.isEmpty() ? QDir::homePath() :
+                                                        QFileInfo(CurrentFilePath).dir().path(),
+                                                        filters, &filters);
+
+            if (!path.isEmpty()) {
+                try {
+                    QFile file(path);
+                    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+                        throw LoadGameException(i18n("Open file failed").toStdString());
+                    }
+
+                    QTextStream out(&file);
+                    out << "MODEL_SIG" << '\n';
+
+                    for (const GLifeObject &obj : objList) {
+                        out << "##ONAME " << obj.getlifeObjectName() << '\n';
+                        const QPoint &absol = obj.getAbsol();
+                        out << "##BPOINT X" << absol.x() << "Y" << absol.y() << '\n';
+                        for (const QVector<int> &vec : obj.listChordes()) {
+                            QPoint bp(vec[0], vec[1]);
+                            bp -= absol;
+                            out << "X" << bp.x() << "Y" << bp.y() << "L" << vec[2] << '\n';
+                        }
+                    }
+
+                    file.close();
+                } catch (const LoadGameException &ex) {
+                    KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
+                }
+            }
+
+        }
     }
 }
 
