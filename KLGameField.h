@@ -64,6 +64,7 @@ private:
     void tryToImportNative(const QString &);
     void tryToImportCells(const QString &);
     void tryToImportRLE(const QString &);
+    void tryToImportOvf(const QString &qString);
 
     void trySaveToFile(const QString &);
     void trySaveToFileLayer(uchar *, const QString &);

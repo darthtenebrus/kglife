@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-31 11:04+0300\n"
-"PO-Revision-Date: 2024-10-31 13:52+0300\n"
+"POT-Creation-Date: 2024-12-15 17:30+0300\n"
+"PO-Revision-Date: 2024-12-15 17:34+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -30,6 +30,11 @@ msgstr "Евгений Сорочинский"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "webmaster@darkguard.net"
+
+#: cmake-build-debug/kglife_autogen/include/ui_AnalysysDialog.h:59
+#, kde-format
+msgid "Dialog"
+msgstr "Диалог"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:232
 #: cmake-build-release/kglife_autogen/include/ui_generalpage.h:232
@@ -292,27 +297,33 @@ msgstr "&Игра"
 msgid "Field"
 msgstr "Поле"
 
+#. i18n: ectx: Menu (analysis)
+#: kglifeui.rc:26
+#, kde-format
+msgid "Analysis"
+msgstr "Анализ"
+
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kglifeui.rc:28
+#: kglifeui.rc:32
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Основная панель инструментов"
 
-#: KLGameField.cpp:503
+#: KLGameField.cpp:504
 #, kde-format
 msgid ""
-"This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
-"Plaintext (*.cells);;All files(*.*)"
+"This application (*.kgol);;Object Vector Format (*.ovf);;Life32/XLife Run "
+"Length Encoding (*.rle);;Plaintext (*.cells);;All files (*.*)"
 msgstr ""
-"Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*."
-"cells);;Все файлы (*.*)"
+"Это приложение (*.kgol);;Формат Object Vector (*.ovf);;Формат Life32/XLife "
+"RLE (*.rle);;Plaintext (*.cells);;Все файлы (*.*)"
 
-#: KLGameField.cpp:507
+#: KLGameField.cpp:509
 #, kde-format
 msgid "Load colony from file"
 msgstr "Загрузить колонию из файла"
 
-#: KLGameField.cpp:520
+#: KLGameField.cpp:522
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -320,12 +331,12 @@ msgid ""
 msgstr ""
 "Это приложение (*.kgol);;Формат Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:524
+#: KLGameField.cpp:526
 #, kde-format
 msgid "Save colony current state"
 msgstr "Сохранить текущее состояние колонии"
 
-#: KLGameField.cpp:585 KLGameField.cpp:601
+#: KLGameField.cpp:587 KLGameField.cpp:603
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
@@ -334,12 +345,12 @@ msgstr ""
 "Установите или снимите клетку двойным нажатием или проведите линию, зажав "
 "левую кнопку"
 
-#: KLGameField.cpp:586
+#: KLGameField.cpp:588
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Зажмите левую кнопку и передвиньте поле с помощью мыши"
 
-#: KLGameField.cpp:588 KLGameField.cpp:604
+#: KLGameField.cpp:590 KLGameField.cpp:606
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -349,7 +360,7 @@ msgstr ""
 "левую кнопку. Можно изменять масштаб при помощи колеса мыши или элементов "
 "управления"
 
-#: KLGameField.cpp:590
+#: KLGameField.cpp:592
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -358,239 +369,276 @@ msgstr ""
 "В режиме перемещения просто перетащите мышкой поле, чтобы увидеть клетки за "
 "его пределами"
 
-#: KLGameField.cpp:602
+#: KLGameField.cpp:604
 #, kde-format
 msgid "Drag the mouse to select the live cells"
 msgstr "Зажмите левую кнопку и передвиньте мышь чтобы выделить живые клетки"
 
-#: KLGameField.cpp:606
+#: KLGameField.cpp:608
 #, kde-format
 msgid "In select mode you simply drag the mouse to select the live cells"
 msgstr ""
 "В режиме отметки просто проведите курсором мыши с нажатой левой кнопкой, "
 "чтобы выделить живые клетки"
 
-#: KLGameField.cpp:697
+#: KLGameField.cpp:699
 #, kde-format
 msgid "General"
 msgstr "Общие"
 
-#: KLGameField.cpp:698 KLGameField.cpp:699
+#: KLGameField.cpp:700 KLGameField.cpp:701
 #, kde-format
 msgid "Patterns"
 msgstr "Шаблоны"
 
-#: KLGameField.cpp:700 KLGameField.cpp:701
+#: KLGameField.cpp:702 KLGameField.cpp:703
 #, kde-format
 msgid "Generator"
 msgstr "Генератор"
 
-#: KLGameField.cpp:728 KLGameField.cpp:832 KLGameField.cpp:883
-#: KLGameField.cpp:1030 KLGameField.cpp:1083 KLGameField.cpp:1126
+#: KLGameField.cpp:732 KLGameField.cpp:785 KLGameField.cpp:889
+#: KLGameField.cpp:940 KLGameField.cpp:1087 KLGameField.cpp:1140
+#: KLGameField.cpp:1183 KLGameField.cpp:1400
 #, kde-format
 msgid "Open file failed"
 msgstr "Не удалось открыть файл"
 
-#: KLGameField.cpp:823 KLGameField.cpp:875 KLGameField.cpp:940
-#: KLGameField.cpp:1057 KLGameField.cpp:1099 KLGameField.cpp:1153
+#: KLGameField.cpp:775 KLGameField.cpp:880 KLGameField.cpp:932
+#: KLGameField.cpp:997 KLGameField.cpp:1114 KLGameField.cpp:1156
+#: KLGameField.cpp:1210 KLGameField.cpp:1419
 #, kde-format
 msgid "Error"
 msgstr "Ошибка"
 
-#: KLGameField.cpp:890 KLGameField.cpp:903 KLGameField.cpp:913
-#: KLGameField.cpp:926
+#: KLGameField.cpp:947 KLGameField.cpp:960 KLGameField.cpp:970
+#: KLGameField.cpp:983
 #, kde-format
 msgid "Invalid file format"
 msgstr "Неверный формат файла"
 
-#: KLGameField.cpp:993 mainwindow.cpp:97
+#: KLGameField.cpp:1050 mainwindow.cpp:94
 #, kde-format
 msgid "Print Pattern"
 msgstr "Печать текущей конфигурации"
 
-#: KLGameField.cpp:1048 KLGameField.cpp:1075 KLGameField.cpp:1118
-#: mainwindow.cpp:74
+#: KLGameField.cpp:1105 KLGameField.cpp:1132 KLGameField.cpp:1175
+#: mainwindow.cpp:72
 #, kde-format
 msgid "Colony is empty"
 msgstr "Колония пуста"
 
-#: KLGameField.cpp:1260
+#: KLGameField.cpp:1303
+#, kde-format
+msgid "Unknown Object"
+msgstr "Неизвестный объект"
+
+#: KLGameField.cpp:1325
+#, kde-format
+msgid "Square"
+msgstr "Квадрат"
+
+#: KLGameField.cpp:1327
+#, kde-format
+msgid "Zigzag"
+msgstr "Зигзаг"
+
+#: KLGameField.cpp:1338
+#, kde-format
+msgid "Glider"
+msgstr "Глайдер"
+
+#: KLGameField.cpp:1346
+#, kde-format
+msgid "Vertical Blinker"
+msgstr "Мигалка вертикальная"
+
+#: KLGameField.cpp:1351
+#, kde-format
+msgid "Horizontal Blinker"
+msgstr "Мигалка горизонтальная"
+
+#: KLGameField.cpp:1384
+#, kde-format
+msgid "Result"
+msgstr "Результат"
+
+#: KLGameField.cpp:1390
+#, kde-format
+msgid "Object Vector Format (*.ovf)"
+msgstr "Формат Object Vector (*.ovf)"
+
+#: KLGameField.cpp:1391
+#, kde-format
+msgid "Save objects model"
+msgstr "Сохранить модель объектов"
+
+#: KLGameField.cpp:1481
 #, kde-format
 msgid "Paste at this position"
 msgstr "Поместить в позицию левого угла меню"
 
-#: KLGameField.cpp:1266
+#: KLGameField.cpp:1487
 #, kde-format
 msgid "Empty"
 msgstr "Очистить выделенную область"
 
-#: KLGameField.cpp:1273
+#: KLGameField.cpp:1494
 #, kde-format
 msgid "Fill"
 msgstr "Заполнить выделение"
 
-#: KLGameField.cpp:1280
+#: KLGameField.cpp:1501
 #, kde-format
 msgid "Select untouched"
 msgstr "Выделить незатронутое"
 
-#: KLGameField.cpp:1287
+#: KLGameField.cpp:1508
 #, kde-format
 msgid "Save selected"
 msgstr "Сохранить выделенное"
 
-#: main.cpp:25
+#: main.cpp:27
 #, kde-format
 msgid "Simple Game Of Life realization"
 msgstr "Простая реализация игры \"Жизнь\""
 
-#: main.cpp:26
+#: main.cpp:28
 #, kde-format
 msgid "Created by: "
 msgstr "Создано: "
 
-#: main.cpp:30
+#: main.cpp:32
 #, kde-format
 msgid "Usage %1 [options]"
 msgstr "Использование %1 [параметры]"
 
-#: main.cpp:31
+#: main.cpp:33
 #, kde-format
 msgid "Valid options:"
 msgstr "Допустимые переметры:"
 
-#: main.cpp:32
+#: main.cpp:34
 #, kde-format
 msgid "show this help"
 msgstr "показать эту инструкцию"
 
-#: main.cpp:33
+#: main.cpp:35
 #, kde-format
 msgid "display version"
 msgstr "показать версию"
 
-#: main.cpp:38
+#: main.cpp:40
 #, kde-format
 msgid "Unknown option %1"
 msgstr "Неизвестный параметр %1"
 
-#: main.cpp:39
+#: main.cpp:41
 #, kde-format
 msgid "Launch %1 -h or %1 --help for help"
 msgstr "Запустите %1 -h or %1 --help для получения инструкции"
 
-#: main.cpp:42
+#: main.cpp:44
 #, kde-format
 msgid ""
 "Launch this application without any parameters to see its main functional"
 msgstr "Запустите без параметров, чтобы увидеть полный функционал"
 
-#: main.cpp:74
-#, kde-format
-msgid "Application Already Running"
-msgstr "Приложение уже запущено"
-
-#: main.cpp:74
-#, kde-format
-msgid "Already Running"
-msgstr "Уже запущено"
-
-#: main.cpp:79
+#: main.cpp:83
 #, kde-format
 msgid "Game Of Life"
 msgstr "Игра \"Жизнь\""
 
-#: main.cpp:80
+#: main.cpp:84
 #, kde-format
 msgid "Conway's Game Of Life for KDE"
 msgstr "Игра \"Жизнь\" Конуэя"
 
-#: main.cpp:82
+#: main.cpp:86
 #, kde-format
 msgid "Construct and experiment with many cell colonies"
 msgstr "Конструируйте и эксперементируйте со множеством колоний"
 
-#: main.cpp:86
+#: main.cpp:90
 #, kde-format
 msgid "Original author"
 msgstr "Автор кода"
 
-#: mainwindow.cpp:53
+#: mainwindow.cpp:54
 #, kde-format
 msgid "Start evolution"
 msgstr "Начать эволюцию"
 
-#: mainwindow.cpp:53
+#: mainwindow.cpp:54
 #, kde-format
 msgid "Stop evolution"
 msgstr "Остановить эволюцию"
 
-#: mainwindow.cpp:68
+#: mainwindow.cpp:67
 #, kde-format
 msgid "Generation: %1"
 msgstr "Поколение %1"
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:97
 #, kde-format
 msgid "Open configuration dialog"
 msgstr "Показать диалог настроек"
 
-#: mainwindow.cpp:102
+#: mainwindow.cpp:99
 #, kde-format
 msgid "Load saved colony"
 msgstr "Загрузить сохраненную колонию"
 
-#: mainwindow.cpp:104
+#: mainwindow.cpp:101
 #, kde-format
 msgid "Save current colony"
 msgstr "Сохранить колонию"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:104
 #, kde-format
 msgid "Save current colony with different name"
 msgstr "Сохранить колонию под другим именем"
 
-#: mainwindow.cpp:115
+#: mainwindow.cpp:111
 #, kde-format
 msgid "Time step control"
 msgstr "Ползунок контроля скорости"
 
-#: mainwindow.cpp:118
+#: mainwindow.cpp:114
 #, kde-format
 msgid "New &Game"
 msgstr "&Новая игра"
 
-#: mainwindow.cpp:120
+#: mainwindow.cpp:116
 #, kde-format
 msgid "Clear the field and stop evolution"
 msgstr "Очистить поле и остановить эволюцию"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:121
 #, kde-format
 msgid "Generate &Random"
 msgstr "Случайная генерация"
 
-#: mainwindow.cpp:126
+#: mainwindow.cpp:122
 #, kde-format
 msgid "Generates random pattern"
 msgstr "Генерирует случайную конфигурацию"
 
-#: mainwindow.cpp:131
+#: mainwindow.cpp:127
 #, kde-format
 msgid "&Next Step"
 msgstr "Следующий шаг"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:129
 #, kde-format
 msgid "Next single evolution step"
 msgstr "Следующий шаг эволюции"
 
-#: mainwindow.cpp:138
+#: mainwindow.cpp:134
 #, kde-format
 msgid "&Start/Stop Game"
 msgstr "Начать/Остановить игру"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:136
 #, kde-format
 msgid ""
 "Start or stop continuous evolution.<br> The icon changes to match the "
@@ -598,12 +646,12 @@ msgid ""
 msgstr ""
 "Начать или остановить эволюцию.<br>Иконка меняется в зависимости от режима"
 
-#: mainwindow.cpp:146
+#: mainwindow.cpp:142
 #, kde-format
 msgid "&Move"
 msgstr "&Перемещение"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:146
 #, kde-format
 msgid ""
 "Click here to enter field move mode.<br>In this mode you can move the field "
@@ -612,12 +660,17 @@ msgstr ""
 "Нажмите, чтобы перейти в режим перемещения.<br> Перемещайте поле, если не "
 "все клетки помещаются на экране из-за масштаба"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:155
+#, kde-format
+msgid "Object chordes sort"
+msgstr "Сортировка хорд объектов"
+
+#: mainwindow.cpp:161
 #, kde-format
 msgid "&Mouse selection"
 msgstr "&Выделение мышью"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Click here to enter select mode.<br>In this mode you can select alive cells "
@@ -626,12 +679,12 @@ msgstr ""
 "Нажмите, чтобы перейти в режим выделения.<br> В этом режимн можно выделить "
 "клетки дял того, чтобы вырезать/скопировать"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "&Clear selection"
 msgstr "Снять выделение"
 
-#: mainwindow.cpp:172
+#: mainwindow.cpp:173
 #, kde-format
 msgid "Click here to clear selection"
 msgstr "Нажмите, чтобы снять выделение"
@@ -656,12 +709,12 @@ msgstr ""
 msgid "Restore initial zoom.<br>Dimmed when the zoom is minimal"
 msgstr "Восстановить начальный масштаб.<br>Затемнена, если масштаб минимальный"
 
-#: mainwindow.cpp:203
+#: mainwindow.cpp:215
 #, kde-format
 msgid "Empty file"
 msgstr "Пустой файл"
 
-#: mainwindow.cpp:208
+#: mainwindow.cpp:220
 #, kde-format
 msgid "File name: %1"
 msgstr "Имя файла: %1"
@@ -680,6 +733,14 @@ msgstr "Можно изменять скорость смены поколени
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Не выбран>"
+
+#, kde-format
+#~ msgid "Application Already Running"
+#~ msgstr "Приложение уже запущено"
+
+#, kde-format
+#~ msgid "Already Running"
+#~ msgstr "Уже запущено"
 
 #, kde-format
 #~ msgid ""

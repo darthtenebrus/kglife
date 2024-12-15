@@ -502,6 +502,7 @@ void KLGameField::newAction(bool) {
 void KLGameField::openAction(bool) {
     cancelTimerInstantly();
     const QString &filters = i18n("This application (*.kgol);;"
+                                  "Object Vector Format (*.ovf);;"
                                   "Life32/XLife Run Length Encoding (*.rle);;"
                                   "Plaintext (*.cells);;All files (*.*)");
     QString fStr = filters.split(";;").at(0);
@@ -715,8 +716,63 @@ void KLGameField::tryLoadFromFile(const QString &path) {
         tryToImportRLE(path);
     } else if (fileInfo.suffix().toLower() == "cells") {
         tryToImportCells(path);
+    } else if (fileInfo.suffix().toLower() == "ovf") {
+        tryToImportOvf(path);
     } else {
         tryToImportNative(path);
+    }
+
+}
+
+void KLGameField::tryToImportOvf(const QString &path) {
+
+    try {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            throw LoadGameException(i18n("Open file failed").toStdString());
+        }
+
+        initLayers();
+        QStringList strBuffer;
+        QTextStream in(&file);
+
+        while (!in.atEnd()) {
+
+            static QPoint bp(0, 0);
+            const QString &strContent = in.readLine();
+            if (strContent.startsWith("##ONAME ")) {
+                const QStringList &objNames = strContent.split(" ");
+                const QString &objName = objNames[1];
+                
+            } else if (strContent.startsWith("##BPOINT ")) {
+                QRegExp re(R"(X([0-9]+)Y([0-9]+))");
+                const QStringList &objNames = strContent.split(" ");
+                const QString &toSearch = objNames[1];
+                if (re.indexIn(toSearch) != -1) {
+                    int baseX = re.cap(1).toInt();
+                    int baseY = re.cap(2).toInt();
+                    bp.setX(baseX);
+                    bp.setY(baseY);
+                }
+
+            } else {
+                QRegExp re(R"(X([0-9]+)Y([0-9]+)L([0-9]+))");
+                if (re.indexIn(strContent) != -1) {
+                    int baseX = re.cap(1).toInt();
+                    int baseY = re.cap(2).toInt();
+                    int len = re.cap(3).toInt();
+                    for(int i = 0; i < len; i++) {
+                        const QPoint &resP = bp + QPoint(baseX, baseY);
+                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + resP.x() + i, m_CurrMemOffsetY + resP.y(), 1);
+                    }
+                }
+            }
+        }
+
+        file.close();
+
+    } catch (const LoadGameException &ex) {
+        KMessageBox::error(this, QString::fromStdString(ex.what()), i18n("Error"));
     }
 
 }
@@ -1510,6 +1566,7 @@ void KLGameField::setupFactory() {
 
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
+
 
 
 
