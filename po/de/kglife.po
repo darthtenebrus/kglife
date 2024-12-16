@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-31 11:04+0300\n"
-"PO-Revision-Date: 2024-10-31 14:32+0300\n"
+"POT-Creation-Date: 2024-12-16 10:18+0300\n"
+"PO-Revision-Date: 2024-12-16 10:23+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -290,27 +290,33 @@ msgstr "&Spiel"
 msgid "Field"
 msgstr "Feld"
 
+#. i18n: ectx: Menu (analysis)
+#: kglifeui.rc:26
+#, kde-format
+msgid "Analysis"
+msgstr ""
+
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kglifeui.rc:28
+#: kglifeui.rc:32
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hauptsymbolleiste"
 
-#: KLGameField.cpp:503
+#: KLGameField.cpp:504
 #, kde-format
 msgid ""
-"This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
-"Plaintext (*.cells);;All files(*.*)"
+"This application (*.kgol);;Object Vector Format (*.ovf);;Life32/XLife Run "
+"Length Encoding (*.rle);;Plaintext (*.cells);;All files (*.*)"
 msgstr ""
-"Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells);;"
-"Alle Datei (*.*)"
+"Diese Anwendung (*.kgol);;Object Vector Format (*.ovf);;Life32/XLife RLE (*."
+"rle);;Plaintext (*.cells);;Alle Datei (*.*)"
 
-#: KLGameField.cpp:507
+#: KLGameField.cpp:509
 #, kde-format
 msgid "Load colony from file"
 msgstr "Kolonie von der Datei einladen"
 
-#: KLGameField.cpp:520
+#: KLGameField.cpp:522
 #, kde-format
 msgid ""
 "This application (*.kgol);;Life32/XLife Run Length Encoding (*.rle);;"
@@ -318,24 +324,24 @@ msgid ""
 msgstr ""
 "Diese Anwendung (*.kgol);;Life32/XLife RLE (*.rle);;Plaintext (*.cells)"
 
-#: KLGameField.cpp:524
+#: KLGameField.cpp:526
 #, kde-format
 msgid "Save colony current state"
 msgstr "Den Koloniezustand speichern"
 
-#: KLGameField.cpp:585 KLGameField.cpp:601
+#: KLGameField.cpp:587 KLGameField.cpp:603
 #, kde-format
 msgid ""
 "Set or erase a single cell by double click or drag a line with left button "
 "pressed"
 msgstr "Mausdoppelklick um die Einzelle setzen oder löschen"
 
-#: KLGameField.cpp:586
+#: KLGameField.cpp:588
 #, kde-format
 msgid "Drag the mouse to move field"
 msgstr "Linke Maustaste halten um das Feld zu bewegen"
 
-#: KLGameField.cpp:588 KLGameField.cpp:604
+#: KLGameField.cpp:590 KLGameField.cpp:606
 #, kde-format
 msgid ""
 "Put any cells here by mouse click or simply drag a line of cells.<br>You can "
@@ -344,7 +350,7 @@ msgstr ""
 "Stellen Sie hier mit Mausklick beliebige Zellen ein oder ziehen Sie einfach "
 "eine Zelllinie auf"
 
-#: KLGameField.cpp:590
+#: KLGameField.cpp:592
 #, kde-format
 msgid ""
 "In move mode you simply drag the mouse to move the field and see the cells "
@@ -353,237 +359,274 @@ msgstr ""
 "Ziehen Sie einfach die Maus, um das Feld zu bewegen und die Zellen über der "
 "Ränder zu sehen"
 
-#: KLGameField.cpp:602
+#: KLGameField.cpp:604
 #, kde-format
 msgid "Drag the mouse to select the live cells"
 msgstr "Linke Maustaste halten um die Lebenzellen zu auswählen"
 
-#: KLGameField.cpp:606
+#: KLGameField.cpp:608
 #, kde-format
 msgid "In select mode you simply drag the mouse to select the live cells"
 msgstr "Ziehen Sie einfach die Maus, um die Lebenzellen zuauswählen"
 
-#: KLGameField.cpp:697
+#: KLGameField.cpp:699
 #, kde-format
 msgid "General"
 msgstr "Allgemeine"
 
-#: KLGameField.cpp:698 KLGameField.cpp:699
+#: KLGameField.cpp:700 KLGameField.cpp:701
 #, kde-format
 msgid "Patterns"
 msgstr "Muster"
 
-#: KLGameField.cpp:700 KLGameField.cpp:701
+#: KLGameField.cpp:702 KLGameField.cpp:703
 #, kde-format
 msgid "Generator"
 msgstr "Generator"
 
-#: KLGameField.cpp:728 KLGameField.cpp:832 KLGameField.cpp:883
-#: KLGameField.cpp:1030 KLGameField.cpp:1083 KLGameField.cpp:1126
+#: KLGameField.cpp:732 KLGameField.cpp:785 KLGameField.cpp:889
+#: KLGameField.cpp:940 KLGameField.cpp:1087 KLGameField.cpp:1140
+#: KLGameField.cpp:1183 KLGameField.cpp:1400
 #, kde-format
 msgid "Open file failed"
 msgstr "Dateiladen Fehler"
 
-#: KLGameField.cpp:823 KLGameField.cpp:875 KLGameField.cpp:940
-#: KLGameField.cpp:1057 KLGameField.cpp:1099 KLGameField.cpp:1153
+#: KLGameField.cpp:775 KLGameField.cpp:880 KLGameField.cpp:932
+#: KLGameField.cpp:997 KLGameField.cpp:1114 KLGameField.cpp:1156
+#: KLGameField.cpp:1210 KLGameField.cpp:1419
 #, kde-format
 msgid "Error"
 msgstr "Fehler"
 
-#: KLGameField.cpp:890 KLGameField.cpp:903 KLGameField.cpp:913
-#: KLGameField.cpp:926
+#: KLGameField.cpp:947 KLGameField.cpp:960 KLGameField.cpp:970
+#: KLGameField.cpp:983
 #, kde-format
 msgid "Invalid file format"
 msgstr "Ein Dateiformat ist falsch"
 
-#: KLGameField.cpp:993 mainwindow.cpp:97
+#: KLGameField.cpp:1050 mainwindow.cpp:94
 #, kde-format
 msgid "Print Pattern"
 msgstr "Muster abdrucken"
 
-#: KLGameField.cpp:1048 KLGameField.cpp:1075 KLGameField.cpp:1118
-#: mainwindow.cpp:74
+#: KLGameField.cpp:1105 KLGameField.cpp:1132 KLGameField.cpp:1175
+#: mainwindow.cpp:72
 #, kde-format
 msgid "Colony is empty"
 msgstr "Leerkolonie"
 
-#: KLGameField.cpp:1260
+#: KLGameField.cpp:1303
+#, kde-format
+msgid "Unknown Object"
+msgstr "Unbekannterobjekt"
+
+#: KLGameField.cpp:1325
+#, kde-format
+msgid "Square"
+msgstr "Square"
+
+#: KLGameField.cpp:1327
+#, kde-format
+msgid "Zigzag"
+msgstr "Zigzag"
+
+#: KLGameField.cpp:1338
+#, kde-format
+msgid "Glider"
+msgstr "Segelflugzeug"
+
+#: KLGameField.cpp:1346
+#, kde-format
+msgid "Vertical Blinker"
+msgstr "Vertikalerblinker"
+
+#: KLGameField.cpp:1351
+#, kde-format
+msgid "Horizontal Blinker"
+msgstr "Horizontalerblinker"
+
+#: KLGameField.cpp:1384
+#, kde-format
+msgid "Result"
+msgstr "Ergebnis"
+
+#: KLGameField.cpp:1390
+#, kde-format
+msgid "Object Vector Format (*.ovf)"
+msgstr "Object Vector Format (*.ovf)"
+
+#: KLGameField.cpp:1391
+#, kde-format
+msgid "Save objects model"
+msgstr "Objektemodell speichern"
+
+#: KLGameField.cpp:1481
 #, kde-format
 msgid "Paste at this position"
 msgstr "An dieser Stelle bekleisten"
 
-#: KLGameField.cpp:1266
+#: KLGameField.cpp:1487
 #, kde-format
 msgid "Empty"
 msgstr "Erlöschen"
 
-#: KLGameField.cpp:1273
+#: KLGameField.cpp:1494
 #, kde-format
 msgid "Fill"
 msgstr "Füllen"
 
-#: KLGameField.cpp:1280
+#: KLGameField.cpp:1501
 #, kde-format
 msgid "Select untouched"
 msgstr " Unberührt wählen"
 
-#: KLGameField.cpp:1287
+#: KLGameField.cpp:1508
 #, kde-format
 msgid "Save selected"
 msgstr "Ausgewählten speichern"
 
-#: main.cpp:25
+#: main.cpp:27
 #, kde-format
 msgid "Simple Game Of Life realization"
 msgstr "Die eifache Lebenspielrealisierung"
 
-#: main.cpp:26
+#: main.cpp:28
 #, kde-format
 msgid "Created by: "
 msgstr "Erstellt von: "
 
-#: main.cpp:30
+#: main.cpp:32
 #, kde-format
 msgid "Usage %1 [options]"
 msgstr "Benutzen: %1 [Argumente]"
 
-#: main.cpp:31
+#: main.cpp:33
 #, kde-format
 msgid "Valid options:"
 msgstr "Gültige Argumenten:"
 
-#: main.cpp:32
+#: main.cpp:34
 #, kde-format
 msgid "show this help"
 msgstr "Diese Hilfe anzeigen"
 
-#: main.cpp:33
+#: main.cpp:35
 #, kde-format
 msgid "display version"
 msgstr "Die Version anzeigen"
 
-#: main.cpp:38
+#: main.cpp:40
 #, kde-format
 msgid "Unknown option %1"
 msgstr "Unbekannte Argument %1"
 
-#: main.cpp:39
+#: main.cpp:41
 #, kde-format
 msgid "Launch %1 -h or %1 --help for help"
 msgstr "Starten %1 -h oder %1 --help ,um Hilfe zu erhalten"
 
-#: main.cpp:42
+#: main.cpp:44
 #, kde-format
 msgid ""
 "Launch this application without any parameters to see its main functional"
 msgstr "Starten die App ohne Argumente, um die Hauptfunktion zu sehen"
 
-#: main.cpp:74
-#, kde-format
-msgid "Application Already Running"
-msgstr "Schon eingelauft"
-
-#: main.cpp:74
-#, kde-format
-msgid "Already Running"
-msgstr "Die Anwendung ist schon eingelauft"
-
-#: main.cpp:79
+#: main.cpp:83
 #, kde-format
 msgid "Game Of Life"
 msgstr "Lebenspiel"
 
-#: main.cpp:80
+#: main.cpp:84
 #, kde-format
 msgid "Conway's Game Of Life for KDE"
 msgstr "KDE Lebenspiel von Conway"
 
-#: main.cpp:82
+#: main.cpp:86
 #, kde-format
 msgid "Construct and experiment with many cell colonies"
 msgstr "Konstruiren Sie verschiedene Kolonie und machen die Experimente"
 
-#: main.cpp:86
+#: main.cpp:90
 #, kde-format
 msgid "Original author"
 msgstr "Hauptautor"
 
-#: mainwindow.cpp:53
+#: mainwindow.cpp:54
 #, kde-format
 msgid "Start evolution"
 msgstr "Symbolleiste anzeigen"
 
-#: mainwindow.cpp:53
+#: mainwindow.cpp:54
 #, kde-format
 msgid "Stop evolution"
 msgstr "Statusleiste anzeigen"
 
-#: mainwindow.cpp:68
+#: mainwindow.cpp:67
 #, kde-format
 msgid "Generation: %1"
 msgstr "Generation: %1"
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:97
 #, kde-format
 msgid "Open configuration dialog"
 msgstr "Einrichtungsfenster aufmachen"
 
-#: mainwindow.cpp:102
+#: mainwindow.cpp:99
 #, kde-format
 msgid "Load saved colony"
 msgstr "Die gespeicherte Kolonie einladen"
 
-#: mainwindow.cpp:104
+#: mainwindow.cpp:101
 #, kde-format
 msgid "Save current colony"
 msgstr "Den Koloniezustand zur Datei speichern"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:104
 #, kde-format
 msgid "Save current colony with different name"
 msgstr "Den Koloniezustand zur Datei mit dem anderen Namen speichern"
 
-#: mainwindow.cpp:115
+#: mainwindow.cpp:111
 #, kde-format
 msgid "Time step control"
 msgstr "Geschwindigkeitsregler"
 
-#: mainwindow.cpp:118
+#: mainwindow.cpp:114
 #, kde-format
 msgid "New &Game"
 msgstr "Neues &Spiel"
 
-#: mainwindow.cpp:120
+#: mainwindow.cpp:116
 #, kde-format
 msgid "Clear the field and stop evolution"
 msgstr "Aufklaren das Spielfeld und die Evolution halten"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:121
 #, kde-format
 msgid "Generate &Random"
 msgstr "&Zufällig erzeugen"
 
-#: mainwindow.cpp:126
+#: mainwindow.cpp:122
 #, kde-format
 msgid "Generates random pattern"
 msgstr "Zufälliges Muster erzeugen"
 
-#: mainwindow.cpp:131
+#: mainwindow.cpp:127
 #, kde-format
 msgid "&Next Step"
 msgstr "&Nächster Schritt"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:129
 #, kde-format
 msgid "Next single evolution step"
 msgstr "Nächster Evolutionsschritt"
 
-#: mainwindow.cpp:138
+#: mainwindow.cpp:134
 #, kde-format
 msgid "&Start/Stop Game"
 msgstr "Start/Halt ein Spiel"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:136
 #, kde-format
 msgid ""
 "Start or stop continuous evolution.<br> The icon changes to match the "
@@ -592,12 +635,12 @@ msgstr ""
 "Kontinuierliche Weiterentwicklung starten oder halten.<br> Das Symbol ändert "
 "sich entsprechend dem aktuellen Modus"
 
-#: mainwindow.cpp:146
+#: mainwindow.cpp:142
 #, kde-format
 msgid "&Move"
 msgstr "&Bewegen"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:146
 #, kde-format
 msgid ""
 "Click here to enter field move mode.<br>In this mode you can move the field "
@@ -607,12 +650,17 @@ msgstr ""
 "diesem Modus können Sie das Feld verschieben, um die Zellen, die den "
 "Bildschirm nicht passen wegen des Maßstabs"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:155
+#, kde-format
+msgid "Object chordes sort"
+msgstr ""
+
+#: mainwindow.cpp:161
 #, kde-format
 msgid "&Mouse selection"
 msgstr "&Mausauswahl"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:165
 #, kde-format
 msgid ""
 "Click here to enter select mode.<br>In this mode you can select alive cells "
@@ -621,12 +669,12 @@ msgstr ""
 "Machen Sie eine Mausclick, um das Auswahlmodus zu eintragen. Mit diesem "
 "Modus können Sie die lebenzellen auswählen, um sie zu kopieren oder löschen"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "&Clear selection"
 msgstr "Auswahl löschen"
 
-#: mainwindow.cpp:172
+#: mainwindow.cpp:173
 #, kde-format
 msgid "Click here to clear selection"
 msgstr "Machen Sie hier ein Mausklick, ein Auswahl zu löschen"
@@ -651,12 +699,12 @@ msgstr ""
 msgid "Restore initial zoom.<br>Dimmed when the zoom is minimal"
 msgstr "Wiederherstellen den Maßstab.<br> Dunkelt when der Maßstab minimum ist"
 
-#: mainwindow.cpp:203
+#: mainwindow.cpp:215
 #, kde-format
 msgid "Empty file"
 msgstr "Leerdatei"
 
-#: mainwindow.cpp:208
+#: mainwindow.cpp:220
 #, kde-format
 msgid "File name: %1"
 msgstr "Dateiname: %1"
@@ -677,6 +725,14 @@ msgstr ""
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Keine Auswahl>"
+
+#, kde-format
+#~ msgid "Application Already Running"
+#~ msgstr "Schon eingelauft"
+
+#, kde-format
+#~ msgid "Already Running"
+#~ msgstr "Die Anwendung ist schon eingelauft"
 
 #, kde-format
 #~ msgid ""

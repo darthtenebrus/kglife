@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-15 17:30+0300\n"
-"PO-Revision-Date: 2024-12-15 17:34+0300\n"
+"POT-Creation-Date: 2024-12-16 10:18+0300\n"
+"PO-Revision-Date: 2024-12-16 10:19+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -30,11 +30,6 @@ msgstr "Евгений Сорочинский"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "webmaster@darkguard.net"
-
-#: cmake-build-debug/kglife_autogen/include/ui_AnalysysDialog.h:59
-#, kde-format
-msgid "Dialog"
-msgstr "Диалог"
 
 #: cmake-build-debug/kglife_autogen/include/ui_generalpage.h:232
 #: cmake-build-release/kglife_autogen/include/ui_generalpage.h:232
@@ -733,6 +728,10 @@ msgstr "Можно изменять скорость смены поколени
 #, kde-format
 msgid "<Not selected>"
 msgstr "<Не выбран>"
+
+#, kde-format
+#~ msgid "Dialog"
+#~ msgstr "Диалог"
 
 #, kde-format
 #~ msgid "Application Already Running"
