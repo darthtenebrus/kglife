@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kglife\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-16 10:18+0300\n"
-"PO-Revision-Date: 2024-12-16 10:23+0300\n"
+"POT-Creation-Date: 2024-12-17 11:09+0300\n"
+"PO-Revision-Date: 2024-12-17 11:11+0300\n"
 "Last-Translator: Eugen Sorotschinskii <webmaster@darkguard.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -652,8 +652,8 @@ msgstr ""
 
 #: mainwindow.cpp:155
 #, kde-format
-msgid "Object chordes sort"
-msgstr ""
+msgid "Object chordes coverage"
+msgstr "Chordedenabdeckung"
 
 #: mainwindow.cpp:161
 #, kde-format

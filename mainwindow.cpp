@@ -152,7 +152,7 @@ void MainWindow::setupToolbar() {
     // Analysis
 
     QAction *actionAnalys = actionCollection()->addAction(QStringLiteral("sort_chordes"));
-    actionAnalys->setText(i18n("Object chordes sort"));
+    actionAnalys->setText(i18n("Object chordes coverage"));
     connect(actionAnalys, &QAction::triggered, gameField, &KLGameField::chordesAction);
 
     // Select
