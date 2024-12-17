@@ -763,7 +763,7 @@ void KLGameField::tryToImportOvf(const QString &path) {
                     int len = re.cap(3).toInt();
                     for(int i = 0; i < len; i++) {
                         const QPoint &resP = bp + QPoint(baseX, baseY);
-                        copyToLayer(m_MainLayer, m_CurrMemOffsetX + resP.x() + i, m_CurrMemOffsetY + resP.y(), 1);
+                        copyToLayer(m_MainLayer, resP.x() + i, resP.y(), 1);
                     }
                 }
             }
@@ -1360,7 +1360,7 @@ void KLGameField::reselectObject(const GLifeObject &chosenObj) {
         int cellY = vect[1];
         int len = vect[2];
         for(int i = 0; i < len; i++) {
-            copyToLayer(m_SelectionLayer, m_CurrMemOffsetX + cellX + i, m_CurrMemOffsetY + cellY, 1);
+            copyToLayer(m_SelectionLayer, cellX + i, cellY, 1);
         }
     }
     repaint();
