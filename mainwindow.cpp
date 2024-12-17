@@ -263,6 +263,14 @@ void MainWindow::fillUpperHamburger(QMenu *menu) {
     for (const auto &mName : qsl) {
         auto fileMenu = dynamic_cast<QMenu *>(factory()->container(mName,this));
         menu->addMenu(fileMenu);
+        if (mName == "analysis") {
+            QPoint minOrigin = QPoint(gameField->getCellsX(), gameField->getCellsY());
+            QPoint maxOrigin = QPoint(0, 0);
+
+            bool isToAnalis = gameField->doMiniMaxTestsOnLayer(gameField->getMainLayer(), minOrigin, maxOrigin);
+            fileMenu->setEnabled(isToAnalis);
+
+        }
     }
 
 }

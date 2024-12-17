@@ -1567,6 +1567,18 @@ void KLGameField::setupFactory() {
     popupMenu = qobject_cast<QMenu *>(factory()->container(QStringLiteral("actions-popup-menu"), this));
 }
 
+int KLGameField::getCellsX() {
+    return m_cellsX;
+}
+
+int KLGameField::getCellsY() {
+    return m_cellsY;
+}
+
+uchar *KLGameField::getMainLayer() {
+    return m_MainLayer;
+}
+
 
 
 

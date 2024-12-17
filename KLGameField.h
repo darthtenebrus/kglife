@@ -22,6 +22,11 @@ public:
     ~KLGameField() override;
     void cancelTimerInstantly(void);
 
+    int getCellsX();
+    int getCellsY();
+    uchar *getMainLayer();
+    bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
+
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -85,8 +90,6 @@ private:
     static QSize getStandardFieldDefs(int &, int &) ;
 
     static void flushStream(int &status, char symbol, QTextStream &);
-
-    bool doMiniMaxTestsOnLayer(uchar *layer, QPoint &minOr, QPoint &maxOr);
 
     QList<GLifeObject> &buildChordesGroups();
     void analizeObjects(QList<GLifeObject> &) const;
