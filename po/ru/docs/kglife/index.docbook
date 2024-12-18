@@ -181,7 +181,7 @@
           </menuchoice>
         </term>
         <listitem>
-          <para>Слхранить выделение в файл, как отдельную колонию</para>
+          <para>Сохранить выделение в файл, как отдельную колонию</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -295,7 +295,7 @@
                 <keycombo action="simul">&Alt;<keycap>R</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Случайная генерация</guimenuitem>
+              <guimenu>Игра</guimenu> <guimenuitem>Случайная генерация</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -324,7 +324,7 @@
                 <keycombo action="simul">&Alt;<keycap>M</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Игра</guimenu> <guimenuitem>Переместить</guimenuitem>
+              <guimenu>Поле</guimenu> <guimenuitem>Переместить</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -339,7 +339,7 @@
                 <keycombo action="simul">&Alt;<keycap>L</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Игра</guimenu> <guimenuitem>Выделение мышью</guimenuitem>
+              <guimenu>Поле</guimenu> <guimenuitem>Выделение мышью</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -354,7 +354,7 @@
                 <keycombo action="simul">&Alt;<keycap>C</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Игра</guimenu> <guimenuitem>Очистить выделение</guimenuitem>
+              <guimenu>Поле</guimenu> <guimenuitem>Очистить выделение</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -369,7 +369,7 @@
                 <keycombo action="simul">&Ctrl;<keycap>+</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>View</guimenu> <guimenuitem>Увеличить</guimenuitem>
+              <guimenu>Вид</guimenu> <guimenuitem>Увеличить</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -383,7 +383,7 @@
                 <keycombo action="simul">&Ctrl;<keycap>-</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>View</guimenu> <guimenuitem>Уменьшить</guimenuitem>
+              <guimenu>Вид</guimenu> <guimenuitem>Уменьшить</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -397,13 +397,26 @@
                 <keycombo action="simul">&Ctrl;<keycap>0</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>View</guimenu> <guimenuitem>Фактический размер</guimenuitem>
+              <guimenu>Вид</guimenu> <guimenuitem>Фактический размер</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
             <para>Восстановить исходный масштаб</para>
           </listitem>
         </varlistentry>
+
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <guimenu>Анализ</guimenu> <guimenuitem>Хордовое покрытие объекта</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Запуск анализа хордового покрытия</para>
+          </listitem>
+        </varlistentry>
+
       </variablelist>
     </sect1>
   </chapter>

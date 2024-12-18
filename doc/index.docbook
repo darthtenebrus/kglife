@@ -356,6 +356,7 @@
             <para>Clear selected area</para>
           </listitem>
         </varlistentry>
+
         <varlistentry>
           <term>
             <menuchoice>
@@ -398,6 +399,18 @@
             <para>Restore the actual size of the field</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <guimenu>Analysys</guimenu> <guimenuitem>Object chordes coverage</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Launch object chordes coverage analysys</para>
+          </listitem>
+        </varlistentry>
+
       </variablelist>
     </sect1>
   </chapter>

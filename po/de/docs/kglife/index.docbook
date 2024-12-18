@@ -291,7 +291,7 @@
                 <keycombo action="simul">&Alt;<keycap>R</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Zufällig erzeugen</guimenuitem>
+              <guimenu>Spiel</guimenu> <guimenuitem>Zufällig erzeugen</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -306,7 +306,7 @@
                 <keycombo action="simul">&Alt;<keycap>S</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Game</guimenu> <guimenuitem>Start/Halt ein Spiel</guimenuitem>
+              <guimenu>Spiel</guimenu> <guimenuitem>Start/Halt ein Spiel</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
@@ -320,13 +320,36 @@
                 <keycombo action="simul">&Alt;<keycap>M</keycap>
                 </keycombo>
               </shortcut>
-              <guimenu>Spiel</guimenu> <guimenuitem>Bewegen</guimenuitem>
+              <guimenu>Feld</guimenu> <guimenuitem>Bewegen</guimenuitem>
               </menuchoice>
           </term>
           <listitem>
             <para>Machen Sie eine Mausclick, um das Feldverschiebungsmodus zu eintragen. Mit diesem Modus können Sie das Feld verschieben, um die Zellen, die den Bildschirm nicht passen wegen des Maßstabs</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <guimenu>Feld</guimenu> <guimenuitem>Mausauswahl</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Mit diesem Modus können Sie die Zellen auswahlen</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <guimenu>Feld</guimenu> <guimenuitem>Auswahl löchen</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Auswahl löchen</para>
+          </listitem>
+        </varlistentry>
+
         <varlistentry>
           <term>
             <menuchoice>
@@ -369,6 +392,19 @@
             <para>Wiederherstellen den Maßstab.</para>
           </listitem>
         </varlistentry>
+
+
+        <varlistentry>
+          <term>
+            <menuchoice>
+              <guimenu>Analysys</guimenu> <guimenuitem>Chordedenabdeckung</guimenuitem>
+              </menuchoice>
+          </term>
+          <listitem>
+            <para>Chordedenabdeckung starten</para>
+          </listitem>
+        </varlistentry>
+
       </variablelist>
     </sect1>
   </chapter>
